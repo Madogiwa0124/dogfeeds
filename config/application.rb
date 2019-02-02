@@ -9,10 +9,8 @@ module Dogfeeds
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
     config.generators do |g|
-      g.stylesheets false
-      g.javascripts false
-      g.helper false
-      g.template_engine false
+      g.assets      false
+      g.helper      false
       g.test_framework :rspec,
         fixtures: true,
         view_specs: false,
@@ -20,7 +18,8 @@ module Dogfeeds
         routing_specs: false,
         controller_specs: false,
         request_specs: false
-      g.fixture_replacement :factory_bot, dir: "spec/factories"
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| %Q(#{html_tag}).html_safe }
   end
 end
