@@ -10,6 +10,15 @@
 #
 
 class Feed < ApplicationRecord
+  require 'rss'
+
+  has_many :entries
+
   validates :title, presence: true
   validates :endpoint, presence: true, format: /\A#{URI::regexp(%w(http https))}\z/
+
+  def parsed_xml
+    xml = Net::HTTP.get(URI.parse(endpoint))
+    RSS::Parser.parse(xml)
+  end
 end
