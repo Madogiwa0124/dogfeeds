@@ -1,24 +1,15 @@
 # README
+DogFeedsは、まとめて・共有できるRSSリーダーです。
+みんながまとめたRSSフィードを、公開してみんなで使うことができます。
+dogfoodingのように気軽に公開して使って貰えたらという気持ちで作っていますUo･ｪ･oU
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+>〈俗〉ドッグフーディング、試験運用◆ソフトウェア開発会社がベータ版（または開発途上）のソフトウェアを自社の従業員に使用させること。または、社員が自社製品を使うこと。
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# TODO
+## RSSフィード管理
+* [x] RSSフィードを登録できること
+* [x] RSSフィードごとの記事一覧を確認できること
+## RSSボード
+* [ ] RSSフィードをまとめてボードとして登録できること
+* [ ] ボードをフォローできること
+* [ ] フォローしたボードをタブで表示できること
