@@ -1,0 +1,21 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= entry.title %>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <%= entry.description %>
+      <%= link_to 'サイトで読む', entry.link %>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <p class="card-footer-item">
+      <%= link_to entry.feed.title, feed_path(entry.feed) %>
+    </p>
+    <p class="card-footer-item">
+      公開日: <%= l(entry.published_at, format: :long) %>
+    </p>
+  </footer>
+</div>

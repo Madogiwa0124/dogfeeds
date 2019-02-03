@@ -1,0 +1,6 @@
+<div class="feed-show">
+  <h1 class="title"><%= @feed.title %></h1>
+  <div class="entries">
+    <%= render partial: 'entry_collection', collection: @feed.entries, as: 'entry' %>
+  </div>
+</div>
