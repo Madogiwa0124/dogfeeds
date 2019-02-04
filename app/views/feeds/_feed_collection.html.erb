@@ -1,25 +1,25 @@
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">
-      <%= link_to feed.title, feed_path(feed) %>
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="card-image">
-      <%= image_tag (feed.last_entry.eye_catching_image || 'noimage.png') %>
+<div class="column is-4">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <%= link_to feed.title, feed_path(feed) %>
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="card-image">
+        <%= image_tag (feed.last_entry.eye_catching_image || 'noimage.png') %>
+      </div>
+      <div class="content">
+        <%= link_to feed.last_entry.title, feed.last_entry.link %>
+      </div>
     </div>
-    <div class="content">
-      <h6 class="subtitle is-6"><%= feed.last_entry.title %></h6>
-      <%= feed.last_entry.description.truncate(50) %>
-      <%= link_to 'サイトで読む', feed.last_entry.link %>
-    </div>
+    <footer class="card-footer">
+      <p class="card-footer-item">
+        last updated: <%= l(feed.last_entry.published_at, format: :long) %>
+      </p>
+      <p class="card-footer-item">
+        <a>フォローする</a>
+      </p>
+    </footer>
   </div>
-  <footer class="card-footer">
-    <p class="card-footer-item">
-      最終更新日時: <%= l(feed.last_entry.published_at, format: :long) %>
-    </p>
-    <p class="card-footer-item">
-      <a>フォローする</a>
-    </p>
-  </footer>
 </div>

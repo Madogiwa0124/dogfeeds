@@ -7,16 +7,25 @@
 
   .card-image {
     img {
-      min-width: 100%;
+      width: 100%;
+      @media screen and (min-width: 980px) {
+        min-height: 300px;
+      }
     }
   }
 
   .entries {
     margin: 0px auto;
-    max-width: 60%;
 
     .card {
-      margin: 15px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      footer {
+        margin-top: auto;
+      }
     }
   }
 }
