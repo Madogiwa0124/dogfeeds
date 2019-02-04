@@ -13,6 +13,7 @@ class Feed < ApplicationRecord
   require 'rss'
 
   has_many :entries
+  has_one :last_entry, ->{ order(published_at: :desc) }, class_name: 'Entry'
 
   validates :title, presence: true
   validates :endpoint, presence: true, format: /\A#{URI::regexp(%w(http https))}\z/

@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
   def index
-    @entries = Entry.all.includes(:feed).order(published_at: :desc)
+    @feeds = Feed.all.includes(:last_entry).order('entries.published_at DESC')
   end
 
   def show
