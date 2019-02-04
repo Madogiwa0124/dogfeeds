@@ -10,15 +10,19 @@
         <%= image_tag (feed.last_entry.eye_catching_image || 'noimage.png') %>
       </div>
       <div class="content">
-        <%= link_to feed.last_entry.title, feed.last_entry.link %>
+        <%= feed.last_entry.title %>
+        <%= link_to feed.last_entry.link do %>
+          リンク先で読む
+        <% end %>
       </div>
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">
-        last updated: <%= l(feed.last_entry.published_at, format: :long) %>
+        <%= tag("span", title: l(feed.last_entry.published_at, format: :long)) %>
+          <i class="far fa-clock"></i> <%= l(feed.last_entry.published_at, format: :short) %>
       </p>
       <p class="card-footer-item">
-        <a>フォローする</a>
+        <a><i class="fas fa-plus-circle"></i> Fllow</a>
       </p>
     </footer>
   </div>

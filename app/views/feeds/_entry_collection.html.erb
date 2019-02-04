@@ -7,15 +7,19 @@
   <div class="card-content">
     <div class="content">
       <%= entry.description %>
-      <%= link_to 'サイトで読む', entry.link %>
     </div>
   </div>
   <footer class="card-footer">
     <p class="card-footer-item">
-      <%= link_to entry.feed.title, feed_path(entry.feed) %>
+      <span>
+        <i class="far fa-clock"></i> <%= l(entry.published_at, format: :long) %>
+      <span>
     </p>
     <p class="card-footer-item">
-      公開日: <%= l(entry.published_at, format: :long) %>
+      <%= link_to entry.link do %>
+        <i class="fas fa-external-link-alt"></i>
+        リンク先で読む
+      <% end %>
     </p>
   </footer>
 </div>
