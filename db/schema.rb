@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_02_02_143602) do
     t.bigint "feed_id"
     t.string "title"
     t.string "link"
+    t.string "eye_catching_image"
     t.text "description"
     t.datetime "published_at"
     t.datetime "created_at", null: false

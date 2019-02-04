@@ -13,7 +13,8 @@ class Feed::EntryCreater
         title: item.title,
         description: strip_tags(item.description).truncate(300),
         published_at: item.pubDate,
-        link: item.link
+        link: item.link,
+        eye_catching_image: item.enclosure&.url
       )
     end
   end

@@ -5,6 +5,12 @@
     text-align: center;
   }
 
+  .card-image {
+    img {
+      min-width: 100%;
+    }
+  }
+
   .entries {
     margin: 0px auto;
     max-width: 60%;

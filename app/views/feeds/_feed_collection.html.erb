@@ -5,6 +5,9 @@
     </p>
   </header>
   <div class="card-content">
+    <div class="card-image">
+      <%= image_tag (feed.last_entry.eye_catching_image || 'noimage.png') %>
+    </div>
     <div class="content">
       <h6 class="subtitle is-6"><%= feed.last_entry.title %></h6>
       <%= feed.last_entry.description.truncate(50) %>
