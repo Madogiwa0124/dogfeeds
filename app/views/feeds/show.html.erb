@@ -1,6 +1,5 @@
-<div class="feed-show">
+<div class="feed-show" id="feeds-entries">
   <h1 class="title"><%= @feed.title %></h1>
-  <div class="entries">
-    <%= render partial: 'entry_collection', collection: @entries, as: 'entry' %>
-  </div>
+  <entry-card-collection :entries="<%= @entries.to_json %>"></entry-card-collection>
 </div>
+<%= javascript_pack_tag 'feeds' %>
