@@ -1,6 +1,8 @@
-<div class="feed-index container">
+<div class="feed-index container" id="feeds">
   <h1 class="title">TOP</h1>
-  <div class="entries columns is-multiline">
-    <%= render partial: 'feed_collection', collection: @feeds, as: 'feed' %>
-  </div>
+  <feed-card-collection
+    :feeds="<%= @feeds.to_json %>"
+    :last_entries="<%= @last_entries.to_json%>">
+  </feed-card-collection>
 </div>
+<%= javascript_pack_tag 'feeds/index' %>

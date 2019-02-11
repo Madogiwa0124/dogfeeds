@@ -2,4 +2,4 @@
   <h1 class="title"><%= @feed.title %></h1>
   <entry-card-collection :entries="<%= @entries.to_json %>"></entry-card-collection>
 </div>
-<%= javascript_pack_tag 'feeds' %>
+<%= javascript_pack_tag 'feeds/show' %>
