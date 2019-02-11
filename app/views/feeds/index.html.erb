@@ -1,8 +1,8 @@
 <div class="feed-index container" id="feeds">
   <h1 class="title">TOP</h1>
   <feed-card-collection
-    :feeds="<%= @feeds.to_json %>"
-    :last_entries="<%= @last_entries.to_json%>">
+    :init_feeds="<%= @feeds.to_json %>"
+    :init_last_entries="<%= @last_entries.to_json%>">
   </feed-card-collection>
 </div>
 <%= javascript_pack_tag 'feeds/index' %>
