@@ -1,6 +1,7 @@
 <template>
 <aside class="menu column is-2">
   <p class="menu-label">Selected Feeds</p>
+  <span v-if="selectedFeeds.length < 1">Feedを選択して、ボードを作ってみましょう！</span>
   <ul class="menu-list">
     <li v-for="feed in selectedFeeds" :key="feed.id">
       <i class="delete icon is-small" @click="deleteSelectedFeed(feed.id)" />

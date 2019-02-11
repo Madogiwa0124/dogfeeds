@@ -20,17 +20,18 @@
       {{lastEntry.published_at | fromNow}}
     </p>
     <p class="card-footer-item">
-      <a><i class="fas fa-plus-circle"></i> Fllow</a>
+      <select-feed :feed="feed"></select-feed>
     </p>
   </footer>
 </div>
 </template>
 <script>
 import moment from 'moment/moment'
+import SelectFeed from './SelectFeed'
 
 export default {
   name: 'FeedCard',
-  components: {},
+  components: { SelectFeed },
   props: ['feed', 'lastEntry'],
   filters: {
     fromNow: function (value) {
