@@ -9,4 +9,6 @@
 #
 
 class Board < ApplicationRecord
+  has_many :board_feeds
+  has_many :feeds, through: :board_feeds
 end

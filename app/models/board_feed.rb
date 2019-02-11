@@ -15,4 +15,6 @@
 #
 
 class BoardFeed < ApplicationRecord
+  belongs_to :board
+  belongs_to :feed
 end
