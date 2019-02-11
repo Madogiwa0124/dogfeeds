@@ -1,6 +1,18 @@
 .feed-index {
   padding: 20px;
 
+  .menu {
+    border-right: 3px solid #ffffff;
+    li {
+      margin-bottom: 5px;
+      .delete {
+        &:hover {
+          background-color: hsl(348, 100%, 61%);
+        }
+      }
+    }
+  }
+
   .title {
     text-align: center;
   }

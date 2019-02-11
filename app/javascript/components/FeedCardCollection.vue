@@ -1,5 +1,5 @@
 <template>
-<div class="entries columns is-multiline">
+<div class="entries is-multiline columns">
   <div class="column is-4" v-for="feed in feeds" :key="feed.id">
     <feed-card
       :feed="feed"
