@@ -14,7 +14,7 @@
   </span>
 </template>
 <script>
-import store from '../packs/store'
+import store from '../packs/store';
 
 export default {
   name: 'SelectFeed',

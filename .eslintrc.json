@@ -9,6 +9,7 @@
     "quotes": ["error", "single"],
     "no-console": 0,
     "vue/require-prop-types": false,
-    "vue/prop-name-casing": false
+    "vue/prop-name-casing": false,
+    "vue/attribute-hyphenation": false
   }
 }

@@ -5,16 +5,12 @@
     </p>
     <span v-if="selectedFeeds.length < 1">Feedを選択して、ボードを作ってみましょう！</span>
     <ul class="menu-list">
-      <li
+      <selected-feed
         v-for="feed in selectedFeeds"
         :key="feed.id"
-      >
-        <i
-          class="delete icon is-small"
-          @click="deleteSelectedFeed(feed.id)"
-        />
-        {{ feed.title }}
-      </li>
+        :feed="feed"
+        @unselectedFeed="handleOnUnselectedFeed"
+      />
     </ul>
     <button class="button is-primary is-fullwidth">
       ボードを作る
@@ -22,14 +18,15 @@
   </aside>
 </template>
 <script>
-import store from '../packs/store'
+import store from '../packs/store';
+import SelectedFeed from './SelectedFeed';
 
 export default {
   name: 'Menu',
-  components: {},
+  components: { SelectedFeed },
   data: () => store.state,
   methods: {
-    deleteSelectedFeed: function (id) {
+    handleOnUnselectedFeed: function (id) {
       const target = this.findSelectedFeed(id);
       this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
     },
