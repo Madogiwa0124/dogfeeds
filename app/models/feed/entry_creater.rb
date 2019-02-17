@@ -7,19 +7,21 @@ class Feed::EntryCreater
 
   def execute
     Entry.where(feed: feed).delete_all
-    feed.parsed_xml.items.map do |item|
-      Entry.create(
-        feed: feed,
-        title: item.title,
-        description: strip_tags(item.description).truncate(300),
-        published_at: item.pubDate,
-        link: item.link,
-        eye_catching_image: item.enclosure&.url
-      )
-    end
+    feed.parsed_xml.items.map { |item| create_entry(item) }
   end
 
   private
+
+  def create_entry(item)
+    Entry.create(
+      feed: feed,
+      title: item.title,
+      description: strip_tags(item.description).truncate(300),
+      published_at: item.pubDate,
+      link: item.link,
+      eye_catching_image: item.enclosure&.url
+    )
+  end
 
   def strip_tags(text)
     ActionController::Base.helpers.strip_tags text

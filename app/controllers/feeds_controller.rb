@@ -29,7 +29,7 @@ class FeedsController < ApplicationController
 
   def update
     @feed = Feed.find(params[:id])
-    if @feed.save
+    if @feed.update(feed_params)
       Feed::EntryCreater.new(@feed).execute
       redirect_to feed_path(@feed)
     else
