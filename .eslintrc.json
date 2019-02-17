@@ -6,6 +6,9 @@
   "rules": {
     "semi": "error",
     "indent": ["error", 2],
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "no-console": 0,
+    "vue/require-prop-types": false,
+    "vue/prop-name-casing": false
   }
 }

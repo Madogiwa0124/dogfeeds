@@ -1,17 +1,20 @@
 <template>
-<span>
-  <a @click="addSelectedFeed()" v-if="!isSelected()">
-    <i class="fas fa-plus-circle"></i>
-    Select
-  </a>
-  <span v-else>
-    <i class="fas fa-check-square"></i>
-    Selected
+  <span>
+    <a
+      v-if="!isSelected()"
+      @click="addSelectedFeed()"
+    >
+      <i class="fas fa-plus-circle" />
+      Select
+    </a>
+    <span v-else>
+      <i class="fas fa-check-square" />
+      Selected
+    </span>
   </span>
-</span>
 </template>
 <script>
-import store from '../store'
+import store from '../store';
 
 export default {
   name: 'SelectFeed',
@@ -20,17 +23,17 @@ export default {
   data: () => store.state,
   methods: {
     isSelected: function () {
-      return !!this.findSelectedFeed(this.feed.id)
+      return !!this.findSelectedFeed(this.feed.id);
     },
     addSelectedFeed: function () {
-      if(this.isSelected()) { return }
-      this.selectedFeeds.push(this.feed)
+      if(this.isSelected()) { return; }
+      this.selectedFeeds.push(this.feed);
     },
     findSelectedFeed: function (id) {
-      return this.selectedFeeds.find(function(feed) { return feed.id === id })
+      return this.selectedFeeds.find(function(feed) { return feed.id === id; });
     }
   }
-}
+};
 </script>
 <style lang="scss">
 
