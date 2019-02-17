@@ -12,13 +12,15 @@
 class Feed < ApplicationRecord
   require 'rss'
 
-  has_many :entries
-  has_one :last_entry, ->{ order(published_at: :desc) }, class_name: 'Entry'
-  has_many :board_feeds
+  URI_REGEXP_PATTERN = /\A#{URI.regexp(%w[http https])}\z/.freeze
+
+  has_many :entries, dependent: :destroy
+  has_one :last_entry, -> { recent }, class_name: 'Entry', inverse_of: :feed
+  has_many :board_feeds, dependent: :destroy
   has_many :boards, through: :board_feeds
 
   validates :title, presence: true
-  validates :endpoint, presence: true, format: /\A#{URI::regexp(%w(http https))}\z/
+  validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
 
   def parsed_xml
     xml = Net::HTTP.get(URI.parse(endpoint))

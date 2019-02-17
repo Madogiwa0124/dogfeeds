@@ -22,4 +22,6 @@ class Entry < ApplicationRecord
 
   validates :title, presence: true
   validates :link, presence: true
+
+  scope :recent, -> { order(published_at: :desc) }
 end
