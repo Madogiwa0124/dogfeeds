@@ -15,6 +15,13 @@
     "yarn": "^1.13.0"
   },
   "devDependencies": {
+    "eslint": "^5.14.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-vue": "^5.2.1",
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "lint": "eslint app/assets/javascripts/**/* app/javascript/**/*",
+    "lint-fix": "eslint app/assets/javascripts/**/* app/javascript/**/* --fix"
   }
 }
