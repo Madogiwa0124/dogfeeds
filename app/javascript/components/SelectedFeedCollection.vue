@@ -22,7 +22,7 @@ import store from '../packs/store';
 import SelectedFeed from './SelectedFeed';
 
 export default {
-  name: 'Menu',
+  name: 'SelectedFeedCollection',
   components: { SelectedFeed },
   data: () => store.state,
   methods: {
