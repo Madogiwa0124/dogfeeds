@@ -7,5 +7,9 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @entries = @board.entries.recent
+    respond_to do |format|
+      format.html
+      format.rss { render layout: false }
+    end
   end
 end

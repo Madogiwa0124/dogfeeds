@@ -16,7 +16,7 @@ class Feed::EntryCreater
     Entry.create(
       feed: feed,
       title: item.title,
-      description: strip_tags(item.description).truncate(300),
+      description: strip_tags(item.description.gsub(/[\r\n]/,"")).truncate(300),
       published_at: item.pubDate,
       link: item.link,
       eye_catching_image: item.enclosure&.url
