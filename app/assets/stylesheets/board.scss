@@ -1,0 +1,60 @@
+.board-index {
+  padding: 20px;
+
+  .menu {
+    border-right: 3px solid #ffffff;
+    li {
+      margin-bottom: 5px;
+      .delete {
+        &:hover {
+          background-color: hsl(348, 100%, 61%);
+        }
+      }
+    }
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .card-image {
+    img {
+      width: 100%;
+      @media screen and (min-width: 980px) {
+        min-height: 300px;
+      }
+    }
+  }
+
+  .entries {
+    margin: 0px auto;
+
+    .card {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      footer {
+        margin-top: auto;
+      }
+    }
+  }
+}
+
+.board-show {
+  padding: 20px;
+
+  .title {
+    text-align: center;
+  }
+
+  .entries {
+    margin: 0px auto;
+    max-width: 60%;
+
+    .card {
+      margin: 15px;
+    }
+  }
+}

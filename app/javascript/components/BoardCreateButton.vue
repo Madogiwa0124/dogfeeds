@@ -40,6 +40,8 @@ export default {
     hundleOnSubmit: function () {
       axios.post('/api/boards', {
         boards: { feed_ids: this.feeds.map(feed => feed.id) }
+      }).then(res => {
+        window.location.href = `/boards/${res.data.id}`;
       });
       this.showModal = false;
     }
