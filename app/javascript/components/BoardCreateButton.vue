@@ -17,6 +17,9 @@
 
 <script>
 import BoardConfirmModal from './BoardConfirmModal';
+import axios from 'axios';
+import { csrfToken } from 'rails-ujs';
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
 
 export default {
   name: 'BoradCreateButton',
@@ -35,7 +38,9 @@ export default {
       this.showModal = false;
     },
     hundleOnSubmit: function () {
-      // TODO: APIに投げてボードを作る。
+      axios.post('/api/boards', {
+        boards: { feed_ids: this.feeds.map(feed => feed.id) }
+      });
       this.showModal = false;
     }
   }

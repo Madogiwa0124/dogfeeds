@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :feeds, only: [:index]
+    resources :boards, only: [:create]
   end
 end
