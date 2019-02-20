@@ -12,18 +12,17 @@
         @unselectedFeed="handleOnUnselectedFeed"
       />
     </ul>
-    <button class="button is-primary is-fullwidth">
-      ボードを作る
-    </button>
+    <borad-create-button :feeds="selectedFeeds" />
   </aside>
 </template>
 <script>
 import store from '../packs/store';
 import SelectedFeed from './SelectedFeed';
+import BoradCreateButton from './BoardCreateButton';
 
 export default {
   name: 'SelectedFeedCollection',
-  components: { SelectedFeed },
+  components: { SelectedFeed, BoradCreateButton },
   data: () => store.state,
   methods: {
     handleOnUnselectedFeed: function (id) {
