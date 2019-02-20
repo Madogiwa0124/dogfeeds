@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get '/', to: 'feeds#index'
+  get '/', to: 'boards#new'
   resources :feeds
-  resources :boards, only: [:show, :index]
+  resources :boards, only: [:show, :new]
 
   namespace :api do
     resources :feeds, only: [:index]

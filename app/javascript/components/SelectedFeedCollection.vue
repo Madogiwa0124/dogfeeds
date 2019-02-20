@@ -3,7 +3,9 @@
     <p class="menu-label">
       Selected Feeds
     </p>
-    <span v-if="selectedFeeds.length < 1">Feedを選択して、ボードを作ってみましょう！</span>
+    <span v-if="selectedFeeds.length < 1">
+      まとめたいRSSフィードを選択して、ボードを作ってみましょう！
+    </span>
     <ul class="menu-list">
       <selected-feed
         v-for="feed in selectedFeeds"
