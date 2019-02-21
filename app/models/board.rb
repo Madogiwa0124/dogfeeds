@@ -22,21 +22,4 @@ class Board < ApplicationRecord
       board
     end
   end
-
-  def to_rss
-    RSS::Maker.make("2.0") do |feed|
-      feed.channel.title = title
-      feed.channel.link = 'http://localhost:3000/boards/'
-      feed.channel.about = 'dogfeeds!!'
-      feed.channel.description = "dogfeeds description!!"
-      feed.channel.updated = entries.recent.last.updated_at
-
-      entries.each do |entry|
-        feed.items.new_item do |item|
-          item.title = article.title
-          item.description = article.description
-        end
-      end
-    end
-  end
 end
