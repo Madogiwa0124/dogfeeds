@@ -13,13 +13,13 @@
     "vue": "^2.5.22",
     "vue-loader": "14.2.2",
     "vue-template-compiler": "^2.5.22",
-    "yarn": "^1.13.0"
-  },
-  "devDependencies": {
+    "yarn": "^1.13.0",
     "eslint": "^5.14.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.2.1",
     "webpack-dev-server": "2.11.2"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "lint": "eslint app/assets/javascripts/**/* app/javascript/**/*",
