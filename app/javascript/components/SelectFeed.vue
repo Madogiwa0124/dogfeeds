@@ -1,21 +1,22 @@
 <template>
   <a @click="toggleSelectedFeed()">
     <span v-if="isSelected()">
-      <i class="far fa-check-square" />
+      <font-awesome-icon :icon="['far','check-square']" />
       Selected
     </span>
     <span v-else>
-      <i class="far fa-square" />
+      <font-awesome-icon :icon="['far','square']" />
       Select
     </span>
   </a>
 </template>
 <script>
 import store from '../packs/store';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
   name: 'SelectFeed',
-  components: {},
+  components: { FontAwesomeIcon },
   props: ['feed'],
   data: () => store.state,
   methods: {
