@@ -22,6 +22,12 @@ class Feed < ApplicationRecord
   validates :title, presence: true
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
 
+  def save_with_entry_create!(params)
+    assign_attributes(params)
+    save!
+    Feed::EntryCreater.new(self).execute!
+  end
+
   def parsed_xml
     xml = Net::HTTP.get(URI.parse(endpoint))
     RSS::Parser.parse(xml)

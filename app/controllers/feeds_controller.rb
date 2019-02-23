@@ -18,23 +18,21 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = Feed.new(feed_params)
-    if @feed.save
-      Feed::EntryCreater.new(@feed).execute
-      redirect_to feed_path(@feed)
-    else
-      render :new
-    end
+    @feed = Feed.new
+    @feed.save_with_entry_create!(feed_params)
+    redirect_to feed_path(@feed)
+  rescue StandardError => e
+    logger.error(e)
+    render :new
   end
 
   def update
     @feed = Feed.find(params[:id])
-    if @feed.update(feed_params)
-      Feed::EntryCreater.new(@feed).execute
-      redirect_to feed_path(@feed)
-    else
-      render :edit
-    end
+    @feed.save_with_entry_create!(feed_params)
+    redirect_to feed_path(@feed)
+  rescue StandardError => e
+    logger.error(e)
+    render :edit
   end
 
   private

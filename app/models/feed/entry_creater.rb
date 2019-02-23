@@ -5,15 +5,17 @@ class Feed::EntryCreater
     @feed = feed
   end
 
-  def execute
-    Entry.where(feed: feed).delete_all
-    feed.parsed_xml.items.map { |item| create_entry(item) }
+  def execute!
+    ActiveRecord::Base.transaction do
+      Entry.where(feed: feed).delete_all
+      feed.parsed_xml.items.map { |item| create_entry!(item) }
+    end
   end
 
   private
 
-  def create_entry(item)
-    Entry.create(
+  def create_entry!(item)
+    Entry.create!(
       feed: feed,
       title: item.title,
       description: shaped_description(item.description),
