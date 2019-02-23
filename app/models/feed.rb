@@ -31,5 +31,14 @@ class Feed < ApplicationRecord
   def parsed_xml
     xml = Net::HTTP.get(URI.parse(endpoint))
     RSS::Parser.parse(xml)
+  rescue RSS::NotWellFormedError => e
+    logger.error(e)
+    invalid_rss_format
+  end
+
+  private
+
+  def invalid_rss_format
+    errors.add(:base, 'rssフィードの形式が不正です。エンドポイントをご確認ください。')
   end
 end
