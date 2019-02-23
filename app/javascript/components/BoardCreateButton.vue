@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="board-create-button">
     <button
       class="button is-primary is-fullwidth"
+      :disabled="!isActive()"
       @click="hundleOnClick()"
     >
       ボードを作る
@@ -31,6 +32,9 @@ export default {
     };
   },
   methods: {
+    isActive: function () {
+      return this.feeds.length > 0;
+    },
     hundleOnClick: function () {
       this.showModal = true;
     },
@@ -49,6 +53,5 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="scss">
 </style>

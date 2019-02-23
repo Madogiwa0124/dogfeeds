@@ -14,7 +14,7 @@
       </header>
       <section class="modal-card-body">
         <p class="has-text-weight-semibold">
-          下記のフィードをまとめますね！
+          こちらのフィードをまとめますね！
         </p>
         <ul>
           <li
