@@ -1,7 +1,10 @@
 class Api::BoardsController < ApplicationController
   def create
     feeds = Feed.where(id: boards_params[:feed_ids])
-    board = Board.create_with_board_feeds!(title: boards_params[:title], feeds: feeds)
+    board = Board.create_with_board_feeds!(
+      title: boards_params[:title],
+      feeds: feeds
+    )
     render json: { id: board.id }
   rescue StandardError => e
     logger.error(e)

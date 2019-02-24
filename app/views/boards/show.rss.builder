@@ -3,7 +3,7 @@ xml.rss(version: '2.0') do
   xml.channel do
     xml.title @board.title
     xml.description @board.description
-    xml.link 'http://localhost:3000/boards/'
+    xml.link 'https://dogfeeds.herokuapp.com'
     xml.lastBuildDate @entries.last.published_at.rfc2822
     xml.language 'ja'
     xml.copyright '© copyright 2019 Madogiwa All Rights Reserved.'

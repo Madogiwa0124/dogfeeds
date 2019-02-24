@@ -14,12 +14,14 @@ class Board < ApplicationRecord
   has_many :board_feeds, dependent: :destroy
   has_many :feeds, through: :board_feeds
   has_many :entries, through: :feeds
+  has_many :last_entries, through: :feeds, source: :last_entry
+
+  def last_entry
+    last_entries.last
+  end
 
   def description
-    <<~"EOS"
-      このフィードは、「#{feeds.map(&:title).join('、')}」をまとめたRSSフィードです。
-      created by dogfeeds(https://dogfeeds.herokuapp.com)
-    EOS
+    "「#{feeds.map(&:title).join('、')}」をまとめたRSSフィードです。"
   end
 
   def self.create_with_board_feeds!(title:, feeds:)
