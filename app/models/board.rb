@@ -15,6 +15,13 @@ class Board < ApplicationRecord
   has_many :feeds, through: :board_feeds
   has_many :entries, through: :feeds
 
+  def description
+    <<~"EOS"
+      このフィードは、「#{feeds.map(&:title).join('、')}」をまとめたRSSフィードです。
+      created by dogfeeds(https://dogfeeds.herokuapp.com)
+    EOS
+  end
+
   def self.create_with_board_feeds!(title:, feeds:)
     ActiveRecord::Base.transaction do
       board = create!(title: title.presence || '無題のボード')

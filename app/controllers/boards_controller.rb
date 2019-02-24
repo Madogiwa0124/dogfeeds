@@ -5,7 +5,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board = Board.find(params[:id])
+    @board = Board.includes(:feeds).find(params[:id])
     @entries = @board.entries.recent
     respond_to do |format|
       format.html
