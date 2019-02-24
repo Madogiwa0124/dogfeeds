@@ -15,9 +15,9 @@ class Board < ApplicationRecord
   has_many :feeds, through: :board_feeds
   has_many :entries, through: :feeds
 
-  def self.create_with_board_feeds!(title: '無題のボード', feeds:)
+  def self.create_with_board_feeds!(title:, feeds:)
     ActiveRecord::Base.transaction do
-      board = create!(title: title)
+      board = create!(title: title.presence || '無題のボード')
       feeds.each { |feed| board.board_feeds.create!(feed: feed) }
       board
     end

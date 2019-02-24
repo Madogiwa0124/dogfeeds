@@ -6,25 +6,19 @@
     <span v-if="selectedFeeds.length < 1">
       まとめたいRSSフィードを選択して、ボードを作ってみましょう！
     </span>
-    <ul class="menu-list">
-      <selected-feed
-        v-for="feed in selectedFeeds"
-        :key="feed.id"
-        :feed="feed"
-        @unselectedFeed="handleOnUnselectedFeed"
-      />
-    </ul>
-    <borad-create-button :feeds="selectedFeeds" />
+    <borad-create-form
+      :feeds="selectedFeeds"
+      @unselectedFeed="handleUnselectedFeed(id)"
+    />
   </aside>
 </template>
 <script>
 import store from '../packs/store';
-import SelectedFeed from './SelectedFeed';
-import BoradCreateButton from './BoardCreateButton';
+import BoradCreateForm from './BoradCreateForm';
 
 export default {
   name: 'SelectedFeedCollection',
-  components: { SelectedFeed, BoradCreateButton },
+  components: { BoradCreateForm },
   data: () => store.state,
   methods: {
     handleOnUnselectedFeed: function (id) {

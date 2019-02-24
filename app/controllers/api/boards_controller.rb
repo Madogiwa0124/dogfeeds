@@ -1,7 +1,7 @@
 class Api::BoardsController < ApplicationController
   def create
-    feeds = Feed.where(id: boards_confirm_params[:feed_ids])
-    board = Board.create_with_board_feeds!(feeds: feeds)
+    feeds = Feed.where(id: boards_params[:feed_ids])
+    board = Board.create_with_board_feeds!(title: boards_params[:title], feeds: feeds)
     render json: { id: board.id }
   rescue StandardError => e
     logger.error(e)
@@ -10,7 +10,7 @@ class Api::BoardsController < ApplicationController
 
   private
 
-  def boards_confirm_params
-    params.require(:boards).permit(feed_ids: [])
+  def boards_params
+    params.require(:boards).permit(:title, feed_ids: [])
   end
 end

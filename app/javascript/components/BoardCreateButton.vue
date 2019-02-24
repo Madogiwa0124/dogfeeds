@@ -10,6 +10,7 @@
     <board-confirm-modal
       v-show="showModal"
       :feeds="feeds"
+      :title="title"
       @close="hundleOnClose()"
       @submit="hundleOnSubmit()"
     />
@@ -25,7 +26,7 @@ axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
 export default {
   name: 'BoradCreateButton',
   components: { BoardConfirmModal },
-  props: ['feeds'],
+  props: ['feeds', 'title'],
   data: function () {
     return {
       showModal: false
@@ -43,7 +44,7 @@ export default {
     },
     hundleOnSubmit: function () {
       axios.post('/api/boards', {
-        boards: { feed_ids: this.feeds.map(feed => feed.id) }
+        boards: { feed_ids: this.feeds.map(feed => feed.id), title: this.title }
       }).then(res => {
         window.location.href = `/boards/${res.data.id}`;
       });

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal is-active">
+  <div class="board-confirm-modal modal is-active">
     <div class="modal-background" />
     <div class="modal-card">
       <header class="modal-card-head">
@@ -13,17 +13,22 @@
         />
       </header>
       <section class="modal-card-body">
-        <p class="has-text-weight-semibold">
-          こちらのフィードをまとめますね！
+        <p
+          v-if="title.length > 0"
+          class="has-text-weight-semibold"
+        >
+          タイトル「{{ title }}」
         </p>
-        <ul>
-          <li
-            v-for="feed in feeds"
-            :key="feed.id"
-          >
-            {{ feed.title }}
-          </li>
-        </ul>
+        <div class="content">
+          <ul>
+            <li
+              v-for="feed in feeds"
+              :key="feed.id"
+            >
+              {{ feed.title }}
+            </li>
+          </ul>
+        </div>
       </section>
       <footer class="modal-card-foot">
         <button
@@ -40,7 +45,7 @@
 export default {
   name: 'ConfirmModal',
   components: {},
-  props: ['feeds'],
+  props: ['feeds', 'title'],
   methods: {
     close: function () {
       this.$emit('close');
@@ -51,5 +56,5 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
 </style>
