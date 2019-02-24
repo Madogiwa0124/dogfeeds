@@ -11,7 +11,12 @@
       </div>
       <div class="content">
         {{ lastEntry.title }}
-        <a :href="lastEntry.link">リンク先で読む</a>
+        <a
+          :href="lastEntry.link"
+          target="_blank"
+        >
+          リンク先で読む
+        </a>
       </div>
     </div>
     <footer class="card-footer">
