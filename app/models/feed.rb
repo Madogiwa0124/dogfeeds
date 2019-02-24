@@ -26,6 +26,9 @@ class Feed < ApplicationRecord
     assign_attributes(params)
     save!
     Feed::EntryCreater.new(self).execute!
+  rescue StandardError => e
+    faild_entries_create
+    raise e
   end
 
   def parsed_xml
@@ -37,6 +40,10 @@ class Feed < ApplicationRecord
   end
 
   private
+
+  def faild_entries_create
+    errors.add(:base, '記事の一覧を取得するのに失敗しました。')
+  end
 
   def invalid_rss_format
     errors.add(:base, 'rssフィードの形式が不正です。エンドポイントをご確認ください。')

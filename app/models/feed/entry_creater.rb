@@ -6,10 +6,8 @@ class Feed::EntryCreater
   end
 
   def execute!
-    ActiveRecord::Base.transaction do
-      Entry.where(feed: feed).delete_all
-      feed.parsed_xml.items.map { |item| create_entry!(item) }
-    end
+    Entry.where(feed: feed).delete_all
+    feed.parsed_xml.items.map { |item| create_entry!(item) }
   end
 
   private

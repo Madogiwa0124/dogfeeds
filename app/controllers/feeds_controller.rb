@@ -19,7 +19,9 @@ class FeedsController < ApplicationController
 
   def create
     @feed = Feed.new
-    @feed.save_with_entry_create!(feed_params)
+    ActiveRecord::Base.transaction do
+      @feed.save_with_entry_create!(feed_params)
+    end
     redirect_to feed_path(@feed)
   rescue StandardError => e
     logger.error(e)
