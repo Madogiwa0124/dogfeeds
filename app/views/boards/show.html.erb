@@ -1,12 +1,13 @@
 <div class="board-show" id="boards-entries">
   <h1 class="title">
     <%= @board.title %>
-    <%= link_to board_path(@board, format: :rss) do %>
-      <i class="fas fa-rss"></i>
-    <% end %>
   </h1>
   <p class="description">
     <%= @board.description.gsub(/\r\n|\r|\n/, '<br/>').html_safe %>
+    <%= link_to board_path(@board, format: :rss) do %>
+      Rssへのリンクはこちら
+      <i class="fas fa-rss"></i>
+    <% end %>
   </p>
   <entry-card-collection :entries="<%= @entries.to_json %>"></entry-card-collection>
 </div>
