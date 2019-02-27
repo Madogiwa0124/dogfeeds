@@ -32,14 +32,20 @@ class Feed < ApplicationRecord
   end
 
   def parsed_xml
-    xml = Net::HTTP.get(URI.parse(endpoint))
-    RSS::Parser.parse(xml)
+    parsed_rss
   rescue RSS::NotWellFormedError => e
     logger.error(e)
     invalid_rss_format
   end
 
   private
+
+  def parsed_rss
+    rss_source = Net::HTTP.get(URI.parse(endpoint))
+    RSS::Parser.parse(rss_source)
+  rescue RSS::InvalidRSSError
+    RSS::Parser.parse(rss_source, false)
+  end
 
   def faild_entries_create
     errors.add(:base, '記事の一覧を取得するのに失敗しました。')
