@@ -4,11 +4,11 @@
       Selected Feeds
     </p>
     <span v-if="selectedFeeds.length < 1">
-      まとめたいRSSフィードを選択して、ボードを作ってみましょう！
+      まとめたいRSSフィードを選択して、ボード作ってみませんか？🐾
     </span>
     <borad-create-form
       :feeds="selectedFeeds"
-      @unselectedFeed="handleUnselectedFeed(id)"
+      @unselectedFeed="handleOnUnselectedFeed(id)"
     />
   </aside>
 </template>
@@ -21,6 +21,11 @@ export default {
   components: { BoradCreateForm },
   data: () => store.state,
   methods: {
+    // TODO: 下記警告に対応するためにidを返すメソッドを定義しているが、詳細要調査
+    // [Vue warn]: Property or method "id" is not defined on the instance but referenced during render
+    id: function (id) {
+      return id;
+    },
     handleOnUnselectedFeed: function (id) {
       const target = this.findSelectedFeed(id);
       this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
