@@ -35,7 +35,7 @@
           class="button is-success is-fullwidth"
           @click="submit()"
         >
-          OK!!
+          これでつくる
         </button>
       </footer>
     </div>
