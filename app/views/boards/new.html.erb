@@ -1,7 +1,21 @@
 <div class="boards-new columns" id="boards">
   <selected-feed-collection></selected-feed-collection>
   <main class="column">
-    <h1 class="title">- Create Rss Board -</h1>
+    <article class="message">
+      <div class="message-header">
+        <p>Dogfeedsとは？</p>
+      </div>
+      <div class="message-body">
+        <strong>
+          RSSフィードをまとめたRssフィードを作ることができます。
+          作り方は簡単なので、ぜひ作ってみてください(/･ω･)/
+        </strong>
+        </br>
+        1. フィードを選択する</br>
+        2. まとめたフィード(ボード)に名前をつける</br>
+        3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！</br>
+      </div>
+    </article>
     <feed-card-collection
       :init_feeds="<%= @feeds.to_json %>"
       :init_last_entries="<%= @last_entries.to_json%>">

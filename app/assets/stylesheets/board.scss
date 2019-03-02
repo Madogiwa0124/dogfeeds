@@ -1,6 +1,14 @@
 .boards-new {
   padding: 20px;
-
+  .message {
+    .message-header {
+      background-color: #999999;
+    }
+    .message-body {
+      color: #000000;
+      background-color: #ffffff;
+    }
+  }
   .menu {
     border-right: 3px solid #ffffff;
     li {
