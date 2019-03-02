@@ -4,10 +4,14 @@
 @import "board";
 
 html {
-  min-height: 100%;
+  height: 100%;
   background-color: hsl(0, 0%, 96%);
 }
 
 body {
-  min-height: 100%;
+  height: 100%;
+}
+
+.footer {
+  padding: 15px;
 }

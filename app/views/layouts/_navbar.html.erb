@@ -1,6 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
+      <img src="/favicon.ico" />
       DogFeeds
     </a>
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -13,7 +14,7 @@
     <div class="navbar-start">
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
-          More
+          MENU
         </a>
         <div class="navbar-dropdown">
           <%= link_to 'RSSフィードを登録する', new_feed_path, class: "navbar-item" %>
@@ -27,6 +28,20 @@
       </div>
     </div>
     <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a href="https://twitter.com/Madogiwa_Boy" class="button is-info" target="_blank">
+            <strong>
+              <i class="far fa-envelope"></i>
+              お問い合わせ
+            </strong>
+          </a>
+          <a href="https://github.com/Madogiwa0124/dogfeeds" class="button is-black" target="_blank">
+            <i class="fab fa-github"></i>
+            Contribute
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
