@@ -21,6 +21,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
   gem 'rubocop'
+  gem 'dotenv-rails'
 end
 
 group :development do

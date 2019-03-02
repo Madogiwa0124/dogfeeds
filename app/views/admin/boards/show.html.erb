@@ -1,0 +1,14 @@
+<h1 class="title"><%= @board.id %>:<%= @board.title %></h1>
+<p class="label">Feeds<p>
+<table class="table is-striped">
+  <tr>
+    <th>title</th>
+    <th>endpoint</th>
+  </tr>
+  <% @board.feeds.each do |feed| %>
+    <tr>
+      <td><%= feed.title %></td>
+      <td><%= link_to feed.endpoint %></td>
+    </tr>
+  <% end %>
+</table>

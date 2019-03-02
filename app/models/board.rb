@@ -31,4 +31,11 @@ class Board < ApplicationRecord
       board
     end
   end
+
+  def recreate_board_feeds!(feed_ids)
+    ActiveRecord::Base.transaction do
+      board_feeds.destroy_all
+      feed_ids.each { |feed_id| board_feeds.create!(feed_id: feed_id) }
+    end
+  end
 end

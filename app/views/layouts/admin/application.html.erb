@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dogfeeds|Admin</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+
+  <body>
+    <div class="admin">
+      <div class="columns">
+        <div class="column is-one-fifth">
+          <%= render 'layouts/admin/sidebar' %>
+        </div>
+        <main class="column">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= board.id %>:
+      <%= board.title %>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <%= board.description %>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <%= link_to 'Edit', edit_admin_board_path(board), class: "card-footer-item" %>
+    <%= link_to 'Destroy', admin_board_path(board), method: :delete, class: "card-footer-item" %>
+    <span class="card-footer-item">
+      更新日: <%= l(board.updated_at, format: :long) %>
+    </span>
+  </footer>
+</div>

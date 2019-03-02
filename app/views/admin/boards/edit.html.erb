@@ -1,0 +1,5 @@
+<h1>Board Edit</h1>
+<% if @board.errors.any? %>
+  <%= render 'layouts/errors', model: @board %>
+<% end %>
+<%= render 'form', board: @board %>
