@@ -35,6 +35,8 @@ export default {
     };
   },
   mounted: function () {
+    // MEMO: 初回表示時にデータ取得するため実行
+    this.infiniteHandler();
     this.$nextTick(function () {
       this.isLoading = false;
     });
