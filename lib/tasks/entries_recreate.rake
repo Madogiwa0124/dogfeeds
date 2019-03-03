@@ -3,6 +3,9 @@ namespace :entries do
   task recreate: :environment do
     Feed.all.each do |feed|
       ActiveRecord::Base.transaction { Feed::EntryCreater.new(feed).execute! }
+    rescue => e
+      logger.error(e)
+      next
     end
   end
 end
