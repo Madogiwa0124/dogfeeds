@@ -22,6 +22,11 @@ class Feed < ApplicationRecord
   validates :title, presence: true
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
 
+  scope :pager, ->(page: 1, per: 10) {
+    num = page.to_i.positive? ? page.to_i - 1 : 0
+    limit(per).offset(per * num)
+  }
+
   def save_with_entry_create!(params)
     assign_attributes(params)
     save!

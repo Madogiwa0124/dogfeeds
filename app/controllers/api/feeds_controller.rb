@@ -1,7 +1,9 @@
 class Api::FeedsController < ApplicationController
+  PER_PAGE = 6
+
   def index
-    @feeds = Feed.all.includes(:last_entry).order('entries.published_at DESC')
-    @last_entries = @feeds.map(&:last_entry)
+    @feeds = Feed.order(id: :desc).pager(page: params[:page], per: PER_PAGE)
+    @last_entries = @feeds.includes(:last_entry).map(&:last_entry)
     object = { feeds: @feeds, last_entries: @last_entries }
     render json: object
   end

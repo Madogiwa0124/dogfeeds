@@ -16,10 +16,7 @@
         3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！</br>
       </div>
     </article>
-    <feed-card-collection
-      :init_feeds="<%= @feeds.to_json %>"
-      :init_last_entries="<%= @last_entries.to_json%>">
-    </feed-card-collection>
+    <feed-card-collection />
   </main>
 </div>
 <%= javascript_pack_tag 'boards/new' %>
