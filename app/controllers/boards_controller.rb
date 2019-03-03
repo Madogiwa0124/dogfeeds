@@ -6,10 +6,7 @@ class BoardsController < ApplicationController
                    .order('entries.published_at DESC NULLS LAST')
   end
 
-  def new
-    @feeds = Feed.all.includes(:last_entry).order('entries.published_at DESC')
-    @last_entries = @feeds.map(&:last_entry)
-  end
+  def new; end
 
   def show
     @board = Board.includes(:feeds).find(params[:id])

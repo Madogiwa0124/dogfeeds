@@ -13,6 +13,9 @@ FrozenStringLiteralComment:
 ClassAndModuleChildren:
   Enabled: false
 
+Style/Lambda:
+  EnforcedStyle: literal
+
 AllCops:
   TargetRubyVersion: 2.5.1
   Exclude:

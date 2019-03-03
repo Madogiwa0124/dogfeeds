@@ -11,46 +11,52 @@
         :lastEntry="feedLastEntry(feed)"
       />
     </div>
+    <infinite-loading @infinite="infiniteHandler" />
   </div>
 </template>
 <script>
 import FeedCard from './FeedCard';
 import PageLoader from './PageLoader';
+import InfiniteLoading from 'vue-infinite-loading';
 import axios from 'axios';
 
-const INTERVAL_TIME = 600000;
+const feedsApi = '/api/feeds';
 
 export default {
   name: 'FeedCardCollection',
-  components: { FeedCard, PageLoader },
+  components: { FeedCard, PageLoader, InfiniteLoading },
   props: ['init_feeds', 'init_last_entries'],
   data: function () {
     return {
-      feeds: this.init_feeds,
-      last_entries: this.init_last_entries,
-      intervalId: 0,
+      page: 1,
+      feeds: [],
+      last_entries: [],
       isLoading: true
     };
   },
   mounted: function () {
-    this.intervalId = setInterval(this.getFeeds, INTERVAL_TIME);
     this.$nextTick(function () {
       this.isLoading = false;
     });
-  },
-  beforeDestroy: function () {
-    clearInterval(this.intervalId);
   },
   methods: {
     feedLastEntry: function(feed) {
       return this.last_entries.filter(entry => entry.feed_id === feed.id)[0];
     },
-    getFeeds: function() {
-      axios.get('/api/feeds').then((res) => {
-        this.feeds = res.data.feeds;
-        this.last_entries = res.data.last_entries;
+    infiniteHandler($state) {
+      axios.get(feedsApi, {
+        params: { page: this.page },
+      }).then(({ data }) => {
+        if (data.feeds.length) {
+          this.page += 1;
+          this.feeds.push(...data.feeds);
+          this.last_entries.push(...data.last_entries);
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
       });
-    }
+    },
   }
 };
 </script>
