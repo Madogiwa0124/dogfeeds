@@ -2,11 +2,12 @@
 #
 # Table name: feeds
 #
-#  id         :bigint(8)        not null, primary key
-#  endpoint   :string           not null
-#  title      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :bigint(8)        not null, primary key
+#  endpoint          :string           not null
+#  last_published_at :datetime
+#  title             :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 class Feed < ApplicationRecord
@@ -22,6 +23,7 @@ class Feed < ApplicationRecord
   validates :title, presence: true
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
 
+  scope :recent, -> { order(last_published_at: :desc) }
   scope :pager, ->(page: 1, per: 10) {
     num = page.to_i.positive? ? page.to_i - 1 : 0
     limit(per).offset(per * num)

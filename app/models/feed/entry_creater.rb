@@ -8,6 +8,7 @@ class Feed::EntryCreater
   def execute!
     Entry.where(feed: feed).delete_all
     feed.parsed_xml.items.map { |item| create_entry!(item) }
+    feed.update!(last_published_at: feed.last_entry.published_at)
   end
 
   private
