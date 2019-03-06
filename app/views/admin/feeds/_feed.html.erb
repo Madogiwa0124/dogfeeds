@@ -1,0 +1,20 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= feed.id %>:
+      <%= feed.title %>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <%= link_to feed.endpoint %>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <%= link_to 'Edit', edit_admin_feed_path(feed), class: "card-footer-item" %>
+    <%= link_to 'Destroy', admin_feed_path(feed), method: :delete, class: "card-footer-item" %>
+    <span class="card-footer-item">
+      更新日: <%= l(feed.updated_at, format: :long) %>
+    </span>
+  </footer>
+</div>

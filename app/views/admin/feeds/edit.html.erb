@@ -1,0 +1,6 @@
+<div class="feed-edit">
+  <% if @feed.errors.any? %>
+    <%= render 'layouts/errors', model: @feed %>
+  <% end %>
+  <%= render 'form', feed: @feed, title: 'Rss Feedを編集する' %>
+</div>

@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :boards
     resources :board_feeds
+    resources :feeds
   end
 end
