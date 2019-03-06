@@ -43,6 +43,10 @@
       display: flex;
       flex-direction: column;
 
+      .content {
+        word-wrap: break-word;
+      }
+
       footer {
         margin-top: auto;
       }
@@ -53,6 +57,7 @@
 .board-index {
   padding: 20px;
 }
+
 .board-show {
   padding: 20px;
 
