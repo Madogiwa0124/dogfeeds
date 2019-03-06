@@ -53,7 +53,7 @@ export default {
           this.page += 1;
           this.feeds.push(...data.feeds);
           this.last_entries.push(...data.last_entries);
-          $state.loaded();
+          if($state) { $state.loaded(); }
         } else {
           $state.complete();
         }
