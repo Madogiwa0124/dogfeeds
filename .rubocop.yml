@@ -16,6 +16,10 @@ ClassAndModuleChildren:
 Style/Lambda:
   EnforcedStyle: literal
 
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
 AllCops:
   TargetRubyVersion: 2.5.1
   Exclude:
