@@ -16,6 +16,12 @@ class Admin::FeedsController < Admin::ApplicationController
     render :edit
   end
 
+  def destroy
+    @feed = Feed.find(params[:id])
+    @feed.destroy
+    redirect_to admin_feeds_path
+  end
+
   private
 
   def feed_params
