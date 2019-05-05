@@ -22,6 +22,7 @@ class Feed < ApplicationRecord
 
   validates :title, presence: true
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
+  validates :endpoint, uniqueness: true
 
   scope :recent, -> { order(last_published_at: :desc) }
   scope :pager, ->(page: 1, per: 10) {
