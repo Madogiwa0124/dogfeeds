@@ -70,4 +70,18 @@
 .feed-form {
   margin: 0px auto;
   max-width: 70%;
+
+  .tags-input {
+    .tag {
+      margin-right: 3px;
+    }
+
+    .tag-list {
+      display: inline;
+    }
+
+    .input {
+      width: initial;
+    }
+  }
 }
