@@ -5,7 +5,7 @@
       v-for="(tag, index) in tags"
       :key="index"
       type="hidden"
-      name="tags[]"
+      name="feed[tags][]"
       :value="tag.name"
     >
     <div class="tag-list">

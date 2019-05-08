@@ -15,28 +15,18 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = Feed.new
-    ActiveRecord::Base.transaction do
-      @feed.save_with_entry_create!(feed_params)
-    end
-    redirect_to feed_path(@feed)
+    post_form = Feed::PostForm.new(feed_params)
+    post_form.create!
+    redirect_to feed_path(post_form.feed)
   rescue StandardError => e
+    @feed = post_form.feed
     logger.error(e)
     render :new
-  end
-
-  def update
-    @feed = Feed.find(params[:id])
-    @feed.save_with_entry_create!(feed_params)
-    redirect_to feed_path(@feed)
-  rescue StandardError => e
-    logger.error(e)
-    render :edit
   end
 
   private
 
   def feed_params
-    params.require(:feed).permit(:title, :endpoint)
+    params.require(:feed).permit(:title, :endpoint, tags:[])
   end
 end

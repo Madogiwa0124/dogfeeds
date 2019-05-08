@@ -51,28 +51,6 @@ RSpec.describe Feed, type: :model do
     end
   end
 
-  describe '#save_with_entry_create' do
-    let(:title) { 'title' }
-    let(:endpoint) { 'https://madogiwa0124.hatenablog.com/rss' }
-    let(:feed) { Feed.last }
-
-    before do
-      described_class.new.save_with_entry_create!(
-        title: title,
-        endpoint: endpoint
-      )
-    end
-
-    it 'feedが作成されること' do
-      expect(feed.title).to eq title
-      expect(feed.endpoint).to eq endpoint
-    end
-
-    it 'entryが作成されること' do
-      expect(feed.entries.length).to be_positive
-    end
-  end
-
   describe '#parsed_items' do
     let(:feed) { build(:feed, endpoint: endpoint) }
 
