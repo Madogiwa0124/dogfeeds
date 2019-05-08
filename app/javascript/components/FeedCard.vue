@@ -17,6 +17,9 @@
         >
           リンク先で読む
         </a>
+        <p>
+          <feed-tag :tag="tag" v-for="tag in tags" :key="tag.id"></feed-tag>
+        </p>
       </div>
     </div>
     <footer class="card-footer">
@@ -33,10 +36,11 @@
 <script>
 import moment from 'moment/moment';
 import SelectFeed from './SelectFeed';
+import FeedTag from './FeedTag'
 
 export default {
   name: 'FeedCard',
-  components: { SelectFeed },
+  components: { SelectFeed, FeedTag },
   filters: {
     fromNow: function (value) {
       return moment(value, 'YYYYMMDD h:mm:ss').fromNow();
@@ -46,7 +50,7 @@ export default {
       return value;
     }
   },
-  props: ['feed', 'lastEntry'],
+  props: ['feed', 'lastEntry', 'tags'],
   methods: {
     feedPath: function () {
       return `/feeds/${this.feed.id}`;

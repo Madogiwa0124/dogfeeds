@@ -8,10 +8,11 @@ class Admin::FeedsController < Admin::ApplicationController
   end
 
   def update
-    @feed = Feed.find(params[:id])
-    @feed.save_with_entry_create!(feed_params)
-    redirect_to admin_feeds_path
+    post_form = Feed::PostForm.new(feed_params)
+    post_form.update!
+    redirect_to feed_path(post_form.feed)
   rescue StandardError => e
+    @feed = post_form.feed
     logger.error(e)
     render :edit
   end

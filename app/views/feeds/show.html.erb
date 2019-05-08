@@ -1,5 +1,12 @@
 <div class="feed-show" id="feeds-entries">
   <h1 class="title"><%= @feed.title %></h1>
+  <div class="tags">
+    Tag:
+    <% @feed.tags.each do |tag| %>
+      <% p tag.to_json %>
+      <feed-tag :tag="<%= tag.to_json %>" />
+    <% end %>
+  </div>
   <entry-card-collection :entries="<%= @entries.to_json %>"></entry-card-collection>
 </div>
 <%= javascript_pack_tag 'feeds/show' %>

@@ -26,6 +26,10 @@
     }
   }
 
+  .tag {
+    margin-right: 3px;
+  }
+
   .entries {
     margin: 0px auto;
 
@@ -63,6 +67,14 @@
 
     .card {
       margin: 15px;
+    }
+  }
+  .tags {
+    display: block;
+    text-align: center;
+
+    .tag {
+      margin-right: 3px;
     }
   }
 }
