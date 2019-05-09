@@ -8,7 +8,7 @@ class Admin::FeedsController < Admin::ApplicationController
   end
 
   def update
-    post_form = Feed::PostForm.new(feed_params)
+    post_form = Feed::PostForm.new(feed_params.merge(id: params[:id]))
     post_form.update!
     redirect_to feed_path(post_form.feed)
   rescue StandardError => e
@@ -26,6 +26,6 @@ class Admin::FeedsController < Admin::ApplicationController
   private
 
   def feed_params
-    params.require(:feed).permit(:title, :endpoint)
+    params.require(:feed).permit(:title, :endpoint, tags: [])
   end
 end

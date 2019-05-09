@@ -18,6 +18,9 @@
         </p>
         <p class="help">RssフィードのエンドポイントURLを入力してください。(必須)</p>
       </div>
+      <div class="field">
+        <tags-input :init_tags="<%= feed.tags.to_json %>" />
+      </div>
       <div class="field is-grouped is-grouped-right">
         <p class="control">
           <%= f.submit class: "button is-success" %>
