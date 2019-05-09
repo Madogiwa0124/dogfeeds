@@ -18,7 +18,11 @@
           リンク先で読む
         </a>
         <p>
-          <feed-tag :tag="tag" v-for="tag in tags" :key="tag.id"></feed-tag>
+          <feed-tag
+            v-for="tag in tags"
+            :key="tag.id"
+            :tag="tag"
+          />
         </p>
       </div>
     </div>
@@ -36,7 +40,7 @@
 <script>
 import moment from 'moment/moment';
 import SelectFeed from './SelectFeed';
-import FeedTag from './FeedTag'
+import FeedTag from './FeedTag';
 
 export default {
   name: 'FeedCard',

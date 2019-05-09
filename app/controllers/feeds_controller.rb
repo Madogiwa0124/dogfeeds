@@ -27,6 +27,6 @@ class FeedsController < ApplicationController
   private
 
   def feed_params
-    params.require(:feed).permit(:title, :endpoint, tags:[])
+    params.require(:feed).permit(:title, :endpoint, tags: [])
   end
 end

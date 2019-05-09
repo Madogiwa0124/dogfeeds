@@ -55,7 +55,6 @@ export default {
         params: { page: this.page },
       }).then(({ data }) => {
         if (data.feeds.length) {
-          console.log(data)
           this.page += 1;
           this.feeds.push(...data.feeds);
           this.last_entries.push(...data.last_entries);

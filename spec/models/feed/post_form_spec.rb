@@ -36,7 +36,9 @@ RSpec.describe Feed::PostForm, type: :model do
   describe '#update!', focus: true do
     let(:title) { 'updated_title' }
     let(:tags) { %w[updated_tag] }
-    let(:params) { { id: feed.id, title: title, endpoint: endpoint, tags: tags } }
+    let(:params) do
+      { id: feed.id, title: title, endpoint: endpoint, tags: tags }
+    end
     let(:post_form) { described_class.new(params) }
     let(:feed) { Feed.last }
 

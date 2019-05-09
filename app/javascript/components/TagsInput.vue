@@ -35,9 +35,6 @@
 export default {
   name: 'TagsInput',
   components: {},
-  created: function() {
-    console.log(this.init_tags)
-  },
   props: ['init_tags'],
   data: function() {
     return {
