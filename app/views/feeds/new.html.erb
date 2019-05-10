@@ -2,5 +2,8 @@
   <% if @feed.errors.any? %>
     <%= render 'layouts/errors', model: @feed %>
   <% end %>
-  <%= render 'form', feed: @feed, title: 'Rss Feedを追加する' %>
+  <div id="feed-form">
+    <%= render 'form', feed: @feed, title: 'Rss Feedを追加する' %>
+  </div>
 </div>
+<%= javascript_pack_tag 'feeds/new_edit' %>

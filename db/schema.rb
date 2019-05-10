@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_031100) do
+ActiveRecord::Schema.define(version: 2019_05_05_030654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,21 @@ ActiveRecord::Schema.define(version: 2019_03_03_031100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_entries_on_feed_id"
+  end
+
+  create_table "feed_taggings", force: :cascade do |t|
+    t.bigint "feed_id"
+    t.bigint "feed_tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_feed_taggings_on_feed_id"
+    t.index ["feed_tag_id"], name: "index_feed_taggings_on_feed_tag_id"
+  end
+
+  create_table "feed_tags", force: :cascade do |t|
+    t.string "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feeds", force: :cascade do |t|
