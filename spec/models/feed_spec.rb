@@ -23,6 +23,51 @@ RSpec.describe Feed, type: :model do
     end
   end
 
+  describe '.titled_by' do
+    let!(:feed) { create(:feed, title: 'hoge') }
+    before { create(:feed, title: 'fuga') }
+
+    it '検索文字列を含むfeedが取得されること' do
+      expect(described_class.titled_by('ho')).to eq [feed]
+    end
+  end
+
+  describe '.tagged_by' do
+    let!(:feed) { create(:feed, title: 'hoge') }
+    let!(:tag) { create(:feed_tag, body: 'tag1') }
+
+    before do
+      create(:feed, title: 'fuga')
+      create(:feed_tagging, feed: feed, feed_tag: tag)
+    end
+
+    it 'タグが設定されたfeedが取得されること' do
+      expect(described_class.tagged_by(tag)).to eq [feed]
+    end
+  end
+
+  describe '.search' do
+    let!(:titled_feed) { create(:feed, title: 'hoge') }
+    let!(:tagged_feed) { create(:feed, title: 'fuga') }
+    let!(:not_target_feed) { create(:feed, title: 'piyo') }
+    let!(:tag) { create(:feed_tag, body: 'ho') }
+
+    before { create(:feed_tagging, feed: tagged_feed, feed_tag: tag) }
+    subject { described_class.search('ho') }
+
+    it '検索文字列が含まれたタイトルを持つfeedが取得されること' do
+      is_expected.to include titled_feed
+    end
+
+    it '検索文字列のタグが設定されたfeedが取得されること' do
+      is_expected.to include tagged_feed
+    end
+
+    it 'それ以外のfeedは検索結果に含まれないこと' do
+      is_expected.to_not include not_target_feed
+    end
+  end
+
   describe 'pager' do
     let!(:feed_1) { create(:feed, last_published_at: 4.days.ago) }
     let!(:feed_2) { create(:feed, last_published_at: 3.days.ago) }
