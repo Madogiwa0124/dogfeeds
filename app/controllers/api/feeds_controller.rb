@@ -2,11 +2,13 @@ class Api::FeedsController < ApplicationController
   PER_PAGE = 6
 
   def index
-    @feeds = Feed.recent.pager(page: params[:page], per: PER_PAGE)
+    @feeds = Feed.search(params.dig(:query, :keyword)).recent
+                 .pager(page: params[:page], per: PER_PAGE)
     @last_entries = @feeds.includes(:last_entry).map(&:last_entry)
-    object = { feeds: @feeds, last_entries: @last_entries, tags: tags }
-    render json: object
+    render json: { feeds: @feeds, last_entries: @last_entries, tags: tags }
   end
+
+  private
 
   def tags
     taggings = FeedTagging.where(feed: @feeds).includes(:feed_tag)

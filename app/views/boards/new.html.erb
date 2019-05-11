@@ -16,6 +16,9 @@
         3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！</br>
       </div>
     </article>
+    <div class="level-left column is-12">
+      <search-form init_keyword="<%= params.dig(:query, :keyword) %>" />
+    </div>
     <feed-card-collection />
   </main>
 </div>

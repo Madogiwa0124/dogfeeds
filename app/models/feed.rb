@@ -27,9 +27,18 @@ class Feed < ApplicationRecord
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
 
   scope :recent, -> { order(last_published_at: :desc) }
+  scope :titled_by, ->(keyword) { where('title LIKE ?', "%#{keyword}%") }
   scope :pager, ->(page: 1, per: 10) {
     num = page.to_i.positive? ? page.to_i - 1 : 0
     limit(per).offset(per * num)
+  }
+  scope :tagged_by, ->(tags) {
+    where(id: FeedTagging.where(feed_tag_id: tags).select(:feed_id))
+  }
+  scope :search, ->(keyword) {
+    return all if keyword.blank?
+
+    titled_by(keyword).or(tagged_by(FeedTag.where(body: keyword)))
   }
 
   def parsed_items

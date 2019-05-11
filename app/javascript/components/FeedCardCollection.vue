@@ -51,7 +51,7 @@ export default {
       return this.tags.filter(tag => tag.feed_id === feed.id);
     },
     infiniteHandler($state) {
-      axios.get(feedsApi, {
+      axios.get(feedsApi + location.search, {
         params: { page: this.page },
       }).then(({ data }) => {
         if (data.feeds.length) {
