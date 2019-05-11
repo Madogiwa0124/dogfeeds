@@ -1,6 +1,9 @@
 <div class="feed-index columns" id="feeds">
   <main class="column">
     <h1 class="title">登録されているRSSフィード</h1>
+    <div class="level-left column is-12">
+      <search-form init_keyword="<%= params.dig(:query, :keyword) %>" />
+    </div>
     <feed-card-collection />
   </main>
 </div>
