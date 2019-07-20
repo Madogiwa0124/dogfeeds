@@ -24,7 +24,7 @@ Metrics/BlockLength:
     - spec/**/*
 
 AllCops:
-  TargetRubyVersion: 2.5.1
+  TargetRubyVersion: 2.6.1
   Exclude:
     - db/**/*
     - vendor/**/*
