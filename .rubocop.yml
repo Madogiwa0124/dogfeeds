@@ -1,8 +1,6 @@
 require:
   - rubocop-performance
-
-Rails:
-  Enabled: true
+  - rubocop-rails
 
 AsciiComments:
   Enabled: false
