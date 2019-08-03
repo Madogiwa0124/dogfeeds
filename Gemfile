@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.1'
+ruby '2.6.3'
 
 gem 'rails', '~> 5.2.2'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -23,6 +23,7 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'dotenv-rails'
+  gem 'spp'
 end
 
 group :development do
@@ -38,7 +39,6 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
   gem 'faker'
-  gem 'spp'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
