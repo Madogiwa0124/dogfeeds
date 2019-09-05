@@ -4,7 +4,7 @@ namespace :entries do
     Feed.all.each do |feed|
       ActiveRecord::Base.transaction { Feed::EntryCreater.new(feed).execute! }
     rescue => e
-      logger.error(e)
+      Rails.logger.error(e)
       next
     end
   end
