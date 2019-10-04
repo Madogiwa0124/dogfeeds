@@ -13,7 +13,7 @@
     "bulma": "^0.7.2",
     "bulma-extensions": "^6.2.1",
     "eslint": "^5.14.0",
-    "eslint-loader": "^3.0.0",
+    "eslint-loader": "^3.0.2",
     "eslint-plugin-vue": "^5.2.1",
     "g": "^2.0.1",
     "moment": "^2.24.0",
