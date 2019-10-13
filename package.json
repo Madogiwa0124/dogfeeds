@@ -2,6 +2,7 @@
   "name": "dogfeeds",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-brands-svg-icons": "^5.11.2",
@@ -20,12 +21,18 @@
     "rails-ujs": "^5.2.2",
     "ts-loader": "3.5.0",
     "typescript": "^3.3.3",
-    "vue": "^2.5.22",
+    "vue": "^2.6.10",
     "vue-infinite-loading": "^2.4.3",
-    "vue-loader": "14.2.2",
-    "vue-template-compiler": "^2.5.22",
+    "vue-loader": "^15.7.1",
+    "vue-template-compiler": "^2.6.10",
     "webpack-dev-server": "^3.8.2",
-    "yarn": "^1.13.0"
+    "yarn": "^1.13.0",
+    "autoprefixer": "^9.6.4",
+    "cssnano": "^4.1.10",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "sugarss": "^2.0.0"
   },
   "devDependencies": {},
   "scripts": {
