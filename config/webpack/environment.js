@@ -1,9 +1,7 @@
 const { environment } = require('@rails/webpacker')
-const typescript =  require('./loaders/typescript')
+const { VueLoaderPlugin } = require('vue-loader')
 const vue = require('./loaders/vue')
-const eslint =  require('./loaders/eslint')
 
-environment.loaders.append('vue', vue)
-environment.loaders.append('typescript', typescript)
-environment.loaders.append('eslint', eslint)
+environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
+environment.loaders.prepend('vue', vue)
 module.exports = environment
