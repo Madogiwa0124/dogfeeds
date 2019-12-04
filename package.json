@@ -20,7 +20,7 @@
     "moment": "^2.24.0",
     "rails-ujs": "^5.2.2",
     "ts-loader": "6.2.1",
-    "typescript": "^3.7.2",
+    "typescript": "^3.7.3",
     "vue": "^2.6.10",
     "vue-infinite-loading": "^2.4.3",
     "vue-loader": "^15.7.2",
