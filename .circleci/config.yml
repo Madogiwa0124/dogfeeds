@@ -27,6 +27,7 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-node-dependencies-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
@@ -39,11 +40,15 @@ jobs:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+            yarn install
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
@@ -56,4 +61,6 @@ jobs:
             bundle exec rspec $TEST_FILES
       - run:
           name: run code analyze
-          command: bundle exec rubocop
+          command: |
+            bundle exec rubocop
+            yarn lint
