@@ -11,10 +11,10 @@
 
 export default {
   components: {},
-  props: ['feed'],
+  props: ["feed"],
   methods: {
     unselectedFeed: function (id) {
-      this.$emit('unselectedFeed', id);
+      this.$emit("unselectedFeed", id);
     }
   }
 };

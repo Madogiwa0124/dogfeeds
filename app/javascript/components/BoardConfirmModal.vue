@@ -43,15 +43,15 @@
 </template>
 <script>
 export default {
-  name: 'ConfirmModal',
+  name: "ConfirmModal",
   components: {},
-  props: ['feeds', 'title'],
+  props: ["feeds", "title"],
   methods: {
     close: function () {
-      this.$emit('close');
+      this.$emit("close");
     },
     submit: function () {
-      this.$emit('submit');
+      this.$emit("submit");
     }
   }
 };

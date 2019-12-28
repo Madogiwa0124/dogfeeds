@@ -8,9 +8,9 @@
 </template>
 <script>
 export default {
-  name: 'PageLoader',
+  name: "PageLoader",
   components: { },
-  props: ['init_is_loading'],
+  props: ["init_is_loading"],
   data: function() {
     return {
       isLoading: this.init_is_loading

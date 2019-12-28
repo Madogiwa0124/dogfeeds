@@ -1,8 +1,16 @@
 <template>
   <div class="entries is-multiline columns">
     <page-loader :init_is_loading="isLoading" />
-    <div v-for="feed in feeds" :key="feed.id" class="column is-4">
-      <feed-card :feed="feed" :lastEntry="feedLastEntry(feed)" :tags="feedTags(feed)" />
+    <div
+      v-for="feed in feeds"
+      :key="feed.id"
+      class="column is-4"
+    >
+      <feed-card
+        :feed="feed"
+        :lastEntry="feedLastEntry(feed)"
+        :tags="feedTags(feed)"
+      />
     </div>
     <infinite-loading @infinite="infiniteHandler" />
   </div>

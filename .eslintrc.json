@@ -1,15 +1,12 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:vue/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:vue/recommended"],
   "rules": {
     "semi": "error",
     "indent": ["error", 2],
-    "quotes": ["error", "single"],
+    "quotes": ["error", "double"],
     "no-console": 0,
-    "vue/require-prop-types": false,
-    "vue/prop-name-casing": false,
-    "vue/attribute-hyphenation": false
+    "vue/require-prop-types": 0,
+    "vue/prop-name-casing": 0,
+    "vue/attribute-hyphenation": 0
   }
 }

@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import BoardConfirmModal from './BoardConfirmModal';
-import axios from 'axios';
-import { csrfToken } from '@rails/ujs';
-axios.defaults.headers.common['X-CSRF-Token'] = csrfToken();
+import BoardConfirmModal from "./BoardConfirmModal";
+import axios from "axios";
+import { csrfToken } from "@rails/ujs";
+axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 
 export default {
-  name: 'BoradCreateButton',
+  name: "BoradCreateButton",
   components: { BoardConfirmModal },
-  props: ['feeds', 'title'],
+  props: ["feeds", "title"],
   data: function () {
     return {
       showModal: false
@@ -43,7 +43,7 @@ export default {
       this.showModal = false;
     },
     hundleOnSubmit: function () {
-      axios.post('/api/boards', {
+      axios.post("/api/boards", {
         boards: { feed_ids: this.feeds.map(feed => feed.id), title: this.title }
       }).then(res => {
         window.location.href = `/boards/${res.data.id}`;

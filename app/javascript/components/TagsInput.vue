@@ -33,26 +33,26 @@
 </template>
 <script>
 export default {
-  name: 'TagsInput',
+  name: "TagsInput",
   components: {},
-  props: ['init_tags'],
+  props: ["init_tags"],
   data: function() {
     return {
-      tagBody: '',
+      tagBody: "",
       tags: this.init_tags ? this.init_tags : []
     };
   },
   methods: {
     buildTag: function(event) {
       event.preventDefault();
-      this.tags.push({body: this.tagBody});
-      this.tagBody = '';
+      if (this.tagBody.length <= 0) return;
+      this.tags.push({ body: this.tagBody });
+      this.tagBody = "";
     },
     deleteTag: function(index) {
-      this.tags.splice(index,1);
+      this.tags.splice(index, 1);
     }
   }
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

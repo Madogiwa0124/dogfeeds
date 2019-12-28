@@ -8,8 +8,8 @@
 </template>
 <script>
 export default {
-  name: 'FeedTag',
-  props: ['tag'],
+  name: "FeedTag",
+  props: ["tag"],
   computed: {
     query: function () {
       return `?query[keyword]=${this.tag.body}`;

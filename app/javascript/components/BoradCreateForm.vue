@@ -25,21 +25,21 @@
   </div>
 </template>
 <script>
-import SelectedFeed from './SelectedFeed';
-import BoradCreateButton from './BoardCreateButton';
+import SelectedFeed from "./SelectedFeed";
+import BoradCreateButton from "./BoardCreateButton";
 
 export default {
-  name: 'SelectedFeedCollection',
+  name: "SelectedFeedCollection",
   components: { SelectedFeed, BoradCreateButton },
-  props: ['feeds'],
+  props: ["feeds"],
   data: function () {
     return {
-      title: ''
+      title: ""
     };
   },
   methods: {
     handleOnUnselectedFeed: function (id) {
-      this.$emit('unselectedFeed', id);
+      this.$emit("unselectedFeed", id);
     }
   }
 };
