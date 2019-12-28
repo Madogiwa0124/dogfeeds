@@ -20,9 +20,9 @@
 </template>
 <script>
 export default {
-  name: 'SearchForm',
+  name: "SearchForm",
   components: {},
-  props: ['init_keyword'],
+  props: ["init_keyword"],
   data: function() {
     return {
       keyword: this.init_keyword,

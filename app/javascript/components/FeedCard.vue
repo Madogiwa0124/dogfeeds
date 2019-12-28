@@ -38,23 +38,23 @@
   </div>
 </template>
 <script>
-import moment from 'moment/moment';
-import SelectFeed from './SelectFeed';
-import FeedTag from './FeedTag';
+import moment from "moment/moment";
+import SelectFeed from "./SelectFeed";
+import FeedTag from "./FeedTag";
 
 export default {
-  name: 'FeedCard',
+  name: "FeedCard",
   components: { SelectFeed, FeedTag },
   filters: {
     fromNow: function (value) {
-      return moment(value, 'YYYYMMDD h:mm:ss').fromNow();
+      return moment(value, "YYYYMMDD h:mm:ss").fromNow();
     },
     eyeCatch: function (value) {
-      if(!value) return '/noimage.png';
+      if(!value) return "/noimage.png";
       return value;
     }
   },
-  props: ['feed', 'lastEntry', 'tags'],
+  props: ["feed", "lastEntry", "tags"],
   methods: {
     feedPath: function () {
       return `/feeds/${this.feed.id}`;

@@ -28,17 +28,17 @@
   </div>
 </template>
 <script>
-import moment from 'moment/moment';
+import moment from "moment/moment";
 
 export default {
-  name: 'EntryCard',
+  name: "EntryCard",
   components: {},
   filters: {
     fromNow: function (value) {
-      return moment(value, 'YYYYMMDD').fromNow();
+      return moment(value, "YYYYMMDD").fromNow();
     }
   },
-  props: ['entry']
+  props: ["entry"]
 };
 </script>
 <style lang="scss">

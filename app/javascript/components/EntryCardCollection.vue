@@ -8,12 +8,12 @@
   </div>
 </template>
 <script>
-import EntryCard from './EntryCard';
+import EntryCard from "./EntryCard";
 
 export default {
-  name: 'EntryCardCollection',
+  name: "EntryCardCollection",
   components: { EntryCard },
-  props: ['entries']
+  props: ["entries"]
 };
 </script>
 <style lang="scss">

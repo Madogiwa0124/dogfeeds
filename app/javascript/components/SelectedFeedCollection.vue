@@ -13,11 +13,11 @@
   </aside>
 </template>
 <script>
-import store from '../packs/store';
-import BoradCreateForm from './BoradCreateForm';
+import store from "../packs/store";
+import BoradCreateForm from "./BoradCreateForm";
 
 export default {
-  name: 'SelectedFeedCollection',
+  name: "SelectedFeedCollection",
   components: { BoradCreateForm },
   data: () => store.state,
   methods: {

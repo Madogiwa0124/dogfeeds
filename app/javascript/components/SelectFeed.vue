@@ -11,13 +11,13 @@
   </a>
 </template>
 <script>
-import store from '../packs/store';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import store from "../packs/store";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
-  name: 'SelectFeed',
+  name: "SelectFeed",
   components: { FontAwesomeIcon },
-  props: ['feed'],
+  props: ["feed"],
   data: () => store.state,
   methods: {
     isSelected: function () {
