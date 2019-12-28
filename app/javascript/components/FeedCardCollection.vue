@@ -1,33 +1,26 @@
 <template>
   <div class="entries is-multiline columns">
     <page-loader :init_is_loading="isLoading" />
-    <div
-      v-for="feed in feeds"
-      :key="feed.id"
-      class="column is-4"
-    >
-      <feed-card
-        :feed="feed"
-        :lastEntry="feedLastEntry(feed)"
-        :tags="feedTags(feed)"
-      />
+    <div v-for="feed in feeds" :key="feed.id" class="column is-4">
+      <feed-card :feed="feed" :lastEntry="feedLastEntry(feed)" :tags="feedTags(feed)" />
     </div>
     <infinite-loading @infinite="infiniteHandler" />
   </div>
 </template>
 <script>
-import FeedCard from './FeedCard';
-import PageLoader from './PageLoader';
-import InfiniteLoading from 'vue-infinite-loading';
-import axios from 'axios';
+import FeedCard from "./FeedCard";
+import PageLoader from "./PageLoader";
+import InfiniteLoading from "vue-infinite-loading";
+import axios from "axios";
+import DeviceChecker from "./../common/DeviceChecker";
 
-const feedsApi = '/api/feeds';
+const feedsApi = "/api/feeds";
 
 export default {
-  name: 'FeedCardCollection',
+  name: "FeedCardCollection",
   components: { FeedCard, PageLoader, InfiniteLoading },
-  props: ['init_feeds', 'init_last_entries', 'init_tags'],
-  data: function () {
+  props: ["init_feeds", "init_last_entries", "init_tags"],
+  data: function() {
     return {
       page: 1,
       feeds: [],
@@ -36,10 +29,13 @@ export default {
       isLoading: true
     };
   },
-  mounted: function () {
+  mounted: function() {
+    const checker = new DeviceChecker(navigator.userAgent);
     // MEMO: 初回表示時にデータ取得するため実行
-    this.infiniteHandler();
-    this.$nextTick(function () {
+    if (!checker.isMobile()) {
+      this.infiniteHandler();
+    }
+    this.$nextTick(function() {
       this.isLoading = false;
     });
   },
@@ -51,20 +47,24 @@ export default {
       return this.tags.filter(tag => tag.feed_id === feed.id);
     },
     infiniteHandler($state) {
-      axios.get(feedsApi + location.search, {
-        params: { page: this.page },
-      }).then(({ data }) => {
-        if (data.feeds.length) {
-          this.page += 1;
-          this.feeds.push(...data.feeds);
-          this.last_entries.push(...data.last_entries);
-          this.tags.push(...data.tags);
-          if($state) { $state.loaded(); }
-        } else {
-          $state.complete();
-        }
-      });
-    },
+      axios
+        .get(feedsApi + location.search, {
+          params: { page: this.page }
+        })
+        .then(({ data }) => {
+          if (data.feeds.length) {
+            this.page += 1;
+            this.feeds.push(...data.feeds);
+            this.last_entries.push(...data.last_entries);
+            this.tags.push(...data.tags);
+            if ($state) {
+              $state.loaded();
+            }
+          } else {
+            $state.complete();
+          }
+        });
+    }
   }
 };
 </script>
