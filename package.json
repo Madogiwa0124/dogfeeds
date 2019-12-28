@@ -26,7 +26,7 @@
     "vue-loader": "^15.7.2",
     "vue-template-compiler": "^2.6.10",
     "webpack-dev-server": "^3.9.0",
-    "yarn": "^1.19.2",
+    "yarn": "^1.21.1",
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^3.0.0"
   },
