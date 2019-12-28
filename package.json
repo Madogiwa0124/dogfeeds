@@ -34,7 +34,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "lint": "eslint app/assets/javascripts/**/* app/javascript/**/*",
-    "lint-fix": "eslint app/assets/javascripts/**/* app/javascript/**/* --fix"
+    "lint": "eslint app/javascript/**/*",
+    "lint-fix": "eslint app/javascript/**/* --fix"
   }
 }
