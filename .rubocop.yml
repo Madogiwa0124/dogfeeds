@@ -2,16 +2,16 @@ require:
   - rubocop-performance
   - rubocop-rails
 
-AsciiComments:
+Style/AsciiComments:
   Enabled: false
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
-FrozenStringLiteralComment:
+Style/FrozenStringLiteralComment:
   Enabled: false
 
-ClassAndModuleChildren:
+Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/Lambda:
