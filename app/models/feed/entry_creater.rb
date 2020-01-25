@@ -7,13 +7,16 @@ class Feed::EntryCreater
 
   def execute!
     Entry.where(feed: feed).delete_all
-    feed.parsed_items.map { |item| create_entry!(item) }
+    Entry.insert_all!(target_entries)
     feed.update!(last_published_at: feed.last_entry.published_at)
   end
 
   private
 
-  def create_entry!(item)
-    Entry.create!(item.attributes.merge(feed: feed))
+  def target_entries
+    feed.parsed_items.map do |item|
+      now = Time.current
+      item.attributes.merge(feed_id: feed.id, created_at: now, updated_at: now)
+    end
   end
 end
