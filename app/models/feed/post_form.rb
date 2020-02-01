@@ -39,7 +39,7 @@ class Feed::PostForm
   end
 
   def tags_create!
-    @tags = tags.map { |tag| FeedTag.find_or_create_by!(body: tag) }
+    @tags = tags.to_a.map { |tag| FeedTag.find_or_create_by!(body: tag) }
     feed.feed_taggings.delete_all
     tags.each { |tag| feed.feed_taggings.create!(feed_tag: tag) }
   end
