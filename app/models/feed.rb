@@ -27,7 +27,9 @@ class Feed < ApplicationRecord
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
 
   scope :recent, -> { order(last_published_at: :desc) }
-  scope :titled_by, ->(keyword) { where('title LIKE ?', "%#{keyword}%") }
+  scope :titled_by, ->(keyword) {
+    where('title LIKE ?', "%#{sanitize_sql_like(keyword)}%")
+  }
   scope :pager, ->(page: 1, per: 10) {
     num = page.to_i.positive? ? page.to_i - 1 : 0
     limit(per).offset(per * num)
