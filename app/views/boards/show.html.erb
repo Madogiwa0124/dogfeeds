@@ -3,7 +3,7 @@
     <%= @board.title %>
   </h1>
   <p class="description">
-    <%= @board.description.gsub(/\r\n|\r|\n/, '<br/>').html_safe %>
+    <%= @board.description %>
     <%= link_to board_path(@board, format: :rss) do %>
       Rssへのリンクはこちら
       <i class="fas fa-rss"></i>

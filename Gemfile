@@ -14,9 +14,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rb-readline'
 
 group :development, :test do
+  gem 'brakeman'
   gem 'pry-rails'
   gem 'better_errors'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
@@ -39,7 +39,4 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'faker'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
