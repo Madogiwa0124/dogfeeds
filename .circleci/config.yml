@@ -1,32 +1,31 @@
 version: 2
 
+default: &default
+  # specify the version you desire here
+  - image: circleci/ruby:2.7.0-node-browsers
+    environment:
+      RAILS_ENV: test
+      PGHOST: 127.0.0.1
+      DATABASE_USER: circleci
+      DATABASE_PASSWORD: password
+
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.0-node-browsers
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
+      - <<: *default
       - image: circleci/postgres
         environment:
           POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: password
     steps:
       - checkout
-      - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
       - persist_to_workspace:
           root: .
           paths:
             - .
   node_build:
     docker:
-      - image: circleci/ruby:2.7.0-node-browsers
-        environment:
-          RAILS_ENV: test
+      - <<: *default
     steps:
       - attach_workspace:
           at: .
@@ -46,16 +45,20 @@ jobs:
           command: yarn lint
   ruby_build:
     docker:
-      - image: circleci/ruby:2.7.0-node-browsers
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
+      - <<: *default
       - image: circleci/postgres
         environment:
           POSTGRES_USER: circleci
+          POSTGRES_PASSWORD: password
     steps:
       - attach_workspace:
           at: .
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler -v $BUNDLER_VERSION
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
@@ -68,8 +71,11 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
-          name: run code analyze
+          name: run rubocop
           command: bundle exec rubocop
+      - run:
+          name: run brakeman
+          command: bundle exec brakeman
       - run:
           name: run migration
           command: |
