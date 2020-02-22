@@ -14,6 +14,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rb-readline'
 
 group :development, :test do
+  gem 'brakeman'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
