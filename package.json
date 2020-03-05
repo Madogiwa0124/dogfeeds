@@ -24,7 +24,7 @@
     "ts-loader": "6.2.1",
     "typescript": "^3.8.3",
     "vue": "^2.6.11",
-    "vue-infinite-loading": "^2.4.3",
+    "vue-infinite-loading": "^2.4.5",
     "vue-loader": "^15.9.0",
     "vue-template-compiler": "^2.6.11",
     "webpack-dev-server": "^3.10.3",
