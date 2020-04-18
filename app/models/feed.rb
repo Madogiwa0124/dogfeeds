@@ -13,7 +13,7 @@
 class Feed < ApplicationRecord
   require 'rss'
 
-  URI_REGEXP_PATTERN = /\A#{URI.regexp(%w[http https])}\z/.freeze
+  URI_REGEXP_PATTERN = URI::DEFAULT_PARSER.make_regexp(%w[http https]).freeze
 
   has_many :entries, dependent: :destroy
   has_one :last_entry, -> { recent }, class_name: 'Entry', inverse_of: :feed
