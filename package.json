@@ -16,9 +16,6 @@
     "axios": "^0.19.2",
     "bulma": "^0.8.2",
     "bulma-extensions": "^6.2.1",
-    "eslint": "^6.8.0",
-    "eslint-loader": "^4.0.2",
-    "eslint-plugin-vue": "^6.2.2",
     "g": "^2.0.1",
     "moment": "^2.24.0",
     "ts-loader": "7.0.1",
@@ -27,12 +24,16 @@
     "vue-infinite-loading": "^2.4.5",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",
-    "webpack-dev-server": "^3.10.3",
     "yarn": "^1.22.4",
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^3.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "webpack-dev-server": "^3.10.3"
+  },
   "scripts": {
     "lint": "eslint app/javascript/**/*",
     "lint-fix": "eslint app/javascript/**/* --fix"
