@@ -19,7 +19,7 @@
     "g": "^2.0.1",
     "moment": "^2.26.0",
     "ts-loader": "7.0.2",
-    "typescript": "^3.8.3",
+    "typescript": "^3.9.5",
     "vue": "^2.6.11",
     "vue-infinite-loading": "^2.4.5",
     "vue-loader": "^15.9.2",
