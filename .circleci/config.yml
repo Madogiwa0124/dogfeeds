@@ -22,6 +22,44 @@ executors:
       - <<: *web
       - <<: *db
 
+commands:
+  cache_node_deps:
+    steps:
+      - save_cache:
+          name: Cache node dependencies
+          paths:
+            - ./node_modules
+          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
+  restore_node_deps:
+    steps:
+      - restore_cache:
+          name: Restore node dependencies
+          keys:
+            - v1-node-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+  configure_bundler:
+    steps:
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler -v $BUNDLER_VERSION
+  cache_ruby_deps:
+    steps:
+      - save_cache:
+          name: Cache ruby dependencies
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+  restore_ruby_deps:
+    steps:
+      - restore_cache:
+          name: Restore node dependencies
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+
 jobs:
   build:
     executor:
@@ -38,17 +76,11 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - restore_cache:
-          keys:
-          - v1-node-dependencies-{{ checksum "yarn.lock" }}
-          - v1-dependencies-
+      - restore_node_deps
       - run:
           name: install dependencies
           command: yarn install
-      - save_cache:
-          paths:
-            - ./node_modules
-          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
+      - cache_node_deps
       - run:
           name: run code analyze
           command: yarn lint
@@ -58,23 +90,12 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler -v $BUNDLER_VERSION
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
+      - configure_bundler
+      - restore_ruby_deps
       - run:
           name: install dependencies
           command: bundle install --jobs=4 --clean --path ./vendor/bundle
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - cache_ruby_deps
       - run:
           name: run rubocop
           command: bundle exec rubocop
