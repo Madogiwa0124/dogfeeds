@@ -13,11 +13,19 @@ db: &db
       POSTGRES_USER: circleci
       POSTGRES_PASSWORD: password
 
-jobs:
-  build:
+executors:
+  web:
+    docker:
+      - <<: *web
+  web-db:
     docker:
       - <<: *web
       - <<: *db
+
+jobs:
+  build:
+    executor:
+      name: web-db
     steps:
       - checkout
       - persist_to_workspace:
@@ -25,8 +33,8 @@ jobs:
           paths:
             - .
   node_build:
-    docker:
-      - <<: *web
+    executor:
+      name: web
     steps:
       - attach_workspace:
           at: .
@@ -45,9 +53,8 @@ jobs:
           name: run code analyze
           command: yarn lint
   ruby_build:
-    docker:
-      - <<: *web
-      - <<: *db
+    executor:
+      name: web-db
     steps:
       - attach_workspace:
           at: .
