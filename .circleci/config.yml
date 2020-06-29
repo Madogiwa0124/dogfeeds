@@ -27,6 +27,11 @@ commands:
     steps:
       - attach_workspace:
           at: .
+  install_node_deps:
+    steps:
+      - run:
+          name: install node dependencies
+          command: yarn install
   cache_node_deps:
     steps:
       - save_cache:
@@ -85,9 +90,7 @@ jobs:
     steps:
       - attach_current
       - restore_node_deps
-      - run:
-          name: install dependencies
-          command: yarn install
+      - install_node_deps
       - cache_node_deps
   node_lint:
     executor:
@@ -95,6 +98,7 @@ jobs:
     steps:
       - attach_current
       - restore_node_deps
+      - install_node_deps
       - run:
           name: run code analyze
           command: yarn lint
