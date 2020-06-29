@@ -49,6 +49,11 @@ commands:
             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
             source $BASH_ENV
             gem install bundler -v $BUNDLER_VERSION
+  install_ruby_deps:
+    steps:
+      - run:
+          name: install dependencies
+          command: bundle install --jobs=4 --clean --path ./vendor/bundle
   cache_ruby_deps:
     steps:
       - save_cache:
@@ -59,7 +64,7 @@ commands:
   restore_ruby_deps:
     steps:
       - restore_cache:
-          name: Restore node dependencies
+          name: Restore ruby dependencies
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
@@ -100,16 +105,30 @@ jobs:
       - attach_current
       - configure_bundler
       - restore_ruby_deps
-      - run:
-          name: install dependencies
-          command: bundle install --jobs=4 --clean --path ./vendor/bundle
+      - install_ruby_deps
       - cache_ruby_deps
+  ruby_lint:
+    executor:
+      name: web
+    steps:
+      - attach_current
+      - restore_ruby_deps
+      - configure_bundler
+      - install_ruby_deps
       - run:
           name: run rubocop
           command: bundle exec rubocop
       - run:
           name: run brakeman
           command: bundle exec brakeman
+  ruby_test:
+    executor:
+      name: web-db
+    steps:
+      - attach_current
+      - restore_ruby_deps
+      - configure_bundler
+      - install_ruby_deps
       - run:
           name: run migration
           command: |
@@ -117,9 +136,7 @@ jobs:
             bundle exec rake db:schema:load
       - run:
           name: run tests
-          command: |
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec $TEST_FILES
+          command: bundle exec rspec spec/
 workflows:
   version: 2
   build:
@@ -128,6 +145,12 @@ workflows:
       - ruby_build:
           requires:
             - build
+      - ruby_lint:
+          requires:
+            - ruby_build
+      - ruby_test:
+          requires:
+            - ruby_build
       - node_build:
           requires:
             - build
