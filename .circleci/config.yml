@@ -1,22 +1,23 @@
-version: 2
+version: 2.1
 
-default: &default
-  # specify the version you desire here
+web: &web
   - image: circleci/ruby:2.7.0-node-browsers
     environment:
       RAILS_ENV: test
       PGHOST: 127.0.0.1
       DATABASE_USER: circleci
       DATABASE_PASSWORD: password
+db: &db
+  - image: circleci/postgres
+    environment:
+      POSTGRES_USER: circleci
+      POSTGRES_PASSWORD: password
 
 jobs:
   build:
     docker:
-      - <<: *default
-      - image: circleci/postgres
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: password
+      - <<: *web
+      - <<: *db
     steps:
       - checkout
       - persist_to_workspace:
@@ -25,7 +26,7 @@ jobs:
             - .
   node_build:
     docker:
-      - <<: *default
+      - <<: *web
     steps:
       - attach_workspace:
           at: .
@@ -45,11 +46,8 @@ jobs:
           command: yarn lint
   ruby_build:
     docker:
-      - <<: *default
-      - image: circleci/postgres
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: password
+      - <<: *web
+      - <<: *db
     steps:
       - attach_workspace:
           at: .
