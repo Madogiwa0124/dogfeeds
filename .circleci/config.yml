@@ -23,6 +23,10 @@ executors:
       - <<: *db
 
 commands:
+  attach_current:
+    steps:
+      - attach_workspace:
+          at: .
   cache_node_deps:
     steps:
       - save_cache:
@@ -74,13 +78,18 @@ jobs:
     executor:
       name: web
     steps:
-      - attach_workspace:
-          at: .
+      - attach_current
       - restore_node_deps
       - run:
           name: install dependencies
           command: yarn install
       - cache_node_deps
+  node_lint:
+    executor:
+      name: web
+    steps:
+      - attach_current
+      - restore_node_deps
       - run:
           name: run code analyze
           command: yarn lint
@@ -88,8 +97,7 @@ jobs:
     executor:
       name: web-db
     steps:
-      - attach_workspace:
-          at: .
+      - attach_current
       - configure_bundler
       - restore_ruby_deps
       - run:
@@ -123,3 +131,6 @@ workflows:
       - node_build:
           requires:
             - build
+      - node_lint:
+          requires:
+            - node_build
