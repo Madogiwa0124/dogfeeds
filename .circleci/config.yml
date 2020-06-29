@@ -72,7 +72,7 @@ commands:
 jobs:
   build:
     executor:
-      name: web-db
+      name: web
     steps:
       - checkout
       - persist_to_workspace:
@@ -100,7 +100,7 @@ jobs:
           command: yarn lint
   ruby_build:
     executor:
-      name: web-db
+      name: web
     steps:
       - attach_current
       - configure_bundler
