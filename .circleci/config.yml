@@ -1,22 +1,83 @@
-version: 2
+version: 2.1
 
-default: &default
-  # specify the version you desire here
+web: &web
   - image: circleci/ruby:2.7.0-node-browsers
     environment:
       RAILS_ENV: test
       PGHOST: 127.0.0.1
       DATABASE_USER: circleci
       DATABASE_PASSWORD: password
+db: &db
+  - image: circleci/postgres
+    environment:
+      POSTGRES_USER: circleci
+      POSTGRES_PASSWORD: password
+
+executors:
+  web:
+    docker:
+      - <<: *web
+  web-db:
+    docker:
+      - <<: *web
+      - <<: *db
+
+commands:
+  attach_current:
+    steps:
+      - attach_workspace:
+          at: .
+  install_node_deps:
+    steps:
+      - run:
+          name: install node dependencies
+          command: yarn install
+  cache_node_deps:
+    steps:
+      - save_cache:
+          name: Cache node dependencies
+          paths:
+            - ./node_modules
+          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
+  restore_node_deps:
+    steps:
+      - restore_cache:
+          name: Restore node dependencies
+          keys:
+            - v1-node-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+  configure_bundler:
+    steps:
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler -v $BUNDLER_VERSION
+  install_ruby_deps:
+    steps:
+      - run:
+          name: install dependencies
+          command: bundle install --jobs=4 --clean --path ./vendor/bundle
+  cache_ruby_deps:
+    steps:
+      - save_cache:
+          name: Cache ruby dependencies
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+  restore_ruby_deps:
+    steps:
+      - restore_cache:
+          name: Restore ruby dependencies
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
 
 jobs:
   build:
-    docker:
-      - <<: *default
-      - image: circleci/postgres
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: password
+    executor:
+      name: web
     steps:
       - checkout
       - persist_to_workspace:
@@ -24,58 +85,54 @@ jobs:
           paths:
             - .
   node_build:
-    docker:
-      - <<: *default
+    executor:
+      name: web
     steps:
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          keys:
-          - v1-node-dependencies-{{ checksum "yarn.lock" }}
-          - v1-dependencies-
-      - run:
-          name: install dependencies
-          command: yarn install
-      - save_cache:
-          paths:
-            - ./node_modules
-          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
+      - attach_current
+      - restore_node_deps
+      - install_node_deps
+      - cache_node_deps
+  node_lint:
+    executor:
+      name: web
+    steps:
+      - attach_current
+      - restore_node_deps
+      - install_node_deps
       - run:
           name: run code analyze
           command: yarn lint
   ruby_build:
-    docker:
-      - <<: *default
-      - image: circleci/postgres
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_PASSWORD: password
+    executor:
+      name: web
     steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler -v $BUNDLER_VERSION
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run:
-          name: install dependencies
-          command: bundle install --jobs=4 --retry=3 --path ./vendor/bundle
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - attach_current
+      - configure_bundler
+      - restore_ruby_deps
+      - install_ruby_deps
+      - cache_ruby_deps
+  ruby_lint:
+    executor:
+      name: web
+    steps:
+      - attach_current
+      - restore_ruby_deps
+      - configure_bundler
+      - install_ruby_deps
       - run:
           name: run rubocop
           command: bundle exec rubocop
       - run:
           name: run brakeman
           command: bundle exec brakeman
+  ruby_test:
+    executor:
+      name: web-db
+    steps:
+      - attach_current
+      - restore_ruby_deps
+      - configure_bundler
+      - install_ruby_deps
       - run:
           name: run migration
           command: |
@@ -83,9 +140,7 @@ jobs:
             bundle exec rake db:schema:load
       - run:
           name: run tests
-          command: |
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec $TEST_FILES
+          command: bundle exec rspec spec/
 workflows:
   version: 2
   build:
@@ -94,6 +149,15 @@ workflows:
       - ruby_build:
           requires:
             - build
+      - ruby_lint:
+          requires:
+            - ruby_build
+      - ruby_test:
+          requires:
+            - ruby_build
       - node_build:
           requires:
             - build
+      - node_lint:
+          requires:
+            - node_build
