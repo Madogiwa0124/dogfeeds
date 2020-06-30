@@ -62,13 +62,6 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.1)
-    better_errors (2.7.1)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
-    bindex (0.8.1)
-    bootsnap (1.4.6)
-      msgpack (~> 1.0)
     brakeman (4.8.2)
     builder (3.2.4)
     capybara (3.33.0)
@@ -80,7 +73,6 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
-    coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     diff-lcs (1.3)
@@ -89,7 +81,6 @@ GEM
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
     erubi (1.9.0)
-    execjs (2.7.0)
     factory_bot (6.0.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.0.0)
@@ -100,8 +91,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.10.0)
-      activesupport (>= 5.0.0)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -117,7 +106,6 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
-    msgpack (1.3.3)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
@@ -125,11 +113,6 @@ GEM
     parser (2.7.1.4)
       ast (~> 2.4.1)
     pg (1.2.3)
-    pry (0.12.2)
-      coderay (~> 1.1.0)
-      method_source (~> 0.9.0)
-    pry-rails (0.3.9)
-      pry (>= 0.10.4)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -166,10 +149,9 @@ GEM
       thor (>= 0.20.3, < 2.0)
     rainbow (3.0.0)
     rake (13.0.1)
-    rb-fsevent (0.10.3)
-    rb-inotify (0.10.0)
+    rb-fsevent (0.10.4)
+    rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rb-readline (0.5.5)
     regexp_parser (1.7.1)
     rexml (3.2.4)
     rspec-core (3.9.2)
@@ -223,12 +205,6 @@ GEM
       rubyzip (>= 1.2.2)
     semantic_range (2.3.0)
     spp (0.1.3)
-    spring (2.1.0)
-    spring-commands-rspec (1.0.4)
-      spring (>= 0.9.1)
-    spring-watcher-listen (2.0.1)
-      listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -241,14 +217,7 @@ GEM
     tilt (2.0.9)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (1.7.0)
-    web-console (4.0.3)
-      actionview (>= 6.0.0)
-      activemodel (>= 6.0.0)
-      bindex (>= 0.4.0)
-      railties (>= 6.0.0)
     webdrivers (4.4.1)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
@@ -270,31 +239,20 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  better_errors
-  bootsnap (>= 1.1.0)
   brakeman
   capybara (>= 2.15)
   dotenv-rails
   factory_bot_rails
-  jbuilder (~> 2.10)
-  listen (>= 3.0.5, < 3.3)
+  listen (~> 3.2)
   pg (>= 0.18, < 2.0)
-  pry-rails
-  puma (~> 4.3)
+  puma
   rails (~> 6.0.3)
-  rb-readline
   rspec-rails
   rubocop
   rubocop-performance
   rubocop-rails
-  sass-rails (~> 6.0)
-  selenium-webdriver
+  sass-rails (>= 6)
   spp
-  spring
-  spring-commands-rspec
-  spring-watcher-listen (~> 2.0.0)
-  uglifier (>= 1.3.0)
-  web-console (>= 3.3.0)
   webdrivers
   webpacker
 
