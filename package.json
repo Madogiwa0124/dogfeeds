@@ -16,7 +16,6 @@
     "axios": "^0.19.2",
     "bulma": "^0.9.0",
     "bulma-extensions": "^6.2.1",
-    "g": "^2.0.1",
     "moment": "^2.27.0",
     "ts-loader": "7.0.5",
     "typescript": "^3.9.5",
