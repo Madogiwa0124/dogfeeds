@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+  rails:
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+      args:
+        - APP_NAME=dogfeeds
+    command: bash -c "bin/setup && bin/rails s -b 0.0.0.0 -p 3000"
+    tty: true
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    volumes:
+      - .:/dogfeeds
+    environment:
+      HOST_NAME: rails
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: password
+      DATABASE_PORT: 5432
+      DATABASE_HOST: db
