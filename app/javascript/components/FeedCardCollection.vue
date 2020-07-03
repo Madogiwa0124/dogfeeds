@@ -15,25 +15,51 @@
     <infinite-loading @infinite="infiniteHandler" />
   </div>
 </template>
-<script>
-import FeedCard from "./FeedCard";
-import PageLoader from "./PageLoader";
+<script lang="ts">
+import Vue, { PropType } from "vue";
+import { Feed, Entry, FeedTag, FeedsResponse } from "@js/types/types.d.ts";
+import FeedCard from "@js/components/FeedCard.vue";
+import PageLoader from "@js/components/PageLoader.vue";
 import InfiniteLoading from "vue-infinite-loading";
-import axios from "axios";
-import DeviceChecker from "./../common/DeviceChecker";
+import axios, { AxiosResponse } from "axios";
+import DeviceChecker from "@js/common/DeviceChecker";
 
 const feedsApi = "/api/feeds";
 
-export default {
+interface DataType {
+  page: number;
+  feeds: Feed[];
+  lastEntries: Entry[];
+  tags: FeedTag[];
+  isLoading: boolean;
+}
+
+export default Vue.extend({
   name: "FeedCardCollection",
   components: { FeedCard, PageLoader, InfiniteLoading },
-  props: ["init_feeds", "init_last_entries", "init_tags"],
-  data: function() {
+  props: {
+    initFeeds: {
+      type: Array as PropType<Feed[]>,
+      default(): Feed[] { return []; },
+      require: false
+    },
+    initLastEntries: {
+      type: Array as PropType<Entry[]>,
+      default(): Entry[] { return []; },
+      require: false
+    },
+    initTags: {
+      type: Array as PropType<FeedTag[]>,
+      default(): FeedTag[] { return []; },
+      require: false
+    },
+  },
+  data(): DataType {
     return {
       page: 1,
-      feeds: [],
-      last_entries: [],
-      tags: [],
+      feeds: this.initFeeds,
+      lastEntries: this.initLastEntries,
+      tags: this.initTags,
       isLoading: true
     };
   },
@@ -48,33 +74,33 @@ export default {
     });
   },
   methods: {
-    feedLastEntry: function(feed) {
-      return this.last_entries.filter(entry => entry.feed_id === feed.id)[0];
+    feedLastEntry: function(feed: Feed): Entry {
+      return this.lastEntries.filter(entry => entry.feed_id === feed.id)[0];
     },
-    feedTags: function(feed) {
+    feedTags: function(feed: Feed): FeedTag {
       return this.tags.filter(tag => tag.feed_id === feed.id);
     },
-    infiniteHandler($state) {
-      axios
-        .get(feedsApi + location.search, {
-          params: { page: this.page }
-        })
-        .then(({ data }) => {
-          if (data.feeds.length) {
-            this.page += 1;
-            this.feeds.push(...data.feeds);
-            this.last_entries.push(...data.last_entries);
-            this.tags.push(...data.tags);
-            if ($state) {
-              $state.loaded();
-            }
-          } else {
-            $state.complete();
-          }
-        });
+    updateFeedList: function(data: FeedsResponse): void {
+      this.page += 1;
+      this.feeds.push(...data.feeds);
+      this.lastEntries.push(...data.last_entries);
+      this.tags.push(...data.tags);
+    },
+    getFeeds: async function (params: object): Promise<AxiosResponse> {
+      return await axios.get(feedsApi + location.search, {params: params});
+    },
+    infiniteHandler: async function ($state: any): Promise<void> {
+      const response: AxiosResponse = await this.getFeeds({ page: this.page });
+      const data: FeedsResponse = response.data;
+      if (data.feeds.length) {
+        this.updateFeedList(data);
+        if ($state) { $state.loaded(); }
+      } else {
+        $state.complete();
+      }
     }
   }
-};
+});
 </script>
 <style lang="scss">
 </style>

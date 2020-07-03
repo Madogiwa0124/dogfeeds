@@ -1,5 +1,18 @@
 {
-  "extends": ["eslint:recommended", "plugin:vue/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "ecmaVersion": 2015,
+    "sourceType": "module",
+    "extraFileExtensions": [".vue"]
+  },
   "rules": {
     "semi": "error",
     "indent": ["error", 2],
@@ -8,5 +21,16 @@
     "vue/require-prop-types": 0,
     "vue/prop-name-casing": 0,
     "vue/attribute-hyphenation": 0
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.vue"],
+      "rules": {
+        "@typescript-eslint/camelcase": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-var-requires": 0,
+        "@typescript-eslint/explicit-function-return-type": 0
+      }
+    }
+  ]
 }
