@@ -20,8 +20,7 @@ class Feed < ApplicationRecord
   has_many :board_feeds, dependent: :destroy
   has_many :boards, through: :board_feeds
   has_many :feed_taggings, dependent: :destroy
-  has_many :feed_tags, through: :feed_taggings
-  alias_attribute :tags, :feed_tags
+  has_many :tags, through: :feed_taggings, class_name: 'FeedTag', source: :feed_tag
 
   validates :title, presence: true
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
