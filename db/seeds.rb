@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "=== START ==="
+
+puts "=== delete old data ==="
+ActiveRecord::Base.transaction {
+  Entry.delete_all
+  Feed.delete_all
+}
+
+puts "=== create feeds ==="
+FactoryBot.create_list(:feed, 10)
+
+puts "=== create entries ==="
+Feed.all.each do |feed|
+  sleep 1
+  ActiveRecord::Base.transaction { Feed::EntryCreater.new(feed).execute! }
+rescue => e
+  Rails.logger.error(e)
+  next
+end
+
+puts "=== FINISHED ==="
