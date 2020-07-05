@@ -18,10 +18,8 @@
 </template>
 
 <script>
-import BoardConfirmModal from "./BoardConfirmModal";
-import axios from "axios";
-import { csrfToken } from "@rails/ujs";
-axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
+import BoardConfirmModal from "@js/components/BoardConfirmModal.vue";
+import { postBoard } from "@js/services/BoardService.ts";
 
 export default {
   name: "BoradCreateButton",
@@ -42,13 +40,13 @@ export default {
     hundleOnClose: function () {
       this.showModal = false;
     },
-    hundleOnSubmit: function () {
-      axios.post("/api/boards", {
-        boards: { feed_ids: this.feeds.map(feed => feed.id), title: this.title }
-      }).then(res => {
+    hundleOnSubmit: async function () {
+      try {
+        const res = await postBoard({ feed_ids: this.feeds.map(feed => feed.id), title: this.title });
         window.location.href = `/boards/${res.data.id}`;
-      });
-      this.showModal = false;
+      } finally {
+        this.showModal = false;
+      }
     }
   }
 };
