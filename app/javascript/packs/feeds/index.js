@@ -1,8 +1,7 @@
 import Vue from "vue/dist/vue.esm";
-import SearchForm from "../../components/SearchForm";
-import FeedCardCollection from "../../components/FeedCardCollection";
+import IndexFeedContainer from "@js/components/containers/IndexFeedContainer.vue";
 
 new Vue({
-  el: "#feeds",
-  components: { SearchForm, FeedCardCollection },
+  el: "#vue-root",
+  components: { IndexFeedContainer },
 });

@@ -1,10 +1,4 @@
-<div class="feed-index columns" id="feeds">
-  <main class="column">
-    <h1 class="title">登録されているRSSフィード</h1>
-    <div class="level-left column is-12">
-      <search-form init_keyword="<%= params.dig(:query, :keyword) %>" />
-    </div>
-    <feed-card-collection />
-  </main>
+<div id="vue-root">
+  <index-feed-container search-word="<%= params.dig(:query, :keyword) %>" />
 </div>
 <%= javascript_pack_tag 'feeds/index' %>
