@@ -21,7 +21,6 @@ import { Feed, Entry, FeedTag, FeedsResponse } from "@js/types/types.d.ts";
 import FeedCard from "@js/components/FeedCard.vue";
 import PageLoader from "@js/components/PageLoader.vue";
 import InfiniteLoading from "vue-infinite-loading";
-import axios, { AxiosResponse } from "axios";
 import DeviceChecker from "@js/common/DeviceChecker";
 import { getFeeds } from "@js/services/FeedService";
 
@@ -65,12 +64,8 @@ export default Vue.extend({
   created: async function() {
     const checker = new DeviceChecker(navigator.userAgent);
     // MEMO: 初回表示時にデータ取得するため実行
-    if (!checker.isMobile()) {
-      this.infiniteHandler();
-    }
-    this.$nextTick(function() {
-      this.isLoading = false;
-    });
+    if (!checker.isMobile()) await this.infiniteHandler();
+    this.isLoading = false;
   },
   methods: {
     feedLastEntry: function(feed: Feed): Entry {
