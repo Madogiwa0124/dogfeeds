@@ -23,8 +23,7 @@ import PageLoader from "@js/components/PageLoader.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import axios, { AxiosResponse } from "axios";
 import DeviceChecker from "@js/common/DeviceChecker";
-
-const feedsApi = "/api/feeds";
+import { getFeeds } from "@js/services/FeedService";
 
 interface DataType {
   page: number;
@@ -63,7 +62,7 @@ export default Vue.extend({
       isLoading: true
     };
   },
-  mounted: function() {
+  created: async function() {
     const checker = new DeviceChecker(navigator.userAgent);
     // MEMO: 初回表示時にデータ取得するため実行
     if (!checker.isMobile()) {
@@ -80,23 +79,19 @@ export default Vue.extend({
     feedTags: function(feed: Feed): FeedTag {
       return this.tags.filter(tag => tag.feed_id === feed.id);
     },
-    updateFeedList: function(data: FeedsResponse): void {
-      this.page += 1;
-      this.feeds.push(...data.feeds);
-      this.lastEntries.push(...data.last_entries);
-      this.tags.push(...data.tags);
-    },
-    getFeeds: async function (params: object): Promise<AxiosResponse> {
-      return await axios.get(feedsApi + location.search, {params: params});
+    updateFeedList: function(feeds: Feed[], lastEntries: Entry[], tags: FeedTag[]): void {
+      this.feeds.push(...feeds);
+      this.lastEntries.push(...lastEntries);
+      this.tags.push(...tags);
     },
     infiniteHandler: async function ($state: any): Promise<void> {
-      const response: AxiosResponse = await this.getFeeds({ page: this.page });
-      const data: FeedsResponse = response.data;
+      const data: FeedsResponse = await getFeeds(location.search, { page: this.page });
       if (data.feeds.length) {
-        this.updateFeedList(data);
+        this.page += 1;
+        this.updateFeedList(data.feeds, data.last_entries, data.tags);
         if ($state) { $state.loaded(); }
       } else {
-        $state.complete();
+        if ($state) { $state.complete(); }
       }
     }
   }
