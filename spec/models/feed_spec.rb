@@ -97,10 +97,19 @@ RSpec.describe Feed, type: :model do
   end
 
   describe '#parsed_items' do
+    include RssMockHelper
+
+    before do
+      valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
+      rss_mock_enable(endpoint: 'https://example.com/rss', body: valid_body)
+      invald_body = '<html invald format</html>'
+      rss_mock_enable(endpoint: 'https://example.com/', body: invald_body)
+    end
+
     let(:feed) { build(:feed, endpoint: endpoint) }
 
     context '正しいendpointの場合' do
-      let(:endpoint) { 'https://madogiwa0124.hatenablog.com/rss' }
+      let(:endpoint) { 'https://example.com/rss' }
 
       it 'Parseされた記事の一覧が取得出来ること' do
         expect(feed.parsed_items.length).to be_positive
@@ -108,7 +117,7 @@ RSpec.describe Feed, type: :model do
     end
 
     context '不正なendpointの場合' do
-      let(:endpoint) { 'https://madogiwa0124.hatenablog.com' }
+      let(:endpoint) { 'https://example.com' }
       let(:mssages) { 'rssフィードの形式が不正です。エンドポイントをご確認ください。' }
 
       before { feed.parsed_items }
