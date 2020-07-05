@@ -44,6 +44,7 @@ Metrics/BlockLength:
 
 AllCops:
   TargetRubyVersion: 2.7.0
+  NewCops: enable
   Exclude:
     - db/**/*
     - vendor/**/*
