@@ -1,10 +1,13 @@
 class Feed::RssClient
   def initialize(endpoint)
     @endpoint = endpoint
-    @rss_source = Net::HTTP.get(URI.parse(endpoint))
   end
 
-  attr_reader :endpoint, :rss_source
+  def rss_source
+    @rss_source ||= Net::HTTP.get(URI.parse(endpoint))
+  end
+
+  attr_reader :endpoint
 
   def parsed_rss!
     RSS::Parser.parse(rss_source)
