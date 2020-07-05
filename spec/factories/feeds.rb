@@ -12,7 +12,7 @@
 
 FactoryBot.define do
   factory :feed do
-    title { 'title' }
+    sequence(:title) { |n| "title_#{n}" }
     last_published_at { Time.current }
     endpoint { 'https://madogiwa0124.hatenablog.com/rss' }
   end

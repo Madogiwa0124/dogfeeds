@@ -1,2 +1,3 @@
 config
+babel.config.js
 app/assets/javascripts/cable.js
