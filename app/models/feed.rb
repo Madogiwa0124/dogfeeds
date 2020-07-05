@@ -44,7 +44,7 @@ class Feed < ApplicationRecord
   }
 
   def parsed_items
-    Feed::RssClient.new(endpoint).parsed_items
+    @parsed_items ||= Feed::RssClient.new(endpoint).parsed_items
   rescue RSS::NotWellFormedError => e
     logger.error(e)
     invalid_rss_format

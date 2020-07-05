@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Example Rss</title>
+    <link>https://example.com/</link>
+    <description>テストのRSSです</description>
+    <lastBuildDate>Sat, 04 Jul 2020 21:44:43 +0900</lastBuildDate>
+    <docs>https://example.com/rss</docs>
+    <generator>Example</generator>
+    <item>
+      <title>title 1</title>
+      <link>https://example.com/1</link>
+      <description></description>
+      <pubDate>Sat, 04 Jul 2020 21:44:43 +0900</pubDate>
+      <guid isPermalink="false">26006613593727086</guid>
+      <category>TEST1</category>
+      <enclosure url="https://example.com/1.png" type="image/png" length="0" />
+    </item>
+    <item>
+      <title>title 2</title>
+      <link>https://example.com/2</link>
+      <description></description>
+      <pubDate>Sat, 04 Jul 2020 21:44:43 +0900</pubDate>
+      <guid isPermalink="false">26006613593727087</guid>
+      <category>TEST2</category>
+      <enclosure url="https://example.com/2.png" type="image/png" length="0" />
+    </item>
+  </channel>
+</rss>

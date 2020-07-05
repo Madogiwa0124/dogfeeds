@@ -14,6 +14,6 @@ FactoryBot.define do
   factory :feed do
     sequence(:title) { |n| "title_#{n}" }
     last_published_at { Time.current }
-    endpoint { 'https://madogiwa0124.hatenablog.com/rss' }
+    endpoint { 'https://example.com/rss' }
   end
 end

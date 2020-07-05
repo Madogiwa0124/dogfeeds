@@ -15,7 +15,8 @@ ActiveRecord::Base.transaction {
 }
 
 puts "=== create feeds ==="
-FactoryBot.create_list(:feed, 10)
+# TODO: set your test site to endpoint
+FactoryBot.create_list(:feed, 10, endpoint: 'rss end points')
 
 puts "=== create entries ==="
 Feed.all.each do |feed|
