@@ -2,17 +2,25 @@
 
 # README
 DogFeedsは、Rssフィードをまとめて・共有できるRSSリーダーです。
-みんながまとめたRSSフィードを、公開してみんなで使うことができます。
-dogfoodingのように気軽に公開して使って貰えればUo･ｪ･oU
+複数のRSSをまとめたRSSフィードを作成することが出来ます。
 
->〈俗〉ドッグフーディング、試験運用◆ソフトウェア開発会社がベータ版（または開発途上）のソフトウェアを自社の従業員に使用させること。または、社員が自社製品を使うこと。
+下記のような2つのRssのエンドポイントを、、、
 
-# Release Note
-* 2019/03/02 β版リリース🎉
+* https://example.com/foo/rss
+* https://example.com/bar/rss
+
+DogFeedsを使うと下記のように1つにまとめることが出来ます:dog:
+
+* http://dogfeeds.herokuapp.com/boards/xxx.rss
+
+便利ポイント
+
+* Slack等でRSSを連携するときに1個1個登録しなくていい :dog2::sparkles:
+
+* 管理画面から、まとめたRSSを変更できるのでSlack等に登録済みのRSSのURLを変更せずに中身を修正できる :dog2::sparkles:
 
 # Contributing
-なにかバグ等があれば、issueを上げていただけますと助かります🙏
-https://github.com/Madogiwa0124/dogfeeds/issues/new
 
-PRはこちらから🙇
-https://github.com/Madogiwa0124/dogfeeds/compare
+なにかバグ等があればissueまで🙏
+
+https://github.com/Madogiwa0124/dogfeeds/issues/new
