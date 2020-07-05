@@ -40,7 +40,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "lint": "eslint app/javascript/**/*",
-    "lint-fix": "eslint app/javascript/**/* --fix"
+    "lint": "eslint app/javascript/**/* --ext .vue,.js,.ts",
+    "lint-fix": "eslint app/javascript/**/* --ext .vue,.js,.ts --fix"
   }
 }
