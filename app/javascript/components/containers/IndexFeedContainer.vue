@@ -35,8 +35,7 @@ interface DataType {
   feeds: Feed[];
   lastEntries: Entry[];
   tags: FeedTag[];
-  isInitLoading: boolean;
-  isInfiniteLoading: boolean;
+  isLoading: boolean;
 }
 
 export default Vue.extend({
@@ -46,7 +45,6 @@ export default Vue.extend({
     searchWord: {
       type: String,
       default: "",
-      require: false,
     }
   },
   data(): DataType {
