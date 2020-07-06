@@ -31,17 +31,14 @@ export default Vue.extend({
     initFeeds: {
       type: Array as PropType<Feed[]>,
       default(): Feed[] { return []; },
-      require: false
     },
     initLastEntries: {
       type: Array as PropType<Entry[]>,
       default(): Entry[] { return []; },
-      require: false
     },
     initTags: {
       type: Array as PropType<FeedTag[]>,
       default(): FeedTag[] { return []; },
-      require: false
     },
   },
   data(): DataType {
