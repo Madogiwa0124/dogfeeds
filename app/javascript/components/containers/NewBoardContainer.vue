@@ -3,7 +3,13 @@
     id="boards"
     class="boards-new columns"
   >
-    <selected-feed-collection />
+    <aside class="menu column is-2">
+      <borad-create-form
+        :selected-feeds="selectedFeeds"
+        @submitBoard="handleOnSubmitBoard"
+        @unselectedFeed="handleOnUnselectedFeed"
+      />
+    </aside>
     <main class="column">
       <article class="message">
         <div class="message-header">
@@ -37,12 +43,14 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import store from "@js/packs/store";
 import FeedCardCollection from "@js/components/FeedCardCollection.vue";
-import SelectedFeedCollection from "@js/components/SelectedFeedCollection.vue";
+import BoradCreateForm from "@js/components/BoradCreateForm.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
-import { Feed, Entry, FeedTag, FeedsResponse } from "@js/types/types.d.ts";
+import { postBoard } from "@js/services/BoardService";
+import { Feed, Entry, FeedTag, FeedsResponse, PostBoardResponse } from "@js/types/types.d.ts";
 
 interface DataType {
   page: number;
@@ -50,11 +58,12 @@ interface DataType {
   lastEntries: Entry[];
   tags: FeedTag[];
   isLoading: boolean;
+  selectedFeeds: Feed[];
 }
 
 export default Vue.extend({
   name: "NewBoardContainer",
-  components: { FeedCardCollection, SelectedFeedCollection, SearchForm, InfiniteLoading },
+  components: { BoradCreateForm, FeedCardCollection, SearchForm, InfiniteLoading },
   props: {
     searchWord: {
       type: String,
@@ -68,6 +77,7 @@ export default Vue.extend({
       lastEntries: [],
       tags: [],
       isLoading: false,
+      selectedFeeds: store.state.selectedFeeds,
     };
   },
   methods: {
@@ -89,6 +99,14 @@ export default Vue.extend({
         $state.complete();
       }
       this.isLoading = false;
+    },
+    handleOnSubmitBoard: async function (title: string): Promise<void> {
+      const res: PostBoardResponse = await postBoard({ feed_ids: this.selectedFeeds.map(feed => feed.id), title: title });
+      window.location.href = `/boards/${res.id}`;
+    },
+    handleOnUnselectedFeed: function(id: number): void {
+      const target: Feed = this.selectedFeeds.find(feed => { return feed.id === id; });
+      this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
     }
   }
 });
