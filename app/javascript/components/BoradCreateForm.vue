@@ -29,11 +29,27 @@
       />
       <board-confirm-modal
         v-show="showModal"
-        :feeds="selectedFeeds"
-        :title="title"
+        title="このRSSフィードをまとめる！"
         @close="handleOnClose"
         @submit="handleOnSubmit"
-      />
+      >
+        <p
+          v-if="title.length > 0"
+          class="has-text-weight-semibold"
+        >
+          タイトル「{{ title }}」
+        </p>
+        <div class="content">
+          <ul>
+            <li
+              v-for="feed in selectedFeeds"
+              :key="feed.id"
+            >
+              {{ feed.title }}
+            </li>
+          </ul>
+        </div>
+      </board-confirm-modal>
     </div>
   </div>
 </template>
@@ -42,7 +58,7 @@ import Vue, { PropType } from "vue";
 import { Feed } from "@js/types/types.d.ts";
 import SelectedFeed from "@js/components/SelectedFeed.vue";
 import BoardCreateButton from "@js/components/BoardCreateButton.vue";
-import BoardConfirmModal from "@js/components/BoardConfirmModal.vue";
+import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
 
 interface DataType {
   title: string;

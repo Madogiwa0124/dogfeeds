@@ -4,7 +4,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">
-          ボードを作る
+          {{ title }}
         </p>
         <button
           class="delete"
@@ -13,29 +13,14 @@
         />
       </header>
       <section class="modal-card-body">
-        <p
-          v-if="title.length > 0"
-          class="has-text-weight-semibold"
-        >
-          タイトル「{{ title }}」
-        </p>
-        <div class="content">
-          <ul>
-            <li
-              v-for="feed in feeds"
-              :key="feed.id"
-            >
-              {{ feed.title }}
-            </li>
-          </ul>
-        </div>
+        <slot />
       </section>
       <footer class="modal-card-foot">
         <button
           class="button is-success is-fullwidth"
           @click="submit()"
         >
-          これでつくる
+          Submit
         </button>
       </footer>
     </div>
@@ -45,7 +30,7 @@
 export default {
   name: "ConfirmModal",
   components: {},
-  props: ["feeds", "title"],
+  props: ["title"],
   methods: {
     close: function () {
       this.$emit("close");
