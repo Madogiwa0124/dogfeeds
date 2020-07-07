@@ -38,8 +38,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import store from "@js/packs/store";
+import Vue, { PropType } from "vue";
 import { Feed } from "@js/types/types.d.ts";
 import SelectedFeed from "@js/components/SelectedFeed.vue";
 import BoardCreateButton from "@js/components/BoardCreateButton.vue";
@@ -48,27 +47,26 @@ import BoardConfirmModal from "@js/components/BoardConfirmModal.vue";
 interface DataType {
   title: string;
   showModal: boolean;
-  selectedFeeds: Feed[];
 }
 
 export default Vue.extend({
   name: "BoadCreateForm",
   components: { SelectedFeed, BoardCreateButton, BoardConfirmModal },
-  props: {},
+  props: {
+    selectedFeeds: {
+      type: Array as PropType<Feed[]>,
+      default: function () { return []; }
+    }
+  },
   data: function (): DataType {
     return {
       title: "",
-      showModal: false,
-      selectedFeeds: store.state.selectedFeeds,
+      showModal: false
     };
   },
   methods: {
-    handleOnUnselectedFeed: function (id) {
-      const target = this.findSelectedFeed(id);
-      this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
-    },
-    findSelectedFeed: function (id) {
-      return this.selectedFeeds.find(function(feed) { return feed.id === id; });
+    handleOnUnselectedFeed: function (id: number): void {
+      this.$emit("unselectedFeed", id);
     },
     handleOnClick: function (): void {
       this.showModal = true;
@@ -77,7 +75,7 @@ export default Vue.extend({
       this.showModal = false;
     },
     handleOnSubmit: function (): void {
-      this.$emit("submitBoard", this.title, this.selectedFeeds);
+      this.$emit("submitBoard", this.title);
     }
   }
 });
