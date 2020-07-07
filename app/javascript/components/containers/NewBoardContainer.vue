@@ -3,7 +3,9 @@
     id="boards"
     class="boards-new columns"
   >
-    <selected-feed-collection @submitBoard="handleOnSubmitBoard" />
+    <aside class="menu column is-2">
+      <borad-create-form @submitBoard="handleOnSubmitBoard" />
+    </aside>
     <main class="column">
       <article class="message">
         <div class="message-header">
@@ -38,7 +40,7 @@
 <script lang="ts">
 import Vue from "vue";
 import FeedCardCollection from "@js/components/FeedCardCollection.vue";
-import SelectedFeedCollection from "@js/components/SelectedFeedCollection.vue";
+import BoradCreateForm from "@js/components/BoradCreateForm.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
@@ -55,7 +57,7 @@ interface DataType {
 
 export default Vue.extend({
   name: "NewBoardContainer",
-  components: { FeedCardCollection, SelectedFeedCollection, SearchForm, InfiniteLoading },
+  components: { BoradCreateForm, FeedCardCollection, SearchForm, InfiniteLoading },
   props: {
     searchWord: {
       type: String,
