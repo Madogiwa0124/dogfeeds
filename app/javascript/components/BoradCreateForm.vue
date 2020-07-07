@@ -18,28 +18,47 @@
         @unselectedFeed="handleOnUnselectedFeed"
       />
     </ul>
-    <borad-create-button
+    <board-create-button
+      :is-active="feeds.length > 0"
+      @click="handleOnClick"
+    />
+    <board-confirm-modal
+      v-show="showModal"
       :feeds="feeds"
       :title="title"
+      @close="handleOnClose"
+      @submit="handleOnSubmit"
     />
   </div>
 </template>
 <script>
-import SelectedFeed from "./SelectedFeed";
-import BoradCreateButton from "./BoardCreateButton";
+import SelectedFeed from "@js/components/SelectedFeed.vue";
+import BoardCreateButton from "@js/components/BoardCreateButton.vue";
+import BoardConfirmModal from "@js/components/BoardConfirmModal.vue";
 
 export default {
-  name: "SelectedFeedCollection",
-  components: { SelectedFeed, BoradCreateButton },
+  name: "BoadCreateForm",
+  components: { SelectedFeed, BoardCreateButton, BoardConfirmModal },
   props: ["feeds"],
   data: function () {
     return {
-      title: ""
+      title: "",
+      showModal: false
     };
   },
   methods: {
+    handleOnClick: function () {
+      console.log("fire");
+      this.showModal = true;
+    },
+    handleOnClose: function () {
+      this.showModal = false;
+    },
     handleOnUnselectedFeed: function (id) {
       this.$emit("unselectedFeed", id);
+    },
+    handleOnSubmit: function () {
+      this.$emit("submitBoard", this.title);
     }
   }
 };

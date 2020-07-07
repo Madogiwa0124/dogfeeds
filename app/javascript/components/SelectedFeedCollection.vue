@@ -8,30 +8,29 @@
     </span>
     <borad-create-form
       :feeds="selectedFeeds"
-      @unselectedFeed="handleOnUnselectedFeed(id)"
+      @unselectedFeed="handleOnUnselectedFeed"
+      @submitBoard="handleOnSubmitBoard"
     />
   </aside>
 </template>
 <script>
-import store from "../packs/store";
-import BoradCreateForm from "./BoradCreateForm";
+import store from "@js/packs/store";
+import BoradCreateForm from "@js/components/BoradCreateForm";
 
 export default {
   name: "SelectedFeedCollection",
   components: { BoradCreateForm },
   data: () => store.state,
   methods: {
-    // TODO: 下記警告に対応するためにidを返すメソッドを定義しているが、詳細要調査
-    // [Vue warn]: Property or method "id" is not defined on the instance but referenced during render
-    id: function (id) {
-      return id;
-    },
     handleOnUnselectedFeed: function (id) {
       const target = this.findSelectedFeed(id);
       this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
     },
     findSelectedFeed: function (id) {
       return this.selectedFeeds.find(function(feed) { return feed.id === id; });
+    },
+    handleOnSubmitBoard: function(title) {
+      this.$emit("submitBoard", title, this.selectedFeeds);
     }
   }
 };

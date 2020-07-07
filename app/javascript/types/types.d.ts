@@ -29,3 +29,6 @@ export interface FeedsResponse {
   last_entries: Entry[];
   tags: FeedTag[];
 }
+export interface PostBoardResponse {
+  id: number;
+}

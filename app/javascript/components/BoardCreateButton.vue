@@ -2,54 +2,36 @@
   <div class="board-create-button">
     <button
       class="button is-primary is-fullwidth"
-      :disabled="!isActive()"
-      @click="hundleOnClick()"
+      :disabled="!isActive"
+      @click="handleOnClick()"
     >
       ボードを作る
     </button>
-    <board-confirm-modal
-      v-show="showModal"
-      :feeds="feeds"
-      :title="title"
-      @close="hundleOnClose()"
-      @submit="hundleOnSubmit()"
-    />
   </div>
 </template>
 
-<script>
-import BoardConfirmModal from "@js/components/BoardConfirmModal.vue";
-import { postBoard } from "@js/services/BoardService.ts";
+<script lang="ts">
+import Vue from "vue";
 
-export default {
+interface DataType {
+  showModal: boolean;
+}
+
+export default Vue.extend({
   name: "BoradCreateButton",
-  components: { BoardConfirmModal },
-  props: ["feeds", "title"],
-  data: function () {
-    return {
-      showModal: false
-    };
+  components: {},
+  props: {
+    isActive: {
+      type: Boolean,
+      default: false,
+    }
   },
   methods: {
-    isActive: function () {
-      return this.feeds.length > 0;
-    },
-    hundleOnClick: function () {
-      this.showModal = true;
-    },
-    hundleOnClose: function () {
-      this.showModal = false;
-    },
-    hundleOnSubmit: async function () {
-      try {
-        const res = await postBoard({ feed_ids: this.feeds.map(feed => feed.id), title: this.title });
-        window.location.href = `/boards/${res.data.id}`;
-      } finally {
-        this.showModal = false;
-      }
+    handleOnClick: function (): void {
+      this.$emit("click");
     }
   }
-};
+});
 </script>
 
 <style lang="scss">

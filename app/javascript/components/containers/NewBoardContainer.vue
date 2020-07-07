@@ -3,7 +3,7 @@
     id="boards"
     class="boards-new columns"
   >
-    <selected-feed-collection />
+    <selected-feed-collection @submitBoard="handleOnSubmitBoard" />
     <main class="column">
       <article class="message">
         <div class="message-header">
@@ -42,7 +42,8 @@ import SelectedFeedCollection from "@js/components/SelectedFeedCollection.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
-import { Feed, Entry, FeedTag, FeedsResponse } from "@js/types/types.d.ts";
+import { postBoard } from "@js/services/BoardService";
+import { Feed, Entry, FeedTag, FeedsResponse, PostBoardResponse } from "@js/types/types.d.ts";
 
 interface DataType {
   page: number;
@@ -89,6 +90,10 @@ export default Vue.extend({
         $state.complete();
       }
       this.isLoading = false;
+    },
+    handleOnSubmitBoard: async function (title: string, feeds: Feed[]): Promise<void> {
+      const res: PostBoardResponse = await postBoard({ feed_ids: feeds.map(feed => feed.id), title: title });
+      window.location.href = `/boards/${res.id}`;
     }
   }
 });
