@@ -12,17 +12,10 @@
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">
-        <span>
-          <i class="far fa-clock" />{{ entry.published_at | fromNow }}
-        </span>
+        <span> <i class="far fa-clock" />{{ entry.published_at | fromNow }} </span>
       </p>
       <p class="card-footer-item">
-        <a
-          :href="entry.link"
-          target="_blank"
-        >
-          <i class="fas fa-external-link-alt" />リンク先で読む
-        </a>
+        <a :href="entry.link" target="_blank"> <i class="fas fa-external-link-alt" />リンク先で読む </a>
       </p>
     </footer>
   </div>
@@ -36,10 +29,9 @@ export default {
   filters: {
     fromNow: function (value) {
       return moment(value, "YYYYMMDD").fromNow();
-    }
+    },
   },
-  props: ["entry"]
+  props: ["entry"],
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

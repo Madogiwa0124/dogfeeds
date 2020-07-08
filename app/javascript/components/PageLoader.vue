@@ -1,28 +1,24 @@
 <template>
-  <div
-    class="pageloader"
-    :class="{ 'is-active': isLoading }"
-  >
+  <div class="pageloader" :class="{ 'is-active': isLoading }">
     <span class="title">Loading</span>
   </div>
 </template>
 <script>
 export default {
   name: "PageLoader",
-  components: { },
+  components: {},
   props: ["init_is_loading"],
-  data: function() {
+  data: function () {
     return {
-      isLoading: this.init_is_loading
+      isLoading: this.init_is_loading,
     };
   },
   watch: {
-    init_is_loading: function() {
+    init_is_loading: function () {
       this.isLoading = this.init_is_loading;
-    }
+    },
   },
-  methods: {}
+  methods: {},
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

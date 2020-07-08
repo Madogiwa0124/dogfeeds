@@ -1,6 +1,6 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
-const environment = require('./environment')
+const environment = require("./environment");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const path = require("path");
 
@@ -11,10 +11,10 @@ environment.plugins.append(
       configFile: path.resolve(__dirname, "../../tsconfig.json"),
       extensions: {
         vue: true,
-      }
+      },
     },
     async: false,
   })
 );
 
-module.exports = environment.toWebpackConfig()
+module.exports = environment.toWebpackConfig();
