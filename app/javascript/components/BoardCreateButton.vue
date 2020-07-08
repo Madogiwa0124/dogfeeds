@@ -1,10 +1,6 @@
 <template>
   <div class="board-create-button">
-    <button
-      class="button is-primary is-fullwidth"
-      :disabled="!isActive"
-      @click="handleOnClick()"
-    >
+    <button class="button is-primary is-fullwidth" :disabled="!isActive" @click="handleOnClick()">
       ボードを作る
     </button>
   </div>
@@ -24,15 +20,14 @@ export default Vue.extend({
     isActive: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   methods: {
     handleOnClick: function (): void {
       this.$emit("click");
-    }
-  }
+    },
+  },
 });
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

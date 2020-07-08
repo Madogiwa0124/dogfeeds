@@ -1,8 +1,5 @@
 <template>
-  <span
-    class="tag is-primary"
-    @click="SearchByTag()"
-  >
+  <span class="tag is-primary" @click="SearchByTag()">
     {{ tag.body }}
   </span>
 </template>
@@ -13,14 +10,13 @@ export default {
   computed: {
     query: function () {
       return `?query[keyword]=${this.tag.body}`;
-    }
+    },
   },
   methods: {
-    SearchByTag: function() {
+    SearchByTag: function () {
       window.location.href = `/${this.query}`;
-    }
-  }
+    },
+  },
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

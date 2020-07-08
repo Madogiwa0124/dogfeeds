@@ -1,15 +1,7 @@
 <template>
   <div class="entries is-multiline columns">
-    <div
-      v-for="feed in feeds"
-      :key="feed.id"
-      class="column is-4"
-    >
-      <feed-card
-        :feed="feed"
-        :lastEntry="feedLastEntry(feed)"
-        :tags="feedTags(feed)"
-      />
+    <div v-for="feed in feeds" :key="feed.id" class="column is-4">
+      <feed-card :feed="feed" :lastEntry="feedLastEntry(feed)" :tags="feedTags(feed)" />
     </div>
   </div>
 </template>
@@ -30,15 +22,21 @@ export default Vue.extend({
   props: {
     initFeeds: {
       type: Array as PropType<Feed[]>,
-      default(): Feed[] { return []; },
+      default(): Feed[] {
+        return [];
+      },
     },
     initLastEntries: {
       type: Array as PropType<Entry[]>,
-      default(): Entry[] { return []; },
+      default(): Entry[] {
+        return [];
+      },
     },
     initTags: {
       type: Array as PropType<FeedTag[]>,
-      default(): FeedTag[] { return []; },
+      default(): FeedTag[] {
+        return [];
+      },
     },
   },
   data(): DataType {
@@ -49,14 +47,13 @@ export default Vue.extend({
     };
   },
   methods: {
-    feedLastEntry: function(feed: Feed): Entry {
-      return this.lastEntries.filter(entry => entry.feed_id === feed.id)[0];
+    feedLastEntry: function (feed: Feed): Entry {
+      return this.lastEntries.filter((entry) => entry.feed_id === feed.id)[0];
     },
-    feedTags: function(feed: Feed): FeedTag {
-      return this.tags.filter(tag => tag.feed_id === feed.id);
-    }
-  }
+    feedTags: function (feed: Feed): FeedTag {
+      return this.tags.filter((tag) => tag.feed_id === feed.id);
+    },
+  },
 });
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

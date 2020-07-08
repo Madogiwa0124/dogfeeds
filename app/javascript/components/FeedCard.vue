@@ -7,22 +7,15 @@
     </header>
     <div class="card-content">
       <div class="card-image">
-        <img :src="lastEntry.eye_catching_image | eyeCatch">
+        <img :src="lastEntry.eye_catching_image | eyeCatch" />
       </div>
       <div class="content">
         {{ lastEntry.title }}
-        <a
-          :href="lastEntry.link"
-          target="_blank"
-        >
+        <a :href="lastEntry.link" target="_blank">
           リンク先で読む
         </a>
         <p>
-          <feed-tag
-            v-for="tag in tags"
-            :key="tag.id"
-            :tag="tag"
-          />
+          <feed-tag v-for="tag in tags" :key="tag.id" :tag="tag" />
         </p>
       </div>
     </div>
@@ -50,17 +43,16 @@ export default {
       return moment(value, "YYYYMMDD h:mm:ss").fromNow();
     },
     eyeCatch: function (value) {
-      if(!value) return "/noimage.png";
+      if (!value) return "/noimage.png";
       return value;
-    }
+    },
   },
   props: ["feed", "lastEntry", "tags"],
   methods: {
     feedPath: function () {
       return `/feeds/${this.feed.id}`;
-    }
-  }
+    },
+  },
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

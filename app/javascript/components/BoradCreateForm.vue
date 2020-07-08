@@ -8,12 +8,7 @@
     </span>
     <div class="field">
       <div class="control">
-        <input
-          v-model="title"
-          type="text"
-          class="input"
-          placeholder="ボードのタイトル(任意)"
-        >
+        <input v-model="title" type="text" class="input" placeholder="ボードのタイトル(任意)" />
       </div>
       <ul class="menu-list">
         <selected-feed
@@ -23,28 +18,17 @@
           @unselectedFeed="handleOnUnselectedFeed"
         />
       </ul>
-      <board-create-button
-        :is-active="selectedFeeds.length > 0"
-        @click="handleOnClick"
-      />
+      <board-create-button :is-active="selectedFeeds.length > 0" @click="handleOnClick" />
       <board-confirm-modal
         v-show="showModal"
         title="このRSSフィードをまとめる！"
         @close="handleOnClose"
         @submit="handleOnSubmit"
       >
-        <p
-          v-if="title.length > 0"
-          class="has-text-weight-semibold"
-        >
-          タイトル「{{ title }}」
-        </p>
+        <p v-if="title.length > 0" class="has-text-weight-semibold">タイトル「{{ title }}」</p>
         <div class="content">
           <ul>
-            <li
-              v-for="feed in selectedFeeds"
-              :key="feed.id"
-            >
+            <li v-for="feed in selectedFeeds" :key="feed.id">
               {{ feed.title }}
             </li>
           </ul>
@@ -71,13 +55,15 @@ export default Vue.extend({
   props: {
     selectedFeeds: {
       type: Array as PropType<Feed[]>,
-      default: function () { return []; }
-    }
+      default: function () {
+        return [];
+      },
+    },
   },
   data: function (): DataType {
     return {
       title: "",
-      showModal: false
+      showModal: false,
     };
   },
   methods: {
@@ -85,17 +71,18 @@ export default Vue.extend({
       this.$emit("unselectedFeed", id);
     },
     handleOnClick: function (): void {
-      this.showModal = true;
+      // NOTE: なぜかProperty 'XXX' does not exist on typeが発生するのでthisの型を無視する
+      (this as any).showModal = true;
     },
     handleOnClose: function (): void {
-      this.showModal = false;
+      // NOTE: なぜかProperty 'XXX' does not exist on typeが発生するのでthisの型を無視する
+      (this as any).showModal = false;
     },
     handleOnSubmit: function (): void {
-      this.$emit("submitBoard", this.title);
-    }
-  }
+      // NOTE: なぜかProperty 'XXX' does not exist on typeが発生するのでthisの型を無視する
+      this.$emit("submitBoard", (this as any).title);
+    },
+  },
 });
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

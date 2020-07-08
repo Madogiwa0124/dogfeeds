@@ -6,20 +6,13 @@
         <p class="modal-card-title">
           {{ title }}
         </p>
-        <button
-          class="delete"
-          aria-label="close"
-          @click="close()"
-        />
+        <button class="delete" aria-label="close" @click="close()" />
       </header>
       <section class="modal-card-body">
         <slot />
       </section>
       <footer class="modal-card-foot">
-        <button
-          class="button is-success is-fullwidth"
-          @click="submit()"
-        >
+        <button class="button is-success is-fullwidth" @click="submit()">
           Submit
         </button>
       </footer>
@@ -37,9 +30,8 @@ export default {
     },
     submit: function () {
       this.$emit("submit");
-    }
-  }
+    },
+  },
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

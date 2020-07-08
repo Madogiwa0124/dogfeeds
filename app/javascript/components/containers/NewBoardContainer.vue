@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="boards"
-    class="boards-new columns"
-  >
+  <div id="boards" class="boards-new columns">
     <aside class="menu column is-2">
       <borad-create-form
         :selected-feeds="selectedFeeds"
@@ -17,27 +14,19 @@
         </div>
         <div class="message-body">
           <strong>
-            RSSフィードをまとめたRssフィードを作ることができます。
-            作り方は簡単なので、ぜひ作ってみてください🐶
+            RSSフィードをまとめたRssフィードを作ることができます。 作り方は簡単なので、ぜひ作ってみてください🐶
           </strong>
-          <br>
-          1. フィードを選択する<br>
-          2. まとめたフィード(ボード)に名前をつける<br>
-          3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！<br>
+          <br />
+          1. フィードを選択する<br />
+          2. まとめたフィード(ボード)に名前をつける<br />
+          3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！<br />
         </div>
       </article>
       <div class="level-left column is-12">
         <search-form :init_keyword="searchWord" />
       </div>
-      <feed-card-collection
-        :init-feeds="feeds"
-        :init-last-entries="lastEntries"
-        :init-tags="tags"
-      />
-      <infinite-loading
-        :distance="100"
-        @infinite="infiniteHandler"
-      />
+      <feed-card-collection :init-feeds="feeds" :init-last-entries="lastEntries" :init-tags="tags" />
+      <infinite-loading :distance="100" @infinite="infiniteHandler" />
     </main>
   </div>
 </template>
@@ -68,7 +57,7 @@ export default Vue.extend({
     searchWord: {
       type: String,
       default: "",
-    }
+    },
   },
   data(): DataType {
     return {
@@ -81,35 +70,39 @@ export default Vue.extend({
     };
   },
   methods: {
-    updateFeedList: function(feeds: Feed[], lastEntries: Entry[], tags: FeedTag[]): void {
+    updateFeedList: function (feeds: Feed[], lastEntries: Entry[], tags: FeedTag[]): void {
       this.feeds.push(...feeds);
       this.lastEntries.push(...lastEntries);
       this.tags.push(...tags);
     },
     infiniteHandler: async function ($state: any): Promise<void> {
-      if(this.isLoading) return;
+      if (this.isLoading) return;
 
       this.isLoading = true;
       const data: FeedsResponse = await getFeeds(location.search, { page: this.page });
       if (data.feeds.length) {
         this.page += 1;
         this.updateFeedList(data.feeds, data.last_entries, data.tags);
-        if ($state) { $state.loaded(); }
+        if ($state) $state.loaded();
       } else {
         $state.complete();
       }
       this.isLoading = false;
     },
     handleOnSubmitBoard: async function (title: string): Promise<void> {
-      const res: PostBoardResponse = await postBoard({ feed_ids: this.selectedFeeds.map(feed => feed.id), title: title });
+      const res: PostBoardResponse = await postBoard({
+        feed_ids: this.selectedFeeds.map((feed) => feed.id),
+        title: title,
+      });
       window.location.href = `/boards/${res.id}`;
     },
-    handleOnUnselectedFeed: function(id: number): void {
-      const target: Feed = this.selectedFeeds.find(feed => { return feed.id === id; });
+    handleOnUnselectedFeed: function (id: number): void {
+      const target: Feed = this.selectedFeeds.find((feed) => {
+        return feed.id === id;
+      });
       this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
-    }
-  }
+    },
+  },
 });
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>
