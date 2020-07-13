@@ -1,3 +1,5 @@
 config
+postcss.config.js
 babel.config.js
 app/assets/javascripts/cable.js
+app/javascript/stylesheets
