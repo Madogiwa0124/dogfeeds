@@ -1,0 +1,30 @@
+$pageloader-opacity: 0.9;
+// NOTE: webpackビルド時のWARNING解消のため設定
+// https://takeokunn.xyz/blog/post/webpacker-bulma-build-warning
+$variable-columns: false;
+
+@import "bulma/bulma";
+@import "bulma-extensions/bulma-pageloader/dist/css/bulma-pageloader";
+@import "../stylesheets/admin";
+@import "../stylesheets/feed";
+@import "../stylesheets/board";
+
+html {
+  height: 100%;
+  background-color: hsl(0, 0%, 96%);
+}
+
+body {
+  height: 100%;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 15px;
+}
