@@ -6,6 +6,7 @@ ruby '2.7.0'
 gem 'rails', '~> 6.0.3'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma'
+gem 'sass-rails', '>= 6'
 gem 'webpacker'
 
 group :development, :test do
