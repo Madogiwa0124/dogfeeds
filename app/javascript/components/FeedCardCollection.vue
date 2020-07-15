@@ -1,7 +1,13 @@
 <template>
   <div class="entries is-multiline columns">
     <div v-for="feed in feeds" :key="feed.id" class="column is-4">
-      <feed-card :feed="feed" :lastEntry="feedLastEntry(feed)" :tags="feedTags(feed)" @clickTag="handleOnClickTag" />
+      <feed-card
+        :feed="feed"
+        :lastEntry="feedLastEntry(feed)"
+        :tags="feedTags(feed)"
+        :selectable="selectable"
+        @clickTag="handleOnClickTag"
+      />
     </div>
   </div>
 </template>
@@ -37,6 +43,10 @@ export default Vue.extend({
       default(): FeedTag[] {
         return [];
       },
+    },
+    selectable: {
+      type: Boolean,
+      default: true,
     },
   },
   data(): DataType {

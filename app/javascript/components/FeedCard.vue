@@ -24,7 +24,7 @@
         <i class="far fa-clock" />
         {{ lastEntry.published_at | fromNow }}
       </p>
-      <p class="card-footer-item">
+      <p v-if="selectable" class="card-footer-item">
         <select-feed :feed="feed" />
       </p>
     </footer>
@@ -59,6 +59,10 @@ export default Vue.extend({
       default(): FeedTag[] {
         return [];
       },
+    },
+    selectable: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {

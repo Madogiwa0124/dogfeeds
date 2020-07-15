@@ -11,6 +11,7 @@
         :init-feeds="feeds"
         :init-last-entries="lastEntries"
         :init-tags="tags"
+        :selectable="false"
         @clickTag="handleOnSearch"
       />
       <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
