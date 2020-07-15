@@ -1,10 +1,10 @@
 <template>
   <div class="field is-grouped">
     <div class="control is-expanded">
-      <input v-model="keyword" class="input" placeholder="タグ、タイトルで検索できます" @keydown.enter="Search()" />
+      <input v-model="keyword" class="input" placeholder="タグ、タイトルで検索できます" @keydown.enter="search" />
     </div>
     <div class="control">
-      <button class="button is-primary" @click="Search()">
+      <button class="button is-primary" @click="search">
         検索
       </button>
     </div>
@@ -14,21 +14,25 @@
 export default {
   name: "SearchForm",
   components: {},
-  props: ["init_keyword"],
+  props: {
+    initKeyword: {
+      type: String,
+      default: "",
+    },
+  },
   data: function () {
     return {
-      keyword: this.init_keyword,
+      keyword: this.initKeyword,
     };
   },
-  computed: {
-    query: function () {
-      return `?query[keyword]=${this.keyword}`;
+  watch: {
+    initKeyword(newKeyword) {
+      this.keyword = newKeyword;
     },
   },
   methods: {
-    Search: function () {
-      // TODO: 検索処理は非同期でやってEntoryCardCollectionのfeedsを更新するようにしたい。。。
-      window.location.href = location.pathname + this.query;
+    search: function () {
+      this.$emit("search", this.keyword);
     },
   },
 };
