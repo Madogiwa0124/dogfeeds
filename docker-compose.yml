@@ -21,9 +21,25 @@ services:
       - db
     volumes:
       - .:/dogfeeds
+      - node_modules:/dogfeeds/node_modules
+      - vendor:/dogfeeds/vendor
+      - log:/dogfeeds/log
+      - public:/dogfeeds/public
+      - tmp:/dogfeeds/tmp
     environment:
       HOST_NAME: rails
       DATABASE_USER: postgres
       DATABASE_PASSWORD: password
       DATABASE_PORT: 5432
       DATABASE_HOST: db
+volumes:
+  node_modules:
+    driver: 'local'
+  vendor:
+    driver: 'local'
+  log:
+    driver: 'local'
+  public:
+    driver: 'local'
+  tmp:
+    driver: 'local'
