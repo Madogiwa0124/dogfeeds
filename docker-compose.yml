@@ -24,7 +24,7 @@ services:
       - node_modules:/dogfeeds/node_modules
       - vendor:/dogfeeds/vendor
       - log:/dogfeeds/log
-      - public:/dogfeeds/public
+      - packs:/dogfeeds/public/packs
       - tmp:/dogfeeds/tmp
     environment:
       HOST_NAME: rails
@@ -39,7 +39,7 @@ volumes:
     driver: 'local'
   log:
     driver: 'local'
-  public:
+  packs:
     driver: 'local'
   tmp:
     driver: 'local'
