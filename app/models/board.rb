@@ -17,7 +17,7 @@ class Board < ApplicationRecord
   has_many :last_entries, through: :feeds, source: :last_entry
 
   def last_entry
-    last_entries.last
+    @last_entry ||= last_entries.first
   end
 
   def description

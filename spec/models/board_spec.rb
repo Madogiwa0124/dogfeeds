@@ -23,7 +23,7 @@ RSpec.describe Board, type: :model do
     end
 
     it 'Feed別に最新の公開日時を持つEntryが取得されること' do
-      expect(board.last_entries.last).to eq board.last_entry
+      expect(board.last_entries.first).to eq board.last_entry
     end
   end
 
