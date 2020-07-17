@@ -14,7 +14,8 @@
 #
 # Indexes
 #
-#  index_entries_on_feed_id  (feed_id)
+#  index_entries_on_feed_id       (feed_id)
+#  index_entries_on_published_at  (published_at)
 #
 
 require 'rails_helper'
