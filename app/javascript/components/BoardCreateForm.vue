@@ -50,7 +50,7 @@ interface DataType {
 }
 
 export default Vue.extend({
-  name: "BoadCreateForm",
+  name: "BoardCreateForm",
   components: { SelectedFeed, BoardCreateButton, BoardConfirmModal },
   props: {
     selectedFeeds: {
