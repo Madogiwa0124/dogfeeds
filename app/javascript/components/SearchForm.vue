@@ -1,10 +1,10 @@
 <template>
-  <div class="field is-grouped">
+  <div class="search-form field is-grouped">
     <div class="control is-expanded">
       <input v-model="keyword" class="input" placeholder="タグ、タイトルで検索できます" @keydown.enter="search" />
     </div>
     <div class="control">
-      <button class="button is-primary" @click="search">
+      <button class="button submit is-primary" @click="search">
         検索
       </button>
     </div>

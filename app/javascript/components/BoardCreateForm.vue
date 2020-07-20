@@ -8,7 +8,7 @@
     </span>
     <div class="field">
       <div class="control">
-        <input v-model="title" type="text" class="input" placeholder="ボードのタイトル(任意)" />
+        <input v-model="title" type="text" class="input board-title" placeholder="ボードのタイトル(任意)" />
       </div>
       <ul class="menu-list">
         <selected-feed
