@@ -131,13 +131,18 @@ jobs:
     steps:
       - attach_current
       - restore_ruby_deps
+      - restore_node_deps
       - configure_bundler
       - install_ruby_deps
+      - install_node_deps
       - run:
           name: run migration
           command: |
             bundle exec rake db:create
             bundle exec rake db:schema:load
+      - run:
+          name: build webpack
+          command: NODE_ENV=test bundle exec rails webpacker:compile
       - run:
           name: run tests
           command: bundle exec rspec spec/
@@ -155,6 +160,7 @@ workflows:
       - ruby_test:
           requires:
             - ruby_build
+            - node_build
       - node_build:
           requires:
             - build
