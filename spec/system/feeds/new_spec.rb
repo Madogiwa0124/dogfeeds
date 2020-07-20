@@ -19,7 +19,6 @@ RSpec.describe 'フィード作成画面', type: :system, js: true do
     before do
       valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
       rss_mock_enable(endpoint: 'https://example.com/rss', body: valid_body)
-      WebMock.allow_net_connect!
       visit new_feed_path
     end
 
