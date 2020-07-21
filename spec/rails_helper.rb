@@ -35,4 +35,7 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do |example|
     example.metadata[:js] ? driven_by(:headless_chrome) : driven_by(:rack_test)
   end
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true unless meta.key?(:aggregate_failures)
+  end
 end
