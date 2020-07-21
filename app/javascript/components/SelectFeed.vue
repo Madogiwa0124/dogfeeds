@@ -1,5 +1,5 @@
 <template>
-  <a @click="toggleSelectedFeed()">
+  <a class="select-feed" @click="toggleSelectedFeed()">
     <span v-if="isSelected()">
       <font-awesome-icon :icon="['far', 'check-square']" />
       Selected

@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div :id="`feed-card-${feed.id}`" class="feed-card card">
     <header class="card-header">
       <p class="card-header-title">
         <a :href="feedPath">{{ feed.title }}</a>

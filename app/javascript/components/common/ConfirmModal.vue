@@ -12,7 +12,7 @@
         <slot />
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success is-fullwidth" @click="submit()">
+        <button class="button submit is-success is-fullwidth" @click="submit()">
           Submit
         </button>
       </footer>
