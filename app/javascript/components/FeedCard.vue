@@ -25,7 +25,7 @@
         {{ lastEntry.published_at | fromNow }}
       </p>
       <p v-if="selectable" class="card-footer-item">
-        <select-feed :feed="feed" />
+        <select-feed :selected="selected" @selected="handleOnSelected" @unselected="handleOnUnselected" />
       </p>
     </footer>
   </div>
@@ -64,6 +64,10 @@ export default Vue.extend({
       type: Boolean,
       default: true,
     },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     eyeCatch: function () {
@@ -77,6 +81,12 @@ export default Vue.extend({
   methods: {
     handleOnTagClick: function (tagBody) {
       this.$emit("clickTag", tagBody);
+    },
+    handleOnSelected: function () {
+      this.$emit("selectedFeed", this.feed.id);
+    },
+    handleOnUnselected: function () {
+      this.$emit("unselectedFeed", this.feed.id);
     },
   },
 });

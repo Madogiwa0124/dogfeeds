@@ -6,7 +6,10 @@
         :lastEntry="feedLastEntry(feed)"
         :tags="feedTags(feed)"
         :selectable="selectable"
+        :selected="selected(feed)"
         @clickTag="handleOnClickTag"
+        @selectedFeed="handleOnSelected"
+        @unselectedFeed="handleOnUnselected"
       />
     </div>
   </div>
@@ -44,6 +47,12 @@ export default Vue.extend({
         return [];
       },
     },
+    selectedFeeds: {
+      type: Array as PropType<Feed[]>,
+      default(): Feed[] {
+        return [];
+      },
+    },
     selectable: {
       type: Boolean,
       default: true,
@@ -63,8 +72,20 @@ export default Vue.extend({
     feedTags: function (feed: Feed): FeedTag {
       return this.tags.filter((tag) => tag.feed_id === feed.id);
     },
+    selected: function (feed: Feed): boolean {
+      const exists = !!this.selectedFeeds.find(function (selectedFeed) {
+        return selectedFeed.id === feed.id;
+      });
+      return exists;
+    },
     handleOnClickTag: function (tagBody: string): void {
       this.$emit("clickTag", tagBody);
+    },
+    handleOnSelected: function (id: number) {
+      this.$emit("selectedFeed", id);
+    },
+    handleOnUnselected: function (id: number) {
+      this.$emit("unselectedFeed", id);
     },
   },
 });
