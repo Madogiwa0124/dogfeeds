@@ -1,45 +1,28 @@
-export interface OriginFeed {
-  id: number;
-  endpoint: string;
-  last_published_at: Date;
-  title: string;
-  created_at: Date;
-  updated_at: Date;
-}
-
 export interface Feed {
   id: number;
   endpoint: string;
-  last_published_at: Date;
+  lastPublishedAt: Date;
   title: string;
-  created_at: Date;
-  updated_at: Date;
-  last_entry: OriginEntry;
-  tags: OriginFeedTag[];
+  lastEntry: Entry;
+  tags: FeedTag[];
 }
 
-export interface OriginEntry {
+export interface Entry {
   id: number;
   description: Text;
-  eye_catching_image: string;
+  eyeCatchingImage: string;
   link: string;
-  published_at: Date;
+  publishedAt: Date;
   title: string;
-  created_at: Date;
-  updated_at: Date;
-  feed_id: number;
+  feedId: number;
 }
 
-export interface OriginFeedTag {
-  feed_id: number;
+export interface FeedTag {
+  id: number;
   body: Text;
+  feedId: number;
 }
 
-export interface FeedsResponse {
-  feeds: OriginFeed[];
-  last_entries: OriginEntry[];
-  tags: OriginFeedTag[];
-}
 export interface PostBoardResponse {
   id: number;
 }

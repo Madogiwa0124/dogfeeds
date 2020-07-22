@@ -10,8 +10,8 @@
         <img :src="eyeCatch" />
       </div>
       <div class="content">
-        {{ feed.last_entry.title }}
-        <a :href="feed.last_entry.link" target="_blank">
+        {{ feed.lastEntry.title }}
+        <a :href="feed.lastEntry.link" target="_blank">
           リンク先で読む
         </a>
         <p>
@@ -22,7 +22,7 @@
     <footer class="card-footer">
       <p class="card-footer-item">
         <i class="far fa-clock" />
-        {{ feed.last_entry.published_at | fromNow }}
+        {{ feed.lastEntry.publishedAt | fromNow }}
       </p>
       <p v-if="selectable" class="card-footer-item">
         <select-feed :selected="selected" @selected="handleOnSelected" @unselected="handleOnUnselected" />
@@ -36,6 +36,7 @@ import moment from "moment";
 import SelectFeed from "@js/components/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
 import { Feed } from "@js/types/types.d.ts";
+const NO_IMAGE_PATH = "/noimage.png";
 
 export default Vue.extend({
   name: "FeedCard",
@@ -61,8 +62,8 @@ export default Vue.extend({
   },
   computed: {
     eyeCatch: function () {
-      if (!this.feed.last_entry.eye_catching_image) return "/noimage.png";
-      return this.feed.last_entry.eye_catching_image;
+      if (!this.feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
+      return this.feed.lastEntry.eyeCatchingImage;
     },
     feedPath: function () {
       return `/feeds/${this.feed.id}`;
