@@ -29,6 +29,9 @@
         :init-feeds="feeds"
         :init-last-entries="lastEntries"
         :init-tags="tags"
+        :selected-feeds="selectedFeeds"
+        @selectedFeed="handleOnSelectedFeed"
+        @unselectedFeed="handleOnUnselectedFeed"
         @clickTag="handleOnSearch"
       />
       <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
@@ -37,7 +40,6 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import store from "@js/packs/store";
 import FeedCardCollection from "@js/components/FeedCardCollection.vue";
 import BoardCreateForm from "@js/components/BoardCreateForm.vue";
 import SearchForm from "@js/components/SearchForm.vue";
@@ -72,7 +74,7 @@ export default Vue.extend({
       lastEntries: [],
       tags: [],
       isLoading: false,
-      selectedFeeds: store.state.selectedFeeds,
+      selectedFeeds: [],
       keyword: this.searchWord,
     };
   },
@@ -114,6 +116,12 @@ export default Vue.extend({
         title: title,
       });
       window.location.href = `/boards/${res.id}`;
+    },
+    handleOnSelectedFeed: function (id: number): void {
+      const target: Feed = this.feeds.find((feed) => {
+        return feed.id === id;
+      });
+      if (target) this.selectedFeeds.push(target);
     },
     handleOnUnselectedFeed: function (id: number): void {
       const target: Feed = this.selectedFeeds.find((feed) => {
