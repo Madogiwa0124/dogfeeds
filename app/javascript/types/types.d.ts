@@ -1,4 +1,4 @@
-export interface Feed {
+export interface OriginFeed {
   id: number;
   endpoint: string;
   last_published_at: Date;
@@ -7,7 +7,18 @@ export interface Feed {
   updated_at: Date;
 }
 
-export interface Entry {
+export interface Feed {
+  id: number;
+  endpoint: string;
+  last_published_at: Date;
+  title: string;
+  created_at: Date;
+  updated_at: Date;
+  last_entry: OriginEntry;
+  tags: OriginFeedTag[];
+}
+
+export interface OriginEntry {
   id: number;
   description: Text;
   eye_catching_image: string;
@@ -19,15 +30,15 @@ export interface Entry {
   feed_id: number;
 }
 
-export interface FeedTag {
+export interface OriginFeedTag {
   feed_id: number;
   body: Text;
 }
 
 export interface FeedsResponse {
-  feeds: Feed[];
-  last_entries: Entry[];
-  tags: FeedTag[];
+  feeds: OriginFeed[];
+  last_entries: OriginEntry[];
+  tags: OriginFeedTag[];
 }
 export interface PostBoardResponse {
   id: number;

@@ -7,13 +7,7 @@
       <div class="level-left column is-12">
         <search-form :init-keyword="keyword" @search="handleOnSearch" />
       </div>
-      <feed-card-collection
-        :init-feeds="feeds"
-        :init-last-entries="lastEntries"
-        :init-tags="tags"
-        :selectable="false"
-        @clickTag="handleOnSearch"
-      />
+      <feed-card-collection :init-feeds="feeds" :selectable="false" @clickTag="handleOnSearch" />
       <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
     </main>
   </div>
@@ -24,13 +18,11 @@ import FeedCardCollection from "@js/components/FeedCardCollection.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
-import { Feed, Entry, FeedTag, FeedsResponse } from "@js/types/types.d.ts";
+import { Feed } from "@js/types/types.d.ts";
 
 interface DataType {
   page: number;
   feeds: Feed[];
-  lastEntries: Entry[];
-  tags: FeedTag[];
   isLoading: boolean;
   keyword: string;
 }
@@ -48,8 +40,6 @@ export default Vue.extend({
     return {
       page: 1,
       feeds: [],
-      lastEntries: [],
-      tags: [],
       isLoading: false,
       keyword: this.searchWord,
     };
@@ -63,23 +53,19 @@ export default Vue.extend({
   methods: {
     resetFeedList: function () {
       // NOTE: Vueに変更検知させるためにspliceしてる
-      this.lastEntries.splice(0);
-      this.tags.splice(0);
       this.feeds.splice(0);
     },
-    updateFeedList: function (feeds: Feed[], lastEntries: Entry[], tags: FeedTag[]): void {
+    updateFeedList: function (feeds: Feed[]): void {
       this.feeds.push(...feeds);
-      this.lastEntries.push(...lastEntries);
-      this.tags.push(...tags);
     },
     infiniteHandler: async function ($state: any): Promise<void> {
       if (this.isLoading) return;
 
       this.isLoading = true;
-      const data: FeedsResponse = await getFeeds(this.query, { page: this.page });
-      if (data.feeds.length) {
+      const feeds: Feed[] = await getFeeds(this.query, { page: this.page });
+      if (feeds.length) {
         this.page += 1;
-        this.updateFeedList(data.feeds, data.last_entries, data.tags);
+        this.updateFeedList(feeds);
         if ($state) $state.loaded();
       } else {
         $state.complete();
