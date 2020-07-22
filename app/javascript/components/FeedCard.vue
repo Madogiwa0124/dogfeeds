@@ -10,19 +10,19 @@
         <img :src="eyeCatch" />
       </div>
       <div class="content">
-        {{ lastEntry.title }}
-        <a :href="lastEntry.link" target="_blank">
+        {{ feed.lastEntry.title }}
+        <a :href="feed.lastEntry.link" target="_blank">
           リンク先で読む
         </a>
         <p>
-          <tag v-for="tag in tags" :key="tag.id" :tag="tag" @click="handleOnTagClick" />
+          <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" @click="handleOnTagClick" />
         </p>
       </div>
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">
         <i class="far fa-clock" />
-        {{ lastEntry.published_at | fromNow }}
+        {{ feed.lastEntry.publishedAt | fromNow }}
       </p>
       <p v-if="selectable" class="card-footer-item">
         <select-feed :selected="selected" @selected="handleOnSelected" @unselected="handleOnUnselected" />
@@ -35,7 +35,8 @@ import Vue, { PropType } from "vue";
 import moment from "moment";
 import SelectFeed from "@js/components/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
-import { Feed, Entry, FeedTag } from "@js/types/types.d.ts";
+import { Feed } from "@js/types/types.d.ts";
+const NO_IMAGE_PATH = "/noimage.png";
 
 export default Vue.extend({
   name: "FeedCard",
@@ -50,16 +51,6 @@ export default Vue.extend({
       type: Object as PropType<Feed>,
       required: true,
     },
-    lastEntry: {
-      type: Object as PropType<Entry>,
-      required: true,
-    },
-    tags: {
-      type: Array as PropType<FeedTag[]>,
-      default(): FeedTag[] {
-        return [];
-      },
-    },
     selectable: {
       type: Boolean,
       default: true,
@@ -71,8 +62,8 @@ export default Vue.extend({
   },
   computed: {
     eyeCatch: function () {
-      if (!this.lastEntry.eye_catching_image) return "/noimage.png";
-      return this.lastEntry.eye_catching_image;
+      if (!this.feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
+      return this.feed.lastEntry.eyeCatchingImage;
     },
     feedPath: function () {
       return `/feeds/${this.feed.id}`;

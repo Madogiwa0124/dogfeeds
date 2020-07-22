@@ -1,34 +1,28 @@
 export interface Feed {
   id: number;
   endpoint: string;
-  last_published_at: Date;
+  lastPublishedAt: Date;
   title: string;
-  created_at: Date;
-  updated_at: Date;
+  lastEntry: Entry;
+  tags: FeedTag[];
 }
 
 export interface Entry {
   id: number;
   description: Text;
-  eye_catching_image: string;
+  eyeCatchingImage: string;
   link: string;
-  published_at: Date;
+  publishedAt: Date;
   title: string;
-  created_at: Date;
-  updated_at: Date;
-  feed_id: number;
+  feedId: number;
 }
 
 export interface FeedTag {
-  feed_id: number;
+  id: number;
   body: Text;
+  feedId: number;
 }
 
-export interface FeedsResponse {
-  feeds: Feed[];
-  last_entries: Entry[];
-  tags: FeedTag[];
-}
 export interface PostBoardResponse {
   id: number;
 }

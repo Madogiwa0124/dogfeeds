@@ -27,8 +27,6 @@
       </div>
       <feed-card-collection
         :init-feeds="feeds"
-        :init-last-entries="lastEntries"
-        :init-tags="tags"
         :selected-feeds="selectedFeeds"
         @selectedFeed="handleOnSelectedFeed"
         @unselectedFeed="handleOnUnselectedFeed"
@@ -46,13 +44,11 @@ import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
 import { postBoard } from "@js/services/BoardService";
-import { Feed, Entry, FeedTag, FeedsResponse, PostBoardResponse } from "@js/types/types.d.ts";
+import { Feed, PostBoardResponse } from "@js/types/types.d.ts";
 
 interface DataType {
   page: number;
   feeds: Feed[];
-  lastEntries: Entry[];
-  tags: FeedTag[];
   isLoading: boolean;
   selectedFeeds: Feed[];
   keyword: string;
@@ -71,8 +67,6 @@ export default Vue.extend({
     return {
       page: 1,
       feeds: [],
-      lastEntries: [],
-      tags: [],
       isLoading: false,
       selectedFeeds: [],
       keyword: this.searchWord,
@@ -87,23 +81,19 @@ export default Vue.extend({
   methods: {
     resetFeedList: function () {
       // NOTE: Vueに変更検知させるためにspliceしてる
-      this.lastEntries.splice(0);
-      this.tags.splice(0);
       this.feeds.splice(0);
     },
-    updateFeedList: function (feeds: Feed[], lastEntries: Entry[], tags: FeedTag[]): void {
+    updateFeedList: function (feeds: Feed[]): void {
       this.feeds.push(...feeds);
-      this.lastEntries.push(...lastEntries);
-      this.tags.push(...tags);
     },
     infiniteHandler: async function ($state: any): Promise<void> {
       if (this.isLoading) return;
 
       this.isLoading = true;
-      const data: FeedsResponse = await getFeeds(this.query, { page: this.page });
-      if (data.feeds.length) {
+      const data: Feed[] = await getFeeds(this.query, { page: this.page });
+      if (data.length) {
         this.page += 1;
-        this.updateFeedList(data.feeds, data.last_entries, data.tags);
+        this.updateFeedList(data);
         if ($state) $state.loaded();
       } else {
         $state.complete();
