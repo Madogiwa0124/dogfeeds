@@ -98,31 +98,30 @@ RSpec.describe Feed, type: :model do
 
   describe '#parsed_items' do
     include RssMockHelper
+    let(:feed) { build(:feed) }
 
-    before do
-      valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
-      rss_mock_enable(endpoint: 'https://example.com/rss', body: valid_body)
-      invald_body = '<html invald format</html>'
-      rss_mock_enable(endpoint: 'https://example.com/', body: invald_body)
-    end
-
-    let(:feed) { build(:feed, endpoint: endpoint) }
-
-    context '正しいendpointの場合' do
-      let(:endpoint) { 'https://example.com/rss' }
+    context '正しいRSS形式の場合' do
+      before do
+        valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
+        rss_mock_enable(resource: valid_body)
+      end
 
       it 'Parseされた記事の一覧が取得出来ること' do
-        expect(feed.parsed_items.length).to be_positive
+        expect(feed.parsed_items.length).to eq 2
+        expect(feed.parsed_items.map(&:title)).to eq ['title 1', 'title 2']
       end
     end
 
-    context '不正なendpointの場合' do
-      let(:endpoint) { 'https://example.com' }
+    context '不正なRSS形式の場合' do
       let(:mssages) { 'rssフィードの形式が不正です。エンドポイントをご確認ください。' }
 
-      before { feed.parsed_items }
+      before do
+        invald_body = '<html invald format</html>'
+        rss_mock_enable(resource: invald_body)
+      end
 
-      it 'errorが発生すること' do
+      it 'エラーメッセージが設定されること' do
+        feed.parsed_items
         expect(feed.errors.messages[:base]).to include(mssages)
       end
     end

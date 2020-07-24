@@ -2,21 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Feed::PostForm, type: :model do
   include RssMockHelper
-
-  before do
-    valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
-    rss_mock_enable(endpoint: 'https://example.com/rss', body: valid_body)
-    invald_body = '<html invald format</html>'
-    rss_mock_enable(endpoint: 'https://example.com/', body: invald_body)
-  end
+  let(:valid_rss_body) { File.read(Rails.root.join('spec/sample/rss.xml')) }
+  let(:invalid_rss_body) { '<html invald format</html>' }
 
   describe '#create!' do
-    let(:title) { 'title' }
-    let(:params) { { title: title, endpoint: endpoint, tags: tags } }
+    let(:title) { 'sample_title' }
+    let(:params) { { title: title, endpoint: 'https://example.com/rss', tags: tags } }
 
     context '正常に終了した場合' do
-      let(:endpoint) { 'https://example.com/rss' }
-      before { described_class.new(params).create! }
+      before do
+        rss_mock_enable(resource: valid_rss_body)
+        described_class.new(params).create!
+      end
 
       context 'タグが入力済みの場合' do
         let(:tags) { %w[tag1 tag2] }
@@ -24,7 +21,6 @@ RSpec.describe Feed::PostForm, type: :model do
         it '関連モデルと合わせてfeedが作成されること' do
           feed = Feed.find_by(title: title)
           expect(feed.title).to eq title
-          expect(feed.endpoint).to eq endpoint
           expect(feed.entries.length).to be_positive
           expect(feed.tags.pluck(:body)).to eq tags
         end
@@ -36,7 +32,6 @@ RSpec.describe Feed::PostForm, type: :model do
         it '関連モデルと合わせてfeedが作成されること' do
           feed = Feed.find_by(title: title)
           expect(feed.title).to eq title
-          expect(feed.endpoint).to eq endpoint
           expect(feed.entries.length).to be_positive
           expect(feed.tags).to eq []
         end
@@ -44,7 +39,7 @@ RSpec.describe Feed::PostForm, type: :model do
     end
 
     context '作成時にエラーが発生した場合' do
-      let(:endpoint) { 'https://example.com/' }
+      before { rss_mock_enable(resource: invalid_rss_body) }
 
       it '関連モデルと合わせてfeedが作成されないこと' do
         described_class.new(params).create!
@@ -59,21 +54,14 @@ RSpec.describe Feed::PostForm, type: :model do
 
   describe '#update!', focus: true do
     let(:title) { 'updated_title' }
-    let(:feed) { Feed.last }
+    let!(:feed) { create(:feed) }
     let(:params) do
-      { id: feed.id, title: title, endpoint: endpoint, tags: tags }
+      { id: feed.id, title: title, endpoint: 'https://example.com/rss', tags: tags }
     end
 
-    before do
-      described_class.new(
-        title: 'title',
-        endpoint: 'https://example.com/rss',
-        tags: %w[tag1 tag2]
-      ).create!
-    end
+    before { rss_mock_enable(resource: valid_rss_body) }
 
     context '正常に終了した場合' do
-      let(:endpoint) { 'https://example.com/rss' }
       before do
         described_class.new(params).update!
         feed.reload
@@ -84,8 +72,7 @@ RSpec.describe Feed::PostForm, type: :model do
 
         it '関連モデルと合わせてfeedが更新されること' do
           expect(feed.title).to eq title
-          expect(feed.endpoint).to eq endpoint
-          expect(feed.entries.length).to be_positive
+          expect(feed.entries.length).to eq 2
           expect(feed.tags.pluck(:body)).to eq tags
         end
       end
@@ -95,15 +82,14 @@ RSpec.describe Feed::PostForm, type: :model do
 
         it '関連モデルと合わせてfeedが更新されること' do
           expect(feed.title).to eq title
-          expect(feed.endpoint).to eq endpoint
-          expect(feed.entries.length).to be_positive
+          expect(feed.entries.length).to eq 2
           expect(feed.tags).to eq []
         end
       end
     end
 
     context '作成時にエラーが発生した場合' do
-      let(:endpoint) { 'https://example.com/' }
+      before { rss_mock_enable(resource: invalid_rss_body) }
 
       it '関連モデルと合わせてfeedが更新されないこと' do
         described_class.new(params).update!

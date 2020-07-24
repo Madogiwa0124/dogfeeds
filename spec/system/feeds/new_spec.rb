@@ -18,7 +18,7 @@ RSpec.describe 'フィード作成画面', type: :system, js: true do
 
     before do
       valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
-      rss_mock_enable(endpoint: 'https://example.com/rss', body: valid_body)
+      rss_mock_enable(resource: valid_body)
       visit new_feed_path
     end
 
