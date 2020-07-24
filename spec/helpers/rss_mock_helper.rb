@@ -1,10 +1,6 @@
 module RssMockHelper
-  def rss_mock_enable(endpoint:, body:, status: 200)
-    WebMock.enable!
-    WebMock.stub_request(:get, endpoint).to_return(
-      body: body,
-      status: status,
-      headers: { 'Content-Type' => 'application/rss+xml' }
-    )
+  def rss_mock_enable(resource:)
+    # NOTE: Feedのclientをattribute定義したので、それを差し替えるようにしても良いかもしれない。
+    allow_any_instance_of(Feed::RssClient).to receive(:resource).and_return(resource)
   end
 end

@@ -22,6 +22,8 @@ class Feed < ApplicationRecord
   has_many :feed_taggings, dependent: :destroy
   has_many :tags, through: :feed_taggings, class_name: 'FeedTag', source: :feed_tag
 
+  attribute :client_class, default: Feed::RssClient
+
   validates :title, presence: true
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
 
@@ -43,7 +45,7 @@ class Feed < ApplicationRecord
   }
 
   def parsed_items
-    @parsed_items ||= Feed::RssClient.new(endpoint).parsed_items
+    @parsed_items ||= client_class.new(endpoint).parsed_items
   rescue RSS::NotWellFormedError => e
     logger.error(e)
     invalid_rss_format

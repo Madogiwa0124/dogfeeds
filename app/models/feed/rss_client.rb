@@ -3,16 +3,16 @@ class Feed::RssClient
     @endpoint = endpoint
   end
 
-  def rss_source
-    @rss_source ||= Net::HTTP.get(URI.parse(endpoint))
+  def resource
+    @resource ||= Net::HTTP.get(URI.parse(endpoint))
   end
 
   attr_reader :endpoint
 
   def parsed_rss!
-    RSS::Parser.parse(rss_source)
+    RSS::Parser.parse(resource)
   rescue RSS::InvalidRSSError
-    RSS::Parser.parse(rss_source, false)
+    RSS::Parser.parse(resource, false)
   end
 
   def parsed_items
