@@ -27,6 +27,5 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  gem 'webmock'
   gem 'simplecov', require: false
 end
