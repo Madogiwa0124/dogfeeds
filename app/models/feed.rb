@@ -25,7 +25,10 @@ class Feed < ApplicationRecord
   attribute :client_class, default: Feed::RssClient
 
   validates :title, presence: true
-  validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
+  # TODO: 開発が落ち着いて安定してきたらDBレベルでのuniq制約をつける
+  # rubocop:disable Rails/UniqueValidationWithoutIndex
+  validates :endpoint, presence: true, format: URI_REGEXP_PATTERN, uniqueness: true
+  # rubocop:enable Rails/UniqueValidationWithoutIndex
 
   scope :recent, -> { order(last_published_at: :desc) }
   scope :titled_by, ->(keyword) {
