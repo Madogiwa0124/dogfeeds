@@ -16,10 +16,10 @@ RSpec.describe Feed, type: :model do
   describe '.recent' do
     let!(:feed_1) { create(:feed, last_published_at: 1.day.ago) }
     let!(:feed_2) { create(:feed, last_published_at: 2.days.ago) }
-    let!(:feed_3) { create(:feed, last_published_at: 3.days.ago) }
+    let!(:feed_3) { create(:feed, last_published_at: 2.days.ago) }
 
-    it '最終公開日時の降順にソートされること' do
-      expect(described_class.recent).to eq [feed_1, feed_2, feed_3]
+    it '最終公開日時、IDの降順にソートされること' do
+      expect(described_class.recent).to eq [feed_1, feed_3, feed_2]
     end
   end
 

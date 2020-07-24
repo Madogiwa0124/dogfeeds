@@ -30,7 +30,7 @@ class Feed < ApplicationRecord
   validates :endpoint, presence: true, format: URI_REGEXP_PATTERN, uniqueness: true
   # rubocop:enable Rails/UniqueValidationWithoutIndex
 
-  scope :recent, -> { order(last_published_at: :desc) }
+  scope :recent, -> { order(last_published_at: :desc, id: :desc) }
   scope :titled_by, ->(keyword) {
     where('title LIKE ?', "%#{sanitize_sql_like(keyword)}%")
   }
