@@ -48,13 +48,22 @@ class Feed < ApplicationRecord
   }
 
   def parsed_items
-    @parsed_items ||= client_class.new(endpoint).parsed_items
-  rescue RSS::NotWellFormedError => e
-    logger.error(e)
-    invalid_rss_format
+    @parsed_items ||= parsed_object ? parsed_object.items : []
+  end
+
+  def parsed_header_title
+    @parsed_header_title ||= parsed_object ? parsed_object.header.title : ''
   end
 
   private
+
+  def parsed_object
+    @parsed_object ||= client_class.new(endpoint).parsed_object
+  rescue RSS::NotWellFormedError => e
+    logger.error(e)
+    invalid_rss_format
+    nil # NOTE: rescueされたときにerrorsが返却されてしまうのでnilを返して呼び元で判定できるようにしてる
+  end
 
   def invalid_rss_format
     errors.add(:base, 'rssフィードの形式が不正です。エンドポイントをご確認ください。')

@@ -2,7 +2,7 @@
 <rss version="2.0">
   <channel>
     <title>Example Rss</title>
-    <link>https://example.com/</link>
+    <link>https://example.com</link>
     <description>テストのRSSです</description>
     <lastBuildDate>Sat, 04 Jul 2020 21:44:43 +0900</lastBuildDate>
     <docs>https://example.com/rss</docs>

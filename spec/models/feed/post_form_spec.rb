@@ -7,6 +7,7 @@ RSpec.describe Feed::PostForm, type: :model do
 
   describe '#create!' do
     let(:title) { 'sample_title' }
+    let(:tags) { %w[tag1 tag2] }
     let(:params) { { title: title, endpoint: 'https://example.com/rss', tags: tags } }
 
     context '正常に終了した場合' do
@@ -15,15 +16,11 @@ RSpec.describe Feed::PostForm, type: :model do
         described_class.new(params).create!
       end
 
-      context 'タグが入力済みの場合' do
-        let(:tags) { %w[tag1 tag2] }
-
-        it '関連モデルと合わせてfeedが作成されること' do
-          feed = Feed.find_by(title: title)
-          expect(feed.title).to eq title
-          expect(feed.entries.length).to be_positive
-          expect(feed.tags.pluck(:body)).to eq tags
-        end
+      it '関連モデルと合わせてfeedが作成されること' do
+        feed = Feed.find_by(title: title)
+        expect(feed.title).to eq title
+        expect(feed.entries.length).to be_positive
+        expect(feed.tags.pluck(:body)).to eq tags
       end
 
       context 'タグが未入力の場合' do
@@ -34,6 +31,16 @@ RSpec.describe Feed::PostForm, type: :model do
           expect(feed.title).to eq title
           expect(feed.entries.length).to be_positive
           expect(feed.tags).to eq []
+        end
+      end
+
+      context 'タイトルが未入力の場合' do
+        let(:tags) { %w[tag1 tag2] }
+        let(:title) { '' }
+
+        it 'RSSで取得したタイトルが設定されること' do
+          feed = Feed.last
+          expect(feed.title).to eq 'Example Rss'
         end
       end
     end

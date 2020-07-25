@@ -21,7 +21,8 @@ class Feed::PostForm
   private
 
   def feed_create!
-    @feed = Feed.new(title: title, endpoint: endpoint)
+    @feed = Feed.new(endpoint: endpoint)
+    @feed.title = title.presence || feed.parsed_header_title
     feed.save!
   end
 

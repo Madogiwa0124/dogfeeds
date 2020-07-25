@@ -4,8 +4,11 @@ module Feed::Rss
       @endpoint = endpoint
     end
 
-    def parsed_items
-      parsed_object.items
+    def parsed_object
+      @parsed_object ||= case parsed_rss.class.name
+      when 'RSS::Atom::Feed' then Parser::Atom.call(parsed_rss)
+      when 'RSS::Rss' then Parser::Rss.call(parsed_rss)
+      end
     end
 
     private
@@ -24,13 +27,6 @@ module Feed::Rss
 
     def parsed_rss
       @parsed_rss ||= parse!
-    end
-
-    def parsed_object
-      @parsed_object ||= case parsed_rss.class.name
-      when 'RSS::Atom::Feed' then Parser::Atom.call(parsed_rss)
-      when 'RSS::Rss' then Parser::Rss.call(parsed_rss)
-      end
     end
   end
 end

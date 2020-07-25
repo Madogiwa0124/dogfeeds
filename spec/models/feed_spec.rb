@@ -124,6 +124,38 @@ RSpec.describe Feed, type: :model do
         feed.parsed_items
         expect(feed.errors.messages[:base]).to include(mssages)
       end
+
+      it '空配列が返却されること' do
+        feed.parsed_items
+        expect(feed.parsed_items).to eq []
+      end
+    end
+  end
+
+  describe '#parsed_header_title' do
+    include RssMockHelper
+    let(:feed) { build(:feed) }
+
+    context '正しいRSS形式の場合' do
+      before do
+        valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
+        rss_mock_enable(resource: valid_body)
+      end
+
+      it 'ParseされたRSSのタイトルが取得されること' do
+        expect(feed.parsed_header_title).to eq 'Example Rss'
+      end
+
+      context '不正なRSS形式の場合' do
+        before do
+          invald_body = '<html invald format</html>'
+          rss_mock_enable(resource: invald_body)
+        end
+
+        it '空文字が返却されること' do
+          expect(feed.parsed_header_title).to eq ''
+        end
+      end
     end
   end
 end
