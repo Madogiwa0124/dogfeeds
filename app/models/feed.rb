@@ -22,12 +22,15 @@ class Feed < ApplicationRecord
   has_many :feed_taggings, dependent: :destroy
   has_many :tags, through: :feed_taggings, class_name: 'FeedTag', source: :feed_tag
 
-  attribute :client_class, default: Feed::RssClient
+  attribute :client_class, default: Feed::Rss::Client
 
   validates :title, presence: true
-  validates :endpoint, presence: true, format: URI_REGEXP_PATTERN
+  # TODO: 開発が落ち着いて安定してきたらDBレベルでのuniq制約をつける
+  # rubocop:disable Rails/UniqueValidationWithoutIndex
+  validates :endpoint, presence: true, format: URI_REGEXP_PATTERN, uniqueness: true
+  # rubocop:enable Rails/UniqueValidationWithoutIndex
 
-  scope :recent, -> { order(last_published_at: :desc) }
+  scope :recent, -> { order(last_published_at: :desc, id: :desc) }
   scope :titled_by, ->(keyword) {
     where('title LIKE ?', "%#{sanitize_sql_like(keyword)}%")
   }
@@ -45,13 +48,22 @@ class Feed < ApplicationRecord
   }
 
   def parsed_items
-    @parsed_items ||= client_class.new(endpoint).parsed_items
-  rescue RSS::NotWellFormedError => e
-    logger.error(e)
-    invalid_rss_format
+    @parsed_items ||= parsed_object ? parsed_object.items : []
+  end
+
+  def parsed_header_title
+    @parsed_header_title ||= parsed_object ? parsed_object.header.title : ''
   end
 
   private
+
+  def parsed_object
+    @parsed_object ||= client_class.new(endpoint).parsed_object
+  rescue RSS::NotWellFormedError => e
+    logger.error(e)
+    invalid_rss_format
+    nil # NOTE: rescueされたときにerrorsが返却されてしまうのでnilを返して呼び元で判定できるようにしてる
+  end
 
   def invalid_rss_format
     errors.add(:base, 'rssフィードの形式が不正です。エンドポイントをご確認ください。')

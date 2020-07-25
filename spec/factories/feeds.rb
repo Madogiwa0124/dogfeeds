@@ -14,7 +14,7 @@ FactoryBot.define do
   factory :feed do
     sequence(:title) { |n| "title_#{n}" }
     last_published_at { Time.current }
-    endpoint { 'https://example.com/rss' }
+    sequence(:endpoint) { |n| "https://#{n}.example.com/rss" }
 
     trait :with_entry do
       after(:create) do |feed, _evaluator|

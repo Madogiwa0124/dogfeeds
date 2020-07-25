@@ -16,10 +16,10 @@ RSpec.describe Feed, type: :model do
   describe '.recent' do
     let!(:feed_1) { create(:feed, last_published_at: 1.day.ago) }
     let!(:feed_2) { create(:feed, last_published_at: 2.days.ago) }
-    let!(:feed_3) { create(:feed, last_published_at: 3.days.ago) }
+    let!(:feed_3) { create(:feed, last_published_at: 2.days.ago) }
 
-    it '最終公開日時の降順にソートされること' do
-      expect(described_class.recent).to eq [feed_1, feed_2, feed_3]
+    it '最終公開日時、IDの降順にソートされること' do
+      expect(described_class.recent).to eq [feed_1, feed_3, feed_2]
     end
   end
 
@@ -123,6 +123,38 @@ RSpec.describe Feed, type: :model do
       it 'エラーメッセージが設定されること' do
         feed.parsed_items
         expect(feed.errors.messages[:base]).to include(mssages)
+      end
+
+      it '空配列が返却されること' do
+        feed.parsed_items
+        expect(feed.parsed_items).to eq []
+      end
+    end
+  end
+
+  describe '#parsed_header_title' do
+    include RssMockHelper
+    let(:feed) { build(:feed) }
+
+    context '正しいRSS形式の場合' do
+      before do
+        valid_body = File.read(Rails.root.join('spec/sample/rss.xml'))
+        rss_mock_enable(resource: valid_body)
+      end
+
+      it 'ParseされたRSSのタイトルが取得されること' do
+        expect(feed.parsed_header_title).to eq 'Example Rss'
+      end
+
+      context '不正なRSS形式の場合' do
+        before do
+          invald_body = '<html invald format</html>'
+          rss_mock_enable(resource: invald_body)
+        end
+
+        it '空文字が返却されること' do
+          expect(feed.parsed_header_title).to eq ''
+        end
       end
     end
   end

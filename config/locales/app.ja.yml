@@ -1,0 +1,10 @@
+---
+  ja:
+    activerecord:
+      models:
+        feed: "フィード"
+      attributes:
+        feed:
+          endpoint: "URL"
+          title: "タイトル"
+          last_published_at: "最終更新日時"
