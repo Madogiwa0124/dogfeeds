@@ -10,10 +10,6 @@ class FeedsController < ApplicationController
     @feed = Feed.new
   end
 
-  def edit
-    @feed = Feed.find(params[:id])
-  end
-
   def create
     post_form = Feed::PostForm.new(feed_params)
     post_form.create!
