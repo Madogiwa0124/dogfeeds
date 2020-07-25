@@ -22,7 +22,7 @@ class Feed < ApplicationRecord
   has_many :feed_taggings, dependent: :destroy
   has_many :tags, through: :feed_taggings, class_name: 'FeedTag', source: :feed_tag
 
-  attribute :client_class, default: Feed::RssClient
+  attribute :client_class, default: Feed::Rss::Client
 
   validates :title, presence: true
   # TODO: 開発が落ち着いて安定してきたらDBレベルでのuniq制約をつける
