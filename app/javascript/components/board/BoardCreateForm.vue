@@ -40,8 +40,8 @@
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import { Feed } from "@js/types/types.d.ts";
-import SelectedFeed from "@js/components/SelectedFeed.vue";
-import BoardCreateButton from "@js/components/BoardCreateButton.vue";
+import SelectedFeed from "@js/components/feed/SelectedFeed.vue";
+import BoardCreateButton from "@js/components/board/BoardCreateButton.vue";
 import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
 
 interface DataType {
