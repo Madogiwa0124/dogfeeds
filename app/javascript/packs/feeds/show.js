@@ -1,7 +1,7 @@
 import Vue from "vue/dist/vue.esm";
-import EntryCardCollection from "@js/components/entry/EntryCardCollection";
+import ShowFeedContainer from "@js/components/containers/ShowFeedContainer.vue";
 
 new Vue({
-  el: "#feeds-entries",
-  components: { EntryCardCollection },
+  el: "#vue-root",
+  components: { ShowFeedContainer },
 });

@@ -7,15 +7,15 @@
 export default {
   name: "PageLoader",
   components: {},
-  props: ["init_is_loading"],
+  props: ["initIsLoading"],
   data: function () {
     return {
-      isLoading: this.init_is_loading,
+      isLoading: this.initIsLoading,
     };
   },
   watch: {
-    init_is_loading: function () {
-      this.isLoading = this.init_is_loading;
+    initIsLoading: function () {
+      this.isLoading = this.initIsLoading;
     },
   },
   methods: {},

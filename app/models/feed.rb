@@ -17,6 +17,7 @@ class Feed < ApplicationRecord
 
   has_many :entries, dependent: :destroy
   has_one :last_entry, -> { recent }, class_name: 'Entry', inverse_of: :feed
+  has_many :recent_entries, -> { recent }, class_name: 'Entry', inverse_of: :feed
   has_many :board_feeds, dependent: :destroy
   has_many :boards, through: :board_feeds
   has_many :feed_taggings, dependent: :destroy

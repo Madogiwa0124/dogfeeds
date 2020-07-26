@@ -2,11 +2,11 @@ module Api
   class Feed
     def initialize(feed:)
       @feed = feed
-      @entry = feed.last_entry
+      @last_entry = feed.last_entry
       @tags = feed.tags
     end
 
-    attr_reader :feed, :entry, :tags
+    attr_reader :feed, :last_entry, :tags
 
     def attributes
       {
@@ -14,23 +14,19 @@ module Api
         endpoint: feed.endpoint,
         lastPublishedAt: feed.last_published_at.iso8601,
         title: feed.title,
-        lastEntry: entry ? entry_attributes : nil,
-        tags: tags.map { |tag| tag_attributes(tag) }
+        lastEntry: last_entry_attirbutes,
+        tags: tags_attributes
       }
     end
 
     private
 
-    def entry_attributes
-      {
-        id: entry.id,
-        description: entry.description,
-        eyeCatchingImage: entry.eye_catching_image,
-        link: entry.link,
-        publishedAt: entry.published_at.iso8601,
-        title: entry.title,
-        feedId: entry.feed_id
-      }
+    def last_entry_attirbutes
+      last_entry ? Entry.new(entry: last_entry).attributes : nil
+    end
+
+    def tags_attributes
+      tags.map { |tag| tag_attributes(tag) }
     end
 
     def tag_attributes(tag)

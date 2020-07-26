@@ -1,6 +1,6 @@
 <template>
   <div class="feed-card-collection entries is-multiline columns">
-    <div v-for="feed in feeds" :key="feed.id" class="column is-4">
+    <div v-for="feed in feeds" :key="feed.id" :class="`column is-${clumnSize}`">
       <feed-card
         :feed="feed"
         :selectable="selectable"
@@ -25,6 +25,10 @@ export default Vue.extend({
   name: "FeedCardCollection",
   components: { FeedCard },
   props: {
+    clumnSize: {
+      type: Number,
+      default: 4,
+    },
     initFeeds: {
       type: Array as PropType<Feed[]>,
       default(): Feed[] {

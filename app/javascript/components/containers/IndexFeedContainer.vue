@@ -7,7 +7,7 @@
       <div class="level-left column is-12">
         <search-form :init-keyword="keyword" @search="handleOnSearch" />
       </div>
-      <feed-card-collection :init-feeds="feeds" :selectable="false" @clickTag="handleOnSearch" />
+      <feed-card-collection :init-feeds="feeds" :selectable="false" :clumn-size="3" @clickTag="handleOnSearch" />
       <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
     </main>
   </div>

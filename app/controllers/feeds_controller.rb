@@ -2,8 +2,7 @@ class FeedsController < ApplicationController
   def index; end
 
   def show
-    @feed = Feed.find(params[:id])
-    @entries = @feed.entries.order(published_at: :desc)
+    @feed_id = params[:id]
   end
 
   def new

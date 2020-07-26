@@ -4,7 +4,7 @@ RSpec.describe Api::Feed, type: :model do
   describe '#attribute' do
     let!(:feed) { create(:feed) }
 
-    context 'Tag、Entryを保つ場合' do
+    context 'Tag、Entryを持つ場合' do
       let!(:entry) { create(:entry, feed: feed) }
       let!(:tag) { create(:feed_tag) }
 
