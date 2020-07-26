@@ -1,15 +1,22 @@
 <template>
-  <div class="entries">
+  <div class="entry-card-collection entries">
     <entry-card v-for="entry in entries" :key="entry.id" :entry="entry" />
   </div>
 </template>
 <script>
-import EntryCard from "./EntryCard";
+import EntryCard from "@js/components/entry/EntryCard";
 
 export default {
   name: "EntryCardCollection",
   components: { EntryCard },
-  props: ["entries"],
+  props: {
+    entries: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+  },
 };
 </script>
 <style lang="scss"></style>

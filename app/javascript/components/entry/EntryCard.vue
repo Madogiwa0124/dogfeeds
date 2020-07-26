@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="entry-card card">
     <header class="card-header">
       <p class="card-header-title">
         {{ entry.title }}
@@ -12,7 +12,7 @@
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">
-        <span> <i class="far fa-clock" />{{ entry.published_at | fromNow }} </span>
+        <span> <i class="far fa-clock" />{{ publishedAt | fromNow }} </span>
       </p>
       <p class="card-footer-item">
         <a :href="entry.link" target="_blank"> <i class="fas fa-external-link-alt" />リンク先で読む </a>
@@ -31,7 +31,19 @@ export default {
       return moment(value, "YYYYMMDD").fromNow();
     },
   },
-  props: ["entry"],
+  props: {
+    entry: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    publishedAt: function () {
+      // TODO: railsのview側からsnake_caseのjsonを渡してしまっている部分があるので、
+      // 一点computedで差分を吸収、あとでちゃんと治す。
+      return this.entry.publishedAt || this.entry.published_at;
+    },
+  },
 };
 </script>
 <style lang="scss"></style>
