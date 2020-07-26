@@ -63,7 +63,7 @@ RSpec.describe Board, type: :model do
       let(:args) { { feeds: feeds, title: nil } }
 
       it 'デフォルトのタイトルでboadとfeedが作成されること' do
-        board = described_class.create_with_board_feeds!(args)
+        board = described_class.create_with_board_feeds!(**args)
         expect(board.title).to eq '無題のボード'
         expect(board.feeds).to match_array feeds
       end
@@ -73,7 +73,7 @@ RSpec.describe Board, type: :model do
       let(:args) { { feeds: feeds, title: 'title' } }
 
       it '指定したタイトルでboadとfeedが作成されること' do
-        board = described_class.create_with_board_feeds!(args)
+        board = described_class.create_with_board_feeds!(**args)
         expect(board.title).to eq 'title'
         expect(board.feeds).to match_array feeds
       end
