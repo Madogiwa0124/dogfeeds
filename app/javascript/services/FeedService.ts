@@ -8,3 +8,9 @@ export async function getFeeds(query = "", params: object): Promise<Feed[]> {
   const feeds: Feed[] = response.data;
   return feeds;
 }
+
+export async function getFeed(id: number): Promise<Feed> {
+  const response = await Client.get(`${FEEDS_API_ENDPOINT}/${id}`);
+  const feed: Feed = response.data;
+  return feed;
+}

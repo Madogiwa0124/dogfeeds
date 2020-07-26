@@ -1,8 +1,4 @@
-<div class="feed-show" id="feeds-entries">
-  <h1 class="title"><%= @feed.title %></h1>
-  <div class="tags">
-    Tag: <%= render partial: 'tag', collection: @feed.tags, as: 'tag' %>
-  </div>
-  <entry-card-collection :entries="<%= @entries.to_json %>"></entry-card-collection>
+<div id="vue-root">
+  <show-feed-container :feed-id="<%= @feed_id %>" />
 </div>
 <%= javascript_pack_tag 'feeds/show' %>
