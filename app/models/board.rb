@@ -11,6 +11,8 @@
 class Board < ApplicationRecord
   require 'rss'
 
+  MAX_DISPLAY_FEED = 5
+
   has_many :board_feeds, dependent: :destroy
   has_many :feeds, through: :board_feeds
   has_many :entries, through: :feeds
@@ -21,7 +23,10 @@ class Board < ApplicationRecord
   end
 
   def description
-    "「#{feeds.map(&:title).join('、')}」をまとめたRSSフィードです。"
+    # NOTE: 表示件数より多くのFeedを持つことをチェックするために+1した件数を取得する
+    display_feeds = feeds.first(MAX_DISPLAY_FEED + 1)
+    omission = display_feeds.length > MAX_DISPLAY_FEED ? ' ...' : ''
+    "「#{display_feeds.first(MAX_DISPLAY_FEED).map(&:title).join('、')}#{omission}」をまとめたRSSフィードです。"
   end
 
   def self.create_with_board_feeds!(title:, feeds:)

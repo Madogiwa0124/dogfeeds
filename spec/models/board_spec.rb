@@ -39,6 +39,21 @@ RSpec.describe Board, type: :model do
     it 'フィードのタイトルを結合した文言が取得出来ること' do
       expect(board.description).to eq description
     end
+
+    context '紐づくFeedの数が5件を超える場合' do
+      let(:description) { '「タイトル1、タイトル2、タイトル3、タイトル4、タイトル5 ...」をまとめたRSSフィードです。' }
+
+      before do
+        board.board_feeds.create(feed: create(:feed, title: 'タイトル3'))
+        board.board_feeds.create(feed: create(:feed, title: 'タイトル4'))
+        board.board_feeds.create(feed: create(:feed, title: 'タイトル5'))
+        board.board_feeds.create(feed: create(:feed, title: 'タイトル6'))
+      end
+
+      it '6件目は省略されてフィードのタイトルを結合した文言が取得出来ること' do
+        expect(board.description).to eq description
+      end
+    end
   end
 
   describe '.create_with_board_feeds!' do
@@ -50,7 +65,7 @@ RSpec.describe Board, type: :model do
       it 'デフォルトのタイトルでboadとfeedが作成されること' do
         board = described_class.create_with_board_feeds!(args)
         expect(board.title).to eq '無題のボード'
-        expect(board.feeds).to eq feeds
+        expect(board.feeds).to match_array feeds
       end
     end
 
@@ -60,7 +75,7 @@ RSpec.describe Board, type: :model do
       it '指定したタイトルでboadとfeedが作成されること' do
         board = described_class.create_with_board_feeds!(args)
         expect(board.title).to eq 'title'
-        expect(board.feeds).to eq feeds
+        expect(board.feeds).to match_array feeds
       end
     end
   end
@@ -71,7 +86,7 @@ RSpec.describe Board, type: :model do
 
     it '引数で渡されたidを持つfeedsに書き換わること' do
       board.recreate_board_feeds!(feeds.map(&:id))
-      expect(board.feeds).to eq feeds
+      expect(board.feeds).to match_array feeds
     end
   end
 end
