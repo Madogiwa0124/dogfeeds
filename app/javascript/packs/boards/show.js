@@ -1,5 +1,5 @@
 import Vue from "vue/dist/vue.esm";
-import EntryCardCollection from "../../components/EntryCardCollection";
+import EntryCardCollection from "@js/components/entry/EntryCardCollection";
 
 new Vue({
   el: "#boards-entries",

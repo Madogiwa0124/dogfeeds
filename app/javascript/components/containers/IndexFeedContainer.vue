@@ -14,7 +14,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import FeedCardCollection from "@js/components/FeedCardCollection.vue";
+import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";

@@ -33,7 +33,7 @@
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import moment from "moment";
-import SelectFeed from "@js/components/SelectFeed.vue";
+import SelectFeed from "@js/components/feed/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
 import { Feed } from "@js/types/types.d.ts";
 const NO_IMAGE_PATH = "/noimage.png";
