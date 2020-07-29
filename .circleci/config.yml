@@ -73,11 +73,30 @@ commands:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
+  rails_migration:
+    steps:
+      - run:
+          name: run migration
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
+  build_webpack:
+    parameters:
+      env:
+        type: string
+        default: test
+    steps:
+      - run:
+          name: build webpack
+          command: NODE_ENV=<<parameters.env>> bundle exec rails webpacker:compile
   store_coverage_atifacts:
     steps:
       - store_artifacts:
           path: coverage
-
+  store_lighthorse_atifacts:
+    steps:
+      - store_artifacts:
+          path: .lighthouseci_result
 jobs:
   build:
     executor:
@@ -139,18 +158,30 @@ jobs:
       - configure_bundler
       - install_ruby_deps
       - install_node_deps
-      - run:
-          name: run migration
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
-      - run:
-          name: build webpack
-          command: NODE_ENV=test bundle exec rails webpacker:compile
+      - rails_migration
+      - build_webpack
       - run:
           name: run tests
           command: bundle exec rspec spec/
       - store_coverage_atifacts
+  lighthourse:
+    executor:
+      name: web-db
+    steps:
+      - attach_current
+      - restore_ruby_deps
+      - restore_node_deps
+      - configure_bundler
+      - install_ruby_deps
+      - install_node_deps
+      - rails_migration
+      # 本番と同様のbuildでlighthouseのチェックを行うためpruductionでビルド
+      - build_webpack:
+          env: production
+      - run:
+          name: lighthourse
+          command: yarn run lighthorse
+      - store_lighthorse_atifacts
 workflows:
   version: 2
   build:
@@ -172,3 +203,9 @@ workflows:
       - node_lint:
           requires:
             - node_build
+      - lighthourse:
+          requires:
+            - ruby_build
+            - node_build
+            - node_lint
+            - ruby_lint
