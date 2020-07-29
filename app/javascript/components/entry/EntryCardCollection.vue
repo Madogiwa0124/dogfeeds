@@ -19,4 +19,12 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.entry-card-collection {
+  margin: 0px auto;
+
+  .entry-card {
+    margin: 15px;
+  }
+}
+</style>

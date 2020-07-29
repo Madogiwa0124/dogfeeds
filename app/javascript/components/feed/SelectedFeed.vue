@@ -1,5 +1,5 @@
 <template>
-  <li :key="feed.id">
+  <li :key="feed.id" class="selected-feed">
     <i class="delete icon is-small" @click="unselectedFeed(feed.id)" />
     {{ feed.title }}
   </li>
@@ -15,4 +15,14 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+li.selected-feed {
+  margin-bottom: 5px;
+
+  .delete {
+    &:hover {
+      background-color: hsl(348, 100%, 61%);
+    }
+  }
+}
+</style>

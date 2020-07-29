@@ -86,4 +86,12 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.feed-index {
+  padding: 20px;
+
+  .title {
+    text-align: center;
+  }
+}
+</style>

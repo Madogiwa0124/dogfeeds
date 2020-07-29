@@ -65,4 +65,8 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.feed-show {
+  padding: 20px;
+}
+</style>

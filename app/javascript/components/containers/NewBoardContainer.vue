@@ -22,7 +22,7 @@
           3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！<br />
         </div>
       </article>
-      <div class="level-left column is-12">
+      <div class="level-left column is-12 search-form-area">
         <search-form :init-keyword="keyword" @search="handleOnSearch" />
       </div>
       <feed-card-collection
@@ -138,4 +138,24 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.boards-new {
+  padding: 20px;
+
+  .message {
+    margin-bottom: 0em;
+
+    .message-header {
+      background-color: #999999;
+    }
+    .message-body {
+      color: #000000;
+      background-color: #ffffff;
+    }
+  }
+
+  .search-form-area {
+    padding: 0.75em 0 0.75em 0;
+  }
+}
+</style>

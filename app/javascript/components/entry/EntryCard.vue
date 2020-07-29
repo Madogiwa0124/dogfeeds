@@ -46,4 +46,10 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.entry-card {
+  .card-content {
+    word-wrap: break-word;
+  }
+}
+</style>

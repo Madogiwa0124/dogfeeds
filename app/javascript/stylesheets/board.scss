@@ -1,64 +1,3 @@
-.boards-new {
-  padding: 20px;
-  .message {
-    .message-header {
-      background-color: #999999;
-    }
-    .message-body {
-      color: #000000;
-      background-color: #ffffff;
-    }
-  }
-  .menu {
-    border-right: 3px solid #ffffff;
-    li {
-      margin-bottom: 5px;
-      .delete {
-        &:hover {
-          background-color: hsl(348, 100%, 61%);
-        }
-      }
-    }
-  }
-
-  .title {
-    text-align: center;
-  }
-
-  .card-image {
-    img {
-      width: 100%;
-      @media screen and (min-width: 980px) {
-        min-height: 300px;
-      }
-    }
-  }
-
-  .entries {
-    margin: 0px auto;
-
-    .card {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-
-      .content {
-        word-wrap: break-word;
-      }
-
-      footer {
-        margin-top: auto;
-      }
-    }
-  }
-
-  .tag {
-    margin-right: 3px;
-    cursor: pointer;
-  }
-}
-
 .board-index {
   padding: 20px;
 }
@@ -73,18 +12,9 @@
   .description {
     margin: 0px auto;
     padding: 10px;
-    width: 70%;
+    width: 90%;
     border-radius: 5px;
     background-color: #ffffff;
-  }
-
-  .entries {
-    margin: 0px auto;
-    max-width: 90%;
-
-    .card {
-      margin: 15px;
-    }
   }
 }
 

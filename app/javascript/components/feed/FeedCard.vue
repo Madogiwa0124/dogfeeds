@@ -82,4 +82,15 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.feed-card {
+  .card-image {
+    img {
+      width: 100%;
+      @media screen and (min-width: 980px) {
+        min-height: 300px;
+      }
+    }
+  }
+}
+</style>
