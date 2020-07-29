@@ -1,5 +1,6 @@
 config
 postcss.config.js
 babel.config.js
+lighthouserc.js
 app/assets/javascripts/cable.js
 app/javascript/stylesheets
