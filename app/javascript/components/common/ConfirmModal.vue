@@ -1,9 +1,9 @@
 <template>
-  <div class="board-confirm-modal modal is-active">
+  <div class="confirm-modal modal is-active">
     <div class="modal-background" />
     <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">
+      <header :class="`modal-card-head has-background-${level}`">
+        <p class="modal-card-title has-text-white">
           {{ title }}
         </p>
         <button class="delete" aria-label="close" @click="close()" />
@@ -12,7 +12,7 @@
         <slot />
       </section>
       <footer class="modal-card-foot">
-        <button class="button submit is-success is-fullwidth" @click="submit()">
+        <button :class="`button submit is-${level} is-fullwidth`" @click="submit()">
           Submit
         </button>
       </footer>
@@ -23,7 +23,16 @@
 export default {
   name: "ConfirmModal",
   components: {},
-  props: ["title"],
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    level: {
+      type: String,
+      default: "primary",
+    },
+  },
   methods: {
     close: function () {
       this.$emit("close");

@@ -30,7 +30,7 @@ RSpec.describe 'Board作成画面', type: :system, js: true do
         page.find('.board-create-form input.board-title').fill_in(with: 'board title')
         page.find('.board-create-button button').click
       end
-      page.find('.board-confirm-modal .submit').click
+      page.find('.confirm-modal .submit').click
     end
 
     it 'ボード詳細画面に遷移すること' do

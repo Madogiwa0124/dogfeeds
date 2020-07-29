@@ -4,10 +4,10 @@
       Selected Feeds
     </p>
     <span v-if="selectedFeeds.length < 1">
-      まとめたいRSSフィードを選択して、ボード作ってみませんか？🐾
+      まとめたいRSSフィードを選択してください🐾
     </span>
     <div class="field">
-      <div class="control">
+      <div class="control board-title">
         <input v-model="title" type="text" class="input board-title" placeholder="ボードのタイトル(任意)" />
       </div>
       <ul class="menu-list">
@@ -21,11 +21,13 @@
       <board-create-button :is-active="selectedFeeds.length > 0" @click="handleOnClick" />
       <board-confirm-modal
         v-show="showModal"
-        title="このRSSフィードをまとめる！"
+        title="Confirm"
+        status="primary"
         @close="handleOnClose"
         @submit="handleOnSubmit"
       >
-        <p v-if="title.length > 0" class="has-text-weight-semibold">タイトル「{{ title }}」</p>
+        <p class="has-text-weight-semibold">このRSSフィードをまとめてみる🐶</p>
+        <p v-if="title.length > 0">タイトル「{{ title }}」</p>
         <div class="content">
           <ul>
             <li v-for="feed in selectedFeeds" :key="feed.id">
@@ -85,4 +87,12 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.board-create-form {
+  .field {
+    div.board-title.control {
+      margin-bottom: 5px;
+    }
+  }
+}
+</style>
