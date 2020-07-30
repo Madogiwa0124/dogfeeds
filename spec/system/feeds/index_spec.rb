@@ -17,17 +17,17 @@ RSpec.describe 'フィード一覧画面', type: :system, js: true do
   describe '検索が行えること' do
     before do
       create_list(:feed, 2, :with_entry, title: '検索対象外')
-      create(:feed, :with_entry, title: 'フィードのタイトル')
+      create(:feed, :with_entry, title: 'Searched')
       visit feeds_path
     end
 
     it '検索結果に合致するフィードだけ表示されること' do
       within('.feed-index') do
-        page.find('.search-form input').fill_in(with: 'フィードのタイトル')
-        page.find('.search-form .submit').click
-        expect(page.all('.feed-card').length).to eq 1
-        expect(page.find('.feed-card')).to have_content 'フィードのタイトル'
-        expect(page.find('.feed-card')).to_not have_content '検索対象外'
+        page.find('.search-form .control input').fill_in(with: 'Searched')
+        click_button('検索')
+        expect(page.find('.feed-card-collection')).to_not have_content '検索対象外'
+        expect(page.find('.feed-card-collection')).to have_content 'Searched'
+        expect(page.all('.feed-card-collection .feed-card').length).to eq 1
       end
     end
   end

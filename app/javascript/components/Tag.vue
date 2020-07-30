@@ -19,4 +19,9 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.tag {
+  margin-right: 3px;
+  cursor: pointer;
+}
+</style>

@@ -62,13 +62,17 @@ export default Vue.extend({
       if (this.isLoading) return;
 
       this.isLoading = true;
-      const feeds: Feed[] = await getFeeds(this.query, { page: this.page });
-      if (feeds.length) {
-        this.page += 1;
-        this.updateFeedList(feeds);
-        if ($state) $state.loaded();
-      } else {
-        $state.complete();
+      try {
+        const data: Feed[] = await getFeeds(this.query, { page: this.page });
+        if (data.length) {
+          this.page += 1;
+          this.updateFeedList(data);
+          if ($state) $state.loaded();
+        } else {
+          if ($state) $state.complete();
+        }
+      } catch {
+        if ($state) $state.error();
       }
       this.isLoading = false;
     },
@@ -82,4 +86,12 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.feed-index {
+  padding: 20px;
+
+  .title {
+    text-align: center;
+  }
+}
+</style>

@@ -22,7 +22,7 @@
           3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！<br />
         </div>
       </article>
-      <div class="level-left column is-12">
+      <div class="level-left column is-12 search-form-area">
         <search-form :init-keyword="keyword" @search="handleOnSearch" />
       </div>
       <feed-card-collection
@@ -90,22 +90,31 @@ export default Vue.extend({
       if (this.isLoading) return;
 
       this.isLoading = true;
-      const data: Feed[] = await getFeeds(this.query, { page: this.page });
-      if (data.length) {
-        this.page += 1;
-        this.updateFeedList(data);
-        if ($state) $state.loaded();
-      } else {
-        $state.complete();
+      try {
+        const data: Feed[] = await getFeeds(this.query, { page: this.page });
+        if (data.length) {
+          this.page += 1;
+          this.updateFeedList(data);
+          if ($state) $state.loaded();
+        } else {
+          if ($state) $state.complete();
+        }
+      } catch {
+        if ($state) $state.error();
       }
       this.isLoading = false;
     },
     handleOnSubmitBoard: async function (title: string): Promise<void> {
-      const res: PostBoardResponse = await postBoard({
-        feed_ids: this.selectedFeeds.map((feed) => feed.id),
-        title: title,
-      });
-      window.location.href = `/boards/${res.id}`;
+      try {
+        const res: PostBoardResponse = await postBoard({
+          feed_ids: this.selectedFeeds.map((feed) => feed.id),
+          title: title,
+        });
+        window.location.href = `/boards/${res.id}`;
+      } catch {
+        // TODO: いい感じの汎用的なmodalを作る
+        alert("予期せぬエラーが発生しました😢");
+      }
     },
     handleOnSelectedFeed: function (id: number): void {
       const target: Feed = this.feeds.find((feed) => {
@@ -129,4 +138,24 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.boards-new {
+  padding: 20px;
+
+  .message {
+    margin-bottom: 0em;
+
+    .message-header {
+      background-color: #999999;
+    }
+    .message-body {
+      color: #000000;
+      background-color: #ffffff;
+    }
+  }
+
+  .search-form-area {
+    padding: 0.75em 0 0.75em 0;
+  }
+}
+</style>

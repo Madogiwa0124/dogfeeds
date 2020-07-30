@@ -1,5 +1,5 @@
 <template>
-  <div class="feed">
+  <div class="feed-infomation">
     <h1 class="title">{{ feed.title }}</h1>
     <div class="tags">
       <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" />
@@ -28,4 +28,19 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.feed-infomation {
+  .title {
+    text-align: center;
+  }
+
+  .entry-card-collection {
+    max-width: 90%;
+  }
+
+  .tags {
+    display: block;
+    text-align: center;
+  }
+}
+</style>
