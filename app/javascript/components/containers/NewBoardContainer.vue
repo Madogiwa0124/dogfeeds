@@ -41,7 +41,7 @@ import Vue from "vue";
 import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import BoardCreateForm from "@js/components/board/BoardCreateForm.vue";
 import SearchForm from "@js/components/SearchForm.vue";
-import InfiniteLoading from "vue-infinite-loading";
+import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
 import { postBoard } from "@js/services/BoardService";
 import { Feed, PostBoardResponse } from "@js/types/types.d.ts";
@@ -73,20 +73,25 @@ export default Vue.extend({
     };
   },
   computed: {
-    query: function () {
+    query: function (): string {
       if (!this.keyword) return "";
       return `?query[keyword]=${this.keyword}`;
     },
+    // NOTE: $refsを参照すると型情報が取得できないのでcomputedに切り出して型を判断できるようにした。
+    // https://engineering.linecorp.com/ja/blog/vue-js-typescript-otoshidama
+    infiniteLoading: function (): InfiniteLoading {
+      return this.$refs.InfiniteLoading as InfiniteLoading;
+    },
   },
   methods: {
-    resetFeedList: function () {
+    resetFeedList: function (): void {
       // NOTE: Vueに変更検知させるためにspliceしてる
       this.feeds.splice(0);
     },
     updateFeedList: function (feeds: Feed[]): void {
       this.feeds.push(...feeds);
     },
-    infiniteHandler: async function ($state: any): Promise<void> {
+    infiniteHandler: async function ($state: StateChanger): Promise<void> {
       if (this.isLoading) return;
 
       this.isLoading = true;
@@ -116,24 +121,25 @@ export default Vue.extend({
         alert("予期せぬエラーが発生しました😢");
       }
     },
-    handleOnSelectedFeed: function (id: number): void {
-      const target: Feed = this.feeds.find((feed) => {
+    findFeed(id: number): Feed | undefined {
+      return this.feeds.find((feed) => {
         return feed.id === id;
       });
+    },
+    handleOnSelectedFeed: function (id: number): void {
+      const target: Feed | undefined = this.findFeed(id);
       if (target) this.selectedFeeds.push(target);
     },
     handleOnUnselectedFeed: function (id: number): void {
-      const target: Feed = this.selectedFeeds.find((feed) => {
-        return feed.id === id;
-      });
-      this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
+      const target: Feed | undefined = this.findFeed(id);
+      if (target) this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
     },
-    handleOnSearch: async function (keyword: string) {
+    handleOnSearch: async function (keyword: string): Promise<void> {
       this.keyword = keyword;
       this.resetFeedList();
       this.page = 1;
-      this.$refs.InfiniteLoading.stateChanger.reset();
-      this.infiniteHandler(this.$refs.InfiniteLoading.stateChanger);
+      this.infiniteLoading.stateChanger.reset();
+      this.infiniteHandler(this.infiniteLoading.stateChanger);
     },
   },
 });

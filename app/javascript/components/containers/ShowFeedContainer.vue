@@ -16,7 +16,7 @@ import { getFeed } from "@js/services/FeedService.ts";
 import { getEntries } from "@js/services/EntryService.ts";
 
 interface DataType {
-  feed: Feed;
+  feed: Feed | null;
   entries: Entry[];
   isLoading: boolean;
   notFound: boolean;

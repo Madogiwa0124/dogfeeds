@@ -61,22 +61,22 @@ export default Vue.extend({
     },
   },
   computed: {
-    eyeCatch: function () {
+    eyeCatch: function (): string {
       if (!this.feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
       return this.feed.lastEntry.eyeCatchingImage;
     },
-    feedPath: function () {
+    feedPath: function (): string {
       return `/feeds/${this.feed.id}`;
     },
   },
   methods: {
-    handleOnTagClick: function (tagBody) {
+    handleOnTagClick: function (tagBody: string): void {
       this.$emit("clickTag", tagBody);
     },
-    handleOnSelected: function () {
+    handleOnSelected: function (): void {
       this.$emit("selectedFeed", this.feed.id);
     },
-    handleOnUnselected: function () {
+    handleOnUnselected: function (): void {
       this.$emit("unselectedFeed", this.feed.id);
     },
   },
