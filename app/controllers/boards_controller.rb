@@ -10,9 +10,5 @@ class BoardsController < ApplicationController
   def show
     @board = Board.preload(:feeds).find(params[:id])
     @entries = @board.entries.recent.limit(DISPLAY_LIMIT)
-    respond_to do |format|
-      format.html
-      format.rss { render layout: false }
-    end
   end
 end
