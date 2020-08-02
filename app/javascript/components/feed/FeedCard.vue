@@ -11,7 +11,7 @@
       </div>
       <div class="content">
         {{ feed.lastEntry.title }}
-        <a :href="feed.lastEntry.link" target="_blank">
+        <a :href="feed.lastEntry.link" target="_blank" rel="noopener">
           リンク先で読む
         </a>
         <p>

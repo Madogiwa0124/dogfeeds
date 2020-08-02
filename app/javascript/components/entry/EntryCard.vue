@@ -15,7 +15,7 @@
         <span> <i class="far fa-clock" />{{ entry.publishedAt | fromNow }} </span>
       </p>
       <p class="card-footer-item">
-        <a :href="entry.link" target="_blank"> <i class="fas fa-external-link-alt" />リンク先で読む </a>
+        <a :href="entry.link" target="_blank" rel="noopener"> <i class="fas fa-external-link-alt" />リンク先で読む </a>
       </p>
     </footer>
   </div>
