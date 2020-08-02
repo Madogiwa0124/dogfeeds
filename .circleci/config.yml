@@ -175,6 +175,10 @@ jobs:
       - install_ruby_deps
       - install_node_deps
       - rails_migration
+      # lighthouse時にノイズになるのでtest用のビルド結果は削除
+      - run:
+          name: remove packs for test
+          command: rm -rf public/packs-test
       # 本番と同様のbuildでlighthouseのチェックを行うためpruductionでビルド
       - build_webpack:
           env: production
