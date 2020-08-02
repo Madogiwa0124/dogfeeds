@@ -1,4 +1,9 @@
 class Api::BoardsController < ApplicationController
+  def show
+    board = ::Api::Board.new(board: Board.preload(:feeds).find(params[:id]))
+    render json: board.attributes
+  end
+
   def create
     feeds = Feed.where(id: boards_params[:feed_ids])
     board = Board.create_with_board_feeds!(

@@ -1,7 +1,7 @@
 import Vue from "vue/dist/vue.esm";
-import EntryCardCollection from "@js/components/entry/EntryCardCollection";
+import ShowBoardContainer from "@js/components/containers/ShowBoardContainer.vue";
 
 new Vue({
-  el: "#boards-entries",
-  components: { EntryCardCollection },
+  el: "#vue-root",
+  components: { ShowBoardContainer },
 });

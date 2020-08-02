@@ -23,6 +23,13 @@ export interface FeedTag {
   feedId: number;
 }
 
+export interface Board {
+  id: number;
+  title: string;
+  description: string;
+  feedIds: number[];
+}
+
 export interface PostBoardResponse {
   id: number;
 }

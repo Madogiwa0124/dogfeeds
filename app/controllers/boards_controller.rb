@@ -8,7 +8,6 @@ class BoardsController < ApplicationController
   def new; end
 
   def show
-    @board = Board.preload(:feeds).find(params[:id])
-    @entries = @board.entries.recent.limit(DISPLAY_LIMIT)
+    @board_id = params[:id]
   end
 end
