@@ -1,23 +1,24 @@
 <template>
-  <div class="feed-show">
-    <feed-infomation v-if="!!feed" :feed="feed" :entries="entries" />
-    <page-loader :init-is-loading="isLoading" />
-    <message v-if="notFound" title="NotFound" body="対象のフィードが見つかりませんでした🐾" level="warning" />
+  <div class="board-show">
     <message v-if="hasError" title="Error" body="予期せぬエラーが発生しました🐕" level="danger" />
+    <message v-if="notFound" title="NotFound" body="対象のボードが見つかりませんでした🐾" level="warning" />
+
+    <board-infomation v-if="!!board" :board="board" :entries="entries" />
+    <page-loader :init-is-loading="isLoading" />
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Feed, Entry } from "@js/types/types.d.ts";
-import FeedInfomation from "@js/components/feed/FeedInfomation.vue";
+import { Entry, Board } from "@js/types/types.d.ts";
+import BoardInfomation from "@js/components/board/BoardInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
-import { getFeed } from "@js/services/FeedService.ts";
+import { getBoard } from "@js/services/BoardService.ts";
 import { getEntries } from "@js/services/EntryService.ts";
 import sleep from "@js/components/common/Sleep.ts";
 
 interface DataType {
-  feed: Feed | null;
+  board: Board | null;
   entries: Entry[];
   isLoading: boolean;
   notFound: boolean;
@@ -27,17 +28,17 @@ interface DataType {
 const LOADING_SLEEP_MSEC = 200;
 
 export default Vue.extend({
-  name: "ShowFeedContainer",
-  components: { FeedInfomation, PageLoader, Message },
+  name: "ShowBoardContainer",
+  components: { BoardInfomation, PageLoader, Message },
   props: {
-    feedId: {
+    boardId: {
       type: Number,
       required: true,
     },
   },
   data: function (): DataType {
     return {
-      feed: null,
+      board: null,
       entries: [],
       isLoading: true,
       notFound: false,
@@ -46,9 +47,8 @@ export default Vue.extend({
   },
   created: async function (): Promise<void> {
     try {
-      this.feed = await getFeed(this.feedId);
-      this.entries = await getEntries("", { feedId: this.feedId });
-      // 一瞬でloadingが消えるとチカチカするのでsleepを入れる
+      this.board = await getBoard(this.boardId);
+      this.entries = await getEntries("", { feedId: this.board.feedIds });
       await sleep(LOADING_SLEEP_MSEC);
     } catch (error) {
       if (error.response.status === 404) {
@@ -62,7 +62,7 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss">
-.feed-show {
+.board-show {
   padding: 20px;
 }
 </style>

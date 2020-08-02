@@ -1,15 +1,5 @@
-<div class="board-show" id="boards-entries">
-  <h1 class="title">
-    <%= @board.title %>
-  </h1>
-  <p class="description">
-    <%= @board.description %>
-    <%= link_to board_path(@board, format: :rss) do %>
-      Rssへのリンクはこちら
-      <i class="fas fa-rss"></i>
-    <% end %>
-  </p>
-  <entry-card-collection :entries="<%= @entries.to_json %>"></entry-card-collection>
+<div id="vue-root">
+  <show-board-container :board-id="<%= @board_id %>" />
 </div>
 <%= javascript_pack_tag 'boards/show' %>
 <%= stylesheet_pack_tag 'boards/show' %>
