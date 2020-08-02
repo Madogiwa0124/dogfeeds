@@ -1,6 +1,8 @@
 class Api::EntriesController < ApplicationController
+  DISPLAY_LIMIT = 15
+
   def index
-    entries = Entry.where(feed_id: request_feed_ids).recent
+    entries = Entry.where(feed_id: request_feed_ids).recent.limit(DISPLAY_LIMIT)
     response = entries.map { |entry| ::Api::Entry.new(entry: entry).attributes }
     render json: response
   end
