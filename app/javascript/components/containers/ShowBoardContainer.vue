@@ -15,7 +15,7 @@ import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import { getBoard } from "@js/services/BoardService.ts";
 import { getEntries } from "@js/services/EntryService.ts";
-import sleep from "@js/components/common/Sleep.ts";
+import { sleep } from "@js/components/common/Sleep.ts";
 
 interface DataType {
   board: Board | null;

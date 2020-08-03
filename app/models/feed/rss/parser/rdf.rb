@@ -1,5 +1,5 @@
 module Feed::Rss
-  class Parser::Rss
+  class Parser::Rdf
     def self.call(parsed_xml)
       new.call(parsed_xml)
     end
@@ -33,9 +33,9 @@ module Feed::Rss
       ParsedItem.new(
         title: item.title,
         description: shaped_description(item.description),
-        published_at: item.pubDate,
+        published_at: item.dc_date,
         link: item.link,
-        eye_catching_image: item.enclosure&.url
+        eye_catching_image: nil
       )
     end
 
