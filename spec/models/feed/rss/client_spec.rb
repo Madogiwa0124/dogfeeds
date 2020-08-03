@@ -48,6 +48,27 @@ RSpec.describe Feed::Rss::Client, type: :model do
       end
     end
 
+    context 'rdf' do
+      let(:resource) { File.read(Rails.root.join('spec/sample/rdf.xml')) }
+
+      it 'headerとitemsを持つparseされたオブジェクトが返却されること' do
+        expect(client.parsed_object.class).to eq Feed::Rss::ParsedObject
+        expect(client.parsed_object.header.attributes).to eq(
+          { title: 'Example Rdf', link: 'https://example.com', description: 'テストのRdfです' }
+        )
+        expect(client.parsed_object.items.length).to eq 2
+        expect(client.parsed_object.items.first.attributes).to eq(
+          {
+            title: 'entry_1',
+            description: 'description 1',
+            eye_catching_image: nil,
+            link: 'https://example.com/1',
+            published_at: '2020-08-02T00:00:00Z'.in_time_zone
+          }
+        )
+      end
+    end
+
     context 'invalid' do
       let(:resource) { '<html invald format</html>' }
 

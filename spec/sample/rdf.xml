@@ -1,0 +1,25 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:admin="http://webns.net/mvcb/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/"  xmlns:syn="http://purl.org/rss/1.0/modules/syndication/" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/">
+  <channel rdf:about="https://example.com">
+  <title>Example Rdf</title>
+  <link>https://example.com</link>
+  <description>テストのRdfです</description>
+  <items>
+    <rdf:Seq>
+    <rdf:li rdf:resource="https://example.com/1"/>
+    <rdf:li rdf:resource="https://example.com/2"/>
+    </rdf:Seq>
+  </items>
+  </channel>
+  <item rdf:about="https://example.com/1">
+    <title>entry_1</title>
+    <link>https://example.com/1</link>
+    <description>description 1</description>
+    <dc:date>2020-08-02T00:00:00Z</dc:date>
+  </item>
+  <item rdf:about="https://example.com/1">
+    <title>entry_2</title>
+    <link>https://example.com/2</link>
+    <description>description 2</description>
+    <dc:date>2020-08-02T01:00:00Z</dc:date>
+  </item>
+</rdf:RDF>
