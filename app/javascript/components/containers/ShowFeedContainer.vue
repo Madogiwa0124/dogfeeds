@@ -14,7 +14,7 @@ import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import { getFeed } from "@js/services/FeedService.ts";
 import { getEntries } from "@js/services/EntryService.ts";
-import sleep from "@js/components/common/Sleep.ts";
+import { sleep } from "@js/components/common/Sleep.ts";
 
 interface DataType {
   feed: Feed | null;
