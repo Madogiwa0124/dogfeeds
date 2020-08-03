@@ -40,7 +40,7 @@ module Feed::Rss
     end
 
     def shaped_description(description)
-      strip_tags(description.gsub(/[\r\n]/, '')).truncate(300)
+      strip_tags(description.to_s.gsub(/[\r\n]/, '')).truncate(300)
     end
 
     def strip_tags(text)
