@@ -32,8 +32,5 @@ module Dogfeeds
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| %Q(#{html_tag}).html_safe }
-    config.active_record.database_selector = { delay: 2.seconds }
-    config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
-    config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   end
 end
