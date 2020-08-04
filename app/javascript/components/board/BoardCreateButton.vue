@@ -1,6 +1,6 @@
 <template>
   <div class="board-create-button">
-    <button class="button is-primary is-fullwidth" :disabled="!isActive" @click="handleOnClick()">
+    <button class="button is-primary is-fullwidth has-text-weight-bold" :disabled="!isActive" @click="handleOnClick()">
       ボードを作る
     </button>
   </div>

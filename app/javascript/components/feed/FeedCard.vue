@@ -7,7 +7,7 @@
     </header>
     <div class="card-content">
       <div class="card-image">
-        <img :src="eyeCatch" />
+        <img :src="eyeCatch" :alt="feed.lastEntry.title" />
       </div>
       <div class="content">
         {{ feed.lastEntry.title }}
