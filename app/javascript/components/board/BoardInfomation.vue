@@ -5,7 +5,7 @@
       {{ board.description }}
       <a :href="rssUrl" target="_blank" rel="noopener">
         Rssへのリンクはこちら
-        <i class="fas fa-rss" />
+        <font-awesome-icon icon="rss" />
       </a>
     </p>
     <entry-card-collection :entries="entries" />
@@ -15,11 +15,15 @@
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import { Entry, Board } from "@js/types/types.d.ts";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faRss } from "@fortawesome/free-solid-svg-icons";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
+library.add(faRss);
 
 export default Vue.extend({
   name: "FeedInfomation",
-  components: { EntryCardCollection },
+  components: { EntryCardCollection, FontAwesomeIcon },
   props: {
     board: {
       type: Object as PropType<Board>,
