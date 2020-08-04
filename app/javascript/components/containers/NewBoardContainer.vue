@@ -9,7 +9,7 @@
     </aside>
     <main class="column">
       <article class="message">
-        <div class="message-header">
+        <div class="message-header has-background-info">
           <p>Dogfeedsとは？</p>
         </div>
         <div class="message-body">

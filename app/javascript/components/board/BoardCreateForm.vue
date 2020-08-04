@@ -1,15 +1,16 @@
 <template>
   <div class="board-create-form">
-    <p class="menu-label">
-      Selected Feeds
-    </p>
     <span v-if="selectedFeeds.length < 1">
       まとめたいRSSフィードを選択してください🐾
     </span>
     <div class="field">
+      <label class="menu-label has-text-dark">Board Title(optional)</label>
       <div class="control board-title">
-        <input v-model="title" type="text" class="input board-title" placeholder="ボードのタイトル(任意)" />
+        <input v-model="title" type="text" class="input board-title" />
       </div>
+      <p class="menu-label has-text-dark">
+        Selected Feeds
+      </p>
       <ul class="menu-list">
         <selected-feed
           v-for="feed in selectedFeeds"
