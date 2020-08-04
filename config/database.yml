@@ -2,36 +2,22 @@ default: &default
   adapter: postgresql
   encoding: unicode
 
-database_config: &database_config
+development:
   <<: *default
+  database: dogfeeds_development
   host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
   port: <%= ENV.fetch('DATABASE_PORT') { '5432' } %>
   username: <%= ENV.fetch('DATABASE_USER') { 'postgres' } %>
   password: <%= ENV.fetch('DATABASE_PASSWORD') { 'password' } %>
 
-development:
-  primary:
-    <<: *database_config
-    database: dogfeeds_development
-  replica:
-    <<: *database_config
-    database: dogfeeds_development
-    replica: true
-
 test:
-  primary:
-    <<: *database_config
-    database: dogfeeds_test
-  replica:
-    <<: *database_config
-    database: dogfeeds_test
-    replica: true
+  <<: *default
+  database: dogfeeds_test
+  host: <%= ENV.fetch('DATABASE_HOST') { 'localhost' } %>
+  port: <%= ENV.fetch('DATABASE_PORT') { '5432' } %>
+  username: <%= ENV.fetch('DATABASE_USER') { 'postgres' } %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD') { 'password' } %>
 
 production:
-  primary:
-    <<: *default
-    database: dogfeeds_production
-  replica:
-    <<: *default
-    database: dogfeeds_production
-    replica: true
+  <<: *default
+  database: dogfeeds_production
