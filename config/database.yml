@@ -31,7 +31,9 @@ production:
   primary:
     <<: *default
     database: dogfeeds_production
+    url: <%= ENV['DATABASE_URL'] %>
   replica:
     <<: *default
     database: dogfeeds_production
+    url: <%= ENV['DATABASE_URL'] %>
     replica: true
