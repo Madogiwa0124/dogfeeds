@@ -21,7 +21,7 @@
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">
-        <i class="far fa-clock" />
+        <font-awesome-icon :icon="['far', 'clock']" />
         {{ feed.lastEntry.publishedAt | fromNow }}
       </p>
       <p v-if="selectable" class="card-footer-item">
@@ -36,11 +36,16 @@ import moment from "moment";
 import SelectFeed from "@js/components/feed/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
 import { Feed } from "@js/types/types.d.ts";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+
+library.add(faClock);
 const NO_IMAGE_PATH = "/noimage.png";
 
 export default Vue.extend({
   name: "FeedCard",
-  components: { SelectFeed, Tag },
+  components: { SelectFeed, Tag, FontAwesomeIcon },
   filters: {
     fromNow: function (value: string): string {
       return moment(value, "YYYYMMDD h:mm:ss").fromNow();

@@ -4,7 +4,6 @@
   "dependencies": {
     "@babel/core": "^7",
     "@babel/preset-typescript": "^7.10.4",
-    "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
