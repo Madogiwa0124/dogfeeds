@@ -62,7 +62,7 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.1)
-    brakeman (4.8.2)
+    brakeman (4.9.0)
     builder (3.2.4)
     capybara (3.33.0)
       addressable
