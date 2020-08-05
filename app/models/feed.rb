@@ -67,6 +67,6 @@ class Feed < ApplicationRecord
   end
 
   def invalid_rss_format
-    errors.add(:base, 'rssフィードの形式が不正です。エンドポイントをご確認ください。')
+    errors.add(:base, 'RSSフィードの形式が不正です。エンドポイントをご確認ください。')
   end
 end

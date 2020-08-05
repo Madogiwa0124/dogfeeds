@@ -91,10 +91,9 @@ export default Vue.extend({
 .feed-card {
   .card-image {
     img {
-      width: 100%;
-      @media screen and (min-width: 980px) {
-        min-height: 300px;
-      }
+      height: 320px;
+      width: 320px;
+      object-fit: cover;
     }
   }
 }
