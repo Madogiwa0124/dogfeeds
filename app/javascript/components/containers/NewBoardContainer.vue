@@ -8,20 +8,7 @@
       />
     </aside>
     <main class="column">
-      <article class="message">
-        <div class="message-header has-background-info">
-          <p>Dogfeedsとは？</p>
-        </div>
-        <div class="message-body">
-          <strong>
-            RSSフィードをまとめたRssフィードを作ることができます。 作り方は簡単なので、ぜひ作ってみてください🐶
-          </strong>
-          <br />
-          1. フィードを選択する<br />
-          2. まとめたフィード(ボード)に名前をつける<br />
-          3. ボードを作って、共有するなり、Slackチャンネルに追加するなりする！<br />
-        </div>
-      </article>
+      <service-infomation v-if="showServiceInfomation" @delete="handleOnServiceInfomationDelete" />
       <div class="level-left column is-12 search-form-area">
         <search-form :init-keyword="keyword" @search="handleOnSearch" />
       </div>
@@ -40,11 +27,14 @@
 import Vue from "vue";
 import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import BoardCreateForm from "@js/components/board/BoardCreateForm.vue";
+import ServiceInfomation from "@js/components/ServiceInfomation.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
 import { postBoard } from "@js/services/BoardService";
 import { Feed, PostBoardResponse } from "@js/types/types.d.ts";
+
+const SHOW_SERVICE_INFOMATION_STRAGE_KEY = "showServiceInfomation";
 
 interface DataType {
   page: number;
@@ -52,11 +42,12 @@ interface DataType {
   isLoading: boolean;
   selectedFeeds: Feed[];
   keyword: string;
+  showServiceInfomation: boolean;
 }
 
 export default Vue.extend({
   name: "NewBoardContainer",
-  components: { BoardCreateForm, FeedCardCollection, SearchForm, InfiniteLoading },
+  components: { ServiceInfomation, BoardCreateForm, FeedCardCollection, SearchForm, InfiniteLoading },
   props: {
     searchWord: {
       type: String,
@@ -70,6 +61,7 @@ export default Vue.extend({
       isLoading: false,
       selectedFeeds: [],
       keyword: this.searchWord,
+      showServiceInfomation: true,
     };
   },
   computed: {
@@ -83,7 +75,13 @@ export default Vue.extend({
       return this.$refs.InfiniteLoading as InfiniteLoading;
     },
   },
+  mounted() {
+    this.showServiceInfomation = this.initShowServiceInfomation();
+  },
   methods: {
+    initShowServiceInfomation(): boolean {
+      return localStorage.getItem(SHOW_SERVICE_INFOMATION_STRAGE_KEY) != "false";
+    },
     resetFeedList: function (): void {
       // NOTE: Vueに変更検知させるためにspliceしてる
       this.feeds.splice(0);
@@ -141,24 +139,16 @@ export default Vue.extend({
       this.infiniteLoading.stateChanger.reset();
       this.infiniteHandler(this.infiniteLoading.stateChanger);
     },
+    handleOnServiceInfomationDelete: function (): void {
+      this.showServiceInfomation = false;
+      localStorage.setItem(SHOW_SERVICE_INFOMATION_STRAGE_KEY, "false");
+    },
   },
 });
 </script>
 <style lang="scss" scoped>
 .boards-new {
   padding: 20px;
-
-  .message {
-    margin-bottom: 0em;
-
-    .message-header {
-      background-color: #999999;
-    }
-    .message-body {
-      color: #000000;
-      background-color: #ffffff;
-    }
-  }
 
   .search-form-area {
     padding: 0.75em 0 0.75em 0;
