@@ -1,6 +1,6 @@
 <template>
   <div class="feed-show">
-    <feed-infomation v-if="!!feed" :feed="feed" :entries="entries" />
+    <feed-infomation v-if="!!feed" :feed="feed" :entries="entries" @tagClick="handleOnTagClick" />
     <page-loader :init-is-loading="isLoading" />
     <message v-if="notFound" title="NotFound" body="対象のフィードが見つかりませんでした🐾" level="warning" />
     <message v-if="hasError" title="Error" body="予期せぬエラーが発生しました🐕" level="danger" />
@@ -25,6 +25,7 @@ interface DataType {
 }
 
 const LOADING_SLEEP_MSEC = 200;
+const TAG_CLICK_REDIRECT_PATH = "/feeds";
 
 export default Vue.extend({
   name: "ShowFeedContainer",
@@ -58,6 +59,12 @@ export default Vue.extend({
       }
     }
     this.isLoading = false;
+  },
+  methods: {
+    handleOnTagClick: function (body: string) {
+      const query = `?query[keyword]=${body}`;
+      window.location.href = `${TAG_CLICK_REDIRECT_PATH}/${query}`;
+    },
   },
 });
 </script>

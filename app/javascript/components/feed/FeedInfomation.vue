@@ -2,7 +2,7 @@
   <div class="feed-infomation">
     <h1 class="title">{{ feed.title }}</h1>
     <div class="tags">
-      <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" />
+      <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" @click="handleOnTagClick" />
     </div>
     <entry-card-collection :entries="entries" />
   </div>
@@ -24,6 +24,11 @@ export default Vue.extend({
     entries: {
       type: Array as PropType<Entry[]>,
       default: [],
+    },
+  },
+  methods: {
+    handleOnTagClick: function (body: string) {
+      this.$emit("tagClick", body);
     },
   },
 });
