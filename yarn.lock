@@ -930,11 +930,11 @@
   integrity sha512-b2+SLF31h32LSepVcXe+BQ63yvbq5qmTCy4KfFogCYm2bn68H5sDWUnX+U7MBqnM2aeEk9M7xSoqGnu+wSdY6w==
 
 "@lhci/cli@0.4.x":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@lhci/cli/-/cli-0.4.3.tgz#ee50227fe19301a00f50e7fe7744ae82d5fd4768"
-  integrity sha512-We3A/smz/j1N3lgvXust4X0EFkj3+N/eaW8837xb7nbOd8yRR4siBVTO1gD7CdpUy7ogyZ8Li01Uke6RjaqATw==
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@lhci/cli/-/cli-0.4.4.tgz#52d179658aeccb228ba94525d87bbe954bc8f87d"
+  integrity sha512-2Gp3+NLQxihURVwNrxxj4T1HxUqhDtcoziKtD6agL43RaRyA6i3TKkJ4xa/nq5V1wt3u/J8z/DFUBYnVuHMcJg==
   dependencies:
-    "@lhci/utils" "0.4.3"
+    "@lhci/utils" "0.4.4"
     chrome-launcher "^0.12.0"
     compression "^1.7.4"
     express "^4.17.1"
@@ -948,10 +948,10 @@
     yargs "^12.0.5"
     yargs-parser "^11.1.1"
 
-"@lhci/utils@0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@lhci/utils/-/utils-0.4.3.tgz#08072bdd6ccbca2e6c71da164d9a9cbbc5491530"
-  integrity sha512-VLe0SYKNkDgEm0ctbplkCx7xFVpFbW0VddQGUfkz/wZq/yAp8aDhxE0PCOYXKBVB8gPIr/RIbd/uEso4r5CIzQ==
+"@lhci/utils@0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@lhci/utils/-/utils-0.4.4.tgz#3a36a1f1a4195b5529192bb9f059af905b1918b0"
+  integrity sha512-sEkxKYEVhy5kwwUhynPEsknHJy/PKfLTPF7j8YISz7ZO6w1iuQVZV691awOM3r4/x79vpEWpFRqPho6gdBJp1w==
   dependencies:
     isomorphic-fetch "^2.2.1"
     js-yaml "^3.13.1"
@@ -10171,15 +10171,7 @@ yargs-parser@^11.1.1:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^13.1.0:
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-13.1.1.tgz#d26058532aa06d365fe091f6a1fc06b2f7e5eca0"
-  integrity sha512-oVAVsHz6uFrg3XQheFII8ESO2ssAf9luWuAd6Wexsu4F3OtIW0o8IribPXYrD4WC24LWtPrJlGy87y5udK+dxQ==
-  dependencies:
-    camelcase "^5.0.0"
-    decamelize "^1.2.0"
-
-yargs-parser@^13.1.2:
+yargs-parser@^13.1.0, yargs-parser@^13.1.2:
   version "13.1.2"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-13.1.2.tgz#130f09702ebaeef2650d54ce6e3e5706f7a4fb38"
   integrity sha512-3lbsNRf/j+A4QuSZfDRA7HRSfWrzO0YjqTJd5kjAq37Zep1CEgaYmrH9Q3GwPiB9cHyd1Y1UwggGhJGoxipbzg==
