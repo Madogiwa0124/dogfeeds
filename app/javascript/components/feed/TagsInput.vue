@@ -10,7 +10,7 @@
     </div>
     <input v-model="tagBody" class="tag-input-area input is-small" @keydown.enter="buildTag" />
     <p class="help">
-      Rssフィードのタグを入力してください。(任意)
+      RSSフィードのタグを入力してください。(任意)
     </p>
   </div>
 </template>

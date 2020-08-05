@@ -113,7 +113,7 @@ RSpec.describe Feed, type: :model do
     end
 
     context '不正なRSS形式の場合' do
-      let(:mssages) { 'rssフィードの形式が不正です。エンドポイントをご確認ください。' }
+      let(:mssages) { 'RSSフィードの形式が不正です。エンドポイントをご確認ください。' }
 
       before do
         invald_body = '<html invald format</html>'

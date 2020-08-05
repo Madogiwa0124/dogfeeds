@@ -1,17 +1,17 @@
 [![CircleCI](https://circleci.com/gh/Madogiwa0124/dogfeeds.svg?style=svg)](https://circleci.com/gh/Madogiwa0124/dogfeeds)
 
 # README
-DogFeedsは、Rssフィードをまとめて・共有できるRSSリーダーです。
+DogFeedsは、RSSフィードをまとめて・共有できるRSSリーダーです。
 複数のRSSをまとめたRSSフィードを作成することが出来ます。
 
-下記のような2つのRssのエンドポイントを、、、
+下記のような2つのRSSのエンドポイントを、、、
 
 * https://example.com/foo/rss
 * https://example.com/bar/rss
 
 DogFeedsを使うと下記のように1つにまとめることが出来ます:dog:
 
-* http://dogfeeds.herokuapp.com/boards/xxx.rss
+* https://dogfeeds.herokuapp.com/boards/xxx.rss
 
 便利ポイント
 
