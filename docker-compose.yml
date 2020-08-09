@@ -33,6 +33,7 @@ services:
       DATABASE_PORT: 5432
       DATABASE_HOST: db
       RUBYOPT: '-w'
+      BUNDLE_PATH: /dogfeeds/vendor/bundle
 volumes:
   node_modules:
     driver: 'local'
