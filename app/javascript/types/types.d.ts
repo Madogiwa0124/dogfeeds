@@ -28,6 +28,7 @@ export interface Board {
   title: string;
   description: string;
   feedIds: number[];
+  lastEntry: Entry;
 }
 
 export interface PostBoardResponse {

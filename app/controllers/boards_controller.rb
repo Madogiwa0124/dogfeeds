@@ -1,7 +1,5 @@
 class BoardsController < ApplicationController
-  def index
-    @boards = Board.preload(:last_entries, :feeds).sort_by(&:last_entry).reverse
-  end
+  def index; end
 
   def new; end
 
