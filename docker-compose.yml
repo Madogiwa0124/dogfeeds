@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: postgres
+    image: postgres:10.13
     ports:
       - "5432"
     environment:
@@ -20,12 +20,15 @@ services:
     links:
       - db
     volumes:
-      - .:/dogfeeds
+      - .:/dogfeeds:cached
       - node_modules:/dogfeeds/node_modules
-      - vendor:/dogfeeds/vendor
-      - log:/dogfeeds/log
-      - packs:/dogfeeds/public/packs
-      - tmp:/dogfeeds/tmp
+      - bundle:/dogfeeds/vendor/bundle
+      - /dogfeeds/log
+      - /dogfeeds/public/packs
+      - /dogfeeds/public/packs-test
+      - /dogfeeds/public/assets
+      - /dogfeeds/tmp
+      - /dogfeeds/.git
     environment:
       HOST_NAME: rails
       DATABASE_USER: postgres
@@ -33,14 +36,9 @@ services:
       DATABASE_PORT: 5432
       DATABASE_HOST: db
       RUBYOPT: '-w'
+      BUNDLE_PATH: /dogfeeds/vendor/bundle
 volumes:
   node_modules:
     driver: 'local'
-  vendor:
-    driver: 'local'
-  log:
-    driver: 'local'
-  packs:
-    driver: 'local'
-  tmp:
+  bundle:
     driver: 'local'

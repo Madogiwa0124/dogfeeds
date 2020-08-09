@@ -8,7 +8,7 @@ web: &web
       DATABASE_USER: circleci
       DATABASE_PASSWORD: password
 db: &db
-  - image: circleci/postgres
+  - image: circleci/postgres:10.13
     environment:
       POSTGRES_USER: circleci
       POSTGRES_PASSWORD: password
