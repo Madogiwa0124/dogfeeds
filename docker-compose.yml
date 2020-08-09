@@ -20,7 +20,7 @@ services:
     links:
       - db
     volumes:
-      - .:/dogfeeds
+      - .:/dogfeeds:cached
       - node_modules:/dogfeeds/node_modules
       - vendor:/dogfeeds/vendor
       - log:/dogfeeds/log
