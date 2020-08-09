@@ -1,6 +1,6 @@
 class Admin::FeedsController < Admin::ApplicationController
   def index
-    @feeds = Feed.all
+    @feeds = Feed.all.order(id: :desc)
   end
 
   def edit

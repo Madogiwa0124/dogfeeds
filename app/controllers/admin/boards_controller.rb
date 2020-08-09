@@ -1,6 +1,6 @@
 class Admin::BoardsController < Admin::ApplicationController
   def index
-    @borads = Board.preload(:feeds).all
+    @borads = Board.preload(:feeds).all.order(id: :desc)
   end
 
   def show
