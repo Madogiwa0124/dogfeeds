@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :feeds, only: [:index, :show]
-    resources :boards, only: [:create, :show]
+    resources :boards, only: [:create, :show, :index]
     resources :entries, only: [:index]
   end
 

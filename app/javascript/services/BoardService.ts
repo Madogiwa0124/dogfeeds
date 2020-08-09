@@ -11,3 +11,9 @@ export async function getBoard(id: number): Promise<Board> {
   const response = await Client.get(`${BOARDS_API_ENDPOINT}/${id}`);
   return response.data;
 }
+
+export async function getBoards(query = "", params: object): Promise<Board[]> {
+  const response = await Client.get(BOARDS_API_ENDPOINT + query, { params: params });
+  const boards: Board[] = response.data;
+  return boards;
+}

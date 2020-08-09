@@ -1,6 +1,13 @@
 class Api::BoardsController < ApplicationController
+  def index
+    boards = Board.preload(:last_entries, :feeds)
+                  .sort_by(&:last_entry).reverse
+                  .map { |board| ::Api::Board.new(board: board).attributes }
+    render json: boards
+  end
+
   def show
-    board = ::Api::Board.new(board: Board.preload(:feeds).find(params[:id]))
+    board = ::Api::Board.new(board: Board.preload(:feeds, :last_entries).find(params[:id]))
     render json: board.attributes
   end
 
