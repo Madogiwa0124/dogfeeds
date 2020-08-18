@@ -21,8 +21,10 @@ class Feed::EntryCreater
   def target_entries(now: Time.current)
     feed.parsed_items.map do |item|
       attributes = item.attributes.merge(feed_id: feed.id, created_at: now, updated_at: now)
+      # valid?時のDBアクセスを抑制するためfeedのオブジェクトを代入する
+      entry = Entry.new(attributes).tap { |obj| obj.feed = feed }
       # insert_all!はcallbackを無視してvalidationが走らないのでvalidなものだけ返却する
-      Entry.new(attributes).valid? ? attributes : nil
+      entry.valid? ? attributes : nil
     end.compact
   end
 end
