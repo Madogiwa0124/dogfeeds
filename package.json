@@ -12,7 +12,7 @@
     "@rails/actioncable": "^6.0.3",
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
-    "@rails/webpacker": "^5.1.1",
+    "@rails/webpacker": "^5.2.1",
     "acorn": "^8.0.1",
     "axios": "^0.19.2",
     "babel-preset-typescript-vue": "^1.1.1",
