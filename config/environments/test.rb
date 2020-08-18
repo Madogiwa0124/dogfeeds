@@ -45,6 +45,9 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # CI実行時にはログの出力を抑制する
+  config.log_level = ENV['CI'].present? ? :fatal : :debug
+
   # configured bullet.
   config.after_initialize do
     Bullet.enable = true
