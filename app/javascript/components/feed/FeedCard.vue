@@ -92,7 +92,7 @@ export default Vue.extend({
   .card-image {
     img {
       height: 320px;
-      width: 320px;
+      width: 100%;
       object-fit: cover;
     }
   }
