@@ -1,4 +1,4 @@
-FROM ruby:2.7.0-alpine
+FROM ruby:2.7.1-alpine
 ENV TZ=Asia/Tokyo
 ENV BUNDLE_PATH /usr/local/bundle
 
