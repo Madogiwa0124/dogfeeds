@@ -1,5 +1,5 @@
 class Api::FeedsController < ApplicationController
-  PER_PAGE = 6
+  PER_PAGE = 12
 
   def index
     @feeds = Feed.preload(:last_entry, :tags)

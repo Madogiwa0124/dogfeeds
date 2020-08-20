@@ -1,35 +1,38 @@
 <template>
   <div id="feeds" class="feed-index columns">
     <main class="column">
-      <h1 class="title">
-        登録されているRSSフィード
-      </h1>
-      <div class="level-left column is-12">
-        <search-form :init-keyword="keyword" @search="handleOnSearch" />
+      <div class="tabs is-boxed">
+        <ul>
+          <li class="feeds" :class="{ 'is-active': selectedFeedTab }">
+            <a @click="handleOnFeedTabClick"><span>RSSフィード一覧</span></a>
+          </li>
+          <li class="entries" :class="{ 'is-active': selectedEntryTab }">
+            <a @click="handleOnEntryTabClick"><span>記事一覧</span></a>
+          </li>
+        </ul>
       </div>
-      <feed-card-collection :init-feeds="feeds" :selectable="false" :clumn-size="3" @clickTag="handleOnSearch" />
-      <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
+      <feed-collection-container v-if="selectedFeedTab" />
+      <entry-collection-container v-if="selectedEntryTab" />
     </main>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
-import SearchForm from "@js/components/SearchForm.vue";
-import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
-import { getFeeds } from "@js/services/FeedService";
-import { Feed } from "@js/types/types.d.ts";
+import FeedCollectionContainer from "@js/components/containers/feed/FeedCollectionContainer.vue";
+import EntryCollectionContainer from "@js/components/containers/feed/EntryCollectionContainer.vue";
+
+enum Tabs {
+  Feed = "feed",
+  Entry = "entry",
+}
 
 interface DataType {
-  page: number;
-  feeds: Feed[];
-  isLoading: boolean;
-  keyword: string;
+  selectedTab: Tabs;
 }
 
 export default Vue.extend({
   name: "IndexFeedContainer",
-  components: { FeedCardCollection, SearchForm, InfiniteLoading },
+  components: { FeedCollectionContainer, EntryCollectionContainer },
   props: {
     searchWord: {
       type: String,
@@ -38,55 +41,23 @@ export default Vue.extend({
   },
   data(): DataType {
     return {
-      page: 1,
-      feeds: [],
-      isLoading: false,
-      keyword: this.searchWord,
+      selectedTab: Tabs.Feed,
     };
   },
   computed: {
-    query: function (): string {
-      if (!this.keyword) return "";
-      return `?query[keyword]=${this.keyword}`;
+    selectedFeedTab(): boolean {
+      return this.selectedTab == Tabs.Feed;
     },
-    // NOTE: $refsを参照すると型情報が取得できないのでcomputedに切り出して型を判断できるようにした。
-    // https://engineering.linecorp.com/ja/blog/vue-js-typescript-otoshidama
-    infiniteLoading: function (): InfiniteLoading {
-      return this.$refs.InfiniteLoading as InfiniteLoading;
+    selectedEntryTab(): boolean {
+      return this.selectedTab == Tabs.Entry;
     },
   },
   methods: {
-    resetFeedList: function (): void {
-      // NOTE: Vueに変更検知させるためにspliceしてる
-      this.feeds.splice(0);
+    handleOnFeedTabClick() {
+      this.selectedTab = Tabs.Feed;
     },
-    updateFeedList: function (feeds: Feed[]): void {
-      this.feeds.push(...feeds);
-    },
-    infiniteHandler: async function ($state: StateChanger): Promise<void> {
-      if (this.isLoading) return;
-
-      this.isLoading = true;
-      try {
-        const data: Feed[] = await getFeeds(this.query, { page: this.page });
-        if (data.length) {
-          this.page += 1;
-          this.updateFeedList(data);
-          if ($state) $state.loaded();
-        } else {
-          if ($state) $state.complete();
-        }
-      } catch {
-        if ($state) $state.error();
-      }
-      this.isLoading = false;
-    },
-    handleOnSearch: async function (keyword: string): Promise<void> {
-      this.keyword = keyword;
-      this.resetFeedList();
-      this.page = 1;
-      this.infiniteLoading.stateChanger.reset();
-      this.infiniteHandler(this.infiniteLoading.stateChanger);
+    handleOnEntryTabClick() {
+      this.selectedTab = Tabs.Entry;
     },
   },
 });
@@ -95,8 +66,8 @@ export default Vue.extend({
 .feed-index {
   padding: 20px;
 
-  .title {
-    text-align: center;
+  .tabs {
+    margin-bottom: 0px;
   }
 }
 </style>

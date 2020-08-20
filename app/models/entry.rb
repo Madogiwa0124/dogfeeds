@@ -24,5 +24,9 @@ class Entry < ApplicationRecord
   validates :title, presence: true
   validates :link, presence: true
 
-  scope :recent, -> { order(published_at: :desc) }
+  scope :recent, -> { order(published_at: :desc, id: :desc) }
+  scope :pager, ->(page: 1, per: 10) {
+    num = page.to_i.positive? ? page.to_i - 1 : 0
+    limit(per).offset(per * num)
+  }
 end

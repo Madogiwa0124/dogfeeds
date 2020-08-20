@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :feeds, only: [:index, :show]
-    resources :boards, only: [:create, :show, :index]
+    resources :feed_entries, only: [:index], controller: 'feed/entries'
     resources :entries, only: [:index]
+    resources :boards, only: [:create, :show, :index]
   end
 
   namespace :admin do

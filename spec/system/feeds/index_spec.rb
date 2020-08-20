@@ -12,6 +12,22 @@ RSpec.describe 'フィード一覧画面', type: :system, js: true do
         expect(page.all('.feed-card').length).to eq 3
       end
     end
+
+    it 'RSSフィード一覧のタグが選択されていること' do
+      within('.feed-index .tabs') do
+        expect(page).to have_css('.feeds.is-active')
+      end
+    end
+
+    context '記事一覧のタブをクリックした場合' do
+      before { page.find('.feed-index .tabs .entries').click }
+
+      it 'エントリー単位で記事の一覧が表示されること' do
+        within('.feed-index') do
+          expect(page.all('.entry-card').length).to eq 3
+        end
+      end
+    end
   end
 
   describe '検索が行えること' do

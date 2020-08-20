@@ -1,6 +1,8 @@
 <template>
-  <div class="entry-card-collection entries">
-    <entry-card v-for="entry in entries" :key="entry.id" :entry="entry" />
+  <div class="entry-card-collection entries is-multiline columns">
+    <div v-for="entry in entries" :key="entry.id" :class="`column is-${clumnSize}`">
+      <entry-card :entry="entry" :descriptionLimit="descriptionLimit" :showFeedLink="showFeedLink" />
+    </div>
   </div>
 </template>
 <script>
@@ -10,6 +12,18 @@ export default {
   name: "EntryCardCollection",
   components: { EntryCard },
   props: {
+    clumnSize: {
+      type: Number,
+      default: 12,
+    },
+    descriptionLimit: {
+      type: Number,
+      default: null,
+    },
+    showFeedLink: {
+      type: Boolean,
+      default: false,
+    },
     entries: {
       type: Array,
       default: () => {
