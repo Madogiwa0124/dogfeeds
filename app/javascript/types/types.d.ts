@@ -9,7 +9,7 @@ export interface Feed {
 
 export interface Entry {
   id: number;
-  description: Text;
+  description: string;
   eyeCatchingImage: string;
   link: string;
   publishedAt: Date;
@@ -19,7 +19,7 @@ export interface Entry {
 
 export interface FeedTag {
   id: number;
-  body: Text;
+  body: string;
   feedId: number;
 }
 

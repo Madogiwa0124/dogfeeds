@@ -14,7 +14,7 @@ import BoardInfomation from "@js/components/board/BoardInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import { getBoard } from "@js/services/BoardService.ts";
-import { getEntries } from "@js/services/EntryService.ts";
+import { getFeedEntries } from "@js/services/EntryService.ts";
 import { sleep } from "@js/components/common/Sleep.ts";
 
 interface DataType {
@@ -48,7 +48,7 @@ export default Vue.extend({
   created: async function (): Promise<void> {
     try {
       this.board = await getBoard(this.boardId);
-      this.entries = await getEntries("", { feedId: this.board.feedIds });
+      this.entries = await getFeedEntries("", { feedId: this.board.feedIds });
       await sleep(LOADING_SLEEP_MSEC);
     } catch (error) {
       if (error.response.status === 404) {

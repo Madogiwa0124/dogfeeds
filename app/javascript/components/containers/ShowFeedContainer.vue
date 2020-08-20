@@ -13,7 +13,7 @@ import FeedInfomation from "@js/components/feed/FeedInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import { getFeed } from "@js/services/FeedService.ts";
-import { getEntries } from "@js/services/EntryService.ts";
+import { getFeedEntries } from "@js/services/EntryService.ts";
 import { sleep } from "@js/components/common/Sleep.ts";
 
 interface DataType {
@@ -48,7 +48,7 @@ export default Vue.extend({
   created: async function (): Promise<void> {
     try {
       this.feed = await getFeed(this.feedId);
-      this.entries = await getEntries("", { feedId: this.feedId });
+      this.entries = await getFeedEntries("", { feedId: this.feedId });
       // 一瞬でloadingが消えるとチカチカするのでsleepを入れる
       await sleep(LOADING_SLEEP_MSEC);
     } catch (error) {
