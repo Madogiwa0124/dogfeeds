@@ -40,7 +40,7 @@ export default {
   components: { FontAwesomeIcon },
   filters: {
     fromNow: function (value) {
-      return moment(value, "YYYYMMDD").fromNow();
+      return moment(value, "YYYYMMDD h:mm:ss").fromNow();
     },
   },
   props: {
