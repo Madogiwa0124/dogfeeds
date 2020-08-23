@@ -16,7 +16,7 @@
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">
-        <span> <font-awesome-icon :icon="['far', 'clock']" />{{ entry.publishedAt | fromNow }} </span>
+        <span> <font-awesome-icon :icon="['far', 'clock']" />{{ fromNow }} </span>
       </p>
       <p v-if="showFeedLink" class="card-footer-item">
         <a :href="feedPath">
@@ -27,22 +27,27 @@
     </footer>
   </div>
 </template>
-<script>
+<script lang="ts">
+import Vue from "vue";
+import VueCompositionApi, { defineComponent, computed } from "@vue/composition-api";
+Vue.use(VueCompositionApi);
+
 import moment from "moment/moment";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faClock, faNewspaper } from "@fortawesome/free-regular-svg-icons";
+import { Entry } from "@js/types/types.d.ts";
 library.add(faExternalLinkAlt, faClock, faNewspaper);
 
-export default {
-  name: "EntryCard",
+type Props = {
+  entry: Entry;
+  descriptionLimit: number | null;
+  showFeedLink: boolean;
+};
+
+export default defineComponent({
   components: { FontAwesomeIcon },
-  filters: {
-    fromNow: function (value) {
-      return moment(value, "YYYYMMDD h:mm:ss").fromNow();
-    },
-  },
   props: {
     entry: {
       type: Object,
@@ -57,17 +62,26 @@ export default {
       default: false,
     },
   },
-  computed: {
-    limitedDescription: function () {
-      const showFull = !this.descriptionLimit || this.entry.description <= this.descriptionLimit;
-      if (showFull) return this.entry.description;
-      return `${this.entry.description.slice(0, this.descriptionLimit)}...`;
-    },
-    feedPath: function () {
-      return `/feeds/${this.entry.feedId}`;
-    },
+  setup(props: Props) {
+    const fromNow = computed(() => {
+      return moment(props.entry.publishedAt, "YYYYMMDD h:mm:ss").fromNow();
+    });
+    const limitedDescription = computed(() => {
+      if (props.descriptionLimit === null) return props.entry.description;
+      if (props.entry.description.length <= props.descriptionLimit) return props.entry.description;
+
+      return `${props.entry.description.slice(0, props.descriptionLimit)}...`;
+    });
+    const feedPath = computed(() => {
+      return `/feeds/${props.entry.feedId}`;
+    });
+    return {
+      fromNow,
+      limitedDescription,
+      feedPath,
+    };
   },
-};
+});
 </script>
 <style lang="scss" scoped>
 .entry-card {

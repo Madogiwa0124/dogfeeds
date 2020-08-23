@@ -8,7 +8,7 @@ RSpec.describe Api::Entry, type: :model do
       expect(Api::Entry.new(entry: entry).attributes).to eq(
         {
           id: entry.id,
-          description: entry.description,
+          description: entry.description.to_s,
           eyeCatchingImage: entry.eye_catching_image,
           link: entry.link,
           publishedAt: entry.published_at.iso8601,

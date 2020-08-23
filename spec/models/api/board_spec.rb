@@ -16,7 +16,7 @@ RSpec.describe Api::Board, type: :model do
             feedIds: board.feeds.ids,
             lastEntry: {
               id: entry.id,
-              description: entry.description,
+              description: entry.description.to_s,
               eyeCatchingImage: entry.eye_catching_image,
               link: entry.link,
               publishedAt: entry.published_at.iso8601,

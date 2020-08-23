@@ -19,7 +19,7 @@ RSpec.describe Api::Feed, type: :model do
             title: feed.title,
             lastEntry: {
               id: entry.id,
-              description: entry.description,
+              description: entry.description.to_s,
               eyeCatchingImage: entry.eye_catching_image,
               link: entry.link,
               publishedAt: entry.published_at.iso8601,

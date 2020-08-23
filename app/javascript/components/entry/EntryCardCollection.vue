@@ -5,11 +5,22 @@
     </div>
   </div>
 </template>
-<script>
-import EntryCard from "@js/components/entry/EntryCard";
+<script lang="ts">
+import Vue from "vue";
+import VueCompositionApi, { defineComponent } from "@vue/composition-api";
+Vue.use(VueCompositionApi);
 
-export default {
-  name: "EntryCardCollection",
+import EntryCard from "@js/components/entry/EntryCard.vue";
+import { Entry } from "@js/types/types.d.ts";
+
+type Props = {
+  entries: Entry[];
+  descriptionLimit: number | null;
+  clumnSize: number;
+  showFeedLink: boolean;
+};
+
+export default defineComponent({
   components: { EntryCard },
   props: {
     clumnSize: {
@@ -31,7 +42,12 @@ export default {
       },
     },
   },
-};
+  // propsの型定義のためsetup引数に型を設定
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup(props: Props) {
+    return {};
+  },
+});
 </script>
 <style lang="scss" scoped>
 .entry-card-collection {
