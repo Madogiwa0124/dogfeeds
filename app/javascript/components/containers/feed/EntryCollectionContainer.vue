@@ -61,7 +61,7 @@ export default Vue.extend({
       }
       this.isLoading = false;
     },
-    handleOnSearch: async function (): Promise<void> {
+    handleOnSearch: function (): void {
       this.resetEntryList();
       this.page = 1;
       this.infiniteLoading.stateChanger.reset();

@@ -132,7 +132,7 @@ export default Vue.extend({
       const target: Feed | undefined = this.findFeed(id);
       if (target) this.selectedFeeds.splice(this.selectedFeeds.indexOf(target), 1);
     },
-    handleOnSearch: async function (keyword: string): Promise<void> {
+    handleOnSearch: function (keyword: string): void {
       this.keyword = keyword;
       this.resetFeedList();
       this.page = 1;

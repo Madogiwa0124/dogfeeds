@@ -76,7 +76,7 @@ export default Vue.extend({
       }
       this.isLoading = false;
     },
-    handleOnSearch: async function (keyword: string): Promise<void> {
+    handleOnSearch: function (keyword: string): void {
       this.keyword = keyword;
       this.resetFeedList();
       this.page = 1;
