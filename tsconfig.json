@@ -2,6 +2,7 @@
   "compilerOptions": {
     "declaration": false,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "lib": ["es6", "dom"],
     "module": "es6",
     "moduleResolution": "node",
@@ -12,7 +13,8 @@
     "baseUrl": "./",
     "paths": {
       "@js/*": ["app/javascript/*"]
-    }
+    },
+    "outDir": "public/dist" // allowjs:trueにしたときのvscodeのエラー回避のためoutDirを設定しとく
   },
   "exclude": [
     "**/*.spec.ts",
