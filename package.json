@@ -13,7 +13,7 @@
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "^5.2.1",
-    "@vue/composition-api": "^1.0.0-beta.11",
+    "@vue/composition-api": "^1.0.0-beta.13",
     "acorn": "^8.0.1",
     "axios": "^0.20.0",
     "babel-preset-typescript-vue": "^1.1.1",
