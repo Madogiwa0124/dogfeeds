@@ -29,7 +29,8 @@
       "html": { "void": "always" }
     }],
     "vue/singleline-html-element-content-newline": 0,
-    "vue/max-attributes-per-line": 0
+    "vue/max-attributes-per-line": 0,
+    "vue/custom-event-name-casing": 0
   },
   "overrides": [
     {
