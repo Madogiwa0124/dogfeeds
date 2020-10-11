@@ -5,12 +5,12 @@ module.exports = {
       url: ["http://localhost:3001"],
       startServerCommand: `bin/rails s -p 3001`,
       startServerReadyPattern: "Puma starting",
-      settings: {chromeFlags: 'headless --disable-gpu --no-sandbox --disable-dev-shm-usage'},
-      numberOfRuns: 3
+      settings: { chromeFlags: "headless --disable-gpu --no-sandbox --disable-dev-shm-usage" },
+      numberOfRuns: 1,
     },
     upload: {
-      target: 'filesystem',
-      outputDir: './.lighthouseci_result'
+      target: "filesystem",
+      outputDir: "./.lighthouseci_result",
     },
   },
 };
