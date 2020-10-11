@@ -11,9 +11,7 @@
       </div>
       <div class="content">
         {{ feed.lastEntry.title }}
-        <a :href="feed.lastEntry.link" target="_blank" rel="noopener">
-          リンク先で読む
-        </a>
+        <a :href="feed.lastEntry.link" target="_blank" rel="noopener"> リンク先で読む </a>
         <p>
           <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" @click="handleOnTagClick" />
         </p>

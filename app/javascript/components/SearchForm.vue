@@ -4,9 +4,7 @@
       <input v-model="keyword" class="input" placeholder="タグ、タイトルで検索できます" @keydown.enter="search" />
     </div>
     <div class="control">
-      <button class="button submit is-primary has-text-weight-bold" @click="search">
-        検索
-      </button>
+      <button class="button submit is-primary has-text-weight-bold" @click="search">検索</button>
     </div>
   </div>
 </template>
