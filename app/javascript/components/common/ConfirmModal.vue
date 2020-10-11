@@ -12,9 +12,7 @@
         <slot />
       </section>
       <footer class="modal-card-foot">
-        <button :class="`button submit is-${level} is-fullwidth`" @click="submit()">
-          Submit
-        </button>
+        <button :class="`button submit is-${level} is-fullwidth`" @click="submit()">Submit</button>
       </footer>
     </div>
   </div>
