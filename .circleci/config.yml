@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+  ruby: circleci/ruby@1.1.1
+  node: circleci/node@4.0.0
+
 web: &web
   - image: circleci/ruby:2.7.1-node-browsers
     environment:
@@ -30,50 +34,16 @@ commands:
           at: .
   install_node_deps:
     steps:
-      - run:
-          name: install node dependencies
-          command: yarn install
-  cache_node_deps:
-    steps:
-      - save_cache:
-          name: Cache node dependencies
-          paths:
-            - ./node_modules
-          key: v1-node-dependencies-{{ checksum "yarn.lock" }}
-  restore_node_deps:
-    steps:
-      - restore_cache:
-          name: Restore node dependencies
-          keys:
-            - v1-node-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
-  configure_bundler:
-    steps:
-      - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler -v $BUNDLER_VERSION
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-path: ./node_modules
+          with-cache: true
   install_ruby_deps:
     steps:
-      - run:
-          name: install dependencies
-          command: bundle install --jobs=4 --clean --path ./vendor/bundle
-  cache_ruby_deps:
-    steps:
-      - save_cache:
-          name: Cache ruby dependencies
-          paths:
-            - ./vendor/bundle
+      - ruby/install-deps:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-  restore_ruby_deps:
-    steps:
-      - restore_cache:
-          name: Restore ruby dependencies
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
+          path: ./vendor/bundle
+          with-cache: true
   rails_migration:
     steps:
       - run:
@@ -113,15 +83,12 @@ jobs:
       name: web
     steps:
       - attach_current
-      - restore_node_deps
       - install_node_deps
-      - cache_node_deps
   node_lint:
     executor:
       name: web
     steps:
       - attach_current
-      - restore_node_deps
       - install_node_deps
       - run:
           name: run code analyze
@@ -131,17 +98,12 @@ jobs:
       name: web
     steps:
       - attach_current
-      - configure_bundler
-      - restore_ruby_deps
       - install_ruby_deps
-      - cache_ruby_deps
   ruby_lint:
     executor:
       name: web
     steps:
       - attach_current
-      - restore_ruby_deps
-      - configure_bundler
       - install_ruby_deps
       - run:
           name: run rubocop
@@ -154,9 +116,6 @@ jobs:
       name: web-db
     steps:
       - attach_current
-      - restore_ruby_deps
-      - restore_node_deps
-      - configure_bundler
       - install_ruby_deps
       - install_node_deps
       - rails_migration
@@ -170,9 +129,6 @@ jobs:
       name: web-db
     steps:
       - attach_current
-      - restore_ruby_deps
-      - restore_node_deps
-      - configure_bundler
       - install_ruby_deps
       - install_node_deps
       - rails_migration
