@@ -7,38 +7,56 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-  rails:
+    volumes:
+      - db:/var/lib/postgresql/data
+  rails: &rails
     build:
       context: .
       dockerfile: ./docker/rails/Dockerfile
       args:
         - APP_NAME=dogfeeds
-    command: bash -c "bin/setup && bin/rails s -b 0.0.0.0 -p 3000"
+    command: bash -c "bin/rails s -b 0.0.0.0 -p 3000"
     tty: true
     ports:
       - "3000:3000"
     links:
       - db
+    tmpfs:
+      - /tmp
     volumes:
       - .:/dogfeeds:cached
       - node_modules:/dogfeeds/node_modules
       - bundle:/dogfeeds/vendor/bundle
-      - /dogfeeds/log
-      - /dogfeeds/public/packs
-      - /dogfeeds/public/packs-test
-      - /dogfeeds/public/assets
-      - /dogfeeds/tmp
-      - /dogfeeds/.git
+      - log:/dogfeeds/log
+      - packs:/dogfeeds/public/packs
+      - packs-test:/dogfeeds/public/packs-test
+      - rails-cache:/dogfeeds/tmp/cache
+      - git:/dogfeeds/.git
     environment:
       HOST_NAME: rails
       DATABASE_USER: postgres
       DATABASE_PASSWORD: password
       DATABASE_PORT: 5432
       DATABASE_HOST: db
-      RUBYOPT: '-w'
       BUNDLE_PATH: /dogfeeds/vendor/bundle
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+  webpacker:
+    <<: *rails
+    command: "bin/webpack-dev-server"
+    ports:
+      - "3035:3035"
+    tty: false
+    environment:
+      NODE_ENV: development
+      RAILS_ENV: development
+      BUNDLE_PATH: /dogfeeds/vendor/bundle
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
 volumes:
+  db:
   node_modules:
-    driver: 'local'
   bundle:
-    driver: 'local'
+  log:
+  packs:
+  packs-test:
+  rails-cache:
+  git:

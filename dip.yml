@@ -1,0 +1,47 @@
+# Required minimum dip version
+version: '4.1'
+
+compose:
+  files:
+    - docker-compose.yml
+
+interaction:
+  bash:
+    description: Open the Bash shell in web's container
+    service: rails
+    command: bash
+
+  bundle:
+    description: Run Bundler commands
+    service: rails
+    command: bundle
+
+  rails:
+    description: Run Rails commands
+    service: rails
+    command: bin/rails
+    subcommands:
+      s:
+        description: Run Rails server at http://localhost:3000
+        service: rails
+        compose:
+          run_options: [service-ports]
+  rspec:
+    description: Run RSpec commands
+    service: rails
+    command: bundle exec rspec
+
+  rubocop:
+    description: Run RuboCop commands
+    service: rails
+    command: bundle exec rubocop
+
+  yarn:
+    description: Run yarn commands
+    service: rails
+    command: yarn
+
+provision:
+  - dip compose down --volumes
+  - dip compose up -d
+  - dip bash -c ./bin/setup

@@ -19,6 +19,26 @@ DogFeedsを使うと下記のように1つにまとめることが出来ます:d
 
 * 管理画面から、まとめたRSSを変更できるのでSlack等に登録済みのRSSのURLを変更せずに中身を修正できる :dog2::sparkles:
 
+# development
+
+環境構築には[dip](https://github.com/bibendi/dip)を使用しているので、ローカル環境に`dip`をinstallしてください。
+
+``` sh
+$ gem install dip
+```
+
+install後は下記のコマンドを実行すると開発環境ができあがります。
+
+``` sh
+$ dip provision
+```
+
+:video_game: コマンド一覧
+
+``` sh
+$ dip ls
+```
+
 # Contributing
 
 なにかバグ等があればissueまで🙏
