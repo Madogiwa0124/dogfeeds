@@ -21,16 +21,17 @@ services:
       - "3000:3000"
     links:
       - db
+    tmpfs:
+      - /tmp
     volumes:
       - .:/dogfeeds:cached
       - node_modules:/dogfeeds/node_modules
       - bundle:/dogfeeds/vendor/bundle
-      - /dogfeeds/log
-      - /dogfeeds/public/packs
-      - /dogfeeds/public/packs-test
-      - /dogfeeds/public/assets
-      - /dogfeeds/tmp
-      - /dogfeeds/.git
+      - log:/dogfeeds/log
+      - packs:/dogfeeds/public/packs
+      - packs-test:/dogfeeds/public/packs-test
+      - rails-cache:/dogfeeds/tmp/cache
+      - git:/dogfeeds/.git
     environment:
       HOST_NAME: rails
       DATABASE_USER: postgres
@@ -42,6 +43,9 @@ services:
 volumes:
   db:
   node_modules:
-    driver: 'local'
   bundle:
-    driver: 'local'
+  log:
+  packs:
+  packs-test:
+  rails-cache:
+  git:
