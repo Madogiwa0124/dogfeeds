@@ -7,6 +7,8 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+    volumes:
+      - db:/var/lib/postgresql/data
   rails:
     build:
       context: .
@@ -38,6 +40,7 @@ services:
       RUBYOPT: '-w'
       BUNDLE_PATH: /dogfeeds/vendor/bundle
 volumes:
+  db:
   node_modules:
     driver: 'local'
   bundle:
