@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - db:/var/lib/postgresql/data
-  rails:
+  rails: &rails
     build:
       context: .
       dockerfile: ./docker/rails/Dockerfile
@@ -38,8 +38,19 @@ services:
       DATABASE_PASSWORD: password
       DATABASE_PORT: 5432
       DATABASE_HOST: db
-      RUBYOPT: '-w'
       BUNDLE_PATH: /dogfeeds/vendor/bundle
+      WEBPACKER_DEV_SERVER_HOST: webpacker
+  webpacker:
+    <<: *rails
+    command: "bin/webpack-dev-server"
+    ports:
+      - "3035:3035"
+    tty: false
+    environment:
+      NODE_ENV: development
+      RAILS_ENV: development
+      BUNDLE_PATH: /dogfeeds/vendor/bundle
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
 volumes:
   db:
   node_modules:
