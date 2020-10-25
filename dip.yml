@@ -24,8 +24,7 @@ interaction:
       s:
         description: Run Rails server at http://localhost:3000
         service: rails
-        compose:
-          run_options: [service-ports]
+
   rspec:
     description: Run RSpec commands
     service: rails
