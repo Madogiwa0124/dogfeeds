@@ -34,10 +34,7 @@ services:
       - git:/dogfeeds/.git
     environment:
       HOST_NAME: rails
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: password
-      DATABASE_PORT: 5432
-      DATABASE_HOST: db
+      DATABASE_URL: postgres://postgres:password@db:5432
       BUNDLE_PATH: /dogfeeds/vendor/bundle
       WEBPACKER_DEV_SERVER_HOST: webpacker
   webpacker:
