@@ -26,9 +26,9 @@ test:
 
 production:
   primary:
-    <<: *default
+    <<: *database_config
     database: dogfeeds_production
   replica:
-    <<: *default
+    <<: *database_config
     database: dogfeeds_production
     replica: true
