@@ -15,24 +15,7 @@
           @unselectedFeed="handleOnUnselectedFeed"
         />
       </ul>
-      <board-create-button :is-active="selectedFeeds.length > 0" @click="handleOnClick" />
-      <board-confirm-modal
-        v-show="showModal"
-        title="Confirm"
-        status="primary"
-        @close="handleOnClose"
-        @submit="handleOnSubmit"
-      >
-        <p class="has-text-weight-semibold">このRSSフィードをまとめてみる🐶</p>
-        <p v-if="title.length > 0">タイトル「{{ title }}」</p>
-        <div class="content">
-          <ul>
-            <li v-for="feed in selectedFeeds" :key="feed.id">
-              {{ feed.title }}
-            </li>
-          </ul>
-        </div>
-      </board-confirm-modal>
+      <board-create-button :is-active="selectedFeeds.length > 0" @click="handleOnSubmit" />
     </div>
   </div>
 </template>
@@ -41,16 +24,14 @@ import Vue, { PropType } from "vue";
 import { Feed } from "@js/types/types.d.ts";
 import SelectedFeed from "@js/components/feed/SelectedFeed.vue";
 import BoardCreateButton from "@js/components/board/BoardCreateButton.vue";
-import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
 
 interface DataType {
   title: string;
-  showModal: boolean;
 }
 
 export default Vue.extend({
   name: "BoardCreateForm",
-  components: { SelectedFeed, BoardCreateButton, BoardConfirmModal },
+  components: { SelectedFeed, BoardCreateButton },
   props: {
     selectedFeeds: {
       type: Array as PropType<Feed[]>,
@@ -62,20 +43,11 @@ export default Vue.extend({
   data: function (): DataType {
     return {
       title: "",
-      showModal: false,
     };
   },
   methods: {
     handleOnUnselectedFeed: function (id: number): void {
       this.$emit("unselectedFeed", id);
-    },
-    handleOnClick: function (): void {
-      // NOTE: なぜかProperty 'XXX' does not exist on typeが発生するのでthisの型を無視する
-      (this as any).showModal = true;
-    },
-    handleOnClose: function (): void {
-      // NOTE: なぜかProperty 'XXX' does not exist on typeが発生するのでthisの型を無視する
-      (this as any).showModal = false;
     },
     handleOnSubmit: function (): void {
       // NOTE: なぜかProperty 'XXX' does not exist on typeが発生するのでthisの型を無視する

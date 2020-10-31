@@ -46,6 +46,7 @@
   "scripts": {
     "lint": "eslint app/javascript --ext .vue,.js,.ts",
     "lint-fix": "eslint app/javascript --ext .vue,.js,.ts --fix",
+    "typecheck": "tsc -p . --noEmit",
     "lighthorse": "lhci autorun",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,vue,ts,css,scss}'"
   }
