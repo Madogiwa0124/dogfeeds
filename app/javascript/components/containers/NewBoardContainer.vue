@@ -3,9 +3,27 @@
     <aside class="menu column is-2">
       <board-create-form
         :selected-feeds="selectedFeeds"
+        class="sticky-area"
         @submitBoard="handleOnSubmitBoard"
         @unselectedFeed="handleOnUnselectedFeed"
       />
+      <board-confirm-modal
+        v-show="showModal"
+        title="Confirm"
+        status="primary"
+        @close="handleOnCloseModal"
+        @submit="handleOnSubmitModal"
+      >
+        <p class="has-text-weight-semibold">このRSSフィードをまとめてみる🐶</p>
+        <p v-if="boardTitle.length > 0">タイトル「{{ boardTitle }}」</p>
+        <div class="content">
+          <ul>
+            <li v-for="feed in selectedFeeds" :key="feed.id">
+              {{ feed.title }}
+            </li>
+          </ul>
+        </div>
+      </board-confirm-modal>
     </aside>
     <main class="column">
       <service-infomation v-if="showServiceInfomation" @delete="handleOnServiceInfomationDelete" />
@@ -30,6 +48,7 @@ import BoardCreateForm from "@js/components/board/BoardCreateForm.vue";
 import ServiceInfomation from "@js/components/ServiceInfomation.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
+import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
 import { getFeeds } from "@js/services/FeedService";
 import { postBoard } from "@js/services/BoardService";
 import { Feed, PostBoardResponse } from "@js/types/types.d.ts";
@@ -40,14 +59,23 @@ interface DataType {
   page: number;
   feeds: Feed[];
   isLoading: boolean;
+  boardTitle: string;
   selectedFeeds: Feed[];
   keyword: string;
   showServiceInfomation: boolean;
+  showModal: boolean;
 }
 
 export default Vue.extend({
   name: "NewBoardContainer",
-  components: { ServiceInfomation, BoardCreateForm, FeedCardCollection, SearchForm, InfiniteLoading },
+  components: {
+    ServiceInfomation,
+    BoardCreateForm,
+    FeedCardCollection,
+    SearchForm,
+    InfiniteLoading,
+    BoardConfirmModal,
+  },
   props: {
     searchWord: {
       type: String,
@@ -59,9 +87,11 @@ export default Vue.extend({
       page: 1,
       feeds: [],
       isLoading: false,
+      boardTitle: "",
       selectedFeeds: [],
       keyword: this.searchWord,
       showServiceInfomation: true,
+      showModal: false,
     };
   },
   computed: {
@@ -107,17 +137,25 @@ export default Vue.extend({
       }
       this.isLoading = false;
     },
-    handleOnSubmitBoard: async function (title: string): Promise<void> {
+    handleOnSubmitBoard: function (title: string): void {
+      this.boardTitle = title;
+      this.showModal = true;
+    },
+    handleOnSubmitModal: async function (): Promise<void> {
       try {
         const res: PostBoardResponse = await postBoard({
           feed_ids: this.selectedFeeds.map((feed) => feed.id),
-          title: title,
+          title: this.boardTitle,
         });
         window.location.href = `/boards/${res.id}`;
-      } catch {
+      } catch (error) {
         // TODO: いい感じの汎用的なmodalを作る
         alert("予期せぬエラーが発生しました😢");
+        throw error;
       }
+    },
+    handleOnCloseModal: function (): void {
+      this.showModal = false;
     },
     findFeed(id: number): Feed | undefined {
       return this.feeds.find((feed) => {
@@ -149,6 +187,11 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .boards-new {
   padding: 20px;
+
+  .sticky-area {
+    position: sticky;
+    top: 30px;
+  }
 
   .search-form-area {
     padding: 0.75em 0 0.75em 0;
