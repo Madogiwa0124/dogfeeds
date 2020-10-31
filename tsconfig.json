@@ -16,8 +16,14 @@
     },
     "outDir": "public/dist" // allowjs:trueにしたときのvscodeのエラー回避のためoutDirを設定しとく
   },
+  "include": [
+    "app/javascript/**/*.ts",
+    "app/javascript/**/*.js",
+    "app/javascript/**/*.vue",
+    "spec/javascript/**/*.spec.js",
+    "spec/javascript/**/*.spec.ts",
+  ],
   "exclude": [
-    "**/*.spec.ts",
     "node_modules",
     "vendor",
     "public"
