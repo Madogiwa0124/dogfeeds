@@ -6,7 +6,7 @@ namespace :entries do
       ActiveRecord::Base.transaction { Feed::EntryCreater.new(feed).execute! }
     rescue => e
       Rails.logger.error(e)
-      Rollbar.error(e)
+      Rollbar.error(e, endpoint: feed.endpoint)
       next
     end
   end
