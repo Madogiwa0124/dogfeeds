@@ -18,6 +18,7 @@ class Admin::BoardsController < Admin::ApplicationController
   rescue StandardError => e
     @board.error.add(base: e)
     logger.error(e)
+    Rollbar.error(e)
     render :edit
   end
 
