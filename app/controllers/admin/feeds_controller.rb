@@ -14,6 +14,7 @@ class Admin::FeedsController < Admin::ApplicationController
   rescue StandardError => e
     @feed = post_form.feed
     logger.error(e)
+    Rollbar.error(e)
     render :edit
   end
 
