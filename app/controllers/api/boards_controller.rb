@@ -20,6 +20,7 @@ class Api::BoardsController < ApplicationController
     render json: { id: board.id }
   rescue StandardError => e
     logger.error(e)
+    Rollbar.error(e)
     head :internal_server_error
   end
 
