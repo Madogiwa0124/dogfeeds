@@ -1,4 +1,7 @@
 eval_gemfile File.expand_path('../Gemfile', __dir__)
 
-dependencies.delete_if { |d| d.name == 'rails' }
+replace_gems = %w[rails bullet]
+dependencies.delete_if { |d| replace_gems.include? d.name }
+
+gem 'bullet', github: 'flyerhzm/bullet'
 gem 'rails', '6.1.0.rc1'
