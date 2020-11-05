@@ -5,8 +5,8 @@ namespace :entries do
       sleep 1
       ActiveRecord::Base.transaction { Feed::EntryCreater.new(feed).execute! }
     rescue => e
-      Rails.logger.error(e)
-      Rollbar.error(e)
+      Rails.logger.error(e.exception("raised from endpoint: #{feed.endpoint}"))
+      Rollbar.warning(e.exception("raised from endpoint: #{feed.endpoint}"))
       next
     end
   end

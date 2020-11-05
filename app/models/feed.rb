@@ -61,8 +61,8 @@ class Feed < ApplicationRecord
   def parsed_object
     @parsed_object ||= client_class.new(endpoint).parsed_object
   rescue RSS::NotWellFormedError => e
-    logger.warn(e)
-    Rollbar.warning(e, endpoint: endpoint)
+    logger.warn(e.exception("raised from endpoint: #{endpoint}"))
+    Rollbar.warning(e.exception("raised from endpoint: #{endpoint}"))
     invalid_rss_format
     nil # NOTE: rescueされたときにerrorsが返却されてしまうのでnilを返して呼び元で判定できるようにしてる
   end
