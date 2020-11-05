@@ -11,7 +11,7 @@ module Feed::Rss
     end
 
     def parsed_object
-      @parsed_object ||= PARSERS[parsed_rss.class.name].call(parsed_rss)
+      @parsed_object ||= PARSERS[parsed_rss.class.name]&.call(parsed_rss)
     end
 
     private
