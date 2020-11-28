@@ -17,6 +17,9 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
 Style/ExponentialNotation:
   Enabled: true
 
