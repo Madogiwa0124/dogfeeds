@@ -2,14 +2,23 @@
 // https://docs.rollbar.com/docs/browser-js
 const token = process.env.ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN;
 const railsEnv = process.env.RAILS_ENV;
+const codeVersion = process.env.SOURCE_VERSION;
+const rollbarParamsValidation = () => !(railsEnv === "test") && token;
 
-if (token && !(railsEnv === "test")) {
+if (rollbarParamsValidation()) {
   let _rollbarConfig = {
     accessToken: token,
     captureUncaught: true,
     captureUnhandledRejections: true,
     payload: {
       environment: railsEnv,
+      client: {
+        javascript: {
+          source_map_enabled: true,
+          code_version: codeVersion,
+          guess_uncaught_frames: true,
+        },
+      },
     },
   };
 
