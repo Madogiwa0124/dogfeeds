@@ -1,0 +1,58 @@
+name: lighthouse
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:password@127.0.0.1:5432
+    services:
+      db:
+        image: postgres:10.13-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7.2'
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+    - name: cache ruby deps
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+    - name: cache node deps
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-node_modules-
+    - name: install bundler
+      run: gem install bundler -v 2.1.4
+    - name: install ruby deps
+      run: bundle install --jobs 4 --retry 3 --path vendor/bundle
+    - name: install node deps
+      run: yarn install
+    - name: db migration
+      run: |
+        bundle exec rake db:create
+        bundle exec rake db:schema:load
+    - name: build webpack
+      run: NODE_ENV=production bundle exec rails webpacker:compile
+    - name: run lighthouse
+      run: yarn run lighthouse --chrome-flags="--headless"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: lighthouseci_result
+        path: .lighthouseci_result
