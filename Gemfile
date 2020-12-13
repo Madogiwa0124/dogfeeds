@@ -27,7 +27,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end

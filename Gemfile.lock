@@ -242,7 +242,7 @@ DEPENDENCIES
   annotate
   brakeman
   bullet
-  capybara (>= 2.15)
+  capybara (>= 3.26)
   dotenv-rails
   factory_bot_rails
   listen (~> 3.3)
