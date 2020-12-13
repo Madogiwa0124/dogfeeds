@@ -15,13 +15,6 @@ web: &web
     environment:
       <<: *web-default-enviroments
 
-web-edge: &web-edge
-  - <<: *web
-    environment:
-      <<: *web-default-enviroments
-      BUNDLE_GEMFILE: gemfiles/rails_6_1.gemfile
-      BUNDLE_PATH_RELATIVE_TO_CWD: true
-
 db: &db
   - image: circleci/postgres:10.13
     environment:
@@ -35,10 +28,6 @@ executors:
   web-db:
     docker:
       - <<: *web
-      - <<: *db
-  web-db-edge:
-    docker:
-      - <<: *web-edge
       - <<: *db
 
 commands:
@@ -126,7 +115,6 @@ jobs:
       name: web-db
     steps:
       - attach_current
-      - run: cp Gemfile.lock gemfiles/rails_61.lock
       - install_ruby_deps
       - install_node_deps
       - rails_migration
@@ -135,18 +123,6 @@ jobs:
           name: run tests
           command: bundle exec rspec spec/
       - store_coverage_atifacts
-  ruby_test_rails_edge:
-    executor:
-      name: web-db-edge
-    steps:
-      - attach_current
-      - install_ruby_deps
-      - install_node_deps
-      - rails_migration
-      - build_webpack
-      - run:
-          name: run tests
-          command: bundle exec rspec spec/
 workflows:
   version: 2
   build:
@@ -159,10 +135,6 @@ workflows:
           requires:
             - ruby_build
       - ruby_test:
-          requires:
-            - ruby_build
-            - node_build
-      - ruby_test_rails_edge:
           requires:
             - ruby_build
             - node_build
