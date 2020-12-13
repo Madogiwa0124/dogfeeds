@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.0'
 gem 'rollbar'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma'
@@ -27,7 +27,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end

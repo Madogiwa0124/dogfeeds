@@ -1,3 +1,5 @@
+require "active_support/core_ext/integer/time"
+
 Rails.application.configure do
   config.webpacker.check_yarn_integrity = false
   config.cache_classes = true
@@ -11,6 +13,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
+  config.active_support.disallowed_deprecation = :log
+  config.active_support.disallowed_deprecation_warnings = []
   config.log_formatter = ::Logger::Formatter.new
   config.force_ssl = true
 
