@@ -5,8 +5,19 @@ $variable-columns: false;
 
 @import "bulma/bulma";
 @import "bulma-extensions/bulma-pageloader/dist/css/bulma-pageloader";
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 @import "../stylesheets/admin";
 @import "../stylesheets/feed";
+
+.navbar-brand {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+
+  a:hover {
+    color: hsl(171, 100%, 41%);
+  }
+}
+
 
 html {
   height: 100%;
