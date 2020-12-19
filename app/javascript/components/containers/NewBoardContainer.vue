@@ -24,7 +24,11 @@
       </board-confirm-modal>
     </aside>
     <main class="column">
-      <service-infomation v-if="showServiceInfomation" @delete="handleOnServiceInfomationDelete" />
+      <service-infomation
+        v-if="showServiceInfomation"
+        class="service-infomation"
+        @delete="handleOnServiceInfomationDelete"
+      />
       <div class="level-left column is-12 search-form-area">
         <search-form :init-keyword="keyword" @search="handleOnSearch" />
       </div>
@@ -185,6 +189,10 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .boards-new {
   padding: 20px;
+
+  .service-infomation {
+    margin-bottom: 0.75rem;
+  }
 
   .sticky-area {
     position: sticky;

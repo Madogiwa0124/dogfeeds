@@ -13,7 +13,7 @@ RSpec.describe 'Board作成画面', type: :system, js: true do
         expect(page).to have_selector("img[src$='/favicon.ico']")
       end
       within('.boards-new') do
-        expect(page).to have_content('Dogfeedsとは？')
+        expect(page).to have_content('Dogfeedsとは')
         expect(page.all('.feed-card').length).to eq 3
       end
     end
