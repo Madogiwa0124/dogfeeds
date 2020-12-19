@@ -17,7 +17,7 @@
       </ul>
       <label v-if="selectedFeeds.length > 0" class="menu-label has-text-dark">タイトル(任意)</label>
       <div v-if="selectedFeeds.length > 0" class="control board-title">
-        <input v-model="title" type="text" class="input board-title" />
+        <input v-model="title" type="text" class="input board-title" placeholder="例)IT関連RSSまとめ etc." />
       </div>
       <board-create-button :is-active="selectedFeeds.length > 0" @click="handleOnSubmit" />
     </div>
