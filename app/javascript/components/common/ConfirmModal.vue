@@ -2,18 +2,16 @@
   <div class="confirm-modal modal is-active">
     <div class="modal-background" />
     <div class="modal-card">
-      <header :class="`modal-card-head has-background-${level}`">
-        <p class="modal-card-title has-text-white">
+      <section class="modal-card-body">
+        <p class="modal-card-title is-size-6 center has-text-weight-semibold">
           {{ title }}
         </p>
-        <button class="delete" aria-label="close" @click="close()" />
-      </header>
-      <section class="modal-card-body">
         <slot />
+        <div class="btn-area has-text-centered">
+          <button class="button is-rounded" @click="close">{{ cancelTitle }}</button>
+          <button class="button submit is-rounded is-conversion" @click="submit">{{ submitTitle }}</button>
+        </div>
       </section>
-      <footer class="modal-card-foot">
-        <button :class="`button submit is-${level} is-fullwidth`" @click="submit()">Submit</button>
-      </footer>
     </div>
   </div>
 </template>
@@ -26,9 +24,13 @@ export default {
       type: String,
       required: true,
     },
-    level: {
+    submitTitle: {
       type: String,
-      default: "primary",
+      default: "OK",
+    },
+    cancelTitle: {
+      type: String,
+      default: "キャンセル",
     },
   },
   methods: {
@@ -41,4 +43,17 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.confirm-modal {
+  .modal-card-head {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  .btn-area {
+    button {
+      margin: 0px 20px;
+      min-width: 120px;
+    }
+  }
+}
+</style>

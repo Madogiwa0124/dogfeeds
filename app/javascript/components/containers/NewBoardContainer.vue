@@ -9,14 +9,12 @@
       />
       <board-confirm-modal
         v-show="showModal"
-        title="Confirm"
-        status="primary"
+        title="これでRSSフィードをまとめますか？"
         @close="handleOnCloseModal"
         @submit="handleOnSubmitModal"
       >
-        <p class="has-text-weight-semibold">このRSSフィードをまとめてみる🐶</p>
-        <p v-if="boardTitle.length > 0">タイトル「{{ boardTitle }}」</p>
         <div class="content">
+          <p v-if="boardTitle.length > 0">タイトル「{{ boardTitle }}」</p>
           <ul>
             <li v-for="feed in selectedFeeds" :key="feed.id">
               {{ feed.title }}
@@ -194,7 +192,7 @@ export default Vue.extend({
   }
 
   .search-form-area {
-    padding: 0.75em 0 0.75em 0;
+    padding: 0 0 0.75em 0;
   }
 }
 </style>
