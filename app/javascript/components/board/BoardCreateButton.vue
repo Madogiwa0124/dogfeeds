@@ -1,7 +1,11 @@
 <template>
   <div class="board-create-button">
-    <button class="button is-primary is-fullwidth has-text-weight-bold" :disabled="!isActive" @click="handleOnClick()">
-      ボードを作る
+    <button
+      class="button is-conversion is-rounded is-fullwidth has-text-weight-bold"
+      :disabled="!isActive"
+      @click="handleOnClick()"
+    >
+      1つにまとめる
     </button>
   </div>
 </template>

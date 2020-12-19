@@ -1,12 +1,10 @@
 <template>
-  <a class="select-feed" @click="toggleSelected">
+  <a class="select-feed is-conversion-color" @click="toggleSelected">
     <span v-if="selected">
       <font-awesome-icon :icon="['far', 'check-square']" />
-      Selected
     </span>
     <span v-else>
       <font-awesome-icon :icon="['far', 'square']" />
-      Select
     </span>
   </a>
 </template>
@@ -27,10 +25,16 @@ export default {
     },
   },
   methods: {
-    toggleSelected: function () {
-      this.$emit(this.selected ? "unselected" : "selected");
+    toggleSelected: function (event) {
+      this.$emit(this.selected ? "unselected" : "selected", event);
     },
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+@import "../../stylesheets/common.scss";
+
+.select-feed:hover {
+  color: darken($conversion-color, 10%);
+}
+</style>

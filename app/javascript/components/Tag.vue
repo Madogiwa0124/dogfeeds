@@ -1,5 +1,5 @@
 <template>
-  <span class="tag is-primary" @click="handleOnClick">
+  <span class="tag is-success" @click="handleOnClick">
     {{ body }}
   </span>
 </template>
@@ -13,8 +13,8 @@ export default {
     },
   },
   methods: {
-    handleOnClick: function () {
-      this.$emit("click", this.body);
+    handleOnClick: function (event) {
+      this.$emit("click", this.body, event);
     },
   },
 };

@@ -1,31 +1,35 @@
 <template>
-  <div :id="`feed-card-${feed.id}`" class="feed-card card">
+  <div :id="`feed-card-${feed.id}`" class="feed-card card" @click="redirectFeedPath">
     <header class="card-header">
       <p class="card-header-title">
-        <a :href="feedPath">{{ feed.title }}</a>
+        {{ feed.title | truncate(19) }}
       </p>
+      <select-feed
+        v-if="selectable"
+        class="selected-feed"
+        :selected="selected"
+        @selected.stop="handleOnSelected"
+        @unselected.stop="handleOnUnselected"
+      />
     </header>
     <div class="card-content">
       <div class="card-image">
         <img :src="eyeCatch" :alt="feed.lastEntry.title" />
       </div>
       <div class="content">
-        {{ feed.lastEntry.title }}
-        <a :href="feed.lastEntry.link" target="_blank" rel="noopener"> リンク先で読む </a>
-        <p>
+        <a class="has-text-info" @click.stop="openExternal">
+          {{ feed.lastEntry.title | truncate(38) }}
+          <font-awesome-icon :icon="['fas', 'external-link-alt']" />
+        </a>
+        <p class="tag-area">
           <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" @click="handleOnTagClick" />
+        </p>
+        <p class="last-updated-at has-text-right">
+          <font-awesome-icon :icon="['far', 'clock']" />
+          {{ feed.lastEntry.publishedAt | fromNow }}
         </p>
       </div>
     </div>
-    <footer class="card-footer">
-      <p class="card-footer-item">
-        <font-awesome-icon :icon="['far', 'clock']" />
-        {{ feed.lastEntry.publishedAt | fromNow }}
-      </p>
-      <p v-if="selectable" class="card-footer-item">
-        <select-feed :selected="selected" @selected="handleOnSelected" @unselected="handleOnUnselected" />
-      </p>
-    </footer>
   </div>
 </template>
 <script lang="ts">
@@ -37,8 +41,9 @@ import { Feed } from "@js/types/types.d.ts";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faClock);
+library.add(faClock, faExternalLinkAlt);
 const NO_IMAGE_PATH = "/noimage.png";
 
 export default Vue.extend({
@@ -47,6 +52,10 @@ export default Vue.extend({
   filters: {
     fromNow: function (value: string): string {
       return moment(value, "YYYYMMDD h:mm:ss").fromNow();
+    },
+    truncate: function (value: string, limit: number): string {
+      if (value.length <= limit) return value;
+      return `${value.trim().replace(/\s+/g, "").substring(0, limit)}…`;
     },
   },
   props: {
@@ -73,7 +82,14 @@ export default Vue.extend({
     },
   },
   methods: {
-    handleOnTagClick: function (tagBody: string): void {
+    redirectFeedPath: function (): void {
+      window.location.href = this.feedPath;
+    },
+    openExternal: function (): void {
+      window.open(this.feed.lastEntry.link);
+    },
+    handleOnTagClick: function (tagBody: string, event: Event): void {
+      event.stopPropagation();
       this.$emit("clickTag", tagBody);
     },
     handleOnSelected: function (): void {
@@ -86,13 +102,45 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
+.feed-card:hover {
+  cursor: pointer;
+  box-shadow: inherit;
+}
+
 .feed-card {
+  border-radius: 0px;
+
+  .selected-feed {
+    height: 100%;
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  .card-header-title {
+    padding: 10px;
+  }
+
+  .card-content {
+    padding: 0px;
+
+    .content {
+      margin: 0px 10px 10px 10px;
+    }
+  }
+
   .card-image {
+    margin: 0px;
+
     img {
-      height: 320px;
+      height: 250px;
       width: 100%;
       object-fit: cover;
     }
+  }
+
+  .tag-area {
+    min-height: 26px;
+    margin: 0px;
   }
 }
 </style>
