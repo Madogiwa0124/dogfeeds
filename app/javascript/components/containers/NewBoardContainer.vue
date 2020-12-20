@@ -35,6 +35,7 @@
       <feed-card-collection
         :init-feeds="feeds"
         :selected-feeds="selectedFeeds"
+        :openNewTab="true"
         @selectedFeed="handleOnSelectedFeed"
         @unselectedFeed="handleOnUnselectedFeed"
         @clickTag="handleOnSearch"

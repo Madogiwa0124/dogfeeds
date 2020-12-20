@@ -71,6 +71,10 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    openNewTab: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     eyeCatch: function (): string {
@@ -83,7 +87,11 @@ export default Vue.extend({
   },
   methods: {
     redirectFeedPath: function (): void {
-      window.location.href = this.feedPath;
+      if (this.openNewTab) {
+        window.open(this.feedPath);
+      } else {
+        window.location.href = this.feedPath;
+      }
     },
     openExternal: function (): void {
       window.open(this.feed.lastEntry.link);

@@ -5,6 +5,7 @@
         :feed="feed"
         :selectable="selectable"
         :selected="selected(feed)"
+        :openNewTab="openNewTab"
         @clickTag="handleOnClickTag"
         @selectedFeed="handleOnSelected"
         @unselectedFeed="handleOnUnselected"
@@ -44,6 +45,10 @@ export default Vue.extend({
     selectable: {
       type: Boolean,
       default: true,
+    },
+    openNewTab: {
+      type: Boolean,
+      default: false,
     },
   },
   data(): DataType {
