@@ -1,25 +1,22 @@
 <template>
   <div class="entry-card card">
-    <header class="card-header">
-      <p class="card-header-title">
-        {{ entry.title }}
-      </p>
-    </header>
     <div class="card-content">
+      <div class="card-image">
+        <img :src="eyeCatch" :alt="entry.title" />
+      </div>
       <div class="content">
-        {{ limitedDescription }}
-        <a :href="entry.link" target="_blank" rel="noopener">
-          リンク先で読む
+        <a class="has-text-info entry-title has-text-weight-semibold" :href="entry.link" target="_blank" rel="noopener">
+          {{ entry.title }}
           <font-awesome-icon icon="external-link-alt" />
         </a>
+        <p class="entry-description">
+          {{ limitedDescription }}
+        </p>
       </div>
     </div>
     <footer class="card-footer">
-      <p class="card-footer-item">
-        <span> <font-awesome-icon :icon="['far', 'clock']" />{{ fromNow }} </span>
-      </p>
       <p v-if="showFeedLink" class="card-footer-item">
-        <a :href="feedPath">
+        <a :href="feedPath" class="has-text-primary">
           RSSフィードを見る
           <font-awesome-icon :icon="['far', 'newspaper']" />
         </a>
@@ -45,6 +42,8 @@ type Props = {
   descriptionLimit: number | null;
   showFeedLink: boolean;
 };
+
+const NO_IMAGE_PATH = "/noimage.png";
 
 export default defineComponent({
   components: { FontAwesomeIcon },
@@ -72,6 +71,10 @@ export default defineComponent({
 
       return `${props.entry.description.slice(0, props.descriptionLimit)}...`;
     });
+    const eyeCatch = computed(() => {
+      if (!props.entry.eyeCatchingImage) return NO_IMAGE_PATH;
+      return props.entry.eyeCatchingImage;
+    });
     const feedPath = computed(() => {
       return `/feeds/${props.entry.feedId}`;
     });
@@ -79,14 +82,39 @@ export default defineComponent({
       fromNow,
       limitedDescription,
       feedPath,
+      eyeCatch,
     };
   },
 });
 </script>
 <style lang="scss" scoped>
 .entry-card {
+  box-shadow: inherit;
+
   .card-content {
     word-wrap: break-word;
+    padding: 0px;
+
+    .entry-title {
+      margin: 0px;
+    }
+
+    .entry-description {
+      color: #888888;
+      font-size: 10px;
+    }
+
+    .content {
+      margin: 0px 10px 10px 10px;
+    }
+
+    .card-image {
+      img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }
 </style>

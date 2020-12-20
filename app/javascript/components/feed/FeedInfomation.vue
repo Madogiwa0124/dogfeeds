@@ -6,7 +6,7 @@
         <tag :body="tag.body" @click="handleOnTagClick" />
       </div>
     </div>
-    <entry-card-collection :entries="entries" />
+    <entry-card-collection :entries="entries" :clumnSize="3" />
   </div>
 </template>
 <script lang="ts">
