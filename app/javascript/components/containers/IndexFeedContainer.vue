@@ -4,10 +4,10 @@
       <div class="tabs">
         <ul>
           <li class="feeds" :class="{ 'is-active': selectedFeedTab }">
-            <a @click="handleOnFeedTabClick"><span>RSSフィード一覧</span></a>
+            <a @click="handleOnFeedTabClick"><span>RSSフィード</span></a>
           </li>
           <li class="entries" :class="{ 'is-active': selectedEntryTab }">
-            <a @click="handleOnEntryTabClick"><span>記事一覧</span></a>
+            <a @click="handleOnEntryTabClick"><span>記事</span></a>
           </li>
         </ul>
       </div>

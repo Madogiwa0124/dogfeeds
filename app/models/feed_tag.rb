@@ -11,4 +11,13 @@
 class FeedTag < ApplicationRecord
   has_many :feed_taggings, dependent: :destroy
   has_many :feeds, through: :feed_taggings
+
+  def self.counted_tags(limit:)
+    joins(:feed_taggings)
+      .group('feed_tags.body')
+      .order('count_all DESC')
+      .limit(limit)
+      .count
+      .map { |body, count| { body: body, count: count } }
+  end
 end

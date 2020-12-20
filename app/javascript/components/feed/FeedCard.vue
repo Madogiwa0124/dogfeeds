@@ -21,9 +21,11 @@
           {{ feed.lastEntry.title | truncate(38) }}
           <font-awesome-icon :icon="['fas', 'external-link-alt']" />
         </a>
-        <p class="tag-area">
-          <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" @click="handleOnTagClick" />
-        </p>
+        <div class="tag-area field is-grouped is-grouped-multiline">
+          <div v-for="(tag, index) in feed.tags" :key="index" class="control">
+            <tag :body="tag.body" @click="handleOnTagClick" />
+          </div>
+        </div>
         <p class="last-updated-at has-text-right">
           <font-awesome-icon :icon="['far', 'clock']" />
           {{ feed.lastEntry.publishedAt | fromNow }}
@@ -148,7 +150,11 @@ export default Vue.extend({
 
   .tag-area {
     min-height: 26px;
-    margin: 0px;
+
+    .control {
+      margin-right: 6px;
+      margin-bottom: 6px !important;
+    }
   }
 }
 </style>

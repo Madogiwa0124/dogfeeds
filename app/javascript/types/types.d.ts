@@ -23,6 +23,11 @@ export interface FeedTag {
   feedId: number;
 }
 
+export interface Tag {
+  body: string;
+  count: number;
+}
+
 export interface Board {
   id: number;
   title: string;

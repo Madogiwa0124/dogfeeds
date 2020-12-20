@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :feed_entries, only: [:index], controller: 'feed/entries'
     resources :entries, only: [:index]
     resources :boards, only: [:create, :show, :index]
+    resources :tags, only: [:index]
   end
 
   namespace :admin do
