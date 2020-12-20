@@ -2,7 +2,7 @@
   <div :id="`feed-card-${feed.id}`" class="feed-card card" @click="redirectFeedPath">
     <header class="card-header">
       <p class="card-header-title">
-        {{ feed.title | truncate(19) }}
+        {{ feed.title | truncate(22) }}
       </p>
       <select-feed
         v-if="selectable"
@@ -17,18 +17,19 @@
         <img :src="eyeCatch" :alt="feed.lastEntry.title" />
       </div>
       <div class="content">
-        <a class="has-text-info" @click.stop="openExternal">
-          {{ feed.lastEntry.title | truncate(38) }}
-          <font-awesome-icon :icon="['fas', 'external-link-alt']" />
-        </a>
         <div class="tag-area field is-grouped is-grouped-multiline">
+          <span v-if="feed.tags < 1" class="tag is-light control has-text-weight-medium">untagged</span>
           <div v-for="(tag, index) in feed.tags" :key="index" class="control">
             <tag :body="tag.body" @click="handleOnTagClick" />
           </div>
         </div>
+        <a class="has-text-info last-entry-title" @click.stop="openExternal">
+          {{ feed.lastEntry.title | truncate(49) }}
+          <font-awesome-icon :icon="['fas', 'external-link-alt']" />
+        </a>
         <p class="last-updated-at has-text-right">
+          Last updadated {{ feed.lastEntry.publishedAt | fromNow }}
           <font-awesome-icon :icon="['far', 'clock']" />
-          {{ feed.lastEntry.publishedAt | fromNow }}
         </p>
       </div>
     </div>
@@ -128,6 +129,7 @@ export default Vue.extend({
 
   .card-header-title {
     padding: 10px;
+    font-size: 14px;
   }
 
   .card-content {
@@ -135,6 +137,10 @@ export default Vue.extend({
 
     .content {
       margin: 0px 10px 10px 10px;
+
+      .last-entry-title {
+        font-size: 14px;
+      }
     }
   }
 
@@ -149,9 +155,8 @@ export default Vue.extend({
   }
 
   .tag-area {
-    min-height: 26px;
-
     .control {
+      margin-top: 6px;
       margin-right: 6px;
       margin-bottom: 6px !important;
     }
