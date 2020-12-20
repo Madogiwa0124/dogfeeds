@@ -51,10 +51,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .entry-card-collection {
-  margin: 0px auto;
-
   .entry-card {
-    margin: 15px;
+    margin: 15px 0px;
   }
 }
 </style>

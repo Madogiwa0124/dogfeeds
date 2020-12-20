@@ -1,7 +1,7 @@
 <template>
   <div class="feed-collection-container">
     <div class="level-left column is-12 search-form-area">
-      <search-form :init-keyword="keyword" @search="handleOnSearch" />
+      <search-form :init-keyword="keyword" :init-tags="tags" @search="handleOnSearch" />
     </div>
     <feed-card-collection :init-feeds="feeds" :selectable="false" :clumn-size="3" @clickTag="handleOnSearch" />
     <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
@@ -13,13 +13,15 @@ import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
-import { Feed } from "@js/types/types.d.ts";
+import { Feed, Tag } from "@js/types/types.d.ts";
+import { getTags } from "@js/services/TagService";
 
 interface DataType {
   page: number;
   feeds: Feed[];
   isLoading: boolean;
   keyword: string;
+  tags: Tag[];
 }
 
 export default Vue.extend({
@@ -35,6 +37,7 @@ export default Vue.extend({
     return {
       page: 1,
       feeds: [],
+      tags: [],
       isLoading: false,
       keyword: this.searchWord,
     };
@@ -49,6 +52,9 @@ export default Vue.extend({
     infiniteLoading: function (): InfiniteLoading {
       return this.$refs.InfiniteLoading as InfiniteLoading;
     },
+  },
+  mounted: async function () {
+    this.tags = await getTags("", {});
   },
   methods: {
     resetFeedList: function (): void {

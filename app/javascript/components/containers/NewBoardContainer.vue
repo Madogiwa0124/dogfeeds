@@ -30,11 +30,12 @@
         @delete="handleOnServiceInfomationDelete"
       />
       <div class="level-left column is-12 search-form-area">
-        <search-form :init-keyword="keyword" @search="handleOnSearch" />
+        <search-form :init-keyword="keyword" :init-tags="tags" @search="handleOnSearch" />
       </div>
       <feed-card-collection
         :init-feeds="feeds"
         :selected-feeds="selectedFeeds"
+        :openNewTab="true"
         @selectedFeed="handleOnSelectedFeed"
         @unselectedFeed="handleOnUnselectedFeed"
         @clickTag="handleOnSearch"
@@ -52,14 +53,16 @@ import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
 import { getFeeds } from "@js/services/FeedService";
+import { getTags } from "@js/services/TagService";
 import { postBoard } from "@js/services/BoardService";
-import { Feed, PostBoardResponse } from "@js/types/types.d.ts";
+import { Feed, PostBoardResponse, Tag } from "@js/types/types.d.ts";
 
 const SHOW_SERVICE_INFOMATION_STRAGE_KEY = "showServiceInfomation";
 
 interface DataType {
   page: number;
   feeds: Feed[];
+  tags: Tag[];
   isLoading: boolean;
   boardTitle: string;
   selectedFeeds: Feed[];
@@ -88,6 +91,7 @@ export default Vue.extend({
     return {
       page: 1,
       feeds: [],
+      tags: [],
       isLoading: false,
       boardTitle: "",
       selectedFeeds: [],
@@ -107,8 +111,9 @@ export default Vue.extend({
       return this.$refs.InfiniteLoading as InfiniteLoading;
     },
   },
-  mounted() {
+  async mounted() {
     this.showServiceInfomation = this.initShowServiceInfomation();
+    this.tags = await getTags("", {});
   },
   methods: {
     initShowServiceInfomation(): boolean {

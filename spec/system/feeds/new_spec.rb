@@ -30,7 +30,6 @@ RSpec.describe 'フィード作成画面', type: :system, js: true do
       end
 
       expect(page).to have_content('feed title')
-      expect(page).to have_content('リンク先で読む')
     end
   end
 end

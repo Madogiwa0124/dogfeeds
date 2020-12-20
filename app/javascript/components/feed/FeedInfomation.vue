@@ -1,10 +1,12 @@
 <template>
   <div class="feed-infomation">
     <h1 class="title">{{ feed.title }}</h1>
-    <div class="tags">
-      <tag v-for="tag in feed.tags" :key="tag.id" :body="tag.body" @click="handleOnTagClick" />
+    <div class="is-centered tags is-grouped">
+      <div v-for="(tag, index) in feed.tags" :key="index" class="control">
+        <tag :body="tag.body" @click="handleOnTagClick" />
+      </div>
     </div>
-    <entry-card-collection :entries="entries" />
+    <entry-card-collection :entries="entries" :clumnSize="3" />
   </div>
 </template>
 <script lang="ts">
@@ -35,16 +37,10 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .feed-infomation {
+  max-width: 90%;
+  margin: 0px auto;
+
   .title {
-    text-align: center;
-  }
-
-  .entry-card-collection {
-    max-width: 90%;
-  }
-
-  .tags {
-    display: block;
     text-align: center;
   }
 }

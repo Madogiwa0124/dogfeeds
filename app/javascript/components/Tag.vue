@@ -1,7 +1,8 @@
 <template>
-  <span class="tag is-success" @click="handleOnClick">
-    {{ body }}
-  </span>
+  <div class="my-tag tags has-addons" @click="handleOnClick">
+    <span class="tag is-success">{{ body }}</span>
+    <span v-if="count" class="tag">{{ count }}</span>
+  </div>
 </template>
 <script>
 export default {
@@ -10,6 +11,10 @@ export default {
     body: {
       type: String,
       required: true,
+    },
+    count: {
+      type: Number,
+      default: null,
     },
   },
   methods: {
@@ -20,8 +25,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.tag {
-  margin-right: 3px;
+.my-tag {
   cursor: pointer;
 }
 </style>

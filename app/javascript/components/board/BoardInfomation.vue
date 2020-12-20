@@ -8,7 +8,7 @@
         <font-awesome-icon icon="rss" />
       </a>
     </p>
-    <entry-card-collection :entries="entries" />
+    <entry-card-collection :entries="entries" clumn-size="3" />
   </div>
 </template>
 
