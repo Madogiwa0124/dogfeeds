@@ -1,7 +1,7 @@
 <template>
   <div id="feeds" class="feed-index columns">
     <main class="column">
-      <div class="tabs is-boxed">
+      <div class="tabs">
         <ul>
           <li class="feeds" :class="{ 'is-active': selectedFeedTab }">
             <a @click="handleOnFeedTabClick"><span>RSSフィード一覧</span></a>
@@ -68,6 +68,11 @@ export default Vue.extend({
 
   .tabs {
     margin-bottom: 0px;
+
+    li.is-active a {
+      border-bottom-color: hsl(171, 100%, 41%);
+      color: hsl(171, 100%, 41%);
+    }
   }
 }
 </style>
