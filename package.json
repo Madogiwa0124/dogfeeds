@@ -40,7 +40,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-vue": "^7.3.0",
-    "fork-ts-checker-webpack-plugin": "^6.0.7",
+    "fork-ts-checker-webpack-plugin": "^6.0.8",
     "prettier": "2.2.1",
     "webpack-dev-server": "^3.11.0"
   },
