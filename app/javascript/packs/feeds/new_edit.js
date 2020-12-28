@@ -1,3 +1,4 @@
+import Vue from "vue";
 import TagsInput from "@js/components/feed/TagsInput.vue";
 
 new Vue({
