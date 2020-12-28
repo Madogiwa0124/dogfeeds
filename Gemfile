@@ -7,7 +7,6 @@ gem 'rails', '~> 6.1.0'
 gem 'rollbar'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma'
-gem 'webpacker'
 
 group :development, :test do
   gem 'brakeman'
