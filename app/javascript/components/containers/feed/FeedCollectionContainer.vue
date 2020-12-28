@@ -12,9 +12,9 @@ import Vue from "vue";
 import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
-import { getFeeds } from "@js/services/FeedService";
+import { getFeeds } from "@js/services/FeedService.ts";
 import { Feed, Tag } from "@js/types/types.ts";
-import { getTags } from "@js/services/TagService";
+import { getTags } from "@js/services/TagService.ts";
 
 interface DataType {
   page: number;

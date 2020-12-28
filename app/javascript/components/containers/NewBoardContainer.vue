@@ -52,9 +52,9 @@ import ServiceInfomation from "@js/components/ServiceInfomation.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
-import { getFeeds } from "@js/services/FeedService";
-import { getTags } from "@js/services/TagService";
-import { postBoard } from "@js/services/BoardService";
+import { getFeeds } from "@js/services/FeedService.ts";
+import { getTags } from "@js/services/TagService.ts";
+import { postBoard } from "@js/services/BoardService.ts";
 import { Feed, PostBoardResponse, Tag } from "@js/types/types.ts";
 
 const SHOW_SERVICE_INFOMATION_STRAGE_KEY = "showServiceInfomation";

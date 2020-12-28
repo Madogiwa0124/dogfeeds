@@ -1,5 +1,4 @@
-import Vue from "vue/dist/vue.esm";
-import TagsInput from "@js/components/feed/TagsInput";
+import TagsInput from "@js/components/feed/TagsInput.vue";
 
 new Vue({
   el: "#feed-form",
