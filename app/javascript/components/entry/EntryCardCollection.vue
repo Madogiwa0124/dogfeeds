@@ -11,7 +11,7 @@ import VueCompositionApi, { defineComponent } from "@vue/composition-api";
 Vue.use(VueCompositionApi);
 
 import EntryCard from "@js/components/entry/EntryCard.vue";
-import { Entry } from "@js/types/types.d.ts";
+import { Entry } from "@js/types/types.ts";
 
 type Props = {
   entries: Entry[];

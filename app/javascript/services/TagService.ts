@@ -1,5 +1,5 @@
 import Client from "@js/services/Client.ts";
-import { Tag } from "@js/types/types.d.ts";
+import { Tag } from "@js/types/types.ts";
 
 const TAGS_API_ENDPOINT = "/api/tags";
 

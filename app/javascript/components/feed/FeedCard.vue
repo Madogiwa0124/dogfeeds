@@ -40,7 +40,7 @@ import Vue, { PropType } from "vue";
 import moment from "moment";
 import SelectFeed from "@js/components/feed/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
-import { Feed } from "@js/types/types.d.ts";
+import { Feed } from "@js/types/types.ts";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faClock } from "@fortawesome/free-regular-svg-icons";

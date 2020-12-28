@@ -9,7 +9,7 @@ import Vue from "vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import { getEntries } from "@js/services/EntryService";
-import { Entry } from "@js/types/types.d.ts";
+import { Entry } from "@js/types/types.ts";
 
 interface DataType {
   page: number;

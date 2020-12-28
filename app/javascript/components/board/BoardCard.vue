@@ -22,7 +22,7 @@
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import moment from "moment";
-import { Board } from "@js/types/types.d.ts";
+import { Board } from "@js/types/types.ts";
 
 export default Vue.extend({
   name: "BoardCard",

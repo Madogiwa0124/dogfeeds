@@ -1,5 +1,5 @@
 import Client from "@js/services/Client.ts";
-import { Feed } from "@js/types/types.d.ts";
+import { Feed } from "@js/types/types.ts";
 
 const FEEDS_API_ENDPOINT = "/api/feeds";
 

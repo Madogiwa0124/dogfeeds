@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Feed, Entry } from "@js/types/types.d.ts";
+import { Feed, Entry } from "@js/types/types.ts";
 import FeedInfomation from "@js/components/feed/FeedInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";

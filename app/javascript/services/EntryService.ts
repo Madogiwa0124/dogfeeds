@@ -1,5 +1,5 @@
 import Client from "@js/services/Client.ts";
-import { Entry } from "@js/types/types.d.ts";
+import { Entry } from "@js/types/types.ts";
 
 const FEED_ENTRY_API_ENDPOINT = "/api/feed_entries";
 const ENTRY_API_ENDPOINT = "/api/entries";

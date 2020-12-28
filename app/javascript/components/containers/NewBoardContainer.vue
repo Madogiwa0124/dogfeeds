@@ -55,7 +55,7 @@ import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
 import { getFeeds } from "@js/services/FeedService";
 import { getTags } from "@js/services/TagService";
 import { postBoard } from "@js/services/BoardService";
-import { Feed, PostBoardResponse, Tag } from "@js/types/types.d.ts";
+import { Feed, PostBoardResponse, Tag } from "@js/types/types.ts";
 
 const SHOW_SERVICE_INFOMATION_STRAGE_KEY = "showServiceInfomation";
 
