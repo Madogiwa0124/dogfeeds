@@ -36,18 +36,6 @@ services:
       HOST_NAME: rails
       DATABASE_URL: postgres://postgres:password@db:5432
       BUNDLE_PATH: /dogfeeds/vendor/bundle
-      WEBPACKER_DEV_SERVER_HOST: webpacker
-  webpacker:
-    <<: *rails
-    command: "bin/webpack-dev-server"
-    ports:
-      - "3035:3035"
-    tty: false
-    environment:
-      NODE_ENV: development
-      RAILS_ENV: development
-      BUNDLE_PATH: /dogfeeds/vendor/bundle
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
 volumes:
   db:
   node_modules:
