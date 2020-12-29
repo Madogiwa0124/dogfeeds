@@ -46,3 +46,6 @@ coverage
 # ignored lighthorse result
 .lighthouseci
 .lighthouseci_result
+
+public/packs
+public/packs-test
