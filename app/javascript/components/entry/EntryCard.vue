@@ -2,11 +2,16 @@
   <div class="entry-card card">
     <div class="card-content">
       <div class="card-image">
-        <img :src="eyeCatch" :alt="entry.title" />
+        <img :src="eyeCatch" :alt="props.entry.title" />
       </div>
       <div class="content">
-        <a class="has-text-info entry-title has-text-weight-semibold" :href="entry.link" target="_blank" rel="noopener">
-          {{ entry.title }}
+        <a
+          class="has-text-info entry-title has-text-weight-semibold"
+          :href="props.entry.link"
+          target="_blank"
+          rel="noopener"
+        >
+          {{ props.entry.title }}
           <font-awesome-icon icon="external-link-alt" />
         </a>
         <p class="entry-description">
@@ -83,6 +88,7 @@ export default defineComponent({
       limitedDescription,
       feedPath,
       eyeCatch,
+      props,
     };
   },
 });

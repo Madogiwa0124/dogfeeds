@@ -1,6 +1,6 @@
 <template>
   <div class="entry-card-collection entries is-multiline columns">
-    <div v-for="entry in entries" :key="entry.id" :class="`column is-${clumnSize}`">
+    <div v-for="entry in props.entries" :key="entry.id" :class="`column is-${clumnSize}`">
       <entry-card :entry="entry" :descriptionLimit="descriptionLimit" :showFeedLink="showFeedLink" />
     </div>
   </div>
@@ -45,7 +45,9 @@ export default defineComponent({
   // propsの型定義のためsetup引数に型を設定
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props: Props) {
-    return {};
+    return {
+      props,
+    };
   },
 });
 </script>
