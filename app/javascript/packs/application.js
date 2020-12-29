@@ -14,11 +14,7 @@ import "@js/components/navbar";
 // that code so it'll be compiled.
 // eslint-disable-next-line
 import Rails from "@rails/ujs";
-import * as ActiveStorage from "@rails/activestorage";
-import "channels";
-
 Rails.start();
-ActiveStorage.start();
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
