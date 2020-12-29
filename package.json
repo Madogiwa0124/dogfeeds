@@ -49,6 +49,7 @@
     "vue-type-check": "^1.1.0"
   },
   "scripts": {
+    "build": "webpack --config './config/webpack/webpack.prod.js'",
     "build:clean": "rm -rf public/packs/* public/packs-test/*",
     "build:dev": "webpack --progress --config './config/webpack/webpack.dev.js'",
     "build:dev-watch": "webpack --watch --progress --config './config/webpack/webpack.dev.js'",
