@@ -49,7 +49,7 @@ jobs:
         bundle exec rake db:create
         bundle exec rake db:schema:load
     - name: build webpack
-      run: NODE_ENV=production bundle exec rails webpacker:compile
+      run: yarn build:test
     - name: run lighthouse
       run: yarn run lighthouse --chrome-flags="--headless"
     - uses: actions/upload-artifact@v2
