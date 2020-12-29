@@ -25,7 +25,7 @@
 </template>
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { Feed } from "@js/types/types.d.ts";
+import { Feed } from "@js/types/types.ts";
 import SelectedFeed from "@js/components/feed/SelectedFeed.vue";
 import BoardCreateButton from "@js/components/board/BoardCreateButton.vue";
 import SpeechBubble from "@js/components/common/SpeechBubble.vue";

@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { Entry, Board } from "@js/types/types.d.ts";
+import { Entry, Board } from "@js/types/types.ts";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faRss } from "@fortawesome/free-solid-svg-icons";

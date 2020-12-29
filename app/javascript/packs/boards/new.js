@@ -1,4 +1,4 @@
-import Vue from "vue/dist/vue.esm";
+import Vue from "vue";
 import NewBoardContainer from "@js/components/containers/NewBoardContainer.vue";
 
 new Vue({

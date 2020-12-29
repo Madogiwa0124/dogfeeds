@@ -1,4 +1,4 @@
-import { Board, PostBoardResponse } from "@js/types/types.d.ts";
+import { Board, PostBoardResponse } from "@js/types/types.ts";
 import Client from "@js/services/Client.ts";
 const BOARDS_API_ENDPOINT = "/api/boards";
 

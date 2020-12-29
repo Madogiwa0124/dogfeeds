@@ -15,7 +15,7 @@
 </template>
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { Feed } from "@js/types/types.d.ts";
+import { Feed } from "@js/types/types.ts";
 import FeedCard from "@js/components/feed/FeedCard.vue";
 
 interface DataType {

@@ -18,7 +18,7 @@
       </div>
       <div class="content">
         <div class="tag-area field is-grouped is-grouped-multiline">
-          <span v-if="feed.tags < 1" class="tag is-light control has-text-weight-medium">untagged</span>
+          <span v-if="feed.tags.length < 1" class="tag is-light control has-text-weight-medium">untagged</span>
           <div v-for="(tag, index) in feed.tags" :key="index" class="control">
             <tag :body="tag.body" @click="handleOnTagClick" />
           </div>
@@ -40,7 +40,7 @@ import Vue, { PropType } from "vue";
 import moment from "moment";
 import SelectFeed from "@js/components/feed/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
-import { Feed } from "@js/types/types.d.ts";
+import { Feed } from "@js/types/types.ts";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faClock } from "@fortawesome/free-regular-svg-icons";

@@ -2,11 +2,16 @@
   <div class="entry-card card">
     <div class="card-content">
       <div class="card-image">
-        <img :src="eyeCatch" :alt="entry.title" />
+        <img :src="eyeCatch" :alt="props.entry.title" />
       </div>
       <div class="content">
-        <a class="has-text-info entry-title has-text-weight-semibold" :href="entry.link" target="_blank" rel="noopener">
-          {{ entry.title }}
+        <a
+          class="has-text-info entry-title has-text-weight-semibold"
+          :href="props.entry.link"
+          target="_blank"
+          rel="noopener"
+        >
+          {{ props.entry.title }}
           <font-awesome-icon icon="external-link-alt" />
         </a>
         <p class="entry-description">
@@ -34,7 +39,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faClock, faNewspaper } from "@fortawesome/free-regular-svg-icons";
-import { Entry } from "@js/types/types.d.ts";
+import { Entry } from "@js/types/types.ts";
 library.add(faExternalLinkAlt, faClock, faNewspaper);
 
 type Props = {
@@ -83,6 +88,7 @@ export default defineComponent({
       limitedDescription,
       feedPath,
       eyeCatch,
+      props,
     };
   },
 });

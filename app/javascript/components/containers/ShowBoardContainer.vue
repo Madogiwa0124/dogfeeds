@@ -9,7 +9,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Entry, Board } from "@js/types/types.d.ts";
+import { Entry, Board } from "@js/types/types.ts";
 import BoardInfomation from "@js/components/board/BoardInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";

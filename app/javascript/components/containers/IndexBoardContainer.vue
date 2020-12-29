@@ -18,8 +18,8 @@ import Vue from "vue";
 import BoardCard from "@js/components/board/BoardCard.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
-import { getBoards } from "@js/services/BoardService";
-import { Board } from "@js/types/types";
+import { getBoards } from "@js/services/BoardService.ts";
+import { Board } from "@js/types/types.ts";
 import { sleep } from "@js/components/common/Sleep.ts";
 
 interface DataType {

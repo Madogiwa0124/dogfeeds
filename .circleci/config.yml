@@ -55,14 +55,10 @@ commands:
             bundle exec rake db:create
             bundle exec rake db:schema:load
   build_webpack:
-    parameters:
-      env:
-        type: string
-        default: test
     steps:
       - run:
           name: build webpack
-          command: NODE_ENV=<<parameters.env>> bundle exec rails webpacker:compile
+          command: yarn build:test
   store_coverage_atifacts:
     steps:
       - store_artifacts:
@@ -92,6 +88,9 @@ jobs:
       - run:
           name: run code analyze
           command: yarn lint
+      - run:
+          name: run code type check
+          command: yarn type:check
   ruby_build:
     executor:
       name: web
