@@ -21,5 +21,16 @@ FactoryBot.define do
         create(:entry, feed: feed)
       end
     end
+
+    trait :with_tag do
+      transient do
+        tag_body { 'tag_body' }
+      end
+
+      after(:create) do |feed, evaluator|
+        tag = create(:feed_tag, body: evaluator.tag_body)
+        create(:feed_tagging, feed: feed, feed_tag: tag)
+      end
+    end
   end
 end
