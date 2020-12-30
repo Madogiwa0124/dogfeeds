@@ -3,7 +3,8 @@
     <message v-if="hasError" title="Error" body="予期せぬエラーが発生しました🐕" level="danger" />
     <message v-if="notFound" title="NotFound" body="対象のボードが見つかりませんでした🐾" level="warning" />
 
-    <board-infomation v-if="!!board" :board="board" :entries="entries" />
+    <board-infomation v-if="!!board" :board="board" />
+    <entry-card-collection :entries="entries" :clumn-size="3" />
     <page-loader :init-is-loading="isLoading" />
   </div>
 </template>
@@ -11,6 +12,7 @@
 import Vue from "vue";
 import { Entry, Board } from "@js/types/types.ts";
 import BoardInfomation from "@js/components/board/BoardInfomation.vue";
+import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import { getBoard } from "@js/services/BoardService.ts";
@@ -29,7 +31,7 @@ const LOADING_SLEEP_MSEC = 200;
 
 export default Vue.extend({
   name: "ShowBoardContainer",
-  components: { BoardInfomation, PageLoader, Message },
+  components: { BoardInfomation, EntryCardCollection, PageLoader, Message },
   props: {
     boardId: {
       type: Number,
