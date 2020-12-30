@@ -13,7 +13,6 @@
 #  index_board_feeds_on_board_id  (board_id)
 #  index_board_feeds_on_feed_id   (feed_id)
 #
-
 class BoardFeed < ApplicationRecord
   belongs_to :board
   belongs_to :feed

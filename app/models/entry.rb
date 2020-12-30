@@ -17,7 +17,6 @@
 #  index_entries_on_feed_id       (feed_id)
 #  index_entries_on_published_at  (published_at)
 #
-
 class Entry < ApplicationRecord
   belongs_to :feed
 

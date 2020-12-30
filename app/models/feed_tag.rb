@@ -7,7 +7,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
 class FeedTag < ApplicationRecord
   has_many :feed_taggings, dependent: :destroy
   has_many :feeds, through: :feed_taggings
