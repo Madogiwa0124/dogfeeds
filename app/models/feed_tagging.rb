@@ -13,7 +13,6 @@
 #  index_feed_taggings_on_feed_id      (feed_id)
 #  index_feed_taggings_on_feed_tag_id  (feed_tag_id)
 #
-
 class FeedTagging < ApplicationRecord
   belongs_to :feed
   belongs_to :feed_tag

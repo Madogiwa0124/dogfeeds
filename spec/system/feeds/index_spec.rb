@@ -30,20 +30,41 @@ RSpec.describe 'フィード一覧画面', type: :system, js: true do
     end
   end
 
-  describe '検索が行えること' do
-    before do
-      create_list(:feed, 2, :with_entry, title: '検索対象外')
-      create(:feed, :with_entry, title: 'Searched')
-      visit feeds_path
+  describe 'フィード検索' do
+    context 'タグをクリックした場合' do
+      before do
+        create_list(:feed, 2, :with_entry, :with_tag, title: 'test_1 feed', tag_body: 'test_1')
+        create(:feed, :with_entry, :with_tag, title: 'test_2 feed', tag_body: 'test_2')
+        create(:feed, :with_entry, title: 'untagged feed')
+        visit feeds_path
+        within('.search-form .tag-area') { page.first('.my-tag').click }
+      end
+
+      it '検索結果に合致するフィードだけ表示されること' do
+        within('.feed-index') do
+          expect(page.find('.feed-card-collection')).to_not have_content 'test_2 feed'
+          expect(page.find('.feed-card-collection')).to_not have_content 'untagged feed'
+          expect(page.find('.feed-card-collection')).to have_content 'test_1 feed'
+          expect(page.all('.feed-card-collection .feed-card').length).to eq 2
+        end
+      end
     end
 
-    it '検索結果に合致するフィードだけ表示されること' do
-      within('.feed-index') do
+    context 'キーワードを入力して検索ボタンを押下した場合' do
+      before do
+        create_list(:feed, 2, :with_entry, title: '検索対象外')
+        create(:feed, :with_entry, title: 'Searched')
+        visit feeds_path
         page.find('.search-form .control input').fill_in(with: 'Searched')
         click_button('検索')
-        expect(page.find('.feed-card-collection')).to_not have_content '検索対象外'
-        expect(page.find('.feed-card-collection')).to have_content 'Searched'
-        expect(page.all('.feed-card-collection .feed-card').length).to eq 1
+      end
+
+      it '検索結果に合致するフィードだけ表示されること' do
+        within('.feed-index') do
+          expect(page.find('.feed-card-collection')).to_not have_content '検索対象外'
+          expect(page.find('.feed-card-collection')).to have_content 'Searched'
+          expect(page.all('.feed-card-collection .feed-card').length).to eq 1
+        end
       end
     end
   end
