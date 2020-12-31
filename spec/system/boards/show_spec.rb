@@ -12,9 +12,9 @@ RSpec.describe 'Board詳細画面', type: :system, js: true do
 
     it '正常に表示されること' do
       expect(page).to have_content 'board title'
+      expect(page).to have_content 'このRSSフィードのURLをコピーする'
       within('.description') do
         expect(page).to have_content '「feed 1、feed 2」をまとめたRSSフィードです。'
-        expect(page).to have_link nil, href: board_path(board, format: :rss)
       end
       within('.entry-card-collection') do
         expect(page.all('.entry-card').length).to eq 2

@@ -1,8 +1,8 @@
 <template>
   <div class="board-index">
     <div class="is-multiline columns">
-      <div v-for="board in boards" :key="board.id" class="column is-3">
-        <board-card :board="board" />
+      <div v-for="board in boards" :key="board.id" class="column is-4">
+        <board-card :board="board" :feeds="boradFeeds(board)" />
       </div>
     </div>
     <page-loader :init-is-loading="isLoading" />
@@ -48,12 +48,18 @@ export default Vue.extend({
   created: async function () {
     try {
       this.boards = await getBoards("", {});
+      this.feeds = await getFeeds("", { ids: this.boards.flatMap((board) => board.feedIds) });
       await sleep(LOADING_SLEEP_MSEC);
     } catch {
       this.hasError = true;
     } finally {
       this.isLoading = false;
     }
+  },
+  methods: {
+    boradFeeds: function (board: Board): Feed[] {
+      return this.feeds.filter((feed) => board.feedIds.includes(feed.id));
+    },
   },
 });
 </script>

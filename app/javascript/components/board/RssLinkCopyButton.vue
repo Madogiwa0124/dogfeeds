@@ -1,23 +1,21 @@
 <template>
-  <div class="board-information">
-    <h1 class="title">{{ board.title }}</h1>
-    <div class="btn-area center">
-      <rss-link-copy-button :board="board" />
-    </div>
-    <p class="description">
-      {{ board.description }}
-    </p>
-  </div>
+  <button class="rss-link-copy-button button is-conversion is-rounded" @click.stop="handleOnRssLinkCopyClick">
+    このRSSフィードのURLをコピーする
+    <font-awesome-icon icon="rss" />
+  </button>
 </template>
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import { Board } from "@js/types/types.ts";
-import RssLinkCopyButton from "@js/components/board/RssLinkCopyButton.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faRss } from "@fortawesome/free-solid-svg-icons";
+library.add(faRss);
 
 export default Vue.extend({
   name: "FeedInfomation",
-  components: { RssLinkCopyButton },
+  components: { FontAwesomeIcon },
   props: {
     board: {
       type: Object as PropType<Board>,
@@ -38,26 +36,6 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
-.board-information {
-  .title {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .btn-area {
-    margin-bottom: 15px;
-
-    button {
-      max-width: 100%;
-    }
-  }
-
-  .description {
-    margin-bottom: 15px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px;
-    background-color: #ffffff;
-  }
+.rss-link-copy-button {
 }
 </style>
