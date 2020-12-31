@@ -11,7 +11,7 @@
           </li>
         </ul>
       </div>
-      <feed-collection-container v-if="selectedFeedTab" />
+      <feed-collection-container v-if="selectedFeedTab" :search-word="initSearchWord" />
       <entry-collection-container v-if="selectedEntryTab" />
     </main>
   </div>
@@ -20,6 +20,7 @@
 import Vue from "vue";
 import FeedCollectionContainer from "@js/components/containers/feed/FeedCollectionContainer.vue";
 import EntryCollectionContainer from "@js/components/containers/feed/EntryCollectionContainer.vue";
+import { parse } from "querystring";
 
 enum Tabs {
   Feed = "feed",
@@ -50,6 +51,10 @@ export default Vue.extend({
     },
     selectedEntryTab(): boolean {
       return this.selectedTab == Tabs.Entry;
+    },
+    initSearchWord(): string | string[] {
+      const searchKeywordQuery = "?query[keyword]";
+      return parse(decodeURI(window.location.search))[searchKeywordQuery];
     },
   },
   methods: {
