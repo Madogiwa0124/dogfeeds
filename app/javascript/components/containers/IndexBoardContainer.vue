@@ -1,7 +1,9 @@
 <template>
   <div class="board-index">
     <div class="is-multiline columns">
-      <board-card v-for="board in boards" :key="board.id" :board="board" />
+      <div v-for="board in boards" :key="board.id" class="column is-4">
+        <board-card :board="board" :feeds="boradFeeds(board)" />
+      </div>
     </div>
     <page-loader :init-is-loading="isLoading" />
     <message v-if="hasError" title="Error" body="予期せぬエラーが発生しました🐕" level="danger" />
@@ -19,11 +21,13 @@ import BoardCard from "@js/components/board/BoardCard.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import { getBoards } from "@js/services/BoardService.ts";
-import { Board } from "@js/types/types.ts";
+import { Board, Feed } from "@js/types/types.ts";
 import { sleep } from "@js/components/common/Sleep.ts";
+import { getFeeds } from "@js/services/FeedService";
 
 interface DataType {
   boards: Board[];
+  feeds: Feed[];
   isLoading: boolean;
   hasError: boolean;
 }
@@ -36,6 +40,7 @@ export default Vue.extend({
   data(): DataType {
     return {
       boards: [],
+      feeds: [],
       isLoading: true,
       hasError: false,
     };
@@ -43,12 +48,18 @@ export default Vue.extend({
   created: async function () {
     try {
       this.boards = await getBoards("", {});
+      this.feeds = await getFeeds("", { ids: this.boards.flatMap((board) => board.feedIds) });
       await sleep(LOADING_SLEEP_MSEC);
     } catch {
       this.hasError = true;
     } finally {
       this.isLoading = false;
     }
+  },
+  methods: {
+    boradFeeds: function (board: Board): Feed[] {
+      return this.feeds.filter((feed) => board.feedIds.includes(feed.id));
+    },
   },
 });
 </script>

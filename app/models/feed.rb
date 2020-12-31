@@ -41,10 +41,15 @@ class Feed < ApplicationRecord
   scope :tagged_by, ->(tags) {
     where(id: FeedTagging.where(feed_tag_id: tags).select(:feed_id))
   }
-  scope :search, ->(keyword) {
-    return all if keyword.blank?
-
-    titled_by(keyword).or(tagged_by(FeedTag.where(body: keyword)))
+  scope :search, ->(keyword: '', ids: []) {
+    fillters = [
+      ->(relation) {
+        return relation if keyword.blank?
+        relation.titled_by(keyword).or(tagged_by(FeedTag.where(body: keyword)))
+      },
+      ->(relation) { ids.present? ? relation.where(id: ids) : relation }
+    ]
+    fillters.inject(all) { |result, filter| filter.call(result) }
   }
 
   def parsed_items

@@ -96,6 +96,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .entry-card {
   box-shadow: inherit;
+  margin-top: 0px !important;
 
   .card-content {
     word-wrap: break-word;

@@ -36,23 +36,27 @@ RSpec.describe Feed, type: :model do
 
   describe '.search' do
     let!(:titled_feed) { create(:feed, title: 'hoge') }
-    let!(:tagged_feed) { create(:feed, title: 'fuga') }
-    let!(:not_target_feed) { create(:feed, title: 'piyo') }
-    let!(:tag) { create(:feed_tag, body: 'ho') }
+    let!(:tagged_feed) { create(:feed, :with_tag, title: 'fuga', tag_body: 'ho') }
+    let!(:feed) { create(:feed, title: 'piyo') }
 
-    before { create(:feed_tagging, feed: tagged_feed, feed_tag: tag) }
-    subject { described_class.search('ho') }
+    before { create(:feed, title: 'untarget') }
 
-    it '検索文字列が含まれたタイトルを持つfeedが取得されること' do
-      is_expected.to include titled_feed
+    context 'keywordのみ指定した場合' do
+      it '検索文字列が含まれたタイトルまたはタグを持つfeedが取得されること' do
+        expect(described_class.search(keyword: 'ho')).to match_array [titled_feed, tagged_feed]
+      end
     end
 
-    it '検索文字列のタグが設定されたfeedが取得されること' do
-      is_expected.to include tagged_feed
+    context 'idsのみ指定した場合' do
+      it '指定したidを持つfeedが取得されること' do
+        expect(described_class.search(ids: [feed.id])).to eq [feed]
+      end
     end
 
-    it 'それ以外のfeedは検索結果に含まれないこと' do
-      is_expected.to_not include not_target_feed
+    context 'keywordとidを指定した場合' do
+      it '指定したid内で検索文字列が含まれたタイトルまたはタグを持つfeedが取得されること' do
+        expect(described_class.search(keyword: 'ho', ids: [titled_feed.id])).to eq [titled_feed]
+      end
     end
   end
 

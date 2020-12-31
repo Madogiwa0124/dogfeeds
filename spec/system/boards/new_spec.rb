@@ -37,7 +37,7 @@ RSpec.describe 'Board作成画面', type: :system, js: true do
       expect(page).to have_content('board title')
       expect(page).to have_content(feeds[0].title)
       expect(page).to have_content(feeds[2].title)
-      expect(page).to have_content('Rssへのリンクはこちら')
+      expect(page).to have_content('このRSSフィードのURLをコピーする')
     end
   end
 end
