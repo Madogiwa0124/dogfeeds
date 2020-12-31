@@ -28,7 +28,7 @@
           <font-awesome-icon :icon="['fas', 'external-link-alt']" />
         </a>
         <p class="last-updated-at has-text-right">
-          Last updadated {{ feed.lastEntry.publishedAt | fromNow }}
+          Last updated {{ feed.lastEntry.publishedAt | fromNow }}
           <font-awesome-icon :icon="['far', 'clock']" />
         </p>
       </div>
