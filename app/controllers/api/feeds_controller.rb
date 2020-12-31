@@ -16,6 +16,6 @@ class Api::FeedsController < ApplicationController
   private
 
   def search_params
-    { keyword: params.dig(:query, :keyword), ids: params.dig(:query, :ids) }
+    { keyword: params.dig(:query, :keyword), ids: params[:ids] }
   end
 end
