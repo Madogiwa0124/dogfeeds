@@ -3,7 +3,7 @@ name: lighthouse
 on: [pull_request]
 
 jobs:
-  build:
+  run-lighthouse:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test

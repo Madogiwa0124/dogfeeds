@@ -3,7 +3,7 @@ name: node_lint
 on: [push]
 
 jobs:
-  build:
+  run-node-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
