@@ -1,6 +1,13 @@
 <template>
   <div class="feed-infomation">
     <h1 class="title">{{ feed.title }}</h1>
+    <div class="center description">
+      RSSフィードのURL:
+      <a :href="feed.endpoint" target="_blank" rel="noopener">
+        {{ feed.endpoint }}
+        <font-awesome-icon icon="external-link-alt" />
+      </a>
+    </div>
     <div class="is-centered tags is-grouped">
       <div v-for="(tag, index) in feed.tags" :key="index" class="control">
         <tag :body="tag.body" @click="handleOnTagClick" />
@@ -14,10 +21,14 @@ import Vue, { PropType } from "vue";
 import { Feed, Entry } from "@js/types/types.ts";
 import Tag from "@js/components/Tag.vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+library.add(faExternalLinkAlt);
 
 export default Vue.extend({
   name: "FeedInfomation",
-  components: { Tag, EntryCardCollection },
+  components: { Tag, EntryCardCollection, FontAwesomeIcon },
   props: {
     feed: {
       type: Object as PropType<Feed>,
@@ -39,6 +50,14 @@ export default Vue.extend({
 .feed-infomation {
   max-width: 90%;
   margin: 0px auto;
+
+  .description {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
 
   .title {
     text-align: center;
