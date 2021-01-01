@@ -35,7 +35,4 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss" scoped>
-.rss-link-copy-button {
-}
-</style>
+<style lang="scss" scoped></style>

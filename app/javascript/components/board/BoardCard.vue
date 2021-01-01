@@ -66,11 +66,6 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
-.board-card:hover {
-  cursor: pointer;
-  box-shadow: inherit;
-}
-
 .board-card {
   .card-header-title {
     padding: 10px;
@@ -98,5 +93,9 @@ export default Vue.extend({
       object-fit: cover;
     }
   }
+}
+.board-card:hover {
+  cursor: pointer;
+  box-shadow: inherit;
 }
 </style>

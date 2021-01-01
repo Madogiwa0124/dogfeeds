@@ -1,0 +1,6 @@
+public/packs
+public/packs-test
+vendor
+coverage
+.lighthouseci
+.lighthouseci_result

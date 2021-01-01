@@ -19,7 +19,9 @@ jobs:
           ${{ runner.os }}-node_modules-
     - name: install node deps
       run: yarn install
-    - name: lint
-      run: yarn lint
+    - name: lint js
+      run: yarn lint:js
+    - name: lint css
+      run: yarn lint:css
     - name: typecheck
       run: yarn type:check
