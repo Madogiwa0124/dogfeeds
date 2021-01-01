@@ -27,6 +27,7 @@
       </div>
       <div class="control">
         <button class="button submit is-success" @click="keywordSearch">検索</button>
+        <button class="button" @click="keywordReset">Reset</button>
       </div>
     </div>
   </div>
@@ -91,6 +92,9 @@ export default {
     tagSearch: function (tagBody) {
       this.keyword = tagBody;
       this.$emit("search", tagBody);
+    },
+    keywordReset: function () {
+      this.keyword = "";
     },
   },
 };
