@@ -4,14 +4,28 @@ $conversion-color: rgb(255, 165, 0);
   color: $conversion-color;
 }
 
-button.is-conversion {
+button.is-conversion, input[type="submit"].is-conversion {
   background-color: $conversion-color !important;
   color: white;
   border: none;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
 }
 
-button.is-conversion:hover {
+button.is-conversion:hover, input[type="submit"].is-conversion:hover {
+  background: darken($conversion-color, 2%) !important;
+  color: white;
+  border: none;
+  box-shadow: inherit;
+}
+
+button.is-conversion.is-outline {
+  background-color: #FFFFFF !important;
+  color: $conversion-color;
+  border: 1px solid $conversion-color;
+  box-shadow: inherit;
+}
+
+button.is-conversion.is-outline:hover {
   background: darken($conversion-color, 2%) !important;
   color: white;
   border: none;

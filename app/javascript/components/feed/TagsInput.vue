@@ -3,7 +3,7 @@
     <label class="label">タグ</label>
     <input v-for="(tag, index) in tags" :key="index" type="hidden" name="feed[tags][]" :value="tag.body" />
     <div class="tag-list">
-      <span v-for="(tag, index) in tags" :key="index" class="tag is-primary">
+      <span v-for="(tag, index) in tags" :key="index" class="tag is-success">
         {{ tag.body }}
         <span class="delete is-small" @click="deleteTag(index)" />
       </span>

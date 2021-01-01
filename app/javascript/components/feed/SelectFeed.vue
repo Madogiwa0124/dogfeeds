@@ -1,12 +1,18 @@
 <template>
-  <a class="select-feed is-conversion-color" @click="toggleSelected">
+  <button
+    class="select-feed button is-conversion is-rounded is-outline"
+    :class="{ selected: selected }"
+    @click="toggleSelected"
+  >
     <span v-if="selected">
       <font-awesome-icon :icon="['far', 'check-square']" />
+      RSSフィードの選択解除
     </span>
     <span v-else>
       <font-awesome-icon :icon="['far', 'square']" />
+      RSSフィードを選択する
     </span>
-  </a>
+  </button>
 </template>
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -31,10 +37,4 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import "../../stylesheets/common.scss";
-
-.select-feed:hover {
-  color: darken($conversion-color, 10%);
-}
-</style>
+<style lang="scss" scoped></style>
