@@ -6,21 +6,38 @@
   margin: 20px;
 }
 
-.feed-form {
+.feed-form-area {
   margin: 0px auto;
-  max-width: 90%;
+  width: 700px;
+  max-width: 95%;
+  padding: 20px;
+  background-color: white;
 
-  .tags-input {
-    .tag {
-      margin-right: 3px;
+  .title {
+    font-size: 20px;
+  }
+
+  .feed-form {
+    .form-item {
+      margin-bottom: 20px;
     }
 
-    .tag-list {
-      display: inline;
+    .tags-input {
+      .tag {
+        margin-right: 3px;
+      }
+
+      .tag-list {
+        display: inline;
+      }
+
+      .input {
+        width: initial;
+      }
     }
 
-    .input {
-      width: initial;
+    input[type="submit"].is-conversion {
+      width: 90%;
     }
   }
 }
