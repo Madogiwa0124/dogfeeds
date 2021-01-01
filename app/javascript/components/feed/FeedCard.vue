@@ -117,11 +117,6 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
-.feed-card:hover {
-  cursor: pointer;
-  box-shadow: inherit;
-}
-
 .feed-card {
   border-radius: 0px;
 
@@ -175,5 +170,10 @@ export default Vue.extend({
   .card-footer-item {
     padding: 10px;
   }
+}
+
+.feed-card:hover {
+  cursor: pointer;
+  box-shadow: inherit;
 }
 </style>

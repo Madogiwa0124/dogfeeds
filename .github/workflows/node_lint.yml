@@ -1,0 +1,27 @@
+name: node_lint
+
+on: [push]
+
+jobs:
+  run-node-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+    - name: cache node deps
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-node_modules-
+    - name: install node deps
+      run: yarn install
+    - name: lint js
+      run: yarn lint:js
+    - name: lint css
+      run: yarn lint:css
+    - name: typecheck
+      run: yarn type:check

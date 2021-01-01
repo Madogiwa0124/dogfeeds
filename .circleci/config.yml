@@ -79,18 +79,6 @@ jobs:
     steps:
       - attach_current
       - install_node_deps
-  node_lint:
-    executor:
-      name: web
-    steps:
-      - attach_current
-      - install_node_deps
-      - run:
-          name: run code analyze
-          command: yarn lint
-      - run:
-          name: run code type check
-          command: yarn type:check
   ruby_build:
     executor:
       name: web
@@ -140,6 +128,3 @@ workflows:
       - node_build:
           requires:
             - build
-      - node_lint:
-          requires:
-            - node_build

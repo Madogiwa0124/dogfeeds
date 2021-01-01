@@ -70,7 +70,4 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss" scoped>
-.entry-collection-container {
-}
-</style>
+<style lang="scss" scoped></style>
