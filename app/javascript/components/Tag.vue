@@ -1,5 +1,5 @@
 <template>
-  <div class="my-tag tags has-addons" @click="handleOnClick">
+  <div class="my-tag has-addons" @click="handleOnClick">
     <span class="tag is-success">{{ body }}</span>
     <span v-if="count" class="tag">{{ count }}</span>
   </div>

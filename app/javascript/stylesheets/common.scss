@@ -18,6 +18,20 @@ button.is-conversion:hover {
   box-shadow: inherit;
 }
 
+button.is-conversion.is-outline {
+  background-color: #FFFFFF !important;
+  color: $conversion-color;
+  border: 1px solid $conversion-color;
+  box-shadow: inherit;
+}
+
+button.is-conversion.is-outline:hover {
+  background: darken($conversion-color, 2%) !important;
+  color: white;
+  border: none;
+  box-shadow: inherit;
+}
+
 .center {
   text-align: center;
 }

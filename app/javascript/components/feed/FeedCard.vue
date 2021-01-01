@@ -2,15 +2,8 @@
   <div :id="`feed-card-${feed.id}`" class="feed-card card" @click="redirectFeedPath">
     <header class="card-header">
       <p class="card-header-title">
-        {{ feed.title | truncate(22) }}
+        {{ feed.title | truncate(24) }}
       </p>
-      <select-feed
-        v-if="selectable"
-        class="selected-feed"
-        :selected="selected"
-        @selected.stop="handleOnSelected"
-        @unselected.stop="handleOnUnselected"
-      />
     </header>
     <div class="card-content">
       <div class="card-image">
@@ -33,6 +26,17 @@
         </p>
       </div>
     </div>
+    <footer class="card-footer">
+      <p class="card-footer-item">
+        <select-feed
+          v-if="selectable"
+          class="selected-feed"
+          :selected="selected"
+          @selected.stop="handleOnSelected"
+          @unselected.stop="handleOnUnselected"
+        />
+      </p>
+    </footer>
   </div>
 </template>
 <script lang="ts">
@@ -122,9 +126,8 @@ export default Vue.extend({
   border-radius: 0px;
 
   .selected-feed {
-    height: 100%;
-    font-size: 20px;
-    padding: 10px;
+    font-size: 14px;
+    width: 70%;
   }
 
   .card-header-title {
@@ -137,18 +140,25 @@ export default Vue.extend({
 
     .content {
       margin: 0px 10px 10px 10px;
+      line-height: 16px;
 
       .last-entry-title {
         font-size: 14px;
+      }
+
+      .last-updated-at {
+        font-size: 12px;
+        color: #999999;
       }
     }
   }
 
   .card-image {
-    margin: 0px;
+    margin: 0px 0px 5px 0px;
+    line-height: 0px;
 
     img {
-      height: 250px;
+      height: 220px;
       width: 100%;
       object-fit: cover;
     }
@@ -156,10 +166,14 @@ export default Vue.extend({
 
   .tag-area {
     .control {
-      margin-top: 6px;
-      margin-right: 6px;
-      margin-bottom: 6px !important;
+      margin-top: 0px;
+      margin-right: 5px;
+      margin-bottom: 5px !important;
     }
+  }
+
+  .card-footer-item {
+    padding: 10px;
   }
 }
 </style>
