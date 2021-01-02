@@ -9,13 +9,12 @@ class Admin::FeedsController < Admin::ApplicationController
 
   def update
     post_form = Feed::PostForm.new(feed_params.merge(id: params[:id]))
-    post_form.update!
-    redirect_to feed_path(post_form.feed)
-  rescue StandardError => e
-    @feed = post_form.feed
-    logger.error(e)
-    Rollbar.error(e)
-    render :edit
+    if post_form.update
+      redirect_to feed_path(post_form.feed)
+    else
+      @feed = post_form.feed
+      render :edit
+    end
   end
 
   def destroy
