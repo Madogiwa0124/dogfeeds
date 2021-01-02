@@ -53,16 +53,19 @@ class Feed < ApplicationRecord
   }
 
   def parsed_items
+    return [] if endpoint.blank?
     @parsed_items ||= parsed_object ? parsed_object.items : []
   end
 
   def parsed_header_title
+    return '' if endpoint.blank?
     @parsed_header_title ||= parsed_object ? parsed_object.header.title : ''
   end
 
   private
 
   def parsed_object
+    return nil if endpoint.blank?
     @parsed_object ||= client_class.new(endpoint).parsed_object
   rescue RSS::NotWellFormedError => e
     raised_error = e.exception("#{e.message} raised from endpoint: #{endpoint}")
