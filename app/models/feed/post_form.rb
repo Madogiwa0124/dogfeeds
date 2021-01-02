@@ -2,6 +2,22 @@ class Feed::PostForm
   include ActiveModel::Model
   attr_accessor :id, :title, :endpoint, :tags, :feed
 
+  def create
+    create!
+    true
+  # TODO: StandardErrorをrescueするのはイケてないので治す
+  rescue StandardError
+    false
+  end
+
+  def update
+    update!
+    true
+  # TODO: StandardErrorをrescueするのはイケてないので治す
+  rescue StandardError
+    false
+  end
+
   def create!
     ActiveRecord::Base.transaction do
       feed_create!
