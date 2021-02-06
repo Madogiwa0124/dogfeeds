@@ -35,7 +35,7 @@
     "@babel/core": "^7",
     "@babel/plugin-transform-runtime": "^7.12.15",
     "@babel/preset-env": "^7.12.1",
-    "@lhci/cli": "0.6.x",
+    "@lhci/cli": "0.7.x",
     "@types/axios": "^0.14.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
