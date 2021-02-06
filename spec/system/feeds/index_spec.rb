@@ -37,6 +37,7 @@ RSpec.describe 'フィード一覧画面', type: :system, js: true do
         create(:feed, :with_entry, :with_tag, title: 'test_2 feed', tag_body: 'test_2')
         create(:feed, :with_entry, title: 'untagged feed')
         visit feeds_path
+        sleep 0.5 # js側のレンダリングを待つためにsleep(capybaraでwaitしたかったが上手く行かなかった。。。)
         within('.search-form .tag-area') { page.first('.my-tag').click }
       end
 
@@ -55,6 +56,7 @@ RSpec.describe 'フィード一覧画面', type: :system, js: true do
         create_list(:feed, 2, :with_entry, title: '検索対象外')
         create(:feed, :with_entry, title: 'Searched')
         visit feeds_path
+        sleep 0.5 # js側のレンダリングを待つためにsleep(capybaraでwaitしたかったが上手く行かなかった。。。)
         page.find('.search-form .control input').fill_in(with: 'Searched')
         click_button('検索')
       end

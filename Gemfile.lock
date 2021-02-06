@@ -180,6 +180,8 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.1)
+    rss (0.2.9)
+      rexml
     rubocop (1.9.1)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -247,6 +249,7 @@ DEPENDENCIES
   rails (~> 6.1.1)
   rollbar
   rspec-rails
+  rss
   rubocop
   rubocop-performance
   rubocop-rails
@@ -256,7 +259,7 @@ DEPENDENCIES
   spp
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.0.0p0
 
 BUNDLED WITH
-   2.1.4
+   2.2.3
