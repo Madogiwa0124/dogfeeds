@@ -17,6 +17,6 @@ module.exports = function getOutput(rootPath) {
     path: `${rootPath}/public/${path}`,
     publicPath: `/${path}/`,
     // 出力先のファイル
-    filename: "[name]-[hash].js",
+    filename: "[name]-[contenthash].js",
   };
 };

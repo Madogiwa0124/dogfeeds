@@ -69,7 +69,7 @@ module.exports = {
   },
   plugins: [
     // CSSを別ファイルでbuildする
-    new MiniCssExtractPlugin({ filename: "[name]-[hash].css" }),
+    new MiniCssExtractPlugin({ filename: "[name]-[contenthash].css" }),
     // manifestファイルの出力
     new WebpackAssetsManifest({ publicPath: true }),
     new VueLoaderPlugin(),
