@@ -1,6 +1,9 @@
 <template>
   <div class="feed-show">
     <feed-infomation v-if="!!feed" :feed="feed" :entries="entries" @tagClick="handleOnTagClick" />
+    <div class="center">
+      <to-top-button />
+    </div>
     <page-loader :init-is-loading="isLoading" />
     <message v-if="notFound" title="NotFound" body="対象のフィードが見つかりませんでした🐾" level="warning" />
     <message v-if="hasError" title="Error" body="予期せぬエラーが発生しました🐕" level="danger" />
@@ -12,6 +15,7 @@ import { Feed, Entry } from "@js/types/types.ts";
 import FeedInfomation from "@js/components/feed/FeedInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
+import ToTopButton from "@js/components/common/ToTopButton.vue";
 import { getFeed } from "@js/services/FeedService.ts";
 import { getFeedEntries } from "@js/services/EntryService.ts";
 import { sleep } from "@js/components/common/Sleep.ts";
@@ -29,7 +33,7 @@ const TAG_CLICK_REDIRECT_PATH = "/feeds";
 
 export default Vue.extend({
   name: "ShowFeedContainer",
-  components: { FeedInfomation, PageLoader, Message },
+  components: { FeedInfomation, PageLoader, Message, ToTopButton },
   props: {
     feedId: {
       type: Number,

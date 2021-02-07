@@ -16,6 +16,9 @@
     </div>
     <feed-card-collection v-if="selectedFeedTab" :init-feeds="feeds" :selectable="false" :clumn-size="3" />
     <entry-card-collection v-if="selectedEntryTab" :entries="entries" :clumn-size="3" />
+    <div class="center">
+      <to-top-button />
+    </div>
     <page-loader :init-is-loading="isLoading" />
   </div>
 </template>
@@ -27,6 +30,7 @@ import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
+import ToTopButton from "@js/components/common/ToTopButton.vue";
 import { getBoard } from "@js/services/BoardService.ts";
 import { getFeedEntries } from "@js/services/EntryService.ts";
 import { sleep } from "@js/components/common/Sleep.ts";
@@ -50,7 +54,7 @@ enum Tabs {
 
 export default Vue.extend({
   name: "ShowBoardContainer",
-  components: { BoardInfomation, EntryCardCollection, FeedCardCollection, PageLoader, Message },
+  components: { BoardInfomation, EntryCardCollection, FeedCardCollection, PageLoader, Message, ToTopButton },
   props: {
     boardId: {
       type: Number,
