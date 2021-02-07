@@ -1,5 +1,8 @@
 // NOTE: Rollbarにブラウザ側で発生したエラー通知を送る機能を有効化
 // https://docs.rollbar.com/docs/browser-js
+
+import process from "process";
+
 const token = process.env.ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN;
 const railsEnv = process.env.RAILS_ENV;
 const codeVersion = process.env.SOURCE_VERSION;

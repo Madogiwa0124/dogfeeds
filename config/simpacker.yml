@@ -1,5 +1,5 @@
 default: &default
-  manifest_path: public/packs/manifest.json
+  manifest_path: public/packs/assets-manifest.json
 
 development:
   <<: *default
@@ -8,7 +8,7 @@ development:
 test:
   <<: *default
   cache_manifest: false
-  manifest_path: public/packs-test/manifest.json
+  manifest_path: public/packs-test/assets-manifest.json
 
 production:
   <<: *default
