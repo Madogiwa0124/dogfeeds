@@ -62,6 +62,8 @@ module.exports = {
       vue: "vue/dist/vue.esm.js",
       "@js": `${__dirname}/app/javascript`,
       "@css": `${__dirname}/app/javascript/stylesheets`,
+      querystring: "querystring-es3",
+      process: "process/browser",
     },
     extensions: [".ts", ".js"],
   },
