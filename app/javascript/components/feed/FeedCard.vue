@@ -7,7 +7,7 @@
     </header>
     <div class="card-content">
       <div class="card-image">
-        <img :src="eyeCatch" :alt="feed.lastEntry.title" />
+        <img :src="eyeCatch" :alt="feed.lastEntry.title" height="220" width="350" />
       </div>
       <div class="content">
         <div class="tag-area field is-grouped is-grouped-multiline">
