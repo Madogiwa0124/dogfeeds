@@ -153,6 +153,7 @@ export default Vue.extend({
     line-height: 0px;
 
     img {
+      min-height: 220px;
       height: 220px;
       width: 100%;
       object-fit: cover;
