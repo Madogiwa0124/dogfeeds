@@ -20,6 +20,9 @@ module Dogfeeds
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
     config.paths.add 'lib', eager_load: true
+    Rails.application.config.public_file_server.headers = {
+      'Cache-Control' => "public, max-age=#{365.days.to_i}"
+    }
     config.generators do |g|
       g.assets      false
       g.helper      false
