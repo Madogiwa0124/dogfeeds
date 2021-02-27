@@ -17,7 +17,7 @@ RSpec.describe Feed::PostForm, type: :model do
       end
 
       it '関連モデルと合わせてfeedが作成されること' do
-        feed = Feed.find_by(title: title)
+        feed = Feed.preload(:entries, :tags).find_by(title: title)
         expect(feed.title).to eq title
         expect(feed.entries.length).to be_positive
         expect(feed.tags.pluck(:body)).to eq tags
@@ -27,7 +27,7 @@ RSpec.describe Feed::PostForm, type: :model do
         let(:tags) { nil }
 
         it '関連モデルと合わせてfeedが作成されること' do
-          feed = Feed.find_by(title: title)
+          feed = Feed.preload(:entries, :tags).find_by(title: title)
           expect(feed.title).to eq title
           expect(feed.entries.length).to be_positive
           expect(feed.tags).to eq []
@@ -62,25 +62,23 @@ RSpec.describe Feed::PostForm, type: :model do
   describe '#update!', focus: true do
     let(:title) { 'updated_title' }
     let!(:feed) { create(:feed) }
-    let(:params) do
-      { id: feed.id, title: title, endpoint: 'https://example.com/rss', tags: tags }
-    end
 
     before { rss_mock_enable(resource: valid_rss_body) }
 
     context '正常に終了した場合' do
       before do
+        params = { id: feed.id, title: title, endpoint: 'https://example.com/rss', tags: tags }
         described_class.new(params).update!
-        feed.reload
       end
 
       context 'タグが入力済の場合' do
         let(:tags) { %w[updated_tag] }
 
         it '関連モデルと合わせてfeedが更新されること' do
-          expect(feed.title).to eq title
-          expect(feed.entries.length).to eq 2
-          expect(feed.tags.pluck(:body)).to eq tags
+          updated_feed = Feed.preload(:entries, :tags).find_by(title: title)
+          expect(updated_feed.title).to eq title
+          expect(updated_feed.entries.length).to eq 2
+          expect(updated_feed.tags.map(&:body)).to eq tags
         end
       end
 
@@ -88,9 +86,10 @@ RSpec.describe Feed::PostForm, type: :model do
         let(:tags) { nil }
 
         it '関連モデルと合わせてfeedが更新されること' do
-          expect(feed.title).to eq title
-          expect(feed.entries.length).to eq 2
-          expect(feed.tags).to eq []
+          updated_feed = Feed.preload(:entries, :tags).find_by(title: title)
+          expect(updated_feed.title).to eq title
+          expect(updated_feed.entries.length).to eq 2
+          expect(updated_feed.tags).to eq []
         end
       end
     end

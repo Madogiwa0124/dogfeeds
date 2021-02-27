@@ -12,7 +12,8 @@ class Feed::EntryCreater
       # rubocop:disable Rails/SkipsModelValidations
       Entry.insert_all!(target_entries)
       # rubocop:enable Rails/SkipsModelValidations
-      feed.update!(last_published_at: feed.last_entry.published_at)
+      reloaded_feed = Feed.preload(:last_entry).find(feed.id)
+      reloaded_feed.update!(last_published_at: reloaded_feed.last_entry.published_at)
     end
   end
 
