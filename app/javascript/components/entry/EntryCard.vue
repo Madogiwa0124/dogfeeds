@@ -39,7 +39,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faClock, faNewspaper } from "@fortawesome/free-regular-svg-icons";
-import { Entry } from "@js/types/types.ts";
+import { Entry } from "@js/types/types";
 library.add(faExternalLinkAlt, faClock, faNewspaper);
 
 type Props = {

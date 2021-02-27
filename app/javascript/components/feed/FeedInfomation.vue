@@ -18,7 +18,7 @@
 </template>
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { Feed, Entry } from "@js/types/types.ts";
+import { Feed, Entry } from "@js/types/types";
 import Tag from "@js/components/Tag.vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";

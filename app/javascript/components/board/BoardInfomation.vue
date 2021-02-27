@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { Board } from "@js/types/types.ts";
+import { Board } from "@js/types/types";
 import RssLinkCopyButton from "@js/components/board/RssLinkCopyButton.vue";
 
 export default Vue.extend({

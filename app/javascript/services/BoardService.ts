@@ -1,5 +1,5 @@
-import { Board, PostBoardResponse } from "@js/types/types.ts";
-import Client from "@js/services/Client.ts";
+import { Board, PostBoardResponse } from "@js/types/types";
+import Client from "@js/services/Client";
 const BOARDS_API_ENDPOINT = "/api/boards";
 
 export async function postBoard(params: object): Promise<PostBoardResponse> {

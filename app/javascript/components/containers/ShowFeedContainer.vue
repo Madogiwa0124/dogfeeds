@@ -11,14 +11,14 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Feed, Entry } from "@js/types/types.ts";
+import { Feed, Entry } from "@js/types/types";
 import FeedInfomation from "@js/components/feed/FeedInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import ToTopButton from "@js/components/common/ToTopButton.vue";
-import { getFeed } from "@js/services/FeedService.ts";
-import { getFeedEntries } from "@js/services/EntryService.ts";
-import { sleep } from "@js/components/common/Sleep.ts";
+import { getFeed } from "@js/services/FeedService";
+import { getFeedEntries } from "@js/services/EntryService";
+import { sleep } from "@js/components/common/Sleep";
 
 interface DataType {
   feed: Feed | null;
