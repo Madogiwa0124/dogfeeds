@@ -19,11 +19,4 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation_warnings = []
   # CI実行時にはログの出力を抑制する
   config.log_level = ENV['CI'].present? ? :fatal : :debug
-
-  # configured bullet.
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.rails_logger = true
-    Bullet.raise = true
-  end
 end

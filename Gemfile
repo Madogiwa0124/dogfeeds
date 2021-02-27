@@ -19,7 +19,6 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'dotenv-rails'
   gem 'spp'
-  gem 'bullet'
 end
 
 group :development do

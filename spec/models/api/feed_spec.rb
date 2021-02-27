@@ -11,6 +11,7 @@ RSpec.describe Api::Feed, type: :model do
       before { create(:feed_tagging, feed: feed, feed_tag: tag) }
 
       it 'Tag、Entryを含んだFeedのHashが取得できること' do
+        feed.strict_loading!(false)
         expect(Api::Feed.new(feed: feed).attributes).to eq(
           {
             id: feed.id,
@@ -38,6 +39,7 @@ RSpec.describe Api::Feed, type: :model do
 
     context 'Tag、Entryが無い場合' do
       it 'Tagは空配列、EntryはnilでFeedのHashが取得できること' do
+        feed.strict_loading!(false)
         expect(Api::Feed.new(feed: feed).attributes).to eq(
           {
             id: feed.id,
