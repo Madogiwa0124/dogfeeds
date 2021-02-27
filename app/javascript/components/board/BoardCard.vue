@@ -24,7 +24,7 @@
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import moment from "moment";
-import { Board, Feed } from "@js/types/types.ts";
+import { Board, Feed } from "@js/types/types";
 import RssLinkCopyButton from "@js/components/board/RssLinkCopyButton.vue";
 const NO_IMAGE_PATH = "/noimage.png";
 const IMAGES_LIMIT = 6;

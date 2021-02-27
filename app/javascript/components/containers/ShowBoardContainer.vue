@@ -24,16 +24,16 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { Entry, Feed, Board } from "@js/types/types.ts";
+import { Entry, Feed, Board } from "@js/types/types";
 import BoardInfomation from "@js/components/board/BoardInfomation.vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import ToTopButton from "@js/components/common/ToTopButton.vue";
-import { getBoard } from "@js/services/BoardService.ts";
-import { getFeedEntries } from "@js/services/EntryService.ts";
-import { sleep } from "@js/components/common/Sleep.ts";
+import { getBoard } from "@js/services/BoardService";
+import { getFeedEntries } from "@js/services/EntryService";
+import { sleep } from "@js/components/common/Sleep";
 import { getFeeds } from "@js/services/FeedService";
 
 interface DataType {
