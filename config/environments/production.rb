@@ -26,4 +26,6 @@ Rails.application.configure do
   end
 
   config.active_record.dump_schema_after_migration = false
+  # NOTE: 本番環境では稼働優先でlogに出力するだけにしとく
+  config.active_record.action_on_strict_loading_violation = :log
 end
