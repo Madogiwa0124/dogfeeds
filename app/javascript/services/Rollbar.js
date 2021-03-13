@@ -22,6 +22,9 @@ if (rollbarParamsValidation()) {
           guess_uncaught_frames: true,
         },
       },
+      server: {
+        root: "webpack:///./",
+      },
     },
   };
 
