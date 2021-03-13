@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :board do
     title { 'Board Title' }
+    strict_loaded
   end
 
   trait :with_feeds do
