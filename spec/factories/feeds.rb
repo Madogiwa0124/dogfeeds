@@ -3,6 +3,7 @@ FactoryBot.define do
     sequence(:title) { |n| "title_#{n}" }
     last_published_at { Time.current }
     sequence(:endpoint) { |n| "https://#{n}.example.com/rss" }
+    strict_loaded
 
     trait :with_entry do
       after(:create) do |feed, _evaluator|

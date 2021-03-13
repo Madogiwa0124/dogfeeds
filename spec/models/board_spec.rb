@@ -6,7 +6,6 @@ RSpec.describe Board, type: :model do
     let(:last_entries) { create_list(:entry, 2, published_at: Time.current) }
 
     before do
-      board.strict_loading!(false)
       create(:entry, feed: last_entries[0].feed, published_at: 1.day.ago)
       create(:entry, feed: last_entries[1].feed, published_at: 1.day.ago)
       board.board_feeds.create(feed: last_entries[0].feed)
@@ -23,7 +22,6 @@ RSpec.describe Board, type: :model do
     let(:description) { '「タイトル1、タイトル2」をまとめたRSSフィードです。' }
 
     before do
-      board.strict_loading!(false)
       board.board_feeds.create(feed: create(:feed, title: 'タイトル1'))
       board.board_feeds.create(feed: create(:feed, title: 'タイトル2'))
     end
@@ -79,7 +77,6 @@ RSpec.describe Board, type: :model do
     let(:board) { create(:board, :with_feeds) }
 
     it '引数で渡されたidを持つfeedsに書き換わること' do
-      board.strict_loading!(false)
       board.recreate_board_feeds!(feeds.map(&:id))
       expect(board.feeds).to match_array feeds
     end

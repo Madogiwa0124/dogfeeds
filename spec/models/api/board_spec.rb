@@ -4,8 +4,6 @@ RSpec.describe Api::Board, type: :model do
   describe '#attribute' do
     let!(:board) { create(:board, :with_feeds) }
 
-    before { board.strict_loading!(false) }
-
     context 'Entryを持つ場合' do
       let!(:entry) { create(:entry, feed: board.feeds.take) }
 

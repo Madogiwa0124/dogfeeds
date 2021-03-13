@@ -5,7 +5,6 @@ RSpec.describe 'Board一覧画面', type: :system, js: true do
     context 'ボードが存在する場合' do
       before do
         boards = create_list(:board, 2, :with_feeds)
-        boards.each { |board| board.strict_loading!(false) }
         create(:entry, feed: boards[0].feeds.take)
         create(:entry, feed: boards[1].feeds.take)
         visit boards_path
