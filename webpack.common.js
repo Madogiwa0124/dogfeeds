@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require("webpack-assets-manifest");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
@@ -73,5 +74,12 @@ module.exports = {
     // manifestファイルの出力
     new WebpackAssetsManifest({ publicPath: true }),
     new VueLoaderPlugin(),
+    new webpack.EnvironmentPlugin({
+      RAILS_ENV: "",
+      NODE_ENV: "",
+      ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN: "",
+      SOURCE_VERSION: "",
+      UPLOAD_SOURCEMAP: "",
+    }),
   ],
 };
