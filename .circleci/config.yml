@@ -59,10 +59,13 @@ commands:
       - run:
           name: build webpack
           command: yarn build:test
-  store_coverage_atifacts:
+  store_atifacts:
+    parameters:
+      path:
+        type: string
     steps:
       - store_artifacts:
-          path: coverage
+          path: << parameters.path >>
 jobs:
   build:
     executor:
@@ -97,6 +100,11 @@ jobs:
       - run:
           name: run brakeman
           command: bundle exec brakeman
+      - run:
+          name: run rubycritic
+          command: bundle exec rubycritic
+      - store_atifacts:
+          path: tmp/rubycritic
   ruby_test:
     executor:
       name: web-db
@@ -109,7 +117,8 @@ jobs:
       - run:
           name: run tests
           command: bundle exec rspec spec/
-      - store_coverage_atifacts
+      - store_atifacts:
+          path: coverage
 workflows:
   version: 2
   build:
