@@ -18,9 +18,8 @@ class Api::BoardsController < ApplicationController
       feeds: feeds
     )
     render json: { id: board.id }
-  rescue StandardError => e
-    logger.error(e)
-    Rollbar.error(e)
+  rescue StandardError => error
+    logged_error(error)
     head :internal_server_error
   end
 
@@ -28,5 +27,10 @@ class Api::BoardsController < ApplicationController
 
   def boards_params
     params.require(:boards).permit(:title, feed_ids: [])
+  end
+
+  def logged_error
+    logger.error(error)
+    Rollbar.error(error)
   end
 end

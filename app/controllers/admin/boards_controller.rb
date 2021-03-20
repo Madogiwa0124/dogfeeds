@@ -15,10 +15,9 @@ class Admin::BoardsController < Admin::ApplicationController
     @board = Board.find(params[:id])
     @board.recreate_board_feeds!(feed_ids) if feed_ids.present?
     redirect_to admin_board_path(@board)
-  rescue StandardError => e
-    @board.error.add(base: e)
-    logger.error(e)
-    Rollbar.error(e)
+  rescue StandardError => error
+    logged_error(error)
+    @board.error.add(base: error)
     render :edit
   end
 
@@ -29,6 +28,11 @@ class Admin::BoardsController < Admin::ApplicationController
   end
 
   private
+
+  def logged_error(error)
+    logger.error(error)
+    Rollbar.error(error)
+  end
 
   def feed_ids
     board_params['feed_ids'].select(&:present?)

@@ -50,9 +50,9 @@ class Feed::PostForm
 
   def entries_create!
     Feed::EntryCreater.new(feed).execute!
-  rescue StandardError => e
+  rescue StandardError => error
     faild_entries_create
-    raise e
+    raise error
   end
 
   def tags_create!
