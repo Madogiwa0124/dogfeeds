@@ -11,12 +11,13 @@ gem 'rss'
 gem 'simpacker'
 
 group :development, :test do
-  gem 'brakeman'
-  gem 'rspec-rails'
+  gem 'brakeman', require: false
+  gem 'rspec-rails', require: false
   gem 'factory_bot_rails'
-  gem 'rubocop'
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem "rubycritic", require: false
   gem 'dotenv-rails'
   gem 'spp'
 end

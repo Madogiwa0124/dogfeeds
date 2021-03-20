@@ -23,6 +23,9 @@ Lint/StructNewOverride:
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
+Naming/RescuedExceptionsVariableName:
+  PreferredName: error
+
 Style/ExponentialNotation:
   Enabled: true
 
