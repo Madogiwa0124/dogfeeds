@@ -10,6 +10,7 @@
 #  updated_at        :datetime         not null
 #
 class Feed < ApplicationRecord
+  include Pagerable
   require 'rss'
 
   URI_REGEXP_PATTERN = URI::DEFAULT_PARSER.make_regexp(%w[http https]).freeze
@@ -34,10 +35,6 @@ class Feed < ApplicationRecord
   scope :titled_by, ->(keyword) {
     where('title LIKE ?', "%#{sanitize_sql_like(keyword)}%")
   }
-  scope :pager, ->(page: 1, per: 10) {
-    num = page.to_i.positive? ? page.to_i - 1 : 0
-    limit(per).offset(per * num)
-  }
   scope :tagged_by, ->(tags) {
     where(id: FeedTagging.where(feed_tag_id: tags).select(:feed_id))
   }
@@ -53,12 +50,10 @@ class Feed < ApplicationRecord
   }
 
   def parsed_items
-    return [] if endpoint.blank?
     @parsed_items ||= parsed_object ? parsed_object.items : []
   end
 
   def parsed_header_title
-    return '' if endpoint.blank?
     @parsed_header_title ||= parsed_object ? parsed_object.header.title : ''
   end
 
