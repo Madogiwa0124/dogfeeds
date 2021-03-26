@@ -23,7 +23,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.4'
+  gem 'listen', '~> 3.5'
   gem 'annotate'
 end
 
