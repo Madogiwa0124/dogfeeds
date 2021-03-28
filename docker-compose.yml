@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - db:/var/lib/postgresql/data
+  redis:
+    image: redis:6.2-alpine
   rails: &rails
     image: circleci/ruby:3.0.0-node-browsers
     command: bash -c "bin/rails s -b 0.0.0.0 -p 3000"
@@ -17,6 +19,7 @@ services:
       - "3000:3000"
     links:
       - db
+      - redis
     tmpfs:
       - /tmp
     volumes:
@@ -33,6 +36,7 @@ services:
     environment:
       HOST_NAME: rails
       DATABASE_URL: postgres://postgres:password@db:5432
+      REDIS_URL: redis://redis:6379/0
       BUNDLE_PATH: /dogfeeds/vendor/bundle
 volumes:
   db:

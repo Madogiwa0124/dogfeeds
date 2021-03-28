@@ -7,6 +7,7 @@ gem 'rails', '~> 6.1.3'
 gem 'rollbar'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma'
+gem 'redis'
 gem 'rss'
 gem 'simpacker'
 
