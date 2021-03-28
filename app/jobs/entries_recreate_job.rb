@@ -6,7 +6,7 @@ class EntriesRecreateJob < ApplicationJob
   def perform(feed)
     ActiveRecord::Base.transaction { Feed::EntryCreater.new(feed).execute! }
   rescue StandardError => error
-    raised_error = e.exception("#{error.message} raised from endpoint: #{feed.endpoint}")
+    raised_error = error.exception("#{error.message} raised from endpoint: #{feed.endpoint}")
     Rails.logger.error(raised_error)
     Rollbar.error(raised_error)
   end
