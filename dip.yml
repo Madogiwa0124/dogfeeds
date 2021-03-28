@@ -26,6 +26,11 @@ interaction:
         service: rails
         compose_run_options: [service-ports]
 
+  sidekiq:
+    description: Run sidekiq
+    service: sidekiq
+    command: bundle exec sidekiq
+
   rspec:
     description: Run RSpec commands
     service: rails

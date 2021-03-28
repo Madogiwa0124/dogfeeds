@@ -9,6 +9,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma'
 gem 'redis'
 gem 'rss'
+gem 'sidekiq'
 gem 'simpacker'
 
 group :development, :test do

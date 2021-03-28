@@ -16,5 +16,7 @@ Rails.application.routes.draw do
     resources :boards
     resources :board_feeds
     resources :feeds
+    require 'sidekiq/web'
+    mount Sidekiq::Web, at: '/sidekiq'
   end
 end

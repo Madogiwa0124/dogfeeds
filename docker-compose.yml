@@ -38,6 +38,10 @@ services:
       DATABASE_URL: postgres://postgres:password@db:5432
       REDIS_URL: redis://redis:6379/0
       BUNDLE_PATH: /dogfeeds/vendor/bundle
+  sidekiq:
+    <<: *rails
+    command: ['bundle', 'exec', 'sidekiq']
+    ports: []
 volumes:
   db:
   node_modules:
