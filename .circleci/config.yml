@@ -6,6 +6,7 @@ orbs:
 
 web-default-enviroments: &web-default-enviroments
   RAILS_ENV: test
+  NODE_ENV: test
   PGHOST: 127.0.0.1
   DATABASE_USER: circleci
   DATABASE_PASSWORD: password

@@ -38,6 +38,8 @@ services:
       DATABASE_URL: postgres://postgres:password@db:5432
       REDIS_URL: redis://redis:6379/0
       BUNDLE_PATH: /dogfeeds/vendor/bundle
+      RAILS_ENV: development
+      NODE_ENV: development
   sidekiq:
     <<: *rails
     command: ['bundle', 'exec', 'sidekiq']
