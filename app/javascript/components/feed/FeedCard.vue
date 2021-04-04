@@ -1,42 +1,51 @@
 <template>
-  <div :id="`feed-card-${feed.id}`" class="feed-card card" @click="redirectFeedPath">
-    <header class="card-header">
-      <p class="card-header-title">
-        {{ feed.title | truncate(24) }}
-      </p>
-    </header>
-    <div class="card-content">
-      <div class="card-image">
-        <img :src="eyeCatch" :alt="feed.lastEntry.title" height="220" width="350" />
-      </div>
-      <div class="content">
-        <div class="tag-area field is-grouped is-grouped-multiline">
-          <span v-if="feed.tags.length < 1" class="tag is-light control has-text-weight-medium">untagged</span>
-          <div v-for="(tag, index) in feed.tags" :key="index" class="control">
-            <tag :body="tag.body" @click="handleOnTagClick" />
-          </div>
-        </div>
-        <a class="has-text-info last-entry-title" @click.stop="openExternal">
-          {{ feed.lastEntry.title | truncate(49) }}
-          <font-awesome-icon :icon="['fas', 'external-link-alt']" />
-        </a>
-        <p class="last-updated-at has-text-right">
-          Last updated {{ feed.lastEntry.publishedAt | fromNow }}
-          <font-awesome-icon :icon="['far', 'clock']" />
+  <div :id="`feed-card-${feed.id}`" class="feed-card card">
+    <a :href="feedPath" :target="feedLinkTarget" :rel="feedLinkRel">
+      <header class="card-header">
+        <p class="card-header-title">
+          {{ feed.title | truncate(24) }}
         </p>
+      </header>
+      <div class="card-content">
+        <div class="card-image">
+          <img :src="eyeCatch" :alt="feed.lastEntry.title" height="220" width="350" />
+        </div>
+        <div class="content">
+          <div class="tag-area field is-grouped is-grouped-multiline">
+            <span v-if="feed.tags.length < 1" class="tag is-light control has-text-weight-medium">untagged</span>
+            <div v-for="(tag, index) in feed.tags" :key="index" class="control">
+              <tag :body="tag.body" @click="handleOnTagClick" />
+            </div>
+          </div>
+          <object>
+            <a
+              class="has-text-info last-entry-title"
+              :href="feed.lastEntry.link"
+              target="_blank"
+              rel="noopener"
+              @click.stop
+            >
+              {{ feed.lastEntry.title | truncate(49) }}
+              <font-awesome-icon :icon="['fas', 'external-link-alt']" />
+            </a>
+          </object>
+          <p class="last-updated-at has-text-right">
+            Last updated {{ feed.lastEntry.publishedAt | fromNow }}
+            <font-awesome-icon :icon="['far', 'clock']" />
+          </p>
+        </div>
       </div>
-    </div>
-    <footer class="card-footer">
-      <p class="card-footer-item">
-        <select-feed
-          v-if="selectable"
-          class="selected-feed"
-          :selected="selected"
-          @selected.stop="handleOnSelected"
-          @unselected.stop="handleOnUnselected"
-        />
-      </p>
-    </footer>
+      <footer v-if="selectable" class="card-footer">
+        <p class="card-footer-item">
+          <select-feed
+            class="selected-feed"
+            :selected="selected"
+            @selected.stop.prevent="handleOnSelected"
+            @unselected.stop.prevent="handleOnUnselected"
+          />
+        </p>
+      </footer>
+    </a>
   </div>
 </template>
 <script lang="ts">
@@ -91,20 +100,17 @@ export default Vue.extend({
     feedPath: function (): string {
       return `/feeds/${this.feed.id}`;
     },
+    feedLinkTarget: function (): "_self" | "_blank" {
+      return this.openNewTab ? "_blank" : "_self";
+    },
+    feedLinkRel: function (): "noopener" | "" {
+      return this.openNewTab ? "noopener" : "";
+    },
   },
   methods: {
-    redirectFeedPath: function (): void {
-      if (this.openNewTab) {
-        window.open(this.feedPath);
-      } else {
-        window.location.href = this.feedPath;
-      }
-    },
-    openExternal: function (): void {
-      window.open(this.feed.lastEntry.link);
-    },
     handleOnTagClick: function (tagBody: string, event: Event): void {
       event.stopPropagation();
+      event.preventDefault();
       this.$emit("clickTag", tagBody);
     },
     handleOnSelected: function (): void {
