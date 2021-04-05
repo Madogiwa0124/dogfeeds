@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "sourceMap": true,
-    "lib": ["dom", "ES2020"], // eslintと合わせてES2020をlibに指定しとく
+    "lib": ["DOM", "ES2020"], // eslintと合わせてES2020をlibに指定しとく
     "target": "ES6",
     "module": "ES6", // TSのモジュールはES Modulesとして出力
     // import Vue from 'vue' の書き方を許容する
