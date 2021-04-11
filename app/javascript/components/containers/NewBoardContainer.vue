@@ -52,6 +52,7 @@ import ServiceInfomation from "@js/components/ServiceInfomation.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
+import Rollbar from "@js/services/Rollbar";
 import { getFeeds } from "@js/services/FeedService";
 import { getTags } from "@js/services/TagService";
 import { postBoard } from "@js/services/BoardService";
@@ -158,7 +159,7 @@ export default Vue.extend({
       } catch (error) {
         // TODO: いい感じの汎用的なmodalを作る
         alert("予期せぬエラーが発生しました😢");
-        throw error;
+        Rollbar.error(error);
       }
     },
     handleOnCloseModal: function (): void {
