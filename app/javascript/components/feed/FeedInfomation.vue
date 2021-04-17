@@ -36,7 +36,7 @@ export default Vue.extend({
     },
     entries: {
       type: Array as PropType<Entry[]>,
-      default: [],
+      default: () => [],
     },
   },
   methods: {
