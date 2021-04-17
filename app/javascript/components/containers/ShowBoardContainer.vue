@@ -14,8 +14,14 @@
         </li>
       </ul>
     </div>
-    <feed-card-collection v-if="selectedFeedTab" :init-feeds="feeds" :selectable="false" :clumn-size="3" />
-    <entry-card-collection v-if="selectedEntryTab" :entries="entries" :clumn-size="3" />
+    <feed-card-collection
+      v-if="selectedFeedTab"
+      :init-feeds="feeds"
+      :selectable="false"
+      :clumn-size="3"
+      @clipEntry="handleOnClipEntry"
+    />
+    <entry-card-collection v-if="selectedEntryTab" :entries="entries" :clumn-size="3" @clipEntry="handleOnClipEntry" />
     <div class="center">
       <to-top-button />
     </div>
@@ -32,7 +38,7 @@ import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import ToTopButton from "@js/components/common/ToTopButton.vue";
 import { getBoard } from "@js/services/BoardService";
-import { getFeedEntries } from "@js/services/EntryService";
+import { clipEntry, getFeedEntries } from "@js/services/EntryService";
 import { sleep } from "@js/components/common/Sleep";
 import { getFeeds } from "@js/services/FeedService";
 
@@ -101,6 +107,9 @@ export default Vue.extend({
     },
     handleOnEntryTabClick() {
       this.selectedTab = Tabs.Entry;
+    },
+    handleOnClipEntry: function (entryId: number, clieped: boolean) {
+      clipEntry(entryId, clieped);
     },
   },
 });

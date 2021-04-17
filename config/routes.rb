@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :feeds, only: [:index, :show, :new, :create]
   resources :boards, only: [:show, :new, :index], constraints: { format: :html }
   get '/boards/:id', to: 'rss/boards#show', constraints: lambda { |req| req.format == :rss }
+  get '/mypage', to: 'mypage#show'
 
   namespace :api do
     resources :feeds, only: [:index, :show]

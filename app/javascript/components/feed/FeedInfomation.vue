@@ -13,7 +13,7 @@
         <tag :body="tag.body" @click="handleOnTagClick" />
       </div>
     </div>
-    <entry-card-collection :entries="entries" :clumnSize="3" />
+    <entry-card-collection :entries="entries" :clumnSize="3" @clipEntry="handleOnClipEntry" />
   </div>
 </template>
 <script lang="ts">
@@ -42,6 +42,9 @@ export default Vue.extend({
   methods: {
     handleOnTagClick: function (body: string) {
       this.$emit("tagClick", body);
+    },
+    handleOnClipEntry: function (entryId: number, cliped: boolean): void {
+      this.$emit("clipEntry", entryId, cliped);
     },
   },
 });

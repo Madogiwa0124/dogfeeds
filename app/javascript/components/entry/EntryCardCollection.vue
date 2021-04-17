@@ -1,13 +1,19 @@
 <template>
   <div class="entry-card-collection entries is-multiline columns">
     <div v-for="entry in props.entries" :key="entry.id" :class="`column is-${clumnSize}`">
-      <entry-card :entry="entry" :descriptionLimit="descriptionLimit" :showFeedLink="showFeedLink" />
+      <entry-card
+        :entry="entry"
+        :descriptionLimit="descriptionLimit"
+        :showFeedLink="showFeedLink"
+        :cliped="cliped"
+        @clipEntry="handleOnClipEntry"
+      />
     </div>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import VueCompositionApi, { defineComponent } from "@vue/composition-api";
+import VueCompositionApi, { defineComponent, SetupContext } from "@vue/composition-api";
 Vue.use(VueCompositionApi);
 
 import EntryCard from "@js/components/entry/EntryCard.vue";
@@ -15,6 +21,7 @@ import { Entry } from "@js/types/types";
 
 type Props = {
   entries: Entry[];
+  cliped: boolean;
   descriptionLimit: number | null;
   clumnSize: number;
   showFeedLink: boolean;
@@ -35,6 +42,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    cliped: {
+      type: Boolean,
+      default: false,
+    },
     entries: {
       type: Array,
       default: () => {
@@ -44,9 +55,13 @@ export default defineComponent({
   },
   // propsの型定義のためsetup引数に型を設定
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setup(props: Props) {
+  setup(props: Props, context: SetupContext) {
+    const handleOnClipEntry = (entryId: number, cliped: boolean): void => {
+      context.emit("clipEntry", entryId, cliped);
+    };
     return {
       props,
+      handleOnClipEntry,
     };
   },
 });

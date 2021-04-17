@@ -39,6 +39,7 @@
         @selectedFeed="handleOnSelectedFeed"
         @unselectedFeed="handleOnUnselectedFeed"
         @clickTag="handleOnSearch"
+        @clipEntry="handleOnClipEntry"
       />
       <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
     </main>
@@ -56,6 +57,7 @@ import Rollbar from "@js/services/Rollbar";
 import { getFeeds } from "@js/services/FeedService";
 import { getTags } from "@js/services/TagService";
 import { postBoard } from "@js/services/BoardService";
+import { clipEntry } from "@js/services/EntryService";
 import { Feed, PostBoardResponse, Tag } from "@js/types/types";
 
 const SHOW_SERVICE_INFOMATION_STRAGE_KEY = "showServiceInfomation";
@@ -188,6 +190,9 @@ export default Vue.extend({
     handleOnServiceInfomationDelete: function (): void {
       this.showServiceInfomation = false;
       localStorage.setItem(SHOW_SERVICE_INFOMATION_STRAGE_KEY, "false");
+    },
+    handleOnClipEntry: function (entryId: number, clieped: boolean) {
+      clipEntry(entryId, clieped);
     },
   },
 });
