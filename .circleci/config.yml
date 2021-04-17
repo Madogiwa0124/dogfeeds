@@ -12,7 +12,7 @@ web-default-enviroments: &web-default-enviroments
   DATABASE_PASSWORD: password
 
 web: &web
-  - image: circleci/ruby:3.0.0-node-browsers
+  - image: circleci/ruby:3.0.1-node-browsers
     environment:
       <<: *web-default-enviroments
 
