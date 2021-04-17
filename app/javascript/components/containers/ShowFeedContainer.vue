@@ -1,6 +1,12 @@
 <template>
   <div class="feed-show">
-    <feed-infomation v-if="!!feed" :feed="feed" :entries="entries" @tagClick="handleOnTagClick" />
+    <feed-infomation
+      v-if="!!feed"
+      :feed="feed"
+      :entries="entries"
+      @tagClick="handleOnTagClick"
+      @clipEntry="handleOnClipEntry"
+    />
     <div class="center">
       <to-top-button />
     </div>
@@ -17,7 +23,7 @@ import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
 import ToTopButton from "@js/components/common/ToTopButton.vue";
 import { getFeed } from "@js/services/FeedService";
-import { getFeedEntries } from "@js/services/EntryService";
+import { clipEntry, getFeedEntries } from "@js/services/EntryService";
 import { sleep } from "@js/components/common/Sleep";
 
 interface DataType {
@@ -68,6 +74,9 @@ export default Vue.extend({
     handleOnTagClick: function (body: string) {
       const query = `?query[keyword]=${body}`;
       window.location.href = `${TAG_CLICK_REDIRECT_PATH}/${query}`;
+    },
+    handleOnClipEntry: function (entryId: number, clieped: boolean) {
+      clipEntry(entryId, clieped);
     },
   },
 });

@@ -9,6 +9,7 @@
         @clickTag="handleOnClickTag"
         @selectedFeed="handleOnSelected"
         @unselectedFeed="handleOnUnselected"
+        @clipEntry="handleOnClipEntry"
       />
     </div>
   </div>
@@ -71,6 +72,9 @@ export default Vue.extend({
     },
     handleOnUnselected: function (id: number) {
       this.$emit("unselectedFeed", id);
+    },
+    handleOnClipEntry: function (entryId: number, cliped: boolean): void {
+      this.$emit("clipEntry", entryId, cliped);
     },
   },
 });

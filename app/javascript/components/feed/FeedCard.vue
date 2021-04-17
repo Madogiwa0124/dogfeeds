@@ -29,9 +29,10 @@
               <font-awesome-icon :icon="['fas', 'external-link-alt']" />
             </a>
           </object>
-          <p class="last-updated-at has-text-right">
+          <p class="entry-info has-text-right">
             Last updated {{ feed.lastEntry.publishedAt | fromNow }}
             <font-awesome-icon :icon="['far', 'clock']" />
+            <entry-clip class="clip" :entryId="feed.lastEntry.id" @clip="handleOnClipEntry" />
           </p>
         </div>
       </div>
@@ -53,6 +54,7 @@ import Vue, { PropType } from "vue";
 import moment from "moment";
 import SelectFeed from "@js/components/feed/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
+import EntryClip from "@js/components/entry/EntryClip.vue";
 import { Feed } from "@js/types/types";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -64,7 +66,7 @@ const NO_IMAGE_PATH = "/noimage.png";
 
 export default Vue.extend({
   name: "FeedCard",
-  components: { SelectFeed, Tag, FontAwesomeIcon },
+  components: { SelectFeed, Tag, FontAwesomeIcon, EntryClip },
   filters: {
     fromNow: function (value: string): string {
       return moment(value, "YYYYMMDD h:mm:ss").fromNow();
@@ -113,6 +115,11 @@ export default Vue.extend({
       event.preventDefault();
       this.$emit("clickTag", tagBody);
     },
+    handleOnClipEntry: function (entryId: number, cliped: boolean, event: Event): void {
+      event.stopPropagation();
+      event.preventDefault();
+      this.$emit("clipEntry", entryId, cliped);
+    },
     handleOnSelected: function (): void {
       this.$emit("selectedFeed", this.feed.id);
     },
@@ -147,9 +154,13 @@ export default Vue.extend({
         font-size: 14px;
       }
 
-      .last-updated-at {
+      .entry-info {
         font-size: 12px;
         color: #999999;
+
+        .clip {
+          font-size: 20px;
+        }
       }
     }
   }

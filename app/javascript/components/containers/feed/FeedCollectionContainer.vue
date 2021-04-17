@@ -3,7 +3,13 @@
     <div class="level-left column is-12 search-form-area">
       <search-form :init-keyword="keyword" :init-tags="tags" @search="handleOnSearch" />
     </div>
-    <feed-card-collection :init-feeds="feeds" :selectable="false" :clumn-size="3" @clickTag="handleOnSearch" />
+    <feed-card-collection
+      :init-feeds="feeds"
+      :selectable="false"
+      :clumn-size="3"
+      @clickTag="handleOnSearch"
+      @clipEntry="handleOnClipEntry"
+    />
     <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
   </div>
 </template>
@@ -15,6 +21,7 @@ import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import { getFeeds } from "@js/services/FeedService";
 import { Feed, Tag } from "@js/types/types";
 import { getTags } from "@js/services/TagService";
+import { clipEntry } from "@js/services/EntryService";
 
 interface DataType {
   page: number;
@@ -88,6 +95,9 @@ export default Vue.extend({
       this.page = 1;
       this.infiniteLoading.stateChanger.reset();
       this.infiniteHandler(this.infiniteLoading.stateChanger);
+    },
+    handleOnClipEntry: function (entryId: number, clieped: boolean) {
+      clipEntry(entryId, clieped);
     },
   },
 });

@@ -22,16 +22,19 @@
     <footer class="card-footer">
       <p v-if="showFeedLink" class="card-footer-item">
         <a :href="feedPath" class="has-text-primary">
-          RSSフィードを見る
+          RSSフィード
           <font-awesome-icon :icon="['far', 'newspaper']" />
         </a>
+      </p>
+      <p class="card-footer-item">
+        <entry-clip class="clip" :entryId="entry.id" :init-cliped="cliped" @clip="handleOnClipEntry"> CLIP </entry-clip>
       </p>
     </footer>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import VueCompositionApi, { defineComponent, computed } from "@vue/composition-api";
+import VueCompositionApi, { defineComponent, computed, SetupContext } from "@vue/composition-api";
 Vue.use(VueCompositionApi);
 
 import moment from "moment/moment";
@@ -42,20 +45,27 @@ import { faClock, faNewspaper } from "@fortawesome/free-regular-svg-icons";
 import { Entry } from "@js/types/types";
 library.add(faExternalLinkAlt, faClock, faNewspaper);
 
+import EntryClip from "@js/components/entry/EntryClip.vue";
+
 type Props = {
   entry: Entry;
   descriptionLimit: number | null;
   showFeedLink: boolean;
+  cliped: boolean;
 };
 
 const NO_IMAGE_PATH = "/noimage.png";
 
 export default defineComponent({
-  components: { FontAwesomeIcon },
+  components: { FontAwesomeIcon, EntryClip },
   props: {
     entry: {
       type: Object,
       required: true,
+    },
+    cliped: {
+      type: Boolean,
+      default: false,
     },
     descriptionLimit: {
       type: Number,
@@ -66,10 +76,13 @@ export default defineComponent({
       default: false,
     },
   },
-  setup(props: Props) {
+  setup(props: Props, context: SetupContext) {
     const fromNow = computed(() => {
       return moment(props.entry.publishedAt, "YYYYMMDD h:mm:ss").fromNow();
     });
+    const handleOnClipEntry = (entryId: number, cliped: boolean, event: Event) => {
+      context.emit("clipEntry", entryId, cliped, event);
+    };
     const limitedDescription = computed(() => {
       if (props.descriptionLimit === null) return props.entry.description;
       if (props.entry.description.length <= props.descriptionLimit) return props.entry.description;
@@ -88,6 +101,7 @@ export default defineComponent({
       limitedDescription,
       feedPath,
       eyeCatch,
+      handleOnClipEntry,
       props,
     };
   },
@@ -122,6 +136,14 @@ export default defineComponent({
         object-fit: cover;
       }
     }
+  }
+
+  .card-footer {
+    p:not(:last-child) {
+      margin-bottom: 0px;
+    }
+
+    color: #888888;
   }
 }
 </style>

@@ -23,6 +23,10 @@
           MENU
         </a>
         <div class="navbar-dropdown is-right">
+          <%= link_to mypage_path, class: "navbar-item" do %>
+            MY PAGE
+          <% end %>
+          <hr class="navbar-divider">
           <%= link_to '登録済みのRSSフィードを見る', feeds_path, class: "navbar-item" %>
           <hr class="navbar-divider">
           <%= link_to 'まとめられたRSSフィードを見る', boards_path, class: "navbar-item" %>

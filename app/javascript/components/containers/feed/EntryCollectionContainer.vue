@@ -1,6 +1,12 @@
 <template>
   <div class="entry-collection-container">
-    <entry-card-collection :entries="entries" :clumnSize="3" :descriptionLimit="100" :showFeedLink="true" />
+    <entry-card-collection
+      :entries="entries"
+      :clumnSize="3"
+      :descriptionLimit="100"
+      :showFeedLink="true"
+      @clipEntry="handleOnClipEntry"
+    />
     <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
   </div>
 </template>
@@ -8,7 +14,7 @@
 import Vue from "vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
-import { getEntries } from "@js/services/EntryService";
+import { clipEntry, getEntries } from "@js/services/EntryService";
 import { Entry } from "@js/types/types";
 
 interface DataType {
@@ -66,6 +72,9 @@ export default Vue.extend({
       this.page = 1;
       this.infiniteLoading.stateChanger.reset();
       this.infiniteHandler(this.infiniteLoading.stateChanger);
+    },
+    handleOnClipEntry: function (entryId: number, clieped: boolean) {
+      clipEntry(entryId, clieped);
     },
   },
 });
