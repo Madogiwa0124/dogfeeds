@@ -10,10 +10,11 @@
     "build:test": "webpack --config './config/webpack/webpack.test.js'",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,vue,ts,css,scss}'",
     "lighthouse": "lhci autorun",
+    "lint": "yarn lint:js && yarn lint:css && yarn lint:type-check",
     "lint:js": "eslint app/javascript --ext .vue,.js,.ts",
     "lint:js-fix": "eslint app/javascript --ext .vue,.js,.ts --fix",
     "lint:css": "stylelint \"**/*.vue\" \"**/*.css\" \"**/*.scss\"",
-    "type:check": "tsc -p . --noEmit && vtc --workspace . --srcDir app/javascript/components/ --onlyTypeScript true"
+    "lint:type-check": "tsc -p . --noEmit && vtc --workspace . --srcDir app/javascript/components/ --onlyTypeScript true"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
