@@ -23,5 +23,5 @@ jobs:
       run: yarn lint:js
     - name: lint css
       run: yarn lint:css
-    - name: typecheck
-      run: yarn type:check
+    - name: lint typecheck
+      run: yarn lint:type-check
