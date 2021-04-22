@@ -9046,9 +9046,9 @@ wcwidth@^1.0.0:
     defaults "^1.0.3"
 
 webpack-assets-manifest@~5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-5.0.5.tgz#0727d9855129110a962c0992504d91c13f5613e8"
-  integrity sha512-sZ5i2O5OTjbdjnJZE0ZAHqFqYejD0PSXjKUOIBie1DMGlZo/2OLdx7UYMuOQyiygfRYB8FPYBqz3QGWV+1BPvw==
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/webpack-assets-manifest/-/webpack-assets-manifest-5.0.6.tgz#1fe7baf9b57f2d28ff09fcaef3d678cc15912b88"
+  integrity sha512-CW94ylPHurZTmxnYajSFA8763Cv/QFIKNgBwqBLaIOnBjH1EbDUAf8Eq1/i+o8qaKyKXJ3aX7r4/jtpXD88ldg==
   dependencies:
     chalk "^4.0"
     deepmerge "^4.0"
