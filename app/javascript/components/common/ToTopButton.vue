@@ -1,7 +1,5 @@
 <template>
-  <div class="board-create-button">
-    <button class="button is-rounded is-outlined is-info" @click="handleOnClick()">TOPに戻る</button>
-  </div>
+  <button class="to-top-button button is-rounded is-outlined is-info" @click="handleOnClick">TOPに戻る</button>
 </template>
 
 <script lang="ts">
