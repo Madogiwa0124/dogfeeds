@@ -43,6 +43,7 @@
       />
       <infinite-loading ref="InfiniteLoading" :distance="100" @infinite="infiniteHandler" />
     </main>
+    <scroll-top-button />
   </div>
 </template>
 <script lang="ts">
@@ -53,6 +54,7 @@ import ServiceInfomation from "@js/components/ServiceInfomation.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import BoardConfirmModal from "@js/components/common/ConfirmModal.vue";
+import ScrollTopButton from "@js/components/common/ScrollTopButton.vue";
 import Rollbar from "@js/services/Rollbar";
 import { getFeeds } from "@js/services/FeedService";
 import { getTags } from "@js/services/TagService";
@@ -83,6 +85,7 @@ export default Vue.extend({
     SearchForm,
     InfiniteLoading,
     BoardConfirmModal,
+    ScrollTopButton,
   },
   props: {
     searchWord: {
@@ -212,6 +215,12 @@ export default Vue.extend({
 
   .search-form-area {
     padding: 0 0 0.75em 0;
+  }
+
+  .scroll-top-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
   }
 }
 </style>
