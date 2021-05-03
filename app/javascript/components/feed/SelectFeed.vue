@@ -14,14 +14,15 @@
     </span>
   </button>
 </template>
-<script>
+<script lang="ts">
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheckSquare, faSquare } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faCheckSquare, faSquare);
 
-export default {
+import Vue from "vue";
+export default Vue.extend({
   name: "SelectFeed",
   components: { FontAwesomeIcon },
   props: {
@@ -31,10 +32,10 @@ export default {
     },
   },
   methods: {
-    toggleSelected: function (event) {
+    toggleSelected: function (event: Event) {
       this.$emit(this.selected ? "unselected" : "selected", event);
     },
   },
-};
+});
 </script>
 <style lang="scss" scoped></style>

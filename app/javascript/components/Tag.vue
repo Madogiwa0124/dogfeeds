@@ -4,8 +4,9 @@
     <span v-if="count" class="tag">{{ count }}</span>
   </div>
 </template>
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
   name: "Tag",
   props: {
     body: {
@@ -18,11 +19,11 @@ export default {
     },
   },
   methods: {
-    handleOnClick: function (event) {
+    handleOnClick: function (event: Event) {
       this.$emit("click", this.body, event);
     },
   },
-};
+});
 </script>
 <style lang="scss" scoped>
 .my-tag {

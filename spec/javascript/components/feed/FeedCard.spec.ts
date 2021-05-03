@@ -1,11 +1,11 @@
 import { mount } from "@vue/test-utils";
-import Component from "@js/components/entry/EntryCard.vue";
-import { buildEntry } from "@spec/mocks/Entry";
+import Component from "@js/components/feed/FeedCard.vue";
+import { buildFeed } from "@spec/mocks/Feed";
 import { advanceTo } from "jest-date-mock";
 
-describe("components/entry/EntryCard.vue", () => {
+describe("components/feed/FeedCard.vue", () => {
   it("snapshot", () => {
-    const props = { entry: buildEntry(1) };
+    const props = { feed: buildFeed(1) };
     advanceTo(new Date("2021-05-03T15:35:47+09:00"));
     const wrapper = mount(Component, { propsData: props });
     expect(wrapper.element).toMatchSnapshot();

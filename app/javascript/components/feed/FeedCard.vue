@@ -30,7 +30,7 @@
             </a>
           </object>
           <p class="entry-info has-text-right">
-            Last updated {{ feed.lastEntry.publishedAt | fromNow }}
+            <span :title="lastPublishedAtText">Last updated {{ feed.lastEntry.publishedAt | fromNow }}</span>
             <font-awesome-icon :icon="['far', 'clock']" />
             <entry-clip class="clip" :entryId="feed.lastEntry.id" @clip="handleOnClipEntry" />
           </p>
@@ -69,7 +69,7 @@ export default Vue.extend({
   components: { SelectFeed, Tag, FontAwesomeIcon, EntryClip },
   filters: {
     fromNow: function (value: string): string {
-      return moment(value, "YYYYMMDD h:mm:ss").fromNow();
+      return moment(value).fromNow();
     },
     truncate: function (value: string, limit: number): string {
       if (value.length <= limit) return value;
@@ -98,6 +98,9 @@ export default Vue.extend({
     eyeCatch: function (): string {
       if (!this.feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
       return this.feed.lastEntry.eyeCatchingImage;
+    },
+    lastPublishedAtText: function (): string {
+      return moment(this.feed.lastEntry.publishedAt).format("YYYY/MM/DD h:mm:ss");
     },
     feedPath: function (): string {
       return `/feeds/${this.feed.id}`;
