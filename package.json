@@ -2,6 +2,7 @@
   "name": "dogfeeds",
   "private": true,
   "scripts": {
+    "build": "yarn build:prod",
     "build:clean": "rm -rf public/packs/* public/packs-test/*",
     "build:dev": "webpack --progress --config './config/webpack/webpack.dev.js'",
     "build:dev-watch": "webpack --watch --progress --config './config/webpack/webpack.dev.js'",
