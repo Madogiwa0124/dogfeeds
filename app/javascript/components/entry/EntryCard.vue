@@ -17,17 +17,18 @@
         <p class="entry-description">
           {{ limitedDescription }}
         </p>
+        <p class="entry-footer">
+          <span :title="publishedAtText">{{ fromNow }} </span>
+          <entry-clip class="clip" :entryId="entry.id" :init-cliped="cliped" @clip="handleOnClipEntry" />
+        </p>
       </div>
     </div>
     <footer class="card-footer">
       <p v-if="showFeedLink" class="card-footer-item">
         <a :href="feedPath" class="has-text-primary">
-          RSSフィード
+          RSSフィードを見る
           <font-awesome-icon :icon="['far', 'newspaper']" />
         </a>
-      </p>
-      <p class="card-footer-item">
-        <entry-clip class="clip" :entryId="entry.id" :init-cliped="cliped" @clip="handleOnClipEntry"> CLIP </entry-clip>
       </p>
     </footer>
   </div>
@@ -77,9 +78,8 @@ export default defineComponent({
     },
   },
   setup(props: Props, context: SetupContext) {
-    const fromNow = computed(() => {
-      return moment(props.entry.publishedAt, "YYYYMMDD h:mm:ss").fromNow();
-    });
+    const publishedAtText = computed(() => moment(props.entry.publishedAt).format("YYYY/MM/DD h:mm:ss"));
+    const fromNow = computed(() => moment(props.entry.publishedAt).fromNow());
     const handleOnClipEntry = (entryId: number, cliped: boolean, event: Event) => {
       context.emit("clipEntry", entryId, cliped, event);
     };
@@ -97,6 +97,7 @@ export default defineComponent({
       return `/feeds/${props.entry.feedId}`;
     });
     return {
+      publishedAtText,
       fromNow,
       limitedDescription,
       feedPath,
@@ -108,6 +109,8 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+$entry-body-color: #888888;
+
 .entry-card {
   box-shadow: inherit;
   margin-top: 0px !important;
@@ -121,8 +124,19 @@ export default defineComponent({
     }
 
     .entry-description {
-      color: #888888;
+      color: $entry-body-color;
       font-size: 10px;
+      margin: 0px;
+    }
+
+    .entry-footer {
+      text-align: right;
+      font-size: 10px;
+      color: $entry-body-color;
+
+      .clip {
+        font-size: 16px;
+      }
     }
 
     .content {
@@ -143,7 +157,7 @@ export default defineComponent({
       margin-bottom: 0px;
     }
 
-    color: #888888;
+    color: $entry-body-color;
   }
 }
 </style>
