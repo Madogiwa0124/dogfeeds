@@ -5,3 +5,4 @@ lighthouserc.js
 app/assets/javascripts/cable.js
 app/javascript/stylesheets
 webpack.common.js
+jest.config.js

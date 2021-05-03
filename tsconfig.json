@@ -16,6 +16,7 @@
     "paths": {
       "@js/*": ["app/javascript/*"],
       "@css/*": ["app/javascript/stylesheets/*"],
+      "@spec/*": ["spec/javascript/*"]
     }
   },
   "include": [
