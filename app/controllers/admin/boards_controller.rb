@@ -8,7 +8,7 @@ class Admin::BoardsController < Admin::ApplicationController
   end
 
   def edit
-    @board = Board.find(params[:id])
+    @board = Board.preload(board_feeds: [:feed]).find(params[:id])
   end
 
   def update
