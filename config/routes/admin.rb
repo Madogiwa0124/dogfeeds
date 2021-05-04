@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     resources :feeds
     require 'sidekiq/web'
     mount Sidekiq::Web, at: '/sidekiq'
+    mount OkComputer::Engine, at: "/health_checks"
   end
 end
