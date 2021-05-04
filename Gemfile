@@ -11,6 +11,7 @@ gem 'redis'
 gem 'rss'
 gem 'sidekiq'
 gem 'simpacker'
+gem 'okcomputer'
 
 group :development, :test do
   gem 'brakeman', require: false
