@@ -16,7 +16,6 @@ Rails.application.configure do
   config.session_store :cache_store
   config.action_mailer.perform_caching = false
 
-  config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.active_support.disallowed_deprecation = :log
   config.active_support.disallowed_deprecation_warnings = []
