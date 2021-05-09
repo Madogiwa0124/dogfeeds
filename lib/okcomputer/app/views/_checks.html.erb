@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th>PASS/FAIL</th>
+      <th>MESSAGE</th>
+      <th>TIME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% checks.each do |check| %>
+      <% passfail = check.success? ? "passed" : "failed" %>
+      <tr class="<%= passfail %>">
+        <td class="registrant_name"><%= check.registrant_name %></td>
+        <td class="passfail"><%= passfail.upcase %></td>
+        <td class="message"><%= check.message %></td>
+        <td class="time"><%= check.time ? sprintf('%.3f', check.time) : '?' %></td>
+      </tr>
+    <% end %>
+  </tbody>

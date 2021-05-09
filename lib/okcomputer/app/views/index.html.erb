@@ -1,0 +1,7 @@
+<%= render '/style' %>
+
+<h1>OkComputer ALL</h1>
+
+<% status_class_name = data.collection.values.any?(&:failure_occurred) ? 'faild' : 'passed' %>
+<%= render partial: '/status', locals: { status: status, class_name: status_class_name } %>
+<%= render partial: '/checks', locals: { checks: data.collection.values } %>
