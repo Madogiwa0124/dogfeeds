@@ -42,5 +42,10 @@ module Dogfeeds
 
     # rails consoleではstrict loadingを無効化
     console { ApplicationRecord.strict_loading_by_default = false }
+    # Rails engineで導入されているokcomputerのcontrollerのオーバーライド
+    # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
+    config.to_prepare do
+      load "#{Rails.root}/lib/okcomputer/app/controllers/ok_computer_controller.rb"
+    end
   end
 end

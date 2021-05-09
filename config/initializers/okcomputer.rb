@@ -10,3 +10,7 @@ OkComputer::Registry.register 'sidekiq latency', OkComputer::SidekiqLatencyCheck
 # https://devcenter.heroku.com/articles/dyno-metadata
 env_name = Rails.env.production? ? 'HEROKU_SLUG_COMMIT' : 'SOURCE_VERSION'
 OkComputer::Registry.register 'version', OkComputer::AppVersionCheck.new(env: env_name)
+
+# NOTE: zeitwerkの期待するファイルパスとnamespaceを含めたclass名を一致させることが厳しいので、
+# okcomputerへのmonkey patchを入れているapp配下はautoloadの対象外にする
+Rails.autoloaders.main.ignore("#{Rails.root}/lib/okcomputer/app")
