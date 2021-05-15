@@ -8,7 +8,7 @@
         <span class="delete is-small" @click="deleteTag(index)" />
       </span>
     </div>
-    <input v-model="tagBody" class="tag-input-area input is-small" @keydown.enter="buildTag" />
+    <input v-model="tagBody" class="tag-input-area input is-small" @keydown.enter="buildTag" @blur="buildTag" />
     <p class="help">RSSフィードのタグを入力してください。(任意)</p>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
     buildTag: function (event) {
       event.preventDefault();
       if (this.tagBody.length <= 0) return;
-      this.tags.push({ body: this.tagBody });
+      this.tags.push({ body: this.tagBody.trim() });
       this.tagBody = "";
     },
     deleteTag: function (index) {
@@ -36,4 +36,4 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped></style>
