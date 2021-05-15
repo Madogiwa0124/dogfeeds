@@ -57,9 +57,6 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*
 
-Rails/EnvironmentVariableAccess:
-  Enabled: false
-
 AllCops:
   TargetRubyVersion: 3.0.1
   NewCops: enable
