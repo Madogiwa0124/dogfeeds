@@ -40,6 +40,9 @@ module Dogfeeds
     config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
     config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
+    # custom settings
+    config.settings = config_for(:settings)
+
     # rails consoleではstrict loadingを無効化
     console { ApplicationRecord.strict_loading_by_default = false }
     # Rails engineで導入されているokcomputerのcontrollerのオーバーライド

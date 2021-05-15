@@ -1,5 +1,6 @@
 # Basic認証
-OkComputer.require_authentication(ENV['BASIC_AUTH_USER'], ENV['BASIC_AUTH_PASSWORD'])
+basic_auth_config = Rails.configuration.settings.basic_auth
+OkComputer.require_authentication(basic_auth_config[:user], basic_auth_config[:password])
 
 # 監視の追加
 OkComputer::Registry.register 'redis', OkComputer::RedisCheck.new({})
