@@ -53,7 +53,7 @@ RSpec.describe Board, type: :model do
       let(:args) { { feeds: feeds, title: nil } }
 
       it 'デフォルトのタイトルでboadとfeedが作成されること' do
-        board = described_class.create_with_board_feeds!(**args)
+        board = described_class.create_with_feeds!(**args)
         board.strict_loading!(false)
         expect(board.title).to eq '無題のボード'
         expect(board.feeds).to match_array feeds
@@ -64,7 +64,7 @@ RSpec.describe Board, type: :model do
       let(:args) { { feeds: feeds, title: 'title' } }
 
       it '指定したタイトルでboadとfeedが作成されること' do
-        board = described_class.create_with_board_feeds!(**args)
+        board = described_class.create_with_feeds!(**args)
         board.strict_loading!(false)
         expect(board.title).to eq 'title'
         expect(board.feeds).to match_array feeds
@@ -72,12 +72,13 @@ RSpec.describe Board, type: :model do
     end
   end
 
-  describe '#recreate_board_feeds' do
+  describe '#update_with_recreate_feeds!' do
     let(:feeds) { create_list(:feed, 3) }
-    let(:board) { create(:board, :with_feeds) }
+    let(:board) { create(:board, :with_feeds, title: 'before') }
 
     it '引数で渡されたidを持つfeedsに書き換わること' do
-      board.recreate_board_feeds!(feeds.map(&:id))
+      board.update_with_recreate_feeds!(title: 'after', feed_ids: feeds.map(&:id))
+      expect(board.title).to eq 'after'
       expect(board.feeds).to match_array feeds
     end
   end

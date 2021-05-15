@@ -10,6 +10,8 @@ web-default-enviroments: &web-default-enviroments
   PGHOST: 127.0.0.1
   DATABASE_USER: circleci
   DATABASE_PASSWORD: password
+  BASIC_AUTH_USER: 'root'
+  BASIC_AUTH_PASSWORD: 'password'
 
 web: &web
   - image: circleci/ruby:3.0.1-node-browsers
