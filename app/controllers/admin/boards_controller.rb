@@ -4,20 +4,19 @@ class Admin::BoardsController < Admin::ApplicationController
   end
 
   def show
-    @board = Board.find(params[:id])
+    @board = Board.preload(:feeds).find(params[:id])
   end
 
   def edit
-    @board = Board.preload(board_feeds: [:feed]).find(params[:id])
+    @board = Board.preload(:feeds).find(params[:id])
   end
 
   def update
-    @board = Board.find(params[:id])
-    @board.recreate_board_feeds!(feed_ids) if feed_ids.present?
+    @board = Board.preload(:feeds).find(params[:id])
+    @board.update_with_recreate_feeds!(title: title, feed_ids: feed_ids)
     redirect_to admin_board_path(@board)
   rescue StandardError => error
     logged_error(error)
-    @board.error.add(base: error)
     render :edit
   end
 
@@ -32,6 +31,10 @@ class Admin::BoardsController < Admin::ApplicationController
   def logged_error(error)
     logger.error(error)
     Rollbar.error(error)
+  end
+
+  def title
+    board_params['title']
   end
 
   def feed_ids
