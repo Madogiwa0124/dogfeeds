@@ -63,7 +63,8 @@ class Feed < ApplicationRecord
   def parsed_object
     return nil if endpoint.blank?
     @parsed_object ||= client_class.new(endpoint).parsed_object
-  rescue RSS::NotWellFormedError => error
+  # NOTE: RSSの形式が不正及びTCPコネクションの確立に失敗した場合
+  rescue RSS::NotWellFormedError, Errno::EADDRNOTAVAIL => error
     logged_error error.exception("#{error.message} raised from endpoint: #{endpoint}")
     invalid_rss_format
     nil # NOTE: rescueされたときにerrorsが返却されてしまうのでnilを返して呼び元で判定できるようにしてる
