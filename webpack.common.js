@@ -27,14 +27,6 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-            plugins: [
-              // NOTE: `ReferenceError regeneratorRuntime is not defined`が発生していたので解消
-              // https://github.com/babel/babel/issues/9849#issuecomment-612595221
-              "@babel/plugin-transform-runtime",
-            ],
-          },
         },
       },
       {
