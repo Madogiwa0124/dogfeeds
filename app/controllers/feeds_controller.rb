@@ -1,4 +1,6 @@
 class FeedsController < ApplicationController
+  TAGS_LIMIT = 5
+
   def index; end
 
   def show
@@ -7,6 +9,7 @@ class FeedsController < ApplicationController
 
   def new
     @feed = Feed.new
+    @recommended_tags = FeedTag.counted_tags(limit: TAGS_LIMIT)
   end
 
   def create
