@@ -3,10 +3,11 @@
     <%= render 'layouts/errors', model: @feed %>
   <% end %>
   <div id="feed-form">
-    <%= render 'form', feed: @feed, title: 'RSSフィードを登録する' %>
+    <%= render 'form', feed: @feed, title: 'RSSフィードを登録する', recommended_tags: @recommended_tags %>
     <div class="center form-footer">
       <to-top-button />
     </div>
   </div>
 </div>
 <%= javascript_pack_tag 'feeds/new_edit' %>
+<%= stylesheet_pack_tag 'feeds/new_edit' %>

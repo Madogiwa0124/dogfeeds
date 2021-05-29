@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/feed/FeedCard.vue 初期表示 recommendedTagsが空の場合 snapshot 1`] = `
+<div
+  class="tags-input"
+>
+  <label
+    class="label"
+  >
+    タグ
+  </label>
+   
+  <!---->
+    
+  <div
+    class="tag-list"
+  />
+   
+  <input
+    class="tag-input-area input is-small"
+  />
+   
+  <p
+    class="help"
+  >
+    RSSフィードのタグを入力してください。(任意)
+  </p>
+</div>
+`;
+
+exports[`components/feed/FeedCard.vue 初期表示 snapshot 1`] = `
+<div
+  class="tags-input"
+>
+  <label
+    class="label"
+  >
+    タグ
+  </label>
+   
+  <div
+    class="recommended-tag-list"
+  >
+    <span
+      class="tag is-light control has-text-weight-medium"
+    >
+      人気のタグ
+    </span>
+     
+    <span
+      class="tag clickable is-success"
+    >
+      
+      tag1
+    
+    </span>
+    <span
+      class="tag clickable is-success"
+    >
+      
+      tags2
+    
+    </span>
+  </div>
+    
+  <div
+    class="tag-list"
+  />
+   
+  <input
+    class="tag-input-area input is-small"
+  />
+   
+  <p
+    class="help"
+  >
+    RSSフィードのタグを入力してください。(任意)
+  </p>
+</div>
+`;

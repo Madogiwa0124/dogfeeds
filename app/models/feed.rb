@@ -28,8 +28,9 @@ class Feed < ApplicationRecord
   validates :title, presence: true
   # TODO: 開発が落ち着いて安定してきたらDBレベルでのuniq制約をつける
   # rubocop:disable Rails/UniqueValidationWithoutIndex
-  validates :endpoint, presence: true, format: URI_REGEXP_PATTERN, uniqueness: true
+  validates :endpoint, presence: true, uniqueness: true
   # rubocop:enable Rails/UniqueValidationWithoutIndex
+  validates :endpoint, format: URI_REGEXP_PATTERN, allow_blank: true
 
   scope :recent, -> { order(last_published_at: :desc, id: :desc) }
   scope :titled_by, ->(keyword) {
@@ -62,7 +63,8 @@ class Feed < ApplicationRecord
   def parsed_object
     return nil if endpoint.blank?
     @parsed_object ||= client_class.new(endpoint).parsed_object
-  rescue RSS::NotWellFormedError => error
+  # NOTE: RSSの形式が不正及びTCPコネクションの確立に失敗した場合
+  rescue RSS::NotWellFormedError, Errno::EADDRNOTAVAIL => error
     logged_error error.exception("#{error.message} raised from endpoint: #{endpoint}")
     invalid_rss_format
     nil # NOTE: rescueされたときにerrorsが返却されてしまうのでnilを返して呼び元で判定できるようにしてる
