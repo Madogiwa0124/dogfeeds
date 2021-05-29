@@ -13,6 +13,7 @@ gem 'rss'
 gem 'sidekiq'
 gem 'simpacker'
 gem 'okcomputer'
+gem "skylight"
 
 group :development, :test do
   gem 'brakeman', require: false
