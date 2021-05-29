@@ -6,7 +6,8 @@ class Feed::PostForm
     create!
     true
   # TODO: StandardErrorをrescueするのはイケてないので治す
-  rescue StandardError
+  rescue StandardError => error
+    logged_error(error)
     false
   end
 
@@ -14,7 +15,8 @@ class Feed::PostForm
     update!
     true
   # TODO: StandardErrorをrescueするのはイケてないので治す
-  rescue StandardError
+  rescue StandardError => error
+    logged_error(error)
     false
   end
 
@@ -35,6 +37,11 @@ class Feed::PostForm
   end
 
   private
+
+  def logged_error(error)
+    Rails.logger.warn(error)
+    Rollbar.warning(error, endpoint: endpoint)
+  end
 
   def feed_create!
     @feed = Feed.new(endpoint: endpoint)

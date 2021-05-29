@@ -32,7 +32,7 @@ module Feed::Rss
     def build_parsed_item(item)
       ParsedItem.new(
         title: item.title.content,
-        description: shaped_description(item.content.content),
+        description: shaped_description(item.content&.content), # content配下にcontentを持たないケースがあるので&.で実行
         published_at: item.published.content,
         link: item.link.href,
         eye_catching_image: nil # MEMO: AtomにアイキャッチのURLなさそうなので一旦NULLを設定
