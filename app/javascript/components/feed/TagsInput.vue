@@ -44,12 +44,7 @@ export default defineComponent({
   props: {
     recommendedTags: {
       type: Array,
-      default: () => [
-        {
-          body: "aaaa",
-          count: 0,
-        },
-      ],
+      default: () => [],
     },
   },
   setup(props: Props) {

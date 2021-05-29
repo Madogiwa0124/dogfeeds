@@ -17,6 +17,7 @@ class FeedsController < ApplicationController
     if post_form.create
       redirect_to feed_path(post_form.feed)
     else
+      @recommended_tags = FeedTag.counted_tags(limit: TAGS_LIMIT)
       @feed = post_form.feed
       render :new
     end
