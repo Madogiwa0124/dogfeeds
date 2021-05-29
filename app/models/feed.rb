@@ -28,8 +28,9 @@ class Feed < ApplicationRecord
   validates :title, presence: true
   # TODO: 開発が落ち着いて安定してきたらDBレベルでのuniq制約をつける
   # rubocop:disable Rails/UniqueValidationWithoutIndex
-  validates :endpoint, presence: true, format: URI_REGEXP_PATTERN, uniqueness: true
+  validates :endpoint, presence: true, uniqueness: true
   # rubocop:enable Rails/UniqueValidationWithoutIndex
+  validates :endpoint, format: URI_REGEXP_PATTERN, allow_blank: true
 
   scope :recent, -> { order(last_published_at: :desc, id: :desc) }
   scope :titled_by, ->(keyword) {
