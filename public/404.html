@@ -1,50 +1,101 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  html {
-    height: 100%;
-  }
-  body {
-    height: 100%;
-    margin: 0;
-  }
-  .rails-default-error-page {
-    height: 100%;
-    background-color: lightgrey;
-    color: white;
-    font-family: "游ゴシック Medium",YuGothic,YuGothicM,"Hiragino Kaku Gothic ProN","Hiragino Kaku Gothic Pro",メイリオ,Meiryo,sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .title {
-    font-size: 120px;
-    margin-top: 0px;
-    margin-bottom: 10px;
-  }
-  .subtitle {
-    font-size: 30px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-  .to-top {
-    font-size: 30px;
-  }
-  a:link { color: white; }
-  a:visited { color: white; }
-  a:hover { color: white; }
-  a:active { color: white; }
-  </style>
-</head>
+<html lang="ja">
+  <head>
+    <title>Page not found</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        color: #555;
+        height: 100%;
+        margin: 0;
+      }
+      .brand {
+        font-size: 18px;
+        margin: 0px;
+        padding: 10px;
+      }
+      .brand img {
+        vertical-align: bottom;
+      }
+      .rails-default-error-page {
+        margin: 0;
+        height: 90%;
+        background-color: #EEE;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <p class="subtitle">Page not found...</p>
-    <p class="title">404</p>
-    <a class="to-top" href="https://dogfeeds.herokuapp.com/">Dogfeeds TOP</a>
-</body>
+      .dialog-header {
+        color: hsl(48, 100%, 67%);
+        font-weight: bold;
+        padding: 20px;
+        text-align: center;
+      }
+      .dialog-header .title {
+        font-size: 120px;
+        margin-top: 0px;
+        margin-bottom: 10px;
+      }
+      .dialog-header .subtitle {
+        font-size: 30px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+      }
+      .dialog-content {
+        text-align: center;
+      }
+      .dialog-footer {
+        text-align: center;
+        border-radius: 50px;
+        background-color: hsl(171, 100%, 41%);
+        padding: 10px;
+      }
+      .dialog-footer .to-top {
+        font-size: 20px;
+        color: #FFF;
+        text-decoration: none;
+      }
+      .footer {
+        font-size: 18px;
+        text-align: center;
+        margin: 0px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <p class="brand">
+        <img src="/favicon.ico" alt="favicon" height="28" width="28"/>
+        Dogfeeds
+      </p>
+    </header>
+    <!-- This file lives in public/422.html -->
+    <main class="rails-default-error-page">
+      <div class="dialog">
+        <div class="dialog-header">
+          <p class="subtitle">Page not found</p>
+          <p class="title">404</p>
+        </div>
+        <div class="dialog-content">
+          <p>ページが見つかりませんでした🐾</p>
+        </div>
+        <div class="dialog-footer">
+          <a class="to-top" href="https://dogfeeds.herokuapp.com/">Dogfeeds TOPへ</a>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          © 2019 Madogiwa0124.
+        </p>
+      </div>
+    </footer>
+  </body>
 </html>
