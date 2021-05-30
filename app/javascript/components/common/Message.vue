@@ -5,7 +5,6 @@
     </div>
     <div class="message-body">
       <p class="body">{{ body }}</p>
-      <a href="/" class="top-link button is-primary">TOPに戻る</a>
     </div>
   </article>
 </template>
