@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  TAGS_LIMIT = 5
+  TAGS_LIMIT = 8
 
   def index; end
 

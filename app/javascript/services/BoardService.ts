@@ -1,6 +1,6 @@
 import { Board, PostBoardResponse } from "@js/types/types";
 import Client from "@js/services/Client";
-const BOARDS_API_ENDPOINT = "/api/boards";
+import { BOARDS_API_ENDPOINT } from "@js/services/Routes";
 
 export async function postBoard(params: object): Promise<PostBoardResponse> {
   const response = await Client.post(BOARDS_API_ENDPOINT, { boards: params });

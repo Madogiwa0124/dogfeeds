@@ -1,9 +1,6 @@
 import Client from "@js/services/Client";
 import { Entry } from "@js/types/types";
-
-const FEED_ENTRY_API_ENDPOINT = "/api/feed_entries";
-const ENTRY_API_ENDPOINT = "/api/entries";
-const CLIP_STRAGE_KEY = "clipedEntriyIds";
+import { ENTRY_API_ENDPOINT, FEED_ENTRY_API_ENDPOINT } from "@js/services/Routes";
 
 export async function getFeedEntries(query = "", params: object): Promise<Entry[]> {
   const response = await Client.get(FEED_ENTRY_API_ENDPOINT + query, { params: params });
@@ -16,6 +13,8 @@ export async function getEntries(query = "", params: object): Promise<Entry[]> {
   const entries: Entry[] = response.data;
   return entries;
 }
+
+const CLIP_STRAGE_KEY = "clipedEntriyIds";
 
 export function getClipedEntryIds(): Set<number> {
   const strage = window.localStorage;
