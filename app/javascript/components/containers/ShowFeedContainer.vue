@@ -1,5 +1,8 @@
 <template>
   <div class="feed-show">
+    <message v-if="notFound" title="NotFound" body="対象のフィードが見つかりませんでした🐾" level="warning" />
+    <message v-if="hasError" title="Error" body="予期せぬエラーが発生しました🐕" level="danger" />
+
     <feed-infomation
       v-if="!!feed"
       :feed="feed"
@@ -11,8 +14,6 @@
       <to-top-button />
     </div>
     <page-loader :init-is-loading="isLoading" />
-    <message v-if="notFound" title="NotFound" body="対象のフィードが見つかりませんでした🐾" level="warning" />
-    <message v-if="hasError" title="Error" body="予期せぬエラーが発生しました🐕" level="danger" />
   </div>
 </template>
 <script lang="ts">
