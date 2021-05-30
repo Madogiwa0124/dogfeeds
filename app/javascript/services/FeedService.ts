@@ -1,7 +1,6 @@
 import Client from "@js/services/Client";
 import { Feed } from "@js/types/types";
-
-const FEEDS_API_ENDPOINT = "/api/feeds";
+import { FEEDS_API_ENDPOINT } from "@js/services/Routes";
 
 export async function getFeeds(query = "", params: object): Promise<Feed[]> {
   const response = await Client.get(FEEDS_API_ENDPOINT + query, { params: params });
