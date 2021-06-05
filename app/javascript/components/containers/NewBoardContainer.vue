@@ -194,8 +194,8 @@ export default Vue.extend({
       this.showServiceInfomation = false;
       localStorage.setItem(SHOW_SERVICE_INFOMATION_STRAGE_KEY, "false");
     },
-    handleOnClipEntry: function (entryId: number, clieped: boolean) {
-      clipEntry(entryId, clieped);
+    handleOnClipEntry: function (entryLink: string, clieped: boolean) {
+      clipEntry(entryLink, clieped);
     },
   },
 });

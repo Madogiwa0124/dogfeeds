@@ -43,8 +43,8 @@ export default Vue.extend({
     handleOnTagClick: function (body: string) {
       this.$emit("tagClick", body);
     },
-    handleOnClipEntry: function (entryId: number, cliped: boolean): void {
-      this.$emit("clipEntry", entryId, cliped);
+    handleOnClipEntry: function (entryLink: string, cliped: boolean): void {
+      this.$emit("clipEntry", entryLink, cliped);
     },
   },
 });

@@ -76,8 +76,8 @@ export default Vue.extend({
       const query = `?query[keyword]=${body}`;
       window.location.href = `${TAG_CLICK_REDIRECT_PATH}/${query}`;
     },
-    handleOnClipEntry: function (entryId: number, clieped: boolean) {
-      clipEntry(entryId, clieped);
+    handleOnClipEntry: function (entryLink: string, clieped: boolean) {
+      clipEntry(entryLink, clieped);
     },
   },
 });

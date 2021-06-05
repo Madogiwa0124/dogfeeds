@@ -73,8 +73,8 @@ export default Vue.extend({
     handleOnUnselected: function (id: number) {
       this.$emit("unselectedFeed", id);
     },
-    handleOnClipEntry: function (entryId: number, cliped: boolean): void {
-      this.$emit("clipEntry", entryId, cliped);
+    handleOnClipEntry: function (entryLink: string, cliped: boolean): void {
+      this.$emit("clipEntry", entryLink, cliped);
     },
   },
 });

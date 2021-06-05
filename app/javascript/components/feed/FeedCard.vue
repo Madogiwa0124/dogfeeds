@@ -32,7 +32,7 @@
           <p class="entry-info has-text-right">
             <span :title="lastPublishedAtText">Last updated {{ feed.lastEntry.publishedAt | fromNow }}</span>
             <font-awesome-icon :icon="['far', 'clock']" />
-            <entry-clip class="clip" :entryId="feed.lastEntry.id" @clip="handleOnClipEntry" />
+            <entry-clip class="clip" :entry-link="feed.lastEntry.link" @clip="handleOnClipEntry" />
           </p>
         </div>
       </div>
@@ -118,10 +118,10 @@ export default Vue.extend({
       event.preventDefault();
       this.$emit("clickTag", tagBody);
     },
-    handleOnClipEntry: function (entryId: number, cliped: boolean, event: Event): void {
+    handleOnClipEntry: function (entryLink: string, cliped: boolean, event: Event): void {
       event.stopPropagation();
       event.preventDefault();
-      this.$emit("clipEntry", entryId, cliped);
+      this.$emit("clipEntry", entryLink, cliped);
     },
     handleOnSelected: function (): void {
       this.$emit("selectedFeed", this.feed.id);
