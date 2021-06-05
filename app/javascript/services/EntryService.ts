@@ -16,16 +16,16 @@ export async function getEntries(query = "", params: object): Promise<Entry[]> {
 
 const CLIP_STRAGE_KEY = "clipedEntriyIds";
 
-export function getClipedEntryIds(): Set<number> {
+export function getClipedEntryLinks(): Set<string> {
   const strage = window.localStorage;
   let strageValue = strage.getItem(CLIP_STRAGE_KEY);
   if (strageValue === null) strageValue = "[]";
-  return new Set(JSON.parse(strageValue) as number[]);
+  return new Set(JSON.parse(strageValue) as string[]);
 }
 
-export function clipEntry(entryId: number, cliped: boolean): void {
+export function clipEntry(link: string, cliped: boolean): void {
   const strage = window.localStorage;
-  const clipedEntriyIds = getClipedEntryIds();
-  cliped ? clipedEntriyIds.add(entryId) : clipedEntriyIds.delete(entryId);
+  const clipedEntriyIds = getClipedEntryLinks();
+  cliped ? clipedEntriyIds.add(link) : clipedEntriyIds.delete(link);
   strage.setItem(CLIP_STRAGE_KEY, JSON.stringify(Array.from(clipedEntriyIds)));
 }

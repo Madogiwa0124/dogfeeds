@@ -108,8 +108,8 @@ export default Vue.extend({
     handleOnEntryTabClick() {
       this.selectedTab = Tabs.Entry;
     },
-    handleOnClipEntry: function (entryId: number, clieped: boolean) {
-      clipEntry(entryId, clieped);
+    handleOnClipEntry: function (entryLink: string, clieped: boolean) {
+      clipEntry(entryLink, clieped);
     },
   },
 });

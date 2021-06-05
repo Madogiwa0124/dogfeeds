@@ -56,8 +56,8 @@ export default defineComponent({
   // propsの型定義のためsetup引数に型を設定
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props: Props, context: SetupContext) {
-    const handleOnClipEntry = (entryId: number, cliped: boolean): void => {
-      context.emit("clipEntry", entryId, cliped);
+    const handleOnClipEntry = (entryLink: string, cliped: boolean): void => {
+      context.emit("clipEntry", entryLink, cliped);
     };
     return {
       props,

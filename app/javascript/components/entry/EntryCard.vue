@@ -19,7 +19,7 @@
         </p>
         <p class="entry-footer">
           <span :title="publishedAtText">{{ fromNow }} </span>
-          <entry-clip class="clip" :entryId="entry.id" :init-cliped="cliped" @clip="handleOnClipEntry" />
+          <entry-clip class="clip" :entry-link="entry.link" :init-cliped="cliped" @clip="handleOnClipEntry" />
         </p>
       </div>
     </div>
@@ -80,8 +80,8 @@ export default defineComponent({
   setup(props: Props, context: SetupContext) {
     const publishedAtText = computed(() => moment(props.entry.publishedAt).format("YYYY/MM/DD h:mm:ss"));
     const fromNow = computed(() => moment(props.entry.publishedAt).fromNow());
-    const handleOnClipEntry = (entryId: number, cliped: boolean, event: Event) => {
-      context.emit("clipEntry", entryId, cliped, event);
+    const handleOnClipEntry = (entryLink: string, cliped: boolean, event: Event) => {
+      context.emit("clipEntry", entryLink, cliped, event);
     };
     const limitedDescription = computed(() => {
       if (props.descriptionLimit === null) return props.entry.description;

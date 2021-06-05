@@ -36,7 +36,7 @@ import { faPaperclip, faUser } from "@fortawesome/free-solid-svg-icons";
 library.add(faPaperclip, faUser);
 
 import { Entry } from "@js/types/types";
-import { clipEntry, getClipedEntryIds, getEntries } from "@js/services/EntryService";
+import { clipEntry, getClipedEntryLinks, getEntries } from "@js/services/EntryService";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 
 export default defineComponent({
@@ -46,12 +46,12 @@ export default defineComponent({
   setup() {
     const state = reactive<{ clipedEntries: Entry[] }>({ clipedEntries: [] });
     onMounted(async () => {
-      const clipedEntryIds = Array.from(getClipedEntryIds());
-      if (clipedEntryIds.length < 1) return;
-      state.clipedEntries = await getEntries("", { ids: clipedEntryIds, pager: false });
+      const clipedEntryLinks = Array.from(getClipedEntryLinks());
+      if (clipedEntryLinks.length < 1) return;
+      state.clipedEntries = await getEntries("", { links: clipedEntryLinks, pager: false });
     });
-    const handleOnClipEntry = (entryId: number, clieped: boolean) => {
-      clipEntry(entryId, clieped);
+    const handleOnClipEntry = (entryLink: string, clieped: boolean) => {
+      clipEntry(entryLink, clieped);
     };
     return { state, handleOnClipEntry };
   },

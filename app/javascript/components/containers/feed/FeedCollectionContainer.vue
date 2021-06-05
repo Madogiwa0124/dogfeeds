@@ -96,8 +96,8 @@ export default Vue.extend({
       this.infiniteLoading.stateChanger.reset();
       this.infiniteHandler(this.infiniteLoading.stateChanger);
     },
-    handleOnClipEntry: function (entryId: number, clieped: boolean) {
-      clipEntry(entryId, clieped);
+    handleOnClipEntry: function (entryLink: string, clieped: boolean) {
+      clipEntry(entryLink, clieped);
     },
   },
 });

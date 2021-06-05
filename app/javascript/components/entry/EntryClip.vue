@@ -16,7 +16,7 @@ library.add(faPaperclip);
 
 type Props = {
   initCliped: boolean;
-  entryId: number;
+  entryLink: string;
   title: string;
 };
 
@@ -27,9 +27,9 @@ export default defineComponent({
       default: false,
       type: Boolean,
     },
-    entryId: {
+    entryLink: {
       required: true,
-      type: Number,
+      type: String,
     },
     title: {
       default: "Clipして後で読む",
@@ -40,7 +40,7 @@ export default defineComponent({
     const state = reactive<{ cliped: boolean }>({ cliped: props.initCliped });
     const clip = (event: Event) => {
       state.cliped = !state.cliped;
-      context.emit("clip", props.entryId, state.cliped, event);
+      context.emit("clip", props.entryLink, state.cliped, event);
     };
     return { clip, state, props };
   },
