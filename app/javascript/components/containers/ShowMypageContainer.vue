@@ -14,6 +14,7 @@
       </div>
       <div class="content">
         <entry-card-collection
+          v-if="state.clipedEntries.length > 0"
           :entries="state.clipedEntries"
           :clumnSize="3"
           :descriptionLimit="100"
@@ -21,8 +22,17 @@
           :cliped="true"
           @clipEntry="handleOnClipEntry"
         />
+        <message
+          v-else
+          level="link"
+          title="CLIPされた記事がありません"
+          body="📎をクリックして記事をCLIPするとこちらに表示されます。"
+        />
       </div>
     </main>
+    <div class="center">
+      <to-top-button />
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -38,10 +48,12 @@ library.add(faPaperclip, faUser);
 import { Entry } from "@js/types/types";
 import { clipEntry, getClipedEntryLinks, getEntries } from "@js/services/EntryService";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
+import Message from "@js/components/common/Message.vue";
+import ToTopButton from "@js/components/common/ToTopButton.vue";
 
 export default defineComponent({
   name: "ShowMypageContainer",
-  components: { FontAwesomeIcon, EntryCardCollection },
+  components: { FontAwesomeIcon, EntryCardCollection, Message, ToTopButton },
   props: {},
   setup() {
     const state = reactive<{ clipedEntries: Entry[] }>({ clipedEntries: [] });

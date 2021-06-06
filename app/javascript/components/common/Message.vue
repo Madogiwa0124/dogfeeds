@@ -30,17 +30,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.message {
-  text-align: center;
+@import "@css/common.scss";
 
+.message {
   .message-body {
     .body {
-      font-size: 1.5em;
-      margin-bottom: 1em;
+      font-size: $font-size-m;
     }
 
     .top-link {
-      font-size: 1.2em;
+      font-size: $font-size-m;
     }
   }
 }
