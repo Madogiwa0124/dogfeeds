@@ -33,7 +33,7 @@
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
     "rollbar": "^2.22.0",
-    "vue": "^2.6.13",
+    "vue": "^2.6.14",
     "vue-infinite-loading": "^2.4.5",
     "yarn": "^1.22.10"
   },
@@ -71,7 +71,7 @@
     "typescript": "^4.3.2",
     "vue-jest": "^3.0.7",
     "vue-loader": "^15.9.7",
-    "vue-template-compiler": "^2.6.13",
+    "vue-template-compiler": "^2.6.14",
     "vue-type-check": "^1.1.0",
     "webpack": "^5.38.1",
     "webpack-assets-manifest": "~5",
