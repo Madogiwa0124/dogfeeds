@@ -72,6 +72,7 @@ module.exports = {
       ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN: "",
       SOURCE_VERSION: "",
       UPLOAD_SOURCEMAP: "",
+      GOOLE_ANALYTICS_ID: "",
     }),
   ],
 };

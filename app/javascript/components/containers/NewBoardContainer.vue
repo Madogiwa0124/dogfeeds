@@ -60,6 +60,7 @@ import { getFeeds } from "@js/services/FeedService";
 import { getTags } from "@js/services/TagService";
 import { postBoard } from "@js/services/BoardService";
 import { clipEntry } from "@js/services/EntryService";
+import { trackEvent } from "@js/services/Gtag";
 import { Feed, PostBoardResponse, Tag } from "@js/types/types";
 
 const SHOW_SERVICE_INFOMATION_STRAGE_KEY = "showServiceInfomation";
@@ -159,6 +160,11 @@ export default Vue.extend({
         const res: PostBoardResponse = await postBoard({
           feed_ids: this.selectedFeeds.map((feed) => feed.id),
           title: this.boardTitle,
+        });
+        trackEvent({
+          action: "create_boad",
+          category: this.$options.name,
+          label: this.boardTitle,
         });
         window.location.href = `/boards/${res.id}`;
       } catch (error) {

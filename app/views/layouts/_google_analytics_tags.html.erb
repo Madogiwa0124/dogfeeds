@@ -1,0 +1,3 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<% ga_id = Rails.configuration.settings.google_analytics[:id] %>
+<script async src="<%= "https://www.googletagmanager.com/gtag/js?id=#{ga_id}" %>"></script>
