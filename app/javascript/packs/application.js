@@ -6,7 +6,14 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
-import "@js/components/navbar";
+
+import Vue from "vue";
+import NavigationBar from "@js/components/NavigationBar.vue";
+
+new Vue({
+  el: "#vue-header",
+  components: { NavigationBar },
+});
 
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in

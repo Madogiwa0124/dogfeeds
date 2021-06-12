@@ -1,6 +1,5 @@
 @import "bulma/bulma";
 @import "bulma-extensions/bulma-pageloader/dist/css/bulma-pageloader";
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 @import "../stylesheets/common.scss";
 @import "../stylesheets/admin";
 
@@ -8,21 +7,6 @@ $pageloader-opacity: 0.9;
 // NOTE: webpackビルド時のWARNING解消のため設定
 // https://takeokunn.xyz/blog/post/webpacker-bulma-build-warning
 $variable-columns: false;
-
-.navbar-brand {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 20px;
-
-  a:hover {
-    color: hsl(171, 100%, 41%);
-  }
-
-  .tag-line {
-    color: #888888;
-    font-size: 10px;
-  }
-}
-
 
 html {
   height: 100%;
