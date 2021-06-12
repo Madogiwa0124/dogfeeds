@@ -8,15 +8,9 @@
     <%= stylesheet_pack_tag 'application' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="RSSフィードをまとめたRSSフィードを作ることができるWebサービスです">
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@Madogiwa_Boy" />
-    <meta property="og:url" content="http://dogfeeds.herokuapp.com/" />
-    <meta property="og:title" content="Dogfeeds" />
-    <meta
-      property="og:description"
-      content="RSSフィードをまとめたRSSフィードを作ることができます。作り方は簡単なので、ぜひ作ってみてください🐶"
-    />
-    <meta property="og:image" content="http://dogfeeds.herokuapp.com/favicon.ico" />
+    <%= render 'layouts/ogp_tags' %>
+    <%= render 'layouts/google_analytics_tags' %>
+    <%= javascript_pack_tag 'application/head' %>
   </head>
 
   <body>

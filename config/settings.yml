@@ -2,11 +2,17 @@ production:
   basic_auth:
     user: <%= ENV['BASIC_AUTH_USER'] %>
     password: <%= ENV['BASIC_AUTH_PASSWORD'] %>
+  google_analytics:
+    id: <%= ENV['GOOLE_ANALYTICS_ID'] %>
 development:
   basic_auth:
     user: <%= ENV['BASIC_AUTH_USER'] %>
     password: <%= ENV['BASIC_AUTH_PASSWORD'] %>
+  google_analytics:
+    id: <%= ENV['GOOLE_ANALYTICS_ID'] %>
 test:
   basic_auth:
     user: <%= ENV['BASIC_AUTH_USER'] %>
     password: <%= ENV['BASIC_AUTH_PASSWORD'] %>
+  google_analytics:
+    id: <%= ENV['GOOLE_ANALYTICS_ID'] %>
