@@ -6,3 +6,5 @@ new Vue({
   el: "#feed-form",
   components: { TagsInput, ToTopButton },
 });
+
+import "@css/feed.scss";
