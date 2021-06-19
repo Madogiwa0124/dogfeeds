@@ -13,6 +13,7 @@ gem 'rss'
 gem 'sidekiq'
 gem 'simpacker'
 gem 'okcomputer'
+gem 'okcomputer_html_view', github: 'Madogiwa0124/okcomputer_html_view', tag: '0.1.0'
 gem "skylight"
 
 group :development, :test do
