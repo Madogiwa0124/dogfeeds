@@ -1,7 +1,0 @@
-<%= render '/style' %>
-
-<h1><%= "OkComputer #{data.registrant_name}" %></h1>
-
-<% status_class_name = data.failure_occurred ? 'faild' : 'passed' %>
-<%= render partial: '/status', locals: { status: status, class_name: status_class_name } %>
-<%= render partial: '/checks', locals: { checks: [data] } %>

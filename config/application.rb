@@ -47,8 +47,6 @@ module Dogfeeds
     console { ApplicationRecord.strict_loading_by_default = false }
     # Rails engineで導入されているokcomputerのcontrollerのオーバーライド
     # https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers
-    config.to_prepare do
-      load "#{Rails.root}/lib/okcomputer/app/controllers/ok_computer_controller.rb"
-    end
+    config.to_prepare { load OkcomputerHtmlView.load_path }
   end
 end

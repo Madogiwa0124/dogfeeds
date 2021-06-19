@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/Madogiwa0124/okcomputer_html_view.git
+  revision: 481e2f247d3e99d53277c4c3b874aef318a27590
+  tag: 0.1.0
+  specs:
+    okcomputer_html_view (0.1.0)
+      okcomputer (~> 1.18.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -306,6 +314,7 @@ DEPENDENCIES
   listen (~> 3.5)
   lograge
   okcomputer
+  okcomputer_html_view!
   pg (>= 0.18, < 2.0)
   puma
   rails (~> 6.1.3)
