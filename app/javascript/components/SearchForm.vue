@@ -100,13 +100,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 .tag-area {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
 
   .more {
-    font-size: 12px;
+    font-size: $font-size-s;
     padding: 0px 9px;
     height: inherit;
   }

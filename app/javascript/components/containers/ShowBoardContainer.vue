@@ -115,6 +115,8 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss">
+@import "@css/common.scss";
+
 .board-show {
   padding: 20px;
 
@@ -122,8 +124,8 @@ export default Vue.extend({
     margin-bottom: 15px;
 
     li.is-active a {
-      border-bottom-color: hsl(171, 100%, 41%);
-      color: hsl(171, 100%, 41%);
+      border-bottom-color: $primary-color;
+      color: $primary-color;
     }
   }
 }

@@ -7,6 +7,9 @@ $font-size-s: 12px;
 $font-size-xs: 10px;
 
 $conversion-color: rgb(255, 165, 0);
+$primary-color: hsl(171, 100%, 41%);
+$dengar-color: hsl(348, 100%, 61%);
+$dengar-hover-color: hsl(348, 60%, 44%);
 
 .is-conversion-color {
   color: $conversion-color;

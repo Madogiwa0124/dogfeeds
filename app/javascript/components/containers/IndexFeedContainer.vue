@@ -68,15 +68,17 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 .feed-index {
   padding: 20px;
 
   .tabs {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 
     li.is-active a {
-      border-bottom-color: hsl(171, 100%, 41%);
-      color: hsl(171, 100%, 41%);
+      border-bottom-color: $primary-color;
+      color: $primary-color;
     }
   }
 }

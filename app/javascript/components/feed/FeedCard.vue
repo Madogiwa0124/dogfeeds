@@ -133,17 +133,19 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 .feed-card {
   border-radius: 0px;
 
   .selected-feed {
-    font-size: 14px;
+    font-size: $font-size-ms;
     width: 70%;
   }
 
   .card-header-title {
     padding: 10px;
-    font-size: 14px;
+    font-size: $font-size-ms;
   }
 
   .card-content {
@@ -154,15 +156,16 @@ export default Vue.extend({
       line-height: 16px;
 
       .last-entry-title {
-        font-size: 14px;
+        font-size: $font-size-ms;
       }
 
       .entry-info {
-        font-size: 12px;
-        color: #999999;
+        font-size: $font-size-s;
+        color: #888888;
+        padding-bottom: 10px;
 
         .clip {
-          font-size: 20px;
+          font-size: $font-size-l;
         }
       }
     }

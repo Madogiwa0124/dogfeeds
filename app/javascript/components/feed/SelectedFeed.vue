@@ -22,18 +22,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 li.selected-feed {
   margin-bottom: 5px;
-  font-size: 14px;
+  font-size: $font-size-ms;
   border-radius: 5px;
   background-color: #ffffff;
   padding: 10px;
 
   .delete {
-    background-color: hsl(348, 100%, 61%);
+    background-color: $dengar-color;
   }
   .delete:hover {
-    background-color: hsl(348, 60%, 44%);
+    background-color: $dengar-hover-color;
   }
 }
 </style>

@@ -17,6 +17,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 .speech-bubble {
   .balloon1 {
     position: relative;
@@ -24,7 +26,7 @@ export default {
     margin: 0 0 1.5em 0;
     padding: 7px 10px;
     width: 100%;
-    font-size: 14px;
+    font-size: $font-size-ms;
     background: #ffffff;
     border-radius: 10px;
   }

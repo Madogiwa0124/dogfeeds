@@ -66,15 +66,17 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 .board-card {
   .card-header-title {
     padding: 10px;
-    font-size: 14px;
+    font-size: $font-size-ms;
   }
 
   .card-content {
     padding: 0px;
-    font-size: 14px;
+    font-size: $font-size-ms;
 
     .content {
       margin: 0px 10px 10px 10px;

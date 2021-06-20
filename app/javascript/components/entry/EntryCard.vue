@@ -109,6 +109,8 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 $entry-body-color: #888888;
 
 .entry-card {
@@ -125,17 +127,17 @@ $entry-body-color: #888888;
 
     .entry-description {
       color: $entry-body-color;
-      font-size: 10px;
+      font-size: $font-size-xs;
       margin: 0px;
     }
 
     .entry-footer {
       text-align: right;
-      font-size: 10px;
+      font-size: $font-size-xs;
       color: $entry-body-color;
 
       .clip {
-        font-size: 16px;
+        font-size: $font-size-m;
       }
     }
 

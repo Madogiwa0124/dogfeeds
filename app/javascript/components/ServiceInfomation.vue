@@ -25,12 +25,14 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
+@import "@css/common.scss";
+
 .message {
   margin-bottom: 0em;
 
   .delete {
     &:hover {
-      background-color: hsl(348, 100%, 61%);
+      background-color: $dengar-color;
     }
   }
 

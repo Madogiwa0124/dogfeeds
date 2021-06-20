@@ -65,18 +65,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import "@css/common.scss";
 
 .navbar-brand {
   font-family: "Ubuntu", sans-serif;
-  font-size: 20px;
+  font-size: $font-size-l;
 
   a:hover {
-    color: hsl(171, 100%, 41%);
+    color: $primary-color;
   }
 
   .tag-line {
     color: #888888;
-    font-size: 10px;
+    font-size: $font-size-xs;
   }
 }
 </style>
