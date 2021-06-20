@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/Madogiwa0124/okcomputer_html_view.git
-  revision: 481e2f247d3e99d53277c4c3b874aef318a27590
-  tag: 0.1.0
+  revision: 1055f7cda9c674018d54407cb0fe3862dcd0ca74
+  tag: 0.1.1
   specs:
-    okcomputer_html_view (0.1.0)
+    okcomputer_html_view (0.1.1)
       okcomputer (~> 1.18.4)
 
 GEM
