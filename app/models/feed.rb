@@ -65,14 +65,14 @@ class Feed < ApplicationRecord
     @parsed_object ||= client_class.new(endpoint).parsed_object
   # NOTE: RSSの形式が不正及びTCPコネクションの確立に失敗した場合
   rescue RSS::NotWellFormedError, Errno::EADDRNOTAVAIL => error
-    logged_error error.exception("#{error.message} raised from endpoint: #{endpoint}")
+    logged_error(error)
     invalid_rss_format
     nil # NOTE: rescueされたときにerrorsが返却されてしまうのでnilを返して呼び元で判定できるようにしてる
   end
 
-  def logged_error(raised_error)
-    logger.warn(raised_error)
-    Rollbar.warning(raised_error)
+  def logged_error(error)
+    logger.warn(error.exception("#{error.message} raised from endpoint: #{endpoint}"))
+    Rollbar.warning(error, endpoint: endpoint)
   end
 
   def invalid_rss_format
