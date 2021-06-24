@@ -18,7 +18,7 @@ class Admin::FeedsController < Admin::ApplicationController
   end
 
   def destroy
-    @feed = Feed.find(params[:id])
+    @feed = Feed.preload(:board_feeds, :entries, :feed_taggings).find(params[:id])
     @feed.destroy
     redirect_to admin_feeds_path
   end
