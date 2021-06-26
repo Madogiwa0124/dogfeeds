@@ -16,5 +16,8 @@
     <span class="card-footer-item">
       更新日: <%= l(feed.updated_at, format: :long) %>
     </span>
+    <span class="card-footer-item">
+      更新停止: <%= feed.suspend %>
+    </span>
   </footer>
 </div>

@@ -1,6 +1,6 @@
 class Feed::PostForm
   include ActiveModel::Model
-  attr_accessor :id, :title, :endpoint, :tags, :feed
+  attr_accessor :id, :title, :endpoint, :tags, :feed, :suspend
 
   def create
     create!
@@ -51,7 +51,7 @@ class Feed::PostForm
 
   def feed_update!
     @feed = Feed.find(id)
-    feed.assign_attributes(title: title, endpoint: endpoint)
+    feed.assign_attributes(title: title, endpoint: endpoint, suspend: suspend)
     feed.save!
   end
 

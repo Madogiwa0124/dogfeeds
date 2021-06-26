@@ -12,7 +12,7 @@ class Admin::FeedsController < Admin::ApplicationController
     if post_form.update
       redirect_to feed_path(post_form.feed)
     else
-      @feed = post_form.feed
+      @feed = post_form.feed.tap { |feed| feed.strict_loading!(false) }
       render :edit
     end
   end
@@ -26,6 +26,6 @@ class Admin::FeedsController < Admin::ApplicationController
   private
 
   def feed_params
-    params.require(:feed).permit(:title, :endpoint, tags: [])
+    params.require(:feed).permit(:title, :endpoint, :suspend, tags: [])
   end
 end
