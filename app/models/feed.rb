@@ -5,6 +5,7 @@
 #  id                :bigint(8)        not null, primary key
 #  endpoint          :string           not null
 #  last_published_at :datetime
+#  suspend           :boolean          default(FALSE), not null
 #  title             :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -33,6 +34,7 @@ class Feed < ApplicationRecord
   validates :endpoint, format: URI_REGEXP_PATTERN, allow_blank: true
 
   scope :recent, -> { order(last_published_at: :desc, id: :desc) }
+  scope :active, -> { where(suspend: false) }
   scope :titled_by, ->(keyword) {
     where('title LIKE ?', "%#{sanitize_sql_like(keyword)}%")
   }

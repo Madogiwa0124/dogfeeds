@@ -67,7 +67,7 @@ RSpec.describe Feed::PostForm, type: :model do
 
     context '正常に終了した場合' do
       before do
-        params = { id: feed.id, title: title, endpoint: 'https://example.com/rss', tags: tags }
+        params = { id: feed.id, title: title, endpoint: 'https://example.com/rss', tags: tags, suspend: false }
         described_class.new(params).update!
       end
 

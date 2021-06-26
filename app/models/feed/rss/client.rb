@@ -18,8 +18,12 @@ module Feed::Rss
 
     attr_reader :endpoint
 
+    def original_resource
+      @original_resource ||= Net::HTTP.get(URI.parse(endpoint))
+    end
+
     def resource
-      @resource ||= Net::HTTP.get(URI.parse(endpoint))
+      @resource ||= Filter.call(original_resource)
     end
 
     def parse!
