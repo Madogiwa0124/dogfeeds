@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require("webpack-assets-manifest");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
 const getEntries = require("./config/webpack/helpers/getEntries");
 const JAVASCRIPT_ENTRY_PATH = "./app/javascript/packs/";
@@ -52,7 +52,6 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue: "vue/dist/vue.esm.js",
       "@js": `${__dirname}/app/javascript`,
       "@css": `${__dirname}/app/javascript/stylesheets`,
       querystring: "querystring-es3",
