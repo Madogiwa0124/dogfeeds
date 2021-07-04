@@ -7,13 +7,13 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import Vue from "vue";
 import NavigationBar from "@js/components/NavigationBar.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { createApp } from "vue";
 
-new Vue({
-  el: "#vue-header",
-  components: { NavigationBar },
-});
+const app = createApp(NavigationBar);
+app.component("FontAwesomeIcon", FontAwesomeIcon);
+app.mount("#vue-header");
 
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in
