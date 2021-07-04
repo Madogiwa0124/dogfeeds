@@ -26,6 +26,7 @@ import ToTopButton from "@js/components/common/ToTopButton.vue";
 import { getFeed } from "@js/services/FeedService";
 import { clipEntry, getFeedEntries } from "@js/services/EntryService";
 import { sleep } from "@js/components/common/Sleep";
+import { getIdFromUrl } from "@js/components/common/GetIdFromUrl";
 
 interface DataType {
   feed: Feed | null;
@@ -44,7 +45,7 @@ export default Vue.extend({
   props: {
     feedId: {
       type: Number,
-      required: true,
+      default: () => getIdFromUrl(),
     },
   },
   data: function (): DataType {

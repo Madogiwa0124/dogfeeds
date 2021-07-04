@@ -41,6 +41,7 @@ import { getBoard } from "@js/services/BoardService";
 import { clipEntry, getFeedEntries } from "@js/services/EntryService";
 import { sleep } from "@js/components/common/Sleep";
 import { getFeeds } from "@js/services/FeedService";
+import { getIdFromUrl } from "@js/components/common/GetIdFromUrl";
 
 interface DataType {
   board: Board | null;
@@ -64,7 +65,7 @@ export default Vue.extend({
   props: {
     boardId: {
       type: Number,
-      required: true,
+      default: () => getIdFromUrl(),
     },
   },
   data: function (): DataType {
