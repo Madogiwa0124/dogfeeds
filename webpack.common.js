@@ -65,6 +65,10 @@ module.exports = {
     // manifestファイルの出力
     new WebpackAssetsManifest({ publicPath: true }),
     new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false,
+    }),
     new webpack.EnvironmentPlugin({
       RAILS_ENV: "",
       NODE_ENV: "",
