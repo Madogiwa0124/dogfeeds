@@ -4,7 +4,9 @@
   </div>
 </template>
 <script>
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "SpeechBubble",
   components: {},
   props: {
@@ -14,7 +16,7 @@ export default {
     },
   },
   methods: {},
-};
+});
 </script>
 <style lang="scss" scoped>
 @import "@css/common.scss";

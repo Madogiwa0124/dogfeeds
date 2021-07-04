@@ -22,13 +22,14 @@
   </div>
 </template>
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import moment from "moment";
 import { Board, Feed } from "@js/types/types";
 import RssLinkCopyButton from "@js/components/board/RssLinkCopyButton.vue";
 const NO_IMAGE_PATH = "/noimage.png";
 const IMAGES_LIMIT = 6;
-export default Vue.extend({
+
+export default defineComponent({
   name: "BoardCard",
   components: { RssLinkCopyButton },
   props: {
@@ -52,7 +53,7 @@ export default Vue.extend({
     boardPath: function (): string {
       return `/boards/${this.board.id}`;
     },
-    lastUpdatedAt: function () {
+    lastUpdatedAt: function (): string {
       return moment(this.board.lastEntry.publishedAt, "YYYYMMDD h:mm:ss").fromNow();
     },
   },

@@ -5,9 +5,7 @@
   </span>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import VueCompositionApi, { defineComponent, SetupContext, reactive } from "@vue/composition-api";
-Vue.use(VueCompositionApi);
+import { defineComponent, reactive, SetupContext } from "vue";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";

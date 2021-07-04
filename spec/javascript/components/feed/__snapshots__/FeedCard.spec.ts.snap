@@ -16,12 +16,9 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
       <p
         class="card-header-title"
       >
-        
         feed title 1
-      
       </p>
     </header>
-     
     <div
       class="card-content"
     >
@@ -35,15 +32,14 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
           width="350"
         />
       </div>
-       
       <div
         class="content"
       >
         <div
           class="tag-area field is-grouped is-grouped-multiline"
         >
-          <!---->
-           
+          <!--v-if-->
+          
           <div
             class="control"
           >
@@ -55,8 +51,7 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
               >
                 feed tag body 1
               </span>
-               
-              <!---->
+              <!--v-if-->
             </div>
           </div>
           <div
@@ -70,12 +65,11 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
               >
                 feed tag body 1
               </span>
-               
-              <!---->
+              <!--v-if-->
             </div>
           </div>
+          
         </div>
-         
         <object>
           <a
             class="has-text-info last-entry-title"
@@ -83,9 +77,7 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
             rel="noopener"
             target="_blank"
           >
-            
-            entry title 1
-            
+            entry title 1 
             <svg
               aria-hidden="true"
               class="svg-inline--fa fa-external-link-alt fa-w-16"
@@ -104,7 +96,6 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
             </svg>
           </a>
         </object>
-         
         <p
           class="entry-info has-text-right"
         >
@@ -113,7 +104,6 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
           >
             Last updated an hour ago
           </span>
-           
           <svg
             aria-hidden="true"
             class="svg-inline--fa fa-clock fa-w-16"
@@ -130,12 +120,12 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
               fill="currentColor"
             />
           </svg>
-           
           <span
             class="entry-clip clip"
             title="Clipして後で読む"
           >
-             
+            
+            
             <svg
               aria-hidden="true"
               class="svg-inline--fa fa-paperclip fa-w-14"
@@ -156,7 +146,6 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
         </p>
       </div>
     </div>
-     
     <footer
       class="card-footer"
     >
@@ -183,9 +172,7 @@ exports[`components/feed/FeedCard.vue snapshot 1`] = `
                 fill="currentColor"
               />
             </svg>
-            
-    RSSフィードを選択する
-  
+             RSSフィードを選択する 
           </span>
         </button>
       </p>

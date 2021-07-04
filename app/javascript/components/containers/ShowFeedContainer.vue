@@ -17,7 +17,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import { Feed, Entry } from "@js/types/types";
 import FeedInfomation from "@js/components/feed/FeedInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
@@ -39,7 +39,7 @@ interface DataType {
 const LOADING_SLEEP_MSEC = 200;
 const TAG_CLICK_REDIRECT_PATH = "/feeds";
 
-export default Vue.extend({
+export default defineComponent({
   name: "ShowFeedContainer",
   components: { FeedInfomation, PageLoader, Message, ToTopButton },
   props: {

@@ -33,13 +33,14 @@
   </div>
 </template>
 <script>
+import { defineComponent } from "vue";
 import Tag from "@js/components/Tag.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faArrowCircleDown, faArrowCircleUp } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faArrowCircleDown, faArrowCircleUp);
-export default {
+export default defineComponent({
   name: "SearchForm",
   components: {
     Tag,
@@ -98,7 +99,7 @@ export default {
       this.keyword = "";
     },
   },
-};
+});
 </script>
 <style lang="scss" scoped>
 @import "@css/common.scss";

@@ -29,7 +29,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import { Entry, Feed, Board } from "@js/types/types";
 import BoardInfomation from "@js/components/board/BoardInfomation.vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
@@ -59,7 +59,7 @@ enum Tabs {
   Entry = "entry",
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: "ShowBoardContainer",
   components: { BoardInfomation, EntryCardCollection, FeedCardCollection, PageLoader, Message, ToTopButton },
   props: {

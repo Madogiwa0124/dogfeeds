@@ -50,8 +50,8 @@
   </div>
 </template>
 <script lang="ts">
-import Vue, { PropType } from "vue";
-import moment from "moment";
+import { defineComponent, PropType } from "vue";
+import * as moment from "moment";
 import SelectFeed from "@js/components/feed/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
 import EntryClip from "@js/components/entry/EntryClip.vue";
@@ -67,9 +67,9 @@ const NO_IMAGE_PATH = "/noimage.png";
 const FEED_TITLE_LIMIT = 24;
 const ENTRY_TITLE_LIMIT = 49;
 
-export default Vue.extend({
+export default defineComponent({
   name: "FeedCard",
-  components: { SelectFeed, Tag, FontAwesomeIcon, EntryClip },
+  components: { FontAwesomeIcon, SelectFeed, Tag, EntryClip },
   props: {
     feed: {
       type: Object as PropType<Feed>,
@@ -94,10 +94,10 @@ export default Vue.extend({
       if (!this.feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
       return this.feed.lastEntry.eyeCatchingImage;
     },
-    trancatedFeedTitle: function () {
+    trancatedFeedTitle: function (): string {
       return truncate(this.feed.title, FEED_TITLE_LIMIT);
     },
-    trancatedEntryTitle: function () {
+    trancatedEntryTitle: function (): string {
       return truncate(this.feed.lastEntry.title, ENTRY_TITLE_LIMIT);
     },
     lastPublishedAtText: function (): string {

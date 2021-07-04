@@ -5,9 +5,10 @@
   </li>
 </template>
 <script>
+import { defineComponent } from "vue";
 import { truncate } from "@js/components/common/Truncate";
 
-export default {
+export default defineComponent({
   components: {},
   props: ["feed"],
   emits: ["unselectedFeed"],
@@ -21,7 +22,7 @@ export default {
       this.$emit("unselectedFeed", id);
     },
   },
-};
+});
 </script>
 <style lang="scss" scoped>
 @import "@css/common.scss";
