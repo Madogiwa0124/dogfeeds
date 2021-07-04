@@ -36,6 +36,7 @@ export default defineComponent({
       type: String,
     },
   },
+  emits: ["clip"],
   setup(props: Props, context: SetupContext) {
     const state = reactive<{ cliped: boolean }>({ cliped: props.initCliped });
     const clip = (event: Event) => {

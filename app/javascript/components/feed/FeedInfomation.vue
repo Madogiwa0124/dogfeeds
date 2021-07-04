@@ -39,6 +39,7 @@ export default Vue.extend({
       default: () => [],
     },
   },
+  emits: ["tagClick", "clipEntry"],
   methods: {
     handleOnTagClick: function (body: string) {
       this.$emit("tagClick", body);

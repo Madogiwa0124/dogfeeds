@@ -52,6 +52,7 @@ export default Vue.extend({
       default: false,
     },
   },
+  emits: ["clickTag", "selectedFeed", "unselectedFeed", "clipEntry"],
   data(): DataType {
     return {
       feeds: this.initFeeds,

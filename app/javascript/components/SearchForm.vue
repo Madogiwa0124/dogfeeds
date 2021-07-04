@@ -59,6 +59,7 @@ export default {
       default: 10,
     },
   },
+  emits: ["search"],
   data: function () {
     return {
       keyword: this.initKeyword,

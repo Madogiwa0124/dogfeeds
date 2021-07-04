@@ -33,6 +33,7 @@ export default {
       default: "キャンセル",
     },
   },
+  emits: ["close", "submit"],
   methods: {
     close: function () {
       this.$emit("close");

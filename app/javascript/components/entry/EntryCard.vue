@@ -77,6 +77,7 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: ["clipEntry"],
   setup(props: Props, context: SetupContext) {
     const publishedAtText = computed(() => moment(props.entry.publishedAt).format("YYYY/MM/DD h:mm:ss"));
     const fromNow = computed(() => moment(props.entry.publishedAt).fromNow());

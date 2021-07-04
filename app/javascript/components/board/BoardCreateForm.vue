@@ -45,6 +45,7 @@ export default Vue.extend({
       },
     },
   },
+  emits: ["unselectedFeed", "submitBoard"],
   data: function (): DataType {
     return {
       title: "",

@@ -53,6 +53,7 @@ export default defineComponent({
       },
     },
   },
+  emits: ["clipEntry"],
   // propsの型定義のためsetup引数に型を設定
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props: Props, context: SetupContext) {

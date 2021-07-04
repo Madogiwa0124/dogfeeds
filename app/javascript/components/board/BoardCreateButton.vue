@@ -26,6 +26,7 @@ export default Vue.extend({
       default: false,
     },
   },
+  emits: ["click"],
   methods: {
     handleOnClick: function (): void {
       this.$emit("click");
