@@ -19,7 +19,17 @@
         <p class="help">RSSフィードのエンドポイントURLを入力してください。(必須)</p>
       </div>
       <div class="field">
-        <tags-input :init_tags="<%= feed.tags.to_json %>" />
+        <label class="label">Tag</label>
+        <p class="control">
+          <%=
+            f.collection_select(
+              :tags, tags, :body, :body,
+              { selected: feed.tags.map(&:body), include_hidden: false },
+              size: tags.length,
+              multiple: true,
+            )
+          %>
+        </p>
       </div>
       <div class="field">
         <label class="label">更新停止</label>
