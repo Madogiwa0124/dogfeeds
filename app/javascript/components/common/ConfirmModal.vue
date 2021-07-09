@@ -16,7 +16,9 @@
   </div>
 </template>
 <script>
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "ConfirmModal",
   components: {},
   props: {
@@ -33,6 +35,7 @@ export default {
       default: "キャンセル",
     },
   },
+  emits: ["close", "submit"],
   methods: {
     close: function () {
       this.$emit("close");
@@ -41,7 +44,7 @@ export default {
       this.$emit("submit");
     },
   },
-};
+});
 </script>
 <style lang="scss" scoped>
 .confirm-modal {

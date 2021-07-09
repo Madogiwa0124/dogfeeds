@@ -3,7 +3,7 @@
     <a :href="feedPath" :target="feedLinkTarget" :rel="feedLinkRel">
       <header class="card-header">
         <p class="card-header-title">
-          {{ feed.title | truncate(24) }}
+          {{ trancatedFeedTitle }}
         </p>
       </header>
       <div class="card-content">
@@ -25,12 +25,12 @@
               rel="noopener"
               @click.stop
             >
-              {{ feed.lastEntry.title | truncate(49) }}
+              {{ trancatedEntryTitle }}
               <font-awesome-icon :icon="['fas', 'external-link-alt']" />
             </a>
           </object>
           <p class="entry-info has-text-right">
-            <span :title="lastPublishedAtText">Last updated {{ feed.lastEntry.publishedAt | fromNow }}</span>
+            <span :title="lastPublishedAtText">Last updated {{ lastPublishedAtFromNow }}</span>
             <font-awesome-icon :icon="['far', 'clock']" />
             <entry-clip class="clip" :entry-link="feed.lastEntry.link" @clip="handleOnClipEntry" />
           </p>
@@ -50,8 +50,8 @@
   </div>
 </template>
 <script lang="ts">
-import Vue, { PropType } from "vue";
-import moment from "moment";
+import { defineComponent, PropType } from "vue";
+import * as moment from "moment";
 import SelectFeed from "@js/components/feed/SelectFeed.vue";
 import Tag from "@js/components/Tag.vue";
 import EntryClip from "@js/components/entry/EntryClip.vue";
@@ -60,22 +60,16 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { truncate } from "@js/components/common/Truncate";
 
 library.add(faClock, faExternalLinkAlt);
 const NO_IMAGE_PATH = "/noimage.png";
+const FEED_TITLE_LIMIT = 24;
+const ENTRY_TITLE_LIMIT = 49;
 
-export default Vue.extend({
+export default defineComponent({
   name: "FeedCard",
-  components: { SelectFeed, Tag, FontAwesomeIcon, EntryClip },
-  filters: {
-    fromNow: function (value: string): string {
-      return moment(value).fromNow();
-    },
-    truncate: function (value: string, limit: number): string {
-      if (value.length <= limit) return value;
-      return `${value.trim().replace(/\s+/g, "").substring(0, limit)}…`;
-    },
-  },
+  components: { FontAwesomeIcon, SelectFeed, Tag, EntryClip },
   props: {
     feed: {
       type: Object as PropType<Feed>,
@@ -94,13 +88,23 @@ export default Vue.extend({
       default: false,
     },
   },
+  emits: ["clickTag", "clipEntry", "selectedFeed", "unselectedFeed"],
   computed: {
     eyeCatch: function (): string {
       if (!this.feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
       return this.feed.lastEntry.eyeCatchingImage;
     },
+    trancatedFeedTitle: function (): string {
+      return truncate(this.feed.title, FEED_TITLE_LIMIT);
+    },
+    trancatedEntryTitle: function (): string {
+      return truncate(this.feed.lastEntry.title, ENTRY_TITLE_LIMIT);
+    },
     lastPublishedAtText: function (): string {
       return moment(this.feed.lastEntry.publishedAt).format("YYYY/MM/DD h:mm:ss");
+    },
+    lastPublishedAtFromNow: function (): string {
+      return moment(this.feed.lastEntry.publishedAt).fromNow();
     },
     feedPath: function (): string {
       return `/feeds/${this.feed.id}`;

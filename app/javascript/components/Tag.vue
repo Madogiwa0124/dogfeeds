@@ -5,8 +5,9 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "Tag",
   props: {
     body: {
@@ -18,6 +19,7 @@ export default Vue.extend({
       default: null,
     },
   },
+  emits: ["click"],
   methods: {
     handleOnClick: function (event: Event) {
       this.$emit("click", this.body, event);

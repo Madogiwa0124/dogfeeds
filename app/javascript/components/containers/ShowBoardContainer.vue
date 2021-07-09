@@ -29,7 +29,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import { Entry, Feed, Board } from "@js/types/types";
 import BoardInfomation from "@js/components/board/BoardInfomation.vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
@@ -41,6 +41,7 @@ import { getBoard } from "@js/services/BoardService";
 import { clipEntry, getFeedEntries } from "@js/services/EntryService";
 import { sleep } from "@js/components/common/Sleep";
 import { getFeeds } from "@js/services/FeedService";
+import { getIdFromUrl } from "@js/components/common/GetIdFromUrl";
 
 interface DataType {
   board: Board | null;
@@ -58,13 +59,13 @@ enum Tabs {
   Entry = "entry",
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: "ShowBoardContainer",
   components: { BoardInfomation, EntryCardCollection, FeedCardCollection, PageLoader, Message, ToTopButton },
   props: {
     boardId: {
       type: Number,
-      required: true,
+      default: () => getIdFromUrl(),
     },
   },
   data: function (): DataType {

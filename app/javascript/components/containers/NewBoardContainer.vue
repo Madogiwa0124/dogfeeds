@@ -47,7 +47,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import BoardCreateForm from "@js/components/board/BoardCreateForm.vue";
 import ServiceInfomation from "@js/components/ServiceInfomation.vue";
@@ -77,7 +77,7 @@ interface DataType {
   showModal: boolean;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: "NewBoardContainer",
   components: {
     ServiceInfomation,

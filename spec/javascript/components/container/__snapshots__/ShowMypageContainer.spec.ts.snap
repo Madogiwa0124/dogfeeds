@@ -27,14 +27,12 @@ exports[`components/containers/ShowMypageContainer.vue snapshot 1`] = `
         />
       </svg>
     </p>
-     
     <p
       class="nickname has-text-weight-bold"
     >
       MY PAGE
     </p>
   </header>
-   
   <main>
     <div
       class="tabs is-fullwidth"
@@ -65,7 +63,6 @@ exports[`components/containers/ShowMypageContainer.vue snapshot 1`] = `
         </li>
       </ul>
     </div>
-     
     <div
       class="content"
     >
@@ -79,7 +76,6 @@ exports[`components/containers/ShowMypageContainer.vue snapshot 1`] = `
             CLIPされた記事がありません
           </p>
         </div>
-         
         <div
           class="message-body"
         >
@@ -92,7 +88,6 @@ exports[`components/containers/ShowMypageContainer.vue snapshot 1`] = `
       </article>
     </div>
   </main>
-   
   <div
     class="center"
   >

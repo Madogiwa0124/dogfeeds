@@ -1,7 +1,7 @@
-import Vue from "vue";
+import { createApp } from "vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import ShowFeedContainer from "@js/components/containers/ShowFeedContainer.vue";
 
-new Vue({
-  el: "#vue-root",
-  components: { ShowFeedContainer },
-});
+const app = createApp(ShowFeedContainer);
+app.component("FontAwesomeIcon", FontAwesomeIcon);
+app.mount("#vue-root");

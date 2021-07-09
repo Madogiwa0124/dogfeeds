@@ -9,7 +9,9 @@
   </article>
 </template>
 <script>
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "Message",
   components: {},
   props: {
@@ -27,7 +29,7 @@ export default {
     },
   },
   methods: {},
-};
+});
 </script>
 <style lang="scss" scoped>
 @import "@css/common.scss";

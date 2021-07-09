@@ -15,7 +15,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import { Feed } from "@js/types/types";
 import FeedCard from "@js/components/feed/FeedCard.vue";
 
@@ -23,7 +23,7 @@ interface DataType {
   feeds: Feed[];
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: "FeedCardCollection",
   components: { FeedCard },
   props: {
@@ -52,13 +52,18 @@ export default Vue.extend({
       default: false,
     },
   },
+  emits: ["clickTag", "selectedFeed", "unselectedFeed", "clipEntry"],
   data(): DataType {
     return {
+      // NOTE: 何故かinitFeedsがfunctionとみなされてしまうためignore
+      // @ts-ignore
       feeds: this.initFeeds,
     };
   },
   methods: {
     selected: function (feed: Feed): boolean {
+      // NOTE: なぜかselectedFeedsがthisに存在しないとみなされてしまっているのでignore
+      // @ts-ignore
       const exists = !!this.selectedFeeds.find(function (selectedFeed) {
         return selectedFeed.id === feed.id;
       });
