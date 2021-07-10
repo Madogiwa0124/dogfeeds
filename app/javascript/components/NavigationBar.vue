@@ -37,14 +37,13 @@
   </nav>
 </template>
 <script>
-import { defineComponent } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faBoxes, faBox, faRss, faBars } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faUser, faBoxes, faBox, faRss, faBars);
 
-export default defineComponent({
+export default {
   name: "NavigationBar",
   components: {
     FontAwesomeIcon,
@@ -62,7 +61,7 @@ export default defineComponent({
       });
     });
   },
-});
+};
 </script>
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");

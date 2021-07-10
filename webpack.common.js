@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require("webpack-assets-manifest");
-const { VueLoaderPlugin } = require("vue-loader");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const getEntries = require("./config/webpack/helpers/getEntries");
 const JAVASCRIPT_ENTRY_PATH = "./app/javascript/packs/";
@@ -52,6 +52,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      vue: "vue/dist/vue.esm.js",
       "@js": `${__dirname}/app/javascript`,
       "@css": `${__dirname}/app/javascript/stylesheets`,
       querystring: "querystring-es3",
@@ -65,10 +66,6 @@ module.exports = {
     // manifestファイルの出力
     new WebpackAssetsManifest({ publicPath: true }),
     new VueLoaderPlugin(),
-    new webpack.DefinePlugin({
-      __VUE_OPTIONS_API__: true,
-      __VUE_PROD_DEVTOOLS__: false,
-    }),
     new webpack.EnvironmentPlugin({
       RAILS_ENV: "",
       NODE_ENV: "",

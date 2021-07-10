@@ -1,10 +1,10 @@
-import { createApp } from "vue";
-import TagsInputContainer from "@js/components/containers/feed/TagsInputContainer.vue";
+import Vue from "vue";
+import TagsInput from "@js/components/feed/TagsInput.vue";
 import ToTopButton from "@js/components/common/ToTopButton.vue";
 
-// NOTE: Componentを登録する形だとレンダリングがされず真っ白な画面になってしまうため、
-// RootComponentとなるようにmount先を調整
-createApp(TagsInputContainer).mount("#vue-form-tags");
-createApp(ToTopButton).mount("#vue-form-footer");
+new Vue({
+  el: "#feed-form",
+  components: { TagsInput, ToTopButton },
+});
 
 import "@css/feed.scss";

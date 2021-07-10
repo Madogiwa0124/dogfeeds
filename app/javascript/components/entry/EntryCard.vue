@@ -34,9 +34,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, SetupContext } from "vue";
+import Vue from "vue";
+import VueCompositionApi, { defineComponent, computed, SetupContext } from "@vue/composition-api";
+Vue.use(VueCompositionApi);
 
-import * as moment from "moment";
+import moment from "moment/moment";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
@@ -75,8 +77,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ["clipEntry"],
-  setup(props, context: SetupContext) {
+  setup(props: Props, context: SetupContext) {
     const publishedAtText = computed(() => moment(props.entry.publishedAt).format("YYYY/MM/DD h:mm:ss"));
     const fromNow = computed(() => moment(props.entry.publishedAt).fromNow());
     const handleOnClipEntry = (entryLink: string, cliped: boolean, event: Event) => {

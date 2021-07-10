@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
 import { clipEntry, getEntries } from "@js/services/EntryService";
@@ -23,7 +23,7 @@ interface DataType {
   isLoading: boolean;
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: "EntryCollectionContainer",
   components: { EntryCardCollection, InfiniteLoading },
   props: {},

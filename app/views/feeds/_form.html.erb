@@ -15,8 +15,8 @@
       </p>
       <p class="help">未入力の場合はRSSで取得したタイトルが設定されます(任意)</p>
     </div>
-    <div class="field form-item" id="vue-form-tags">
-      <tags-input-container />
+    <div class="field form-item">
+      <tags-input :recommended-tags="<%= recommended_tags.to_json %>" />
     </div>
     <div class="field">
       <p class="control center">
