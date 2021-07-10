@@ -29,8 +29,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import Vue from "vue";
+import VueCompositionApi, { defineComponent, reactive } from "@vue/composition-api";
 import { Tag } from "@js/types/types";
+Vue.use(VueCompositionApi);
 
 type Props = {
   recommendedTags: Tag[];
@@ -45,8 +47,6 @@ export default defineComponent({
       default: () => [],
     },
   },
-  // NOTE: なぜかoverloadのエラーが発生するためignore
-  // @ts-ignore
   setup(props: Props) {
     const state = reactive<{ tagBody: string; tags: Tag[] }>({
       tagBody: "",

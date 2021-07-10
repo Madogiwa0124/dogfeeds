@@ -1,28 +1,25 @@
 <template>
   <li :key="feed.id" class="selected-feed">
     <i class="delete icon is-small" @click="unselectedFeed(feed.id)" />
-    {{ truncatedFeedTitle }}
+    {{ feed.title | truncate(12) }}
   </li>
 </template>
 <script>
-import { defineComponent } from "vue";
-import { truncate } from "@js/components/common/Truncate";
-
-export default defineComponent({
+export default {
   components: {},
-  props: ["feed"],
-  emits: ["unselectedFeed"],
-  computed: {
-    truncatedFeedTitle: function () {
-      return truncate(this.feed.title, 12);
+  filters: {
+    truncate: function (value, limit) {
+      if (value.length <= limit) return value;
+      return `${value.trim().replace(/\s+/g, "").substring(0, limit)}…`;
     },
   },
+  props: ["feed"],
   methods: {
     unselectedFeed: function (id) {
       this.$emit("unselectedFeed", id);
     },
   },
-});
+};
 </script>
 <style lang="scss" scoped>
 @import "@css/common.scss";

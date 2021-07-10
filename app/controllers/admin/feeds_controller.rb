@@ -5,7 +5,6 @@ class Admin::FeedsController < Admin::ApplicationController
 
   def edit
     @feed = Feed.preload(:tags).find(params[:id])
-    @tags = FeedTag.all
   end
 
   def update

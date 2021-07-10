@@ -12,7 +12,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, SetupContext } from "vue";
+import Vue from "vue";
+import VueCompositionApi, { defineComponent, SetupContext } from "@vue/composition-api";
+Vue.use(VueCompositionApi);
 
 import EntryCard from "@js/components/entry/EntryCard.vue";
 import { Entry } from "@js/types/types";
@@ -46,11 +48,14 @@ export default defineComponent({
     },
     entries: {
       type: Array,
-      default: () => [],
+      default: () => {
+        return [];
+      },
     },
   },
-  emits: ["clipEntry"],
-  setup(props, context: SetupContext) {
+  // propsの型定義のためsetup引数に型を設定
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup(props: Props, context: SetupContext) {
     const handleOnClipEntry = (entryLink: string, cliped: boolean): void => {
       context.emit("clipEntry", entryLink, cliped);
     };

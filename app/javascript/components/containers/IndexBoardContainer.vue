@@ -16,7 +16,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
 import BoardCard from "@js/components/board/BoardCard.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
 import Message from "@js/components/common/Message.vue";
@@ -34,7 +34,7 @@ interface DataType {
 
 const LOADING_SLEEP_MSEC = 200;
 
-export default defineComponent({
+export default Vue.extend({
   name: "IndexBoardContainer",
   components: { BoardCard, PageLoader, Message },
   data(): DataType {

@@ -1,7 +1,7 @@
-import { createApp } from "vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import Vue from "vue";
 import IndexBoardContainer from "@js/components/containers/IndexBoardContainer.vue";
 
-const app = createApp(IndexBoardContainer);
-app.component("FontAwesomeIcon", FontAwesomeIcon);
-app.mount("#vue-root");
+new Vue({
+  el: "#vue-root",
+  components: { IndexBoardContainer },
+});

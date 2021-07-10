@@ -3,8 +3,8 @@
     <%= render 'layouts/errors', model: @feed %>
   <% end %>
   <div id="feed-form">
-    <%= render 'form', feed: @feed, title: 'RSSフィードを登録する' %>
-    <div class="center form-footer" id="vue-form-footer">
+    <%= render 'form', feed: @feed, title: 'RSSフィードを登録する', recommended_tags: @recommended_tags %>
+    <div class="center form-footer">
       <to-top-button />
     </div>
   </div>

@@ -4,9 +4,7 @@
   </div>
 </template>
 <script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
+export default {
   name: "PageLoader",
   components: {},
   props: ["initIsLoading"],
@@ -21,6 +19,6 @@ export default defineComponent({
     },
   },
   methods: {},
-});
+};
 </script>
 <style lang="scss"></style>

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import Vue, { PropType } from "vue";
 import { Board } from "@js/types/types";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -14,7 +14,7 @@ import { faRss } from "@fortawesome/free-solid-svg-icons";
 import { trackEvent } from "@js/services/Gtag";
 library.add(faRss);
 
-export default defineComponent({
+export default Vue.extend({
   name: "FeedInfomation",
   components: { FontAwesomeIcon },
   props: {

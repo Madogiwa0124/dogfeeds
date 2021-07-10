@@ -15,14 +15,14 @@
   </button>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheckSquare, faSquare } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faCheckSquare, faSquare);
 
-export default defineComponent({
+import Vue from "vue";
+export default Vue.extend({
   name: "SelectFeed",
   components: { FontAwesomeIcon },
   props: {

@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
+import VueCompositionApi, { defineComponent } from "@vue/composition-api";
+Vue.use(VueCompositionApi);
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";

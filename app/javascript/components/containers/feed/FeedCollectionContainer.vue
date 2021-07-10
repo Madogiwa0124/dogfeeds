@@ -14,7 +14,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
 import FeedCardCollection from "@js/components/feed/FeedCardCollection.vue";
 import SearchForm from "@js/components/SearchForm.vue";
 import InfiniteLoading, { StateChanger } from "vue-infinite-loading";
@@ -31,7 +31,7 @@ interface DataType {
   tags: Tag[];
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: "FeedCollectionContainer",
   components: { FeedCardCollection, SearchForm, InfiniteLoading },
   props: {

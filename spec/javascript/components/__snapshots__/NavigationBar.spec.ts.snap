@@ -19,13 +19,17 @@ exports[`components/NavigationBar.vue snapshot 1`] = `
         src="/favicon.ico"
         width="28"
       />
-       Dogfeeds 
+      
+      Dogfeeds
+    
     </a>
+     
     <span
       class="navbar-item tag-line"
     >
       いろんなRSSをまとめて、1つのRSSに。
     </span>
+     
     <a
       aria-expanded="false"
       aria-label="menu"
@@ -36,14 +40,17 @@ exports[`components/NavigationBar.vue snapshot 1`] = `
       <span
         aria-hidden="true"
       />
+       
       <span
         aria-hidden="true"
       />
+       
       <span
         aria-hidden="true"
       />
     </a>
   </div>
+   
   <div
     class="navbar-menu"
     id="header-navbar"
@@ -61,6 +68,7 @@ exports[`components/NavigationBar.vue snapshot 1`] = `
           RSSフィードを登録する
         </a>
       </div>
+       
       <div
         class="navbar-item"
       >
@@ -71,6 +79,7 @@ exports[`components/NavigationBar.vue snapshot 1`] = `
           RSSフィードを見る
         </a>
       </div>
+       
       <div
         class="navbar-item has-dropdown is-hoverable"
       >
@@ -95,6 +104,7 @@ exports[`components/NavigationBar.vue snapshot 1`] = `
             />
           </svg>
         </a>
+         
         <div
           class="navbar-dropdown is-right"
         >
@@ -118,11 +128,14 @@ exports[`components/NavigationBar.vue snapshot 1`] = `
                 fill="currentColor"
               />
             </svg>
-             みんながまとめたRSSフィードを見る 
+             みんながまとめたRSSフィードを見る
+          
           </a>
+           
           <hr
             class="navbar-divider"
           />
+           
           <a
             class="navbar-item"
             href="/boards/new"
@@ -145,9 +158,11 @@ exports[`components/NavigationBar.vue snapshot 1`] = `
             </svg>
               RSSフィードをまとめる 
           </a>
+           
           <hr
             class="navbar-divider"
           />
+           
           <a
             class="navbar-item"
             href="/mypage"

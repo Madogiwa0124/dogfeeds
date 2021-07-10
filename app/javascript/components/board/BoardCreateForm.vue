@@ -24,7 +24,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import Vue, { PropType } from "vue";
 import { Feed } from "@js/types/types";
 import SelectedFeed from "@js/components/feed/SelectedFeed.vue";
 import BoardCreateButton from "@js/components/board/BoardCreateButton.vue";
@@ -34,7 +34,7 @@ interface DataType {
   title: string;
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: "BoardCreateForm",
   components: { SelectedFeed, BoardCreateButton, SpeechBubble },
   props: {
@@ -45,7 +45,6 @@ export default defineComponent({
       },
     },
   },
-  emits: ["unselectedFeed", "submitBoard"],
   data: function (): DataType {
     return {
       title: "",

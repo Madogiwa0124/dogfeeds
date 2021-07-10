@@ -36,7 +36,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive } from "vue";
+import Vue from "vue";
+import VueCompositionApi, { defineComponent, onMounted, reactive } from "@vue/composition-api";
+Vue.use(VueCompositionApi);
+
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPaperclip, faUser } from "@fortawesome/free-solid-svg-icons";

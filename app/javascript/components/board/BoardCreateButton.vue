@@ -11,13 +11,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
 
 interface DataType {
   showModal: boolean;
 }
 
-export default defineComponent({
+export default Vue.extend({
   name: "BoradCreateButton",
   components: {},
   props: {
@@ -26,7 +26,6 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ["click"],
   methods: {
     handleOnClick: function (): void {
       this.$emit("click");

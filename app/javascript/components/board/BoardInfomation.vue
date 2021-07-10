@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import Vue, { PropType } from "vue";
 import { Board } from "@js/types/types";
 import RssLinkCopyButton from "@js/components/board/RssLinkCopyButton.vue";
 
-export default defineComponent({
+export default Vue.extend({
   name: "FeedInfomation",
   components: { RssLinkCopyButton },
   props: {

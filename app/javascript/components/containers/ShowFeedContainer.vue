@@ -17,7 +17,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
 import { Feed, Entry } from "@js/types/types";
 import FeedInfomation from "@js/components/feed/FeedInfomation.vue";
 import PageLoader from "@js/components/common/PageLoader.vue";
@@ -26,7 +26,6 @@ import ToTopButton from "@js/components/common/ToTopButton.vue";
 import { getFeed } from "@js/services/FeedService";
 import { clipEntry, getFeedEntries } from "@js/services/EntryService";
 import { sleep } from "@js/components/common/Sleep";
-import { getIdFromUrl } from "@js/components/common/GetIdFromUrl";
 
 interface DataType {
   feed: Feed | null;
@@ -39,13 +38,13 @@ interface DataType {
 const LOADING_SLEEP_MSEC = 200;
 const TAG_CLICK_REDIRECT_PATH = "/feeds";
 
-export default defineComponent({
+export default Vue.extend({
   name: "ShowFeedContainer",
   components: { FeedInfomation, PageLoader, Message, ToTopButton },
   props: {
     feedId: {
       type: Number,
-      default: () => getIdFromUrl(),
+      required: true,
     },
   },
   data: function (): DataType {
