@@ -17,7 +17,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import { Feed, Entry } from "@js/types/types";
 import Tag from "@js/components/Tag.vue";
 import EntryCardCollection from "@js/components/entry/EntryCardCollection.vue";
@@ -26,7 +26,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 library.add(faExternalLinkAlt);
 
-export default Vue.extend({
+export default defineComponent({
   name: "FeedInfomation",
   components: { Tag, EntryCardCollection, FontAwesomeIcon },
   props: {
@@ -39,6 +39,7 @@ export default Vue.extend({
       default: () => [],
     },
   },
+  emits: ["tagClick", "clipEntry"],
   methods: {
     handleOnTagClick: function (body: string) {
       this.$emit("tagClick", body);

@@ -17,7 +17,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import FeedCollectionContainer from "@js/components/containers/feed/FeedCollectionContainer.vue";
 import EntryCollectionContainer from "@js/components/containers/feed/EntryCollectionContainer.vue";
 import { parse } from "querystring";
@@ -31,7 +31,7 @@ interface DataType {
   selectedTab: Tabs;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: "IndexFeedContainer",
   components: { FeedCollectionContainer, EntryCollectionContainer },
   props: {
@@ -52,7 +52,7 @@ export default Vue.extend({
     selectedEntryTab(): boolean {
       return this.selectedTab == Tabs.Entry;
     },
-    initSearchWord(): string | string[] | undefined {
+    initSearchWord(): string | string[] {
       const searchKeywordQuery = "?query[keyword]";
       return parse(decodeURI(window.location.search))[searchKeywordQuery];
     },

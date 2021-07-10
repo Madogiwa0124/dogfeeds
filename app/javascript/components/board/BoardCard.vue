@@ -11,7 +11,7 @@
       </div>
       <div class="content">
         {{ board.description }}
-        <p class="last-updated-at has-text-right">Last updated at {{ board.lastEntry.publishedAt | fromNow }}</p>
+        <p class="last-updated-at has-text-right">Last updated at {{ lastUpdatedAt }}</p>
       </div>
     </div>
     <footer class="card-footer">
@@ -22,20 +22,16 @@
   </div>
 </template>
 <script lang="ts">
-import Vue, { PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import moment from "moment";
 import { Board, Feed } from "@js/types/types";
 import RssLinkCopyButton from "@js/components/board/RssLinkCopyButton.vue";
 const NO_IMAGE_PATH = "/noimage.png";
 const IMAGES_LIMIT = 6;
-export default Vue.extend({
+
+export default defineComponent({
   name: "BoardCard",
   components: { RssLinkCopyButton },
-  filters: {
-    fromNow: function (value: string): string {
-      return moment(value, "YYYYMMDD h:mm:ss").fromNow();
-    },
-  },
   props: {
     board: {
       type: Object as PropType<Board>,
@@ -56,6 +52,9 @@ export default Vue.extend({
     },
     boardPath: function (): string {
       return `/boards/${this.board.id}`;
+    },
+    lastUpdatedAt: function (): string {
+      return moment(this.board.lastEntry.publishedAt, "YYYYMMDD h:mm:ss").fromNow();
     },
   },
   methods: {
