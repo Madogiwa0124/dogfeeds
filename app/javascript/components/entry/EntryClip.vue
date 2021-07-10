@@ -5,9 +5,7 @@
   </span>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import VueCompositionApi, { defineComponent, SetupContext, reactive } from "@vue/composition-api";
-Vue.use(VueCompositionApi);
+import { defineComponent, reactive, SetupContext } from "vue";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -36,6 +34,7 @@ export default defineComponent({
       type: String,
     },
   },
+  emits: ["clip"],
   setup(props: Props, context: SetupContext) {
     const state = reactive<{ cliped: boolean }>({ cliped: props.initCliped });
     const clip = (event: Event) => {

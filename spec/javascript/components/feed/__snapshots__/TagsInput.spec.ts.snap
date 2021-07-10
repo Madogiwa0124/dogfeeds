@@ -9,17 +9,18 @@ exports[`components/feed/FeedCard.vue 初期表示 recommendedTagsが空の場�
   >
     タグ
   </label>
-   
-  <!---->
-    
+  <!--v-if-->
+  
+  
   <div
     class="tag-list"
-  />
-   
+  >
+    
+    
+  </div>
   <input
     class="tag-input-area input is-small"
   />
-   
   <p
     class="help"
   >
@@ -37,7 +38,6 @@ exports[`components/feed/FeedCard.vue 初期表示 snapshot 1`] = `
   >
     タグ
   </label>
-   
   <div
     class="recommended-tag-list"
   >
@@ -46,31 +46,30 @@ exports[`components/feed/FeedCard.vue 初期表示 snapshot 1`] = `
     >
       人気のタグ
     </span>
-     
+    
     <span
       class="tag clickable is-success"
     >
-      
       tag1
-    
     </span>
     <span
       class="tag clickable is-success"
     >
-      
       tags2
-    
     </span>
-  </div>
     
+  </div>
+  
+  
   <div
     class="tag-list"
-  />
-   
+  >
+    
+    
+  </div>
   <input
     class="tag-input-area input is-small"
   />
-   
   <p
     class="help"
   >

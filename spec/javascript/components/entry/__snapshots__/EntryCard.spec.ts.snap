@@ -15,7 +15,6 @@ exports[`components/entry/EntryCard.vue snapshot 1`] = `
         src="https://example/com/sample.png"
       />
     </div>
-     
     <div
       class="content"
     >
@@ -25,9 +24,7 @@ exports[`components/entry/EntryCard.vue snapshot 1`] = `
         rel="noopener"
         target="_blank"
       >
-        
-        entry title 1
-        
+        entry title 1 
         <svg
           aria-hidden="true"
           class="svg-inline--fa fa-external-link-alt fa-w-16"
@@ -45,29 +42,25 @@ exports[`components/entry/EntryCard.vue snapshot 1`] = `
           />
         </svg>
       </a>
-       
       <p
         class="entry-description"
       >
-        
         entry discription 1
-      
       </p>
-       
       <p
         class="entry-footer"
       >
         <span
           title="2021/05/03 2:35:46"
         >
-          an hour ago 
+          an hour ago
         </span>
-         
         <span
           class="entry-clip clip"
           title="Clipして後で読む"
         >
-           
+          
+          
           <svg
             aria-hidden="true"
             class="svg-inline--fa fa-paperclip fa-w-14"
@@ -88,11 +81,10 @@ exports[`components/entry/EntryCard.vue snapshot 1`] = `
       </p>
     </div>
   </div>
-   
   <footer
     class="card-footer"
   >
-    <!---->
+    <!--v-if-->
   </footer>
 </div>
 `;
