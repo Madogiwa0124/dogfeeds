@@ -2808,10 +2808,10 @@ csp_evaluator@^1.0.1:
   resolved "https://registry.yarnpkg.com/csp_evaluator/-/csp_evaluator-1.0.1.tgz#cef3b755b26cfff25701a2fdaeab27ddceb31b7c"
   integrity sha512-9L57/vkuwH1tJv9Sw9t13xKGKyRR7OKn/pizcLCHK/83WH+sqRav0JCFBmBLmpurQAcz5usU3efS1rabOPV/qA==
 
-css-loader@^5.2.6:
-  version "5.2.6"
-  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-5.2.6.tgz#c3c82ab77fea1f360e587d871a6811f4450cc8d1"
-  integrity sha512-0wyN5vXMQZu6BvjbrPdUJvkCzGEO24HC7IS7nW4llc6BBFC+zwR9CKtYGv63Puzsg10L/o12inMY5/2ByzfD6w==
+css-loader@^5.2.7:
+  version "5.2.7"
+  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-5.2.7.tgz#9b9f111edf6fb2be5dc62525644cbc9c232064ae"
+  integrity sha512-Q7mOvpBNBG7YrVGMxRxcBJZFL75o+cH2abNASdibkj/fffYD8qWbInZrD0S9ccI6vZclF3DsHE7njGlLtaHbhg==
   dependencies:
     icss-utils "^5.1.0"
     loader-utils "^2.0.0"
@@ -6315,7 +6315,7 @@ postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.10:
+postcss@^8.1.10, postcss@^8.2.15:
   version "8.3.5"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.5.tgz#982216b113412bc20a86289e91eb994952a5b709"
   integrity sha512-NxTuJocUhYGsMiMFHDUkmjSKT3EdH4/WbGF6GCi1NDGk+vbcUTun4fpbOqaPtD8IIsztA2ilZm2DhYCuyN58gA==
@@ -6323,15 +6323,6 @@ postcss@^8.1.10:
     colorette "^1.2.2"
     nanoid "^3.1.23"
     source-map-js "^0.6.2"
-
-postcss@^8.2.15:
-  version "8.2.15"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.15.tgz#9e66ccf07292817d226fc315cbbf9bc148fbca65"
-  integrity sha512-2zO3b26eJD/8rb106Qu2o7Qgg52ND5HPjcyQiK2B98O388h43A448LCslC0dI2P97wCAQRJsFvwTRcXxTKds+Q==
-  dependencies:
-    colorette "^1.2.2"
-    nanoid "^3.1.23"
-    source-map "^0.6.1"
 
 prelude-ls@^1.2.1:
   version "1.2.1"
