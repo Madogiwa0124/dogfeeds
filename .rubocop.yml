@@ -58,7 +58,6 @@ Metrics/BlockLength:
     - spec/**/*
 
 AllCops:
-  TargetRubyVersion: 3.0.1
   NewCops: enable
   Exclude:
     - db/**/*
