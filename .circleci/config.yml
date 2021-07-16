@@ -14,7 +14,7 @@ web-default-enviroments: &web-default-enviroments
   BASIC_AUTH_PASSWORD: 'password'
 
 web: &web
-  - image: circleci/ruby:3.0.1-node-browsers
+  - image: circleci/ruby:3.0.2-node-browsers
     environment:
       <<: *web-default-enviroments
 
