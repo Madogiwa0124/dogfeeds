@@ -49,3 +49,5 @@ coverage
 
 public/packs
 public/packs-test
+
+storybook-static

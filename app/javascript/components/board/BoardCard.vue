@@ -23,10 +23,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import moment from "moment";
+import * as moment from "moment";
 import { Board, Feed } from "@js/types/types";
 import RssLinkCopyButton from "@js/components/board/RssLinkCopyButton.vue";
-const NO_IMAGE_PATH = "/noimage.png";
 const IMAGES_LIMIT = 6;
 
 export default defineComponent({
@@ -45,7 +44,7 @@ export default defineComponent({
   computed: {
     eyeCatches: function (): string[] {
       const result = this.feeds.map((feed) => {
-        if (!feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
+        if (!feed.lastEntry.eyeCatchingImage) return require("@js/assets/noimage.png");
         return feed.lastEntry.eyeCatchingImage;
       });
       return result.slice(0, IMAGES_LIMIT);

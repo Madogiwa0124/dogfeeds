@@ -13,6 +13,7 @@
     // 返り値の型を明示的に指定させる
     "noImplicitReturns": true,
     "baseUrl": "./",
+    "skipLibCheck": true,
     "paths": {
       "@js/*": ["app/javascript/*"],
       "@css/*": ["app/javascript/stylesheets/*"],
