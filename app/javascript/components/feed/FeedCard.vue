@@ -61,9 +61,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { truncate } from "@js/components/common/Truncate";
+import "@js/assets/noimage.png";
 
 library.add(faClock, faExternalLinkAlt);
-const NO_IMAGE_PATH = "/noimage.png";
 const FEED_TITLE_LIMIT = 24;
 const ENTRY_TITLE_LIMIT = 49;
 
@@ -91,7 +91,7 @@ export default defineComponent({
   emits: ["clickTag", "clipEntry", "selectedFeed", "unselectedFeed"],
   computed: {
     eyeCatch: function (): string {
-      if (!this.feed.lastEntry.eyeCatchingImage) return NO_IMAGE_PATH;
+      if (!this.feed.lastEntry.eyeCatchingImage) return require("@js/assets/noimage.png");
       return this.feed.lastEntry.eyeCatchingImage;
     },
     trancatedFeedTitle: function (): string {

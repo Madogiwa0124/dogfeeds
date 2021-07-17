@@ -3,10 +3,12 @@ module.exports = {
   clearMocks: true,
 
   // An array of file extensions your modules use
-  moduleFileExtensions: ["js", "ts", "vue"],
+  moduleFileExtensions: ["js", "ts", "vue", "png"],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "<rootDir>/spec/javascript/mocks/FileMock.js",
     "^@js(.*)$": "<rootDir>/app/javascript/$1",
     "^@css(.*)$": "<rootDir>/app/javascript/stylesheets/$1",
     "^@spec(.*)$": "<rootDir>/spec/javascript/$1",

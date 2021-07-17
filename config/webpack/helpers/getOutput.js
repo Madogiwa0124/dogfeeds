@@ -18,5 +18,6 @@ module.exports = function getOutput(rootPath) {
     publicPath: `/${path}/`,
     // 出力先のファイル
     filename: "[name]-[contenthash].js",
+    assetModuleFilename: "images/[name]-[contenthash][ext]",
   };
 };

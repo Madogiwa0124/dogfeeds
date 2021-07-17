@@ -45,6 +45,7 @@ import { Entry } from "@js/types/types";
 library.add(faExternalLinkAlt, faClock, faNewspaper);
 
 import EntryClip from "@js/components/entry/EntryClip.vue";
+import "@js/assets/noimage.png";
 
 type Props = {
   entry: Entry;
@@ -52,8 +53,6 @@ type Props = {
   showFeedLink: boolean;
   cliped: boolean;
 };
-
-const NO_IMAGE_PATH = "/noimage.png";
 
 export default defineComponent({
   components: { FontAwesomeIcon, EntryClip },
@@ -89,7 +88,7 @@ export default defineComponent({
       return `${props.entry.description.slice(0, props.descriptionLimit)}...`;
     });
     const eyeCatch = computed(() => {
-      if (!props.entry.eyeCatchingImage) return NO_IMAGE_PATH;
+      if (!props.entry.eyeCatchingImage) return require("@js/assets/noimage.png");
       return props.entry.eyeCatchingImage;
     });
     const feedPath = computed(() => {
